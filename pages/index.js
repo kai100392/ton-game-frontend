@@ -19,7 +19,10 @@ import {
   Card,
   CardContent,
   TextField,
+  IconButton,
 } from "@mui/material";
+import MarketCard from "../components/MarketCard";
+
 import {
   makeNewMarket,
   buyCallTicketWithPromoCode,
@@ -193,35 +196,51 @@ export default function Home() {
             </Typography>
 
             {/* Market Cards */}
-            <Box display="flex" flexDirection="column" gap={2}>
+            <Box
+              display="flex"
+              flexDirection="row"
+              flexWrap="wrap"
+              justifyContent="space-around"
+              sx={{ padding: 2 }}
+            >
               {[
                 {
                   title: "2024 Presidential Election",
                   prediction: "Kamala Harris vs Donald Trump",
                   bets: "$5,000.2m Bet",
+                  participants: "15,000",
                 },
                 {
                   title: "Popular Vote Winner",
                   prediction: "Kamala Harris",
                   bets: "$4,723.9m Bet",
+                  participants: "15,000",
                 },
                 {
                   title: "Super Bowl Champion 2025",
                   prediction: "Chiefs",
                   bets: "$3,123.8m Bet",
+                  participants: "15,000",
                 },
               ].map((market, index) => (
-                <Card key={index}>
-                  <CardContent>
-                    <Typography variant="h6">{market.title}</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {market.prediction}
-                    </Typography>
-                    <Typography variant="body2" sx={{ marginTop: 1 }}>
-                      {market.bets}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                // <Card key={index}>
+                //   <CardContent>
+                //     <Typography variant="h6">{market.title}</Typography>
+                //     <Typography variant="body2" color="text.secondary">
+                //       {market.prediction}
+                //     </Typography>
+                //     <Typography variant="body2" sx={{ marginTop: 1 }}>
+                //       {market.bets}
+                //     </Typography>
+                //   </CardContent>
+                // </Card>
+                <MarketCard
+                  key={index}
+                  title={market.title}
+                  prediction={market.prediction}
+                  bets={market.bets}
+                  participants={market.participants}
+                />
               ))}
             </Box>
 
