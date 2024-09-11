@@ -5,20 +5,22 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 
-const TimestampForm = ({ label }) => {
+const TimestampForm = ({ label, onSubmitValue }) => {
   const [dateTime, setDateTime] = useState(null); // Holds selected date and time
 
-  // Function to handle form submission
-  const handleSubmit = (value) => {
-    setDateTime(value);
+  // Function to handle date and time change
+  const handleDateTimeChange = (newValue) => {
+    setDateTime(newValue);
+
     // Convert selected date and time to Unix timestamp
-    const timestamp = dateTime
-      ? Math.floor(new Date(dateTime).getTime() / 1000)
+    const timestamp = newValue
+      ? Math.floor(new Date(newValue).getTime() / 1000)
       : null;
 
     if (timestamp) {
-      console.log("Timestamp:", timestamp);
-      // Here, you can submit the timestamp to your smart contract
+      // Call the parent function to pass the value up
+      onSubmitValue(timestamp);
+      console.log("timestamp: ", timestamp);
     } else {
       console.log("Please select a date and time");
     }
@@ -29,13 +31,10 @@ const TimestampForm = ({ label }) => {
       {/* DateTimePicker for selecting date and time */}
       <Box sx={{ m: 4 }}>
         <DateTimePicker
-          fullWidth
-          margin="normal"
-          variant="outlined"
           label={label}
           value={dateTime}
-          onChange={(newValue) => handleSubmit(newValue)} // Updates the callDeadline state
-          renderInput={(params) => <TextField {...params} />}
+          onChange={handleDateTimeChange} // Updates the dateTime state and calls handleSubmit
+          renderInput={(params) => <TextField {...params} fullWidth />}
         />
       </Box>
     </LocalizationProvider>

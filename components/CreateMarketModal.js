@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography, Modal } from "@mui/material";
 import TimestampForm from "./TimeStampForm";
 
@@ -6,9 +6,9 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
   // State to manage form input values
   const [name, setName] = useState("");
   const [usdAmntLP, setUsdAmntLP] = useState("");
-  const [dtCallDeadline, setDtCallDeadline] = useState("");
-  const [dtResultVoteStart, setDtResultVoteStart] = useState("");
-  const [dtResultVoteEnd, setDtResultVoteEnd] = useState("");
+  const [dtCallDeadline, setDtCallDeadline] = useState(null);
+  const [dtResultVoteStart, setDtResultVoteStart] = useState(null);
+  const [dtResultVoteEnd, setDtResultVoteEnd] = useState(null);
   const [resultLabels, setResultLabels] = useState("");
   const [resultDescrs, setResultDescrs] = useState("");
 
@@ -21,12 +21,12 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
       _dtCallDeadline: dtCallDeadline,
       _dtResultVoteStart: dtResultVoteStart,
       _dtResultVoteEnd: dtResultVoteEnd,
-      _resultLabels: resultLabels.split(","), // Assuming user enters comma-separated values
-      _resultDescrs: resultDescrs.split(","),
+      _resultLabels: resultLabels, // Assuming user enters comma-separated values
+      _resultDescrs: resultDescrs,
     };
 
     try {
-      console.log("Market created:", JSON.stringify(formData));
+      console.log(formData);
       // Submit the data to your backend using fetch or axios
       const response = await fetch("/api/create-market", {
         method: "POST",
@@ -86,22 +86,20 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
           variant="outlined"
           margin="normal"
           value={usdAmntLP}
+          type="number"
           onChange={(e) => setUsdAmntLP(e.target.value)} // Handle usdAmntLP input
         />
         <TimestampForm
           label="_dtCallDeadline"
-          value={dtCallDeadline}
-          onChange={(value) => setDtCallDeadline(value)} // Handle timestamp input
+          onSubmitValue={setDtCallDeadline}
         />
         <TimestampForm
           label="_dtResultVoteStart"
-          value={dtResultVoteStart}
-          onChange={(value) => setDtResultVoteStart(value)} // Handle timestamp input
+          onSubmitValue={setDtResultVoteStart}
         />
         <TimestampForm
           label="_dtResultVoteEnd"
-          value={dtResultVoteEnd}
-          onChange={(value) => setDtResultVoteEnd(value)} // Handle timestamp input
+          onSubmitValue={setDtResultVoteEnd}
         />
         <TextField
           fullWidth
