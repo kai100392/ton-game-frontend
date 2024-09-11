@@ -3,9 +3,12 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { abi } from "../constants/abi";
+import abi from "./abi/CallitFactory.abi.json";
+// import { abi } from "../constants/abi";
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
+import { Typography, Button, Container, Box } from "@mui/material";
+import Link from "next/link";
 
 export const injected = new InjectedConnector();
 
@@ -53,18 +56,40 @@ export default function Home() {
   }
 
   return (
-    <div>
-      {hasMetamask ? (
-        active ? (
-          "Connected! "
+    <Container maxWidth="sm">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Welcome to the Prediction Market App
+        </Typography>
+        <Link href="/about" passHref>
+          <Button variant="contained" color="primary">
+            About Us
+          </Button>
+        </Link>
+        <Link href="/contact" passHref>
+          <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
+            Contact Us
+          </Button>
+        </Link>
+        <Link href="/market" passHref>
+          <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
+            Market Page
+          </Button>
+        </Link>
+      </Box>
+      <div>
+        {hasMetamask ? (
+          active ? (
+            "Connected! "
+          ) : (
+            <button onClick={() => connect()}>Connect</button>
+          )
         ) : (
-          <button onClick={() => connect()}>Connect</button>
-        )
-      ) : (
-        "Please install metamask"
-      )}
+          "Please install metamask"
+        )}
 
-      {active ? <button onClick={() => execute()}>Execute</button> : ""}
-    </div>
+        {active ? <button onClick={() => execute()}>Execute</button> : ""}
+      </div>
+    </Container>
   );
 }
