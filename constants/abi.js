@@ -1,91 +1,27 @@
-module.exports = {
-  abi: [
-    {
-      inputs: [
-        {
-          internalType: "string",
-          name: "_name",
-          type: "string",
-        },
-        {
-          internalType: "uint256",
-          name: "_favoriteNumber",
-          type: "uint256",
-        },
-      ],
-      name: "addPerson",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "string",
-          name: "",
-          type: "string",
-        },
-      ],
-      name: "nameToFavoriteNumber",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      name: "people",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "favoriteNumber",
-          type: "uint256",
-        },
-        {
-          internalType: "string",
-          name: "name",
-          type: "string",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "retrieve",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "_favoriteNumber",
-          type: "uint256",
-        },
-      ],
-      name: "store",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-  ],
+import web3 from "../components/Connector";
+import contractABI from "../pages/abi/CallitFactory.abi.json";
+
+const contractAddress = "0xYourContractAddress"; // Replace with your contract's address
+const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+export const makeNewMarket = async (fromAddress, marketParams) => {
+  try {
+    return await contract.methods
+      .makeNewMarket(marketParams)
+      .send({ from: fromAddress });
+  } catch (error) {
+    console.error("Error in makeNewMarket:", error);
+    throw error;
+  }
+};
+
+export const buyCallTicketWithPromoCode = async (fromAddress, promoCode) => {
+  try {
+    return await contract.methods
+      .buyCallTicketWithPromoCode(promoCode)
+      .send({ from: fromAddress });
+  } catch (error) {
+    console.error("Error in buyCallTicketWithPromoCode:", error);
+    throw error;
+  }
 };
