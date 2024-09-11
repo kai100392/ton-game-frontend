@@ -77,6 +77,51 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const injected = new InjectedConnector();
 
+const MarketArray = [
+  {
+    id: 2423,
+    title: "2024 Presidential Election",
+    prediction: "Kamala Harris vs Donald Trump",
+    bets: "$5,000.2m Bet",
+    participants: "15,000",
+  },
+  {
+    id: 2423,
+    title: "Popular Vote Winner",
+    prediction: "Kamala Harris",
+    bets: "$4,723.9m Bet",
+    participants: "15,000",
+  },
+  {
+    id: 13684,
+    title: "Super Bowl Champion 2025",
+    prediction: "Chiefs",
+    bets: "$3,123.8m Bet",
+    participants: "15,000",
+  },
+  {
+    id: 463,
+    title: "2024 Presidential Election",
+    prediction: "Kamala Harris vs Donald Trump",
+    bets: "$5,000.2m Bet",
+    participants: "15,000",
+  },
+  {
+    id: 2246264423,
+    title: "Popular Vote Winner",
+    prediction: "Kamala Harris",
+    bets: "$4,723.9m Bet",
+    participants: "15,000",
+  },
+  {
+    id: 456,
+    title: "Super Bowl Champion 2025",
+    prediction: "Chiefs",
+    bets: "$3,123.8m Bet",
+    participants: "15,000",
+  },
+];
+
 export default function Home() {
   // const [address, setAddress] = useState(null);
   const [marketParams, setMarketParams] = useState("");
@@ -203,26 +248,7 @@ export default function Home() {
               justifyContent="space-around"
               sx={{ padding: 2 }}
             >
-              {[
-                {
-                  title: "2024 Presidential Election",
-                  prediction: "Kamala Harris vs Donald Trump",
-                  bets: "$5,000.2m Bet",
-                  participants: "15,000",
-                },
-                {
-                  title: "Popular Vote Winner",
-                  prediction: "Kamala Harris",
-                  bets: "$4,723.9m Bet",
-                  participants: "15,000",
-                },
-                {
-                  title: "Super Bowl Champion 2025",
-                  prediction: "Chiefs",
-                  bets: "$3,123.8m Bet",
-                  participants: "15,000",
-                },
-              ].map((market, index) => (
+              {MarketArray.map((market, index) => (
                 // <Card key={index}>
                 //   <CardContent>
                 //     <Typography variant="h6">{market.title}</Typography>
@@ -235,7 +261,7 @@ export default function Home() {
                 //   </CardContent>
                 // </Card>
                 <MarketCard
-                  key={index}
+                  id={market.id}
                   title={market.title}
                   prediction={market.prediction}
                   bets={market.bets}

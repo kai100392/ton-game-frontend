@@ -13,22 +13,25 @@ import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import Avatar from "@mui/material/Avatar";
+import Link from "next/link";
 
-const MarketCard = ({ title, bets, participants }) => {
+const MarketCard = ({ id, title, bets, participants }) => {
   return (
     <Card sx={{ width: 300, margin: 2, borderRadius: 2, boxShadow: 3 }}>
       <CardContent>
-        {/* Top Section: Icon and Title */}
-        <Box display="flex" alignItems="center" mb={2}>
-          <Avatar
-            alt="Presidential Seal"
-            src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Seal_of_the_President_of_the_United_States.svg"
-            sx={{ width: 40, height: 40, marginRight: 2 }}
-          />
-          <Typography variant="h6" component="div">
-            {title}
-          </Typography>
-        </Box>
+        <Link href={`/market/${id}`} passHref>
+          {/* Top Section: Icon and Title */}
+          <Box display="flex" alignItems="center" mb={2}>
+            <Avatar
+              alt="Presidential Seal"
+              src="/vote_img.jpg"
+              sx={{ width: 40, height: 40, marginRight: 2 }}
+            />
+            <Typography variant="h6" component="div">
+              {title}
+            </Typography>
+          </Box>
+        </Link>
 
         {/* Middle Section: Stats */}
         <Box
