@@ -1,11 +1,11 @@
 import web3 from "../components/Connector";
 import contractABI from "../pages/abi/CallitFactory.abi.json";
 
-const contractAddress = "0xf9Aede2C017A2cF51eB00d7f2C5b59d388440068"; // Replace with your contract address
-const contract = new web3.eth.Contract(contractABI, contractAddress);
+// const contractAddress = "0xf9Aede2C017A2cF51eB00d7f2C5b59d388440068"; // Replace with your contract address
+// const contract = new web3.eth.Contract(contractABI, contractAddress);
 
 // Make a new market
-export const makeNewMarket = async (fromAddress, marketParams) => {
+export const makeNewMarket = async (contract, fromAddress, marketParams) => {
   try {
     return await contract.methods
       .makeNewMarket(marketParams)
@@ -17,7 +17,11 @@ export const makeNewMarket = async (fromAddress, marketParams) => {
 };
 
 // Buy call ticket with promo code
-export const buyCallTicketWithPromoCode = async (fromAddress, promoCode) => {
+export const buyCallTicketWithPromoCode = async (
+  contract,
+  fromAddress,
+  promoCode
+) => {
   try {
     return await contract.methods
       .buyCallTicketWithPromoCode(promoCode)
@@ -29,7 +33,11 @@ export const buyCallTicketWithPromoCode = async (fromAddress, promoCode) => {
 };
 
 // Execute air parity for ticket
-export const exeAerriceParityForTicket = async (fromAddress, ticketId) => {
+export const exeAerriceParityForTicket = async (
+  contract,
+  fromAddress,
+  ticketId
+) => {
   try {
     return await contract.methods
       .exeAerriceParityForTicket(ticketId)
@@ -41,7 +49,11 @@ export const exeAerriceParityForTicket = async (fromAddress, ticketId) => {
 };
 
 // Close market calls for ticket
-export const closeMarketCallsForTicket = async (fromAddress, ticketId) => {
+export const closeMarketCallsForTicket = async (
+  contract,
+  fromAddress,
+  ticketId
+) => {
   try {
     return await contract.methods
       .closeMarketCallsForTicket(ticketId)
@@ -53,7 +65,12 @@ export const closeMarketCallsForTicket = async (fromAddress, ticketId) => {
 };
 
 // Cast vote for market ticket
-export const castVoteForMarketTicket = async (fromAddress, marketId, vote) => {
+export const castVoteForMarketTicket = async (
+  contract,
+  fromAddress,
+  marketId,
+  vote
+) => {
   try {
     return await contract.methods
       .castVoteForMarketTicket(marketId, vote)
@@ -65,7 +82,7 @@ export const castVoteForMarketTicket = async (fromAddress, marketId, vote) => {
 };
 
 // Close market for ticket
-export const closeMarketForTicket = async (fromAddress, ticketId) => {
+export const closeMarketForTicket = async (contract, fromAddress, ticketId) => {
   try {
     return await contract.methods
       .closeMarketForTicket(ticketId)
@@ -77,7 +94,7 @@ export const closeMarketForTicket = async (fromAddress, ticketId) => {
 };
 
 // Claim ticket rewards
-export const claimTicketRewards = async (fromAddress, ticketId) => {
+export const claimTicketRewards = async (contract, fromAddress, ticketId) => {
   try {
     return await contract.methods
       .claimTicketRewards(ticketId)
@@ -89,7 +106,7 @@ export const claimTicketRewards = async (fromAddress, ticketId) => {
 };
 
 // Claim voter rewards
-export const claimVoterRewards = async (fromAddress, marketId) => {
+export const claimVoterRewards = async (contract, fromAddress, marketId) => {
   try {
     return await contract.methods
       .claimVoterRewards(marketId)
@@ -101,7 +118,11 @@ export const claimVoterRewards = async (fromAddress, marketId) => {
 };
 
 // Claim promoter rewards
-export const claimPromotorRewards = async (fromAddress, promoterId) => {
+export const claimPromotorRewards = async (
+  contract,
+  fromAddress,
+  promoterId
+) => {
   try {
     return await contract.methods
       .claimPromotorRewards(promoterId)

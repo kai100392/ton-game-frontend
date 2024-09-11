@@ -32,11 +32,50 @@ import {
   claimPromotorRewards,
 } from "../constants/contractActions";
 import web3 from "../components/Connector";
+import { styled } from "@mui/material/styles";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+
+// Custom style for the search bar
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: "#f1f1f1",
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "20ch",
+    },
+  },
+}));
 
 export const injected = new InjectedConnector();
 
 export default function Home() {
-  const [account, setAccount] = useState(null);
+  // const [address, setAddress] = useState(null);
   const [marketParams, setMarketParams] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const [ticketId, setTicketId] = useState("");
@@ -44,12 +83,21 @@ export default function Home() {
   const [vote, setVote] = useState("");
 
   const [hasMetamask, setHasMetamask] = useState(null);
+
+  const {
+    active,
+    activate,
+    chainId,
+    account,
+    library: provider,
+  } = useWeb3React();
+
   // Connect to MetaMask
   const connectWallet = async () => {
     try {
-      const accounts = await web3.eth.requestAccounts();
-      setAccount(accounts[0]);
-      console.log("Connected account:", accounts[0]);
+      await activate(injected);
+      setHasMetamask(true);
+      console.log("User's wallet address:", account);
     } catch (error) {
       console.error("Error connecting to MetaMask:", error);
     }
@@ -57,8 +105,12 @@ export default function Home() {
 
   // Trigger market creation
   const handleCreateMarket = async () => {
+    const signer = provider.getSigner();
+    console.log("User's wallet address:", account);
+    const contract = new ethers.Contract(account, abi, signer);
+
     try {
-      await makeNewMarket(account, marketParams);
+      await makeNewMarket(contract, account, marketParams);
       console.log("Market created successfully!");
     } catch (error) {
       console.error("Error creating market:", error);
@@ -82,29 +134,11 @@ export default function Home() {
     }
   });
 
-  const {
-    active,
-    activate,
-    chainId,
-    // account,
-    library: provider,
-  } = useWeb3React();
-
-  async function connect() {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        await activate(injected);
-        setHasMetamask(true);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
-
   async function execute() {
     if (active) {
       const signer = provider.getSigner();
       const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+      console.log("User's wallet address:", account);
       const contract = new ethers.Contract(contractAddress, abi, signer);
       try {
         await contract.store(42);
@@ -118,14 +152,198 @@ export default function Home() {
 
   return (
     <>
+      {/* Top Navigation */}
+      <AppBar position="static" color="default" elevation={0}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+            Polymarket
+          </Typography>
+
+          {/* Search Bar */}
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search markets"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+
+          <Button variant="contained" color="primary" sx={{ marginRight: 2 }}>
+            Log In
+          </Button>
+          <Button variant="outlined" color="primary">
+            Sign Up
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      {/* Main Content */}
+      <Container maxWidth="lg" sx={{ marginTop: 4 }}>
+        <Box
+          display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          justifyContent="space-between"
+        >
+          {/* Left Column for Market Cards */}
+          <Box flex="1" marginRight={{ md: 2 }}>
+            <Typography variant="h5" gutterBottom>
+              Top Markets
+            </Typography>
+
+            {/* Market Cards */}
+            <Box display="flex" flexDirection="column" gap={2}>
+              {[
+                {
+                  title: "2024 Presidential Election",
+                  prediction: "Kamala Harris vs Donald Trump",
+                  bets: "$5,000.2m Bet",
+                },
+                {
+                  title: "Popular Vote Winner",
+                  prediction: "Kamala Harris",
+                  bets: "$4,723.9m Bet",
+                },
+                {
+                  title: "Super Bowl Champion 2025",
+                  prediction: "Chiefs",
+                  bets: "$3,123.8m Bet",
+                },
+              ].map((market, index) => (
+                <Card key={index}>
+                  <CardContent>
+                    <Typography variant="h6">{market.title}</Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {market.prediction}
+                    </Typography>
+                    <Typography variant="body2" sx={{ marginTop: 1 }}>
+                      {market.bets}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
+            </Box>
+
+            {/* View All Button */}
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button variant="contained" color="primary">
+                View All
+              </Button>
+            </Box>
+          </Box>
+
+          {/* Right Column for Side Sections */}
+          <Box flexBasis="300px">
+            {/* Sidebar Widget: Election Forecast */}
+            <Card sx={{ marginBottom: 2 }}>
+              <CardContent>
+                <Typography variant="h6">2024 Election Forecast</Typography>
+                <Button variant="contained" fullWidth sx={{ marginTop: 2 }}>
+                  View
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Sidebar Widget: Recent Activity */}
+            <Card sx={{ marginBottom: 2 }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Recent Activity
+                </Typography>
+                {["User1 bet $1000 on Harris", "User2 bet $2000 on Trump"].map(
+                  (activity, index) => (
+                    <Typography
+                      key={index}
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      {activity}
+                    </Typography>
+                  )
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Sidebar Widget: Top Volume */}
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Top Volume This Week
+                </Typography>
+                {["UserA: $1.2m", "UserB: $800k"].map((volume, index) => (
+                  <Typography
+                    key={index}
+                    variant="body2"
+                    color="text.secondary"
+                  >
+                    {volume}
+                  </Typography>
+                ))}
+              </CardContent>
+            </Card>
+          </Box>
+        </Box>
+      </Container>
+
+      {/* Footer */}
+      <Box
+        sx={{
+          backgroundColor: "#1976d2",
+          color: "#fff",
+          padding: 2,
+          marginTop: 6,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography variant="body1" align="center">
+            © 2024 Polymarket. All rights reserved.
+          </Typography>
+        </Container>
+      </Box>
+
+      <Container maxWidth="sm">
+        <Box sx={{ my: 4 }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Welcome to the Prediction Market App
+          </Typography>
+          <Link href="/about" passHref>
+            <Button variant="contained" color="primary">
+              About Us
+            </Button>
+          </Link>
+          <Link href="/contact" passHref>
+            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
+              Contact Us
+            </Button>
+          </Link>
+          <Link href="/market" passHref>
+            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
+              Market Page
+            </Button>
+          </Link>
+        </Box>
+        <div></div>
+      </Container>
       <Container maxWidth="md">
         <Typography variant="h4" gutterBottom>
           Prediction Market dApp
         </Typography>
+        <Typography variant="h6" gutterBottom>
+          {hasMetamask ? (
+            active ? (
+              "Connected Successfully! "
+            ) : (
+              <Button variant="outlined" onClick={connectWallet}>
+                Connect MetaMask
+              </Button>
+            )
+          ) : (
+            "Please install metamask"
+          )}
 
-        <Button variant="outlined" onClick={connectWallet}>
-          Connect MetaMask
-        </Button>
+          {active ? <button onClick={() => execute()}>Execute</button> : ""}
+        </Typography>
 
         <Typography variant="h6" gutterBottom>
           Create a New Market
@@ -158,190 +376,6 @@ export default function Home() {
         <Button variant="contained" color="secondary" onClick={handleBuyTicket}>
           Buy Ticket
         </Button>
-      </Container>
-      {/* Navbar */}
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            PredictIt
-          </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Sign Up</Button>
-        </Toolbar>
-      </AppBar>
-
-      {/* Hero Section */}
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={8}>
-            <Box>
-              <Image
-                src="/banner.jpg" // Placeholder for image
-                alt="Banner"
-                width={800}
-                height={400}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card sx={{ mb: 2 }}>
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  2024 Presidential Election Winner
-                </Typography>
-                <Typography variant="body2">
-                  Kamala Harris: 55%
-                  <br />
-                  Donald Trump: 48%
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  Electoral College Margin
-                </Typography>
-                <Typography variant="body2">270 to Win</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* How It Works Section */}
-      <Container
-        maxWidth="lg"
-        sx={{ mt: 4, py: 4, backgroundColor: "#f0f0f0" }}
-      >
-        <Typography variant="h4" gutterBottom align="center">
-          How It Works
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Browse Markets
-                </Typography>
-                <Typography>
-                  Check out available markets and predict the outcome.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Make a Prediction
-                </Typography>
-                <Typography>
-                  Buy shares for or against an event to take part in
-                  predictions.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Trade Your Shares
-                </Typography>
-                <Typography>
-                  Buy and sell your shares to earn rewards when you're right.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* Additional Sections */}
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
-        <Grid container spacing={2}>
-          {/* Newsletters Section */}
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  Newsletters
-                </Typography>
-                <Typography>
-                  Daily Markets Monday
-                  <br />
-                  Daily Markets Tuesday
-                  <br />
-                  Daily Markets Wednesday
-                  <br />
-                  Daily Markets Thursday
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Research Section */}
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  Empowering Research
-                </Typography>
-                <Typography>
-                  Learn more about how prediction markets empower academic
-                  research.
-                </Typography>
-                <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* Footer */}
-      <Box sx={{ py: 4, backgroundColor: "#1976d2", color: "white", mt: 4 }}>
-        <Container maxWidth="lg">
-          <Typography variant="body1" align="center">
-            © 2024 PredictIt. All rights reserved.
-          </Typography>
-        </Container>
-      </Box>
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Welcome to the Prediction Market App
-          </Typography>
-          <Link href="/about" passHref>
-            <Button variant="contained" color="primary">
-              About Us
-            </Button>
-          </Link>
-          <Link href="/contact" passHref>
-            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
-              Contact Us
-            </Button>
-          </Link>
-          <Link href="/market" passHref>
-            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
-              Market Page
-            </Button>
-          </Link>
-        </Box>
-        <div>
-          {hasMetamask ? (
-            active ? (
-              "Connected! "
-            ) : (
-              <button onClick={() => connect()}>Connect</button>
-            )
-          ) : (
-            "Please install metamask"
-          )}
-
-          {active ? <button onClick={() => execute()}>Execute</button> : ""}
-        </div>
       </Container>
     </>
   );
