@@ -14,12 +14,12 @@ import {
   Typography,
   Button,
   Container,
-  Grid,
   Box,
   Card,
   CardContent,
   TextField,
   IconButton,
+  Modal,
 } from "@mui/material";
 import MarketCard from "../components/MarketCard";
 
@@ -38,6 +38,8 @@ import web3 from "../components/Connector";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import TimestampForm from "../components/TimeStampForm";
+import CreateMarketModal from "../components/CreateMarketModal";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -132,6 +134,8 @@ export default function Home() {
 
   const [hasMetamask, setHasMetamask] = useState(null);
 
+  const [createModalopen, setCreateModalOpen] = useState(false);
+
   const {
     active,
     activate,
@@ -139,6 +143,11 @@ export default function Home() {
     account,
     library: provider,
   } = useWeb3React();
+
+  //
+  const handleCreateModalOpen = () => setCreateModalOpen(true);
+  // Function to handle modal close
+  const handleCreateModalClose = () => setCreateModalOpen(false);
 
   // Connect to MetaMask
   const connectWallet = async () => {
@@ -280,6 +289,15 @@ export default function Home() {
 
           {/* Right Column for Side Sections */}
           <Box flexBasis="300px">
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleCreateModalOpen}
+              >
+                Create New Market
+              </Button>
+            </Box>
             {/* Sidebar Widget: Election Forecast */}
             <Card sx={{ marginBottom: 2 }}>
               <CardContent>
@@ -422,6 +440,12 @@ export default function Home() {
           Buy Ticket
         </Button>
       </Container>
+
+      {/* Modal */}
+      <CreateMarketModal
+        createModalopen={createModalopen}
+        handleCreateModalClose={handleCreateModalClose}
+      />
     </>
   );
 }

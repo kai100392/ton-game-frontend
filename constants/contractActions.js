@@ -6,10 +6,9 @@ import contractABI from "../pages/abi/CallitFactory.abi.json";
 
 // Make a new market
 export const makeNewMarket = async (contract, fromAddress, marketParams) => {
+  console.log("contract--", contract);
   try {
-    return await contract.methods
-      .makeNewMarket(marketParams)
-      .send({ from: fromAddress });
+    return await contract.functions.makeNewMarket(fromAddress, marketParams);
   } catch (error) {
     console.error("Error in makeNewMarket:", error);
     throw error;
@@ -23,7 +22,7 @@ export const buyCallTicketWithPromoCode = async (
   promoCode
 ) => {
   try {
-    return await contract.methods
+    return await contract
       .buyCallTicketWithPromoCode(promoCode)
       .send({ from: fromAddress });
   } catch (error) {
