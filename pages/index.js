@@ -290,13 +290,41 @@ export default function Home() {
           {/* Right Column for Side Sections */}
           <Box flexBasis="300px">
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button
-                variant="contained"
-                color="warning"
-                onClick={handleCreateModalOpen}
-              >
-                Create New Market
-              </Button>
+              {hasMetamask ? (
+                active ? (
+                  "Connected Successfully! "
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={connectWallet}
+                  >
+                    Connect MetaMask
+                  </Button>
+                )
+              ) : (
+                <h3>"Please install metamask"</h3>
+              )}
+            </Box>
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              {active ? (
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={handleCreateModalOpen}
+                >
+                  Create New Market
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={handleCreateModalOpen}
+                  disabled
+                >
+                  Create New Market
+                </Button>
+              )}
             </Box>
             {/* Sidebar Widget: Election Forecast */}
             <Card sx={{ marginBottom: 2 }}>

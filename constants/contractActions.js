@@ -6,9 +6,26 @@ import contractABI from "../pages/abi/CallitFactory.abi.json";
 
 // Make a new market
 export const makeNewMarket = async (contract, marketParams) => {
-  console.log("contract--", contract);
+  const {
+    _name,
+    _usdAmntLP,
+    _dtCallDeadline,
+    _dtResultVoteStart,
+    _dtResultVoteEnd,
+    _resultLabels,
+    _resultDescrs,
+  } = marketParams;
+  console.log("contract--", _resultLabels);
   try {
-    const tx = await contract.makeNewMarket(marketParams);
+    const tx = await contract.makeNewMarket(
+      _name,
+      _usdAmntLP,
+      _dtCallDeadline,
+      _dtResultVoteStart,
+      _dtResultVoteEnd,
+      _resultLabels,
+      _resultDescrs
+    );
     // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
