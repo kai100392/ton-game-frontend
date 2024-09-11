@@ -292,7 +292,7 @@ export default function Home() {
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               <Button
                 variant="contained"
-                color="primary"
+                color="warning"
                 onClick={handleCreateModalOpen}
               >
                 Create New Market

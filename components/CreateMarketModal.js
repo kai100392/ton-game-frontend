@@ -21,8 +21,8 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
       _dtCallDeadline: dtCallDeadline,
       _dtResultVoteStart: dtResultVoteStart,
       _dtResultVoteEnd: dtResultVoteEnd,
-      _resultLabels: resultLabels, // Assuming user enters comma-separated values
-      _resultDescrs: resultDescrs,
+      _resultLabels: resultLabels.split(","), // Assuming user enters comma-separated values
+      _resultDescrs: resultDescrs.split(","),
     };
 
     try {
@@ -108,6 +108,7 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
           margin="normal"
           value={resultLabels}
           onChange={(e) => setResultLabels(e.target.value)} // Handle resultLabels input
+          placeholder="yes, no, other"
         />
         <TextField
           fullWidth
@@ -116,6 +117,7 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
           margin="normal"
           value={resultDescrs}
           onChange={(e) => setResultDescrs(e.target.value)} // Handle resultDescrs input
+          placeholder="yes means A win, no means B win, ..."
         />
 
         {/* Submit and Cancel Buttons */}
