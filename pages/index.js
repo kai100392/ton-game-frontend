@@ -161,13 +161,13 @@ export default function Home() {
   };
 
   // Trigger market creation
-  const handleCreateMarket = async () => {
+  const handleCreateMarket = async (marketParams) => {
     const signer = provider.getSigner();
     console.log("User's wallet address:", account);
     const contract = new ethers.Contract(account, abi, signer);
 
     try {
-      await makeNewMarket(contract, account, marketParams);
+      await makeNewMarket(contract, marketParams);
       console.log("Market created successfully!");
     } catch (error) {
       console.error("Error creating market:", error);
@@ -445,6 +445,7 @@ export default function Home() {
       <CreateMarketModal
         createModalopen={createModalopen}
         handleCreateModalClose={handleCreateModalClose}
+        handleCreateMarket={handleCreateMarket}
       />
     </>
   );

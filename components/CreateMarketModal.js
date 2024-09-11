@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography, Modal } from "@mui/material";
 import TimestampForm from "./TimeStampForm";
 
-const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
+const CreateMarketModal = ({
+  createModalopen,
+  handleCreateModalClose,
+  handleCreateMarket,
+}) => {
   // State to manage form input values
   const [name, setName] = useState("");
   const [usdAmntLP, setUsdAmntLP] = useState("");
@@ -11,6 +15,13 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
   const [dtResultVoteEnd, setDtResultVoteEnd] = useState(null);
   const [resultLabels, setResultLabels] = useState("");
   const [resultDescrs, setResultDescrs] = useState("");
+  const [outcomeStr, setOutcomeStr] = useState("");
+
+  const [outcomeState, setOutcomeState] = useState(false);
+
+  const handleOutcomeStateOpen = () => setOutcomeState(true);
+  // Function to handle modal close
+  const handleOutcomeStateClose = () => setOutcomeState(false);
 
   // Function to handle form submission
   const handleSubmit = async () => {
@@ -23,28 +34,11 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
       _dtResultVoteEnd: dtResultVoteEnd,
       _resultLabels: resultLabels.split(","), // Assuming user enters comma-separated values
       _resultDescrs: resultDescrs.split(","),
+      _outcomeStr: outcomeStr,
     };
 
-    try {
-      console.log(formData);
-      // Submit the data to your backend using fetch or axios
-      const response = await fetch("/api/create-market", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-      console.log("Market created:", data);
-
-      // Handle success or error accordingly
-      // Close the modal
-      handleCreateModalClose();
-    } catch (error) {
-      console.error("Error creating market:", error);
-    }
+    handleCreateMarket(formData);
+    console.log(formData);
   };
 
   return (
@@ -119,8 +113,32 @@ const CreateMarketModal = ({ createModalopen, handleCreateModalClose }) => {
           onChange={(e) => setResultDescrs(e.target.value)} // Handle resultDescrs input
           placeholder="yes means A win, no means B win, ..."
         />
+        {outcomeState ? (
+          <Box mt={3} display="flex" justifyContent="space-between">
+            <TextField
+              fullWidth
+              label="_outcome"
+              variant="outlined"
+              margin="normal"
+              value={outcomeStr}
+              onChange={(e) => setName(e.target.value)} // Handle name input
+            />
+            <Button size="small" onClick={handleOutcomeStateClose}>
+              X
+            </Button>
+          </Box>
+        ) : null}
 
         {/* Submit and Cancel Buttons */}
+        <Box mt={3} display="flex" justifyContent="space-between">
+          <Button
+            variant="outlined"
+            color="info"
+            onClick={handleOutcomeStateOpen}
+          >
+            Add Outcome
+          </Button>
+        </Box>
         <Box mt={3} display="flex" justifyContent="space-between">
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit

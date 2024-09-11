@@ -5,10 +5,13 @@ import contractABI from "../pages/abi/CallitFactory.abi.json";
 // const contract = new web3.eth.Contract(contractABI, contractAddress);
 
 // Make a new market
-export const makeNewMarket = async (contract, fromAddress, marketParams) => {
+export const makeNewMarket = async (contract, marketParams) => {
   console.log("contract--", contract);
   try {
-    return await contract.functions.makeNewMarket(fromAddress, marketParams);
+    const tx = await contract.makeNewMarket(marketParams);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in makeNewMarket:", error);
     throw error;
