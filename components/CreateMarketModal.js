@@ -21,20 +21,18 @@ const CreateMarketModal = ({
     const newLabels = resultLabels;
     newLabels[key] = value;
     setResultLabels(newLabels);
-    console.log("resultLabel: ", setResultLabels);
   };
 
   const handleResultDescrs = (value, key) => {
     const newDescrs = resultDescrs;
     newDescrs[key] = value;
     setResultDescrs(newDescrs);
-    console.log("resultDescrs: ", resultDescrs);
   };
 
   const handleAddResult = () => {
     const newNum = resultNum + 1;
     setResultNum(newNum);
-    console.log("resultNumber: ", resultNum);
+    // console.log("resultNumber: ", resultNum);
   };
 
   const handleModalClose = () => {
@@ -47,7 +45,7 @@ const CreateMarketModal = ({
     // Prepare data as JSON
     const formData = {
       _name: name,
-      _usdAmntLP: usdAmntLP,
+      _usdAmntLP: Number(usdAmntLP),
       _dtCallDeadline: dtCallDeadline,
       _dtResultVoteStart: dtResultVoteStart,
       _dtResultVoteEnd: dtResultVoteEnd,

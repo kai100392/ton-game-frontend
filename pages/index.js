@@ -33,6 +33,7 @@ import {
   claimTicketRewards,
   claimVoterRewards,
   claimPromotorRewards,
+  setMarketInfo,
 } from "../constants/contractActions";
 import web3 from "../components/Connector";
 import { styled } from "@mui/material/styles";
@@ -40,6 +41,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import TimestampForm from "../components/TimeStampForm";
 import CreateMarketModal from "../components/CreateMarketModal";
+import SetMarketInfoModal from "../components/SetMarketInfoModal";
+
+const contractAddress = "0xA06b84577cA9e1ABC59eED62c8d0efD5F45950E3"; //  contract address : Factory
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -135,6 +139,7 @@ export default function Home() {
   const [hasMetamask, setHasMetamask] = useState(null);
 
   const [createModalopen, setCreateModalOpen] = useState(false);
+  const [setInfoModalOpen, setSetInfoModalOpen] = useState(false);
 
   const {
     active,
@@ -144,10 +149,14 @@ export default function Home() {
     library: provider,
   } = useWeb3React();
 
-  //
+  // Functions to handle modal close
   const handleCreateModalOpen = () => setCreateModalOpen(true);
-  // Function to handle modal close
+
   const handleCreateModalClose = () => setCreateModalOpen(false);
+
+  const handleSetInfoModalOpen = () => setSetInfoModalOpen(true);
+
+  const handleSetInfoModalClose = () => setSetInfoModalOpen(false);
 
   // Connect to MetaMask
   const connectWallet = async () => {
@@ -163,8 +172,7 @@ export default function Home() {
   // Trigger market creation
   const handleCreateMarket = async (marketParams) => {
     const signer = provider.getSigner();
-    console.log("User's wallet address:", account);
-    const contract = new ethers.Contract(account, abi, signer);
+    const contract = new ethers.Contract(contractAddress, abi, signer);
 
     try {
       await makeNewMarket(contract, marketParams);
@@ -174,10 +182,23 @@ export default function Home() {
     }
   };
 
+  // Trigger set market infomation
+  const handleSetMarketInfo = async (params) => {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    try {
+      await setMarketInfo(contract, params);
+      console.log("Market Info Updated!");
+    } catch (error) {
+      console.error("Error creating market:", error);
+    }
+  };
+
   // Trigger buy ticket with promo code
   const handleBuyTicket = async () => {
     try {
-      await buyCallTicketWithPromoCode(account, promoCode);
+      await buyCallTicketWithPromoCode(contractAddress, promoCode);
       console.log("Ticket bought successfully!");
     } catch (error) {
       console.error("Error buying ticket:", error);
@@ -194,7 +215,6 @@ export default function Home() {
   async function execute() {
     if (active) {
       const signer = provider.getSigner();
-      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
       console.log("User's wallet address:", account);
       const contract = new ethers.Contract(contractAddress, abi, signer);
       try {
@@ -258,19 +278,9 @@ export default function Home() {
               sx={{ padding: 2 }}
             >
               {MarketArray.map((market, index) => (
-                // <Card key={index}>
-                //   <CardContent>
-                //     <Typography variant="h6">{market.title}</Typography>
-                //     <Typography variant="body2" color="text.secondary">
-                //       {market.prediction}
-                //     </Typography>
-                //     <Typography variant="body2" sx={{ marginTop: 1 }}>
-                //       {market.bets}
-                //     </Typography>
-                //   </CardContent>
-                // </Card>
                 <MarketCard
                   id={market.id}
+                  key={index}
                   title={market.title}
                   prediction={market.prediction}
                   bets={market.bets}
@@ -316,16 +326,23 @@ export default function Home() {
                   Create New Market
                 </Button>
               ) : (
-                <Button
-                  variant="contained"
-                  color="warning"
-                  onClick={handleCreateModalOpen}
-                  disabled
-                >
+                <Button variant="contained" color="warning" disabled>
                   Create New Market
                 </Button>
               )}
             </Box>
+
+            {/* Set Market Info: For test */}
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handleSetInfoModalOpen}
+              >
+                SetMarketInfo(test)
+              </Button>
+            </Box>
+
             {/* Sidebar Widget: Election Forecast */}
             <Card sx={{ marginBottom: 2 }}>
               <CardContent>
@@ -474,6 +491,12 @@ export default function Home() {
         createModalopen={createModalopen}
         handleCreateModalClose={handleCreateModalClose}
         handleCreateMarket={handleCreateMarket}
+      />
+
+      <SetMarketInfoModal
+        setInfoModalOpen={setInfoModalOpen}
+        handleSetInfoModalClose={handleSetInfoModalClose}
+        handleSetMarketInfo={handleSetMarketInfo}
       />
     </>
   );

@@ -1,9 +1,6 @@
 import web3 from "../components/Connector";
 import contractABI from "../pages/abi/CallitFactory.abi.json";
 
-// const contractAddress = "0xf9Aede2C017A2cF51eB00d7f2C5b59d388440068"; // Replace with your contract address
-// const contract = new web3.eth.Contract(contractABI, contractAddress);
-
 // Make a new market
 export const makeNewMarket = async (contract, params) => {
   const {
