@@ -5,7 +5,7 @@ import contractABI from "../pages/abi/CallitFactory.abi.json";
 // const contract = new web3.eth.Contract(contractABI, contractAddress);
 
 // Make a new market
-export const makeNewMarket = async (contract, marketParams) => {
+export const makeNewMarket = async (contract, params) => {
   const {
     _name,
     _usdAmntLP,
@@ -14,7 +14,7 @@ export const makeNewMarket = async (contract, marketParams) => {
     _dtResultVoteEnd,
     _resultLabels,
     _resultDescrs,
-  } = marketParams;
+  } = params;
   console.log("contract--", _resultLabels);
   try {
     const tx = await contract.makeNewMarket(
@@ -36,15 +36,17 @@ export const makeNewMarket = async (contract, marketParams) => {
 };
 
 // Buy call ticket with promo code
-export const buyCallTicketWithPromoCode = async (
-  contract,
-  fromAddress,
-  promoCode
-) => {
+export const buyCallTicketWithPromoCode = async (contract, params) => {
+  const { _ticket, _promoCodeHash, _usdAmnt } = params;
   try {
-    return await contract
-      .buyCallTicketWithPromoCode(promoCode)
-      .send({ from: fromAddress });
+    const tx = await contract.buyCallTicketWithPromoCode(
+      _ticket,
+      _promoCodeHash,
+      _usdAmnt
+    );
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in buyCallTicketWithPromoCode:", error);
     throw error;
@@ -52,31 +54,27 @@ export const buyCallTicketWithPromoCode = async (
 };
 
 // Execute air parity for ticket
-export const exeAerriceParityForTicket = async (
-  contract,
-  fromAddress,
-  ticketId
-) => {
+export const exeArbPriceParityForTicket = async (contract, params) => {
+  const { _ticket } = params;
   try {
-    return await contract.methods
-      .exeAerriceParityForTicket(ticketId)
-      .send({ from: fromAddress });
+    const tx = await contract.exeArbPriceParityForTicket(_ticket);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
-    console.error("Error in exeAerriceParityForTicket:", error);
+    console.error("Error in exeArbPriceParityForTicket:", error);
     throw error;
   }
 };
 
 // Close market calls for ticket
-export const closeMarketCallsForTicket = async (
-  contract,
-  fromAddress,
-  ticketId
-) => {
+export const closeMarketCallsForTicket = async (contract, params) => {
+  const { _ticket } = params;
   try {
-    return await contract.methods
-      .closeMarketCallsForTicket(ticketId)
-      .send({ from: fromAddress });
+    const tx = await contract.closeMarketCallsForTicket(_ticket);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in closeMarketCallsForTicket:", error);
     throw error;
@@ -84,16 +82,13 @@ export const closeMarketCallsForTicket = async (
 };
 
 // Cast vote for market ticket
-export const castVoteForMarketTicket = async (
-  contract,
-  fromAddress,
-  marketId,
-  vote
-) => {
+export const castVoteForMarketTicket = async (contract, params) => {
+  const { _ticket } = params;
   try {
-    return await contract.methods
-      .castVoteForMarketTicket(marketId, vote)
-      .send({ from: fromAddress });
+    const tx = await contract.castVoteForMarketTicket(_ticket);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in castVoteForMarketTicket:", error);
     throw error;
@@ -101,11 +96,13 @@ export const castVoteForMarketTicket = async (
 };
 
 // Close market for ticket
-export const closeMarketForTicket = async (contract, fromAddress, ticketId) => {
+export const closeMarketForTicket = async (contract, params) => {
+  const { _ticket } = params;
   try {
-    return await contract.methods
-      .closeMarketForTicket(ticketId)
-      .send({ from: fromAddress });
+    const tx = await contract.closeMarketForTicket(_ticket);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in closeMarketForTicket:", error);
     throw error;
@@ -113,11 +110,13 @@ export const closeMarketForTicket = async (contract, fromAddress, ticketId) => {
 };
 
 // Claim ticket rewards
-export const claimTicketRewards = async (contract, fromAddress, ticketId) => {
+export const claimTicketRewards = async (contract, params) => {
+  const { _ticket, _resultAgree } = params;
   try {
-    return await contract.methods
-      .claimTicketRewards(ticketId)
-      .send({ from: fromAddress });
+    const tx = await contract.claimTicketRewards(_ticket, _resultAgree);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in claimTicketRewards:", error);
     throw error;
@@ -125,11 +124,12 @@ export const claimTicketRewards = async (contract, fromAddress, ticketId) => {
 };
 
 // Claim voter rewards
-export const claimVoterRewards = async (contract, fromAddress, marketId) => {
+export const claimVoterRewards = async (contract) => {
   try {
-    return await contract.methods
-      .claimVoterRewards(marketId)
-      .send({ from: fromAddress });
+    const tx = await contract.claimVoterRewards();
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in claimVoterRewards:", error);
     throw error;
@@ -137,17 +137,75 @@ export const claimVoterRewards = async (contract, fromAddress, marketId) => {
 };
 
 // Claim promoter rewards
-export const claimPromotorRewards = async (
-  contract,
-  fromAddress,
-  promoterId
-) => {
+export const claimPromotorRewards = async (contract, params) => {
+  const { _promoCodeHash } = params;
   try {
-    return await contract.methods
-      .claimPromotorRewards(promoterId)
-      .send({ from: fromAddress });
+    const tx = await contract.claimPromotorRewards(_promoCodeHash);
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
   } catch (error) {
     console.error("Error in claimPromotorRewards:", error);
+    throw error;
+  }
+};
+
+// Set Market Information
+export const setMarketInfo = async (contract, params) => {
+  const { _anyTicket, _category, _descr, _imgUrl } = params;
+  console.log("sMIcontract--", _category);
+  try {
+    const tx = await contract.setMarketInfo(
+      _anyTicket,
+      _category,
+      _descr,
+      _imgUrl
+    );
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
+  } catch (error) {
+    console.error("Error in setMarketInfo:", error);
+    throw error;
+  }
+};
+
+// Get Market Information For Maker
+export const getMarketsForMaker = async (contract, params) => {
+  const { _maker, _liveAll, _idxStart, _retCnt } = params;
+  console.log("gMFMcontract--", _category);
+  try {
+    const tx = await contract.getMarketsForMaker(
+      _maker,
+      _liveAll,
+      _idxStart,
+      _retCnt
+    );
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
+  } catch (error) {
+    console.error("Error in getMarketsForMaker:", error);
+    throw error;
+  }
+};
+
+// Get Market Info For Category
+export const getMarketsForCategory = async (contract, params) => {
+  const { _cat, _liveAll, _idxStart, _retCnt } = params;
+  console.log("gMFMcontract--", _category);
+  try {
+    const tx = await contract.getMarketsForCategory(
+      _cat,
+      _liveAll,
+      _idxStart,
+      _retCnt
+    );
+    // Wait for the transaction to be mined
+    await tx.wait();
+    console.log("Transaction successful:", tx);
+  } catch (error) {
+    console.error("Error in getMarketsForCategory:", error);
     throw error;
   }
 };

@@ -28,13 +28,13 @@ const TimestampForm = ({ label, onSubmitValue }) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* DateTimePicker for selecting date and time */}
-      <Box sx={{ m: 4 }}>
+      {/* Ensure that the Box and DateTimePicker handle width correctly */}
+      <Box sx={{ my: 2, width: "100%" }} display="flex">
         <DateTimePicker
-          label={label}
-          value={dateTime}
-          onChange={handleDateTimeChange} // Updates the dateTime state and calls handleSubmit
-          renderInput={(params) => <TextField {...params} fullWidth />}
+          sx={{ flexgrow: 1 }}
+          label="_dtResultVoteEnd"
+          value={dateTime} // your state value
+          onChange={handleDateTimeChange} // Update function for dateTime
         />
       </Box>
     </LocalizationProvider>
