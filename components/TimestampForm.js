@@ -5,8 +5,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 
-const TimestampForm = ({ label, onSubmitValue }) => {
-  const [dateTime, setDateTime] = useState(null); // Holds selected date and time
+const TimestampForm = ({ label, value, onSubmitValue }) => {
+  const [dateTime, setDateTime] = useState(value); // Holds selected date and time
 
   // Function to handle date and time change
   const handleDateTimeChange = (newValue) => {
@@ -31,8 +31,8 @@ const TimestampForm = ({ label, onSubmitValue }) => {
       {/* Ensure that the Box and DateTimePicker handle width correctly */}
       <Box sx={{ my: 2, width: "100%" }} display="flex">
         <DateTimePicker
-          sx={{ flexgrow: 1 }}
-          label="_dtResultVoteEnd"
+          sx={{ width: "100%" }}
+          label={label}
           value={dateTime} // your state value
           onChange={handleDateTimeChange} // Update function for dateTime
         />

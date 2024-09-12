@@ -9,19 +9,38 @@ const CreateMarketModal = ({
 }) => {
   // State to manage form input values
   const [name, setName] = useState("");
-  const [usdAmntLP, setUsdAmntLP] = useState("");
+  const [usdAmntLP, setUsdAmntLP] = useState(null);
   const [dtCallDeadline, setDtCallDeadline] = useState(null);
   const [dtResultVoteStart, setDtResultVoteStart] = useState(null);
   const [dtResultVoteEnd, setDtResultVoteEnd] = useState(null);
-  const [resultLabels, setResultLabels] = useState("");
-  const [resultDescrs, setResultDescrs] = useState("");
-  const [outcomeStr, setOutcomeStr] = useState("");
+  const [resultLabels, setResultLabels] = useState([""]);
+  const [resultDescrs, setResultDescrs] = useState([""]);
+  const [resultNum, setResultNum] = useState(1);
 
-  const [outcomeState, setOutcomeState] = useState(false);
+  const handleResultLabels = (value, key) => {
+    const newLabels = resultLabels;
+    newLabels[key] = value;
+    setResultLabels(newLabels);
+    console.log("resultLabel: ", setResultLabels);
+  };
 
-  const handleOutcomeStateOpen = () => setOutcomeState(true);
-  // Function to handle modal close
-  const handleOutcomeStateClose = () => setOutcomeState(false);
+  const handleResultDescrs = (value, key) => {
+    const newDescrs = resultDescrs;
+    newDescrs[key] = value;
+    setResultDescrs(newDescrs);
+    console.log("resultDescrs: ", resultDescrs);
+  };
+
+  const handleAddResult = () => {
+    const newNum = resultNum + 1;
+    setResultNum(newNum);
+    console.log("resultNumber: ", resultNum);
+  };
+
+  const handleModalClose = () => {
+    setResultNum(1);
+    handleCreateModalClose();
+  };
 
   // Function to handle form submission
   const handleSubmit = async () => {
@@ -32,9 +51,8 @@ const CreateMarketModal = ({
       _dtCallDeadline: dtCallDeadline,
       _dtResultVoteStart: dtResultVoteStart,
       _dtResultVoteEnd: dtResultVoteEnd,
-      _resultLabels: resultLabels.split(","), // Assuming user enters comma-separated values
-      _resultDescrs: resultDescrs.split(","),
-      _outcomeStr: outcomeStr,
+      _resultLabels: resultLabels, // Assuming user enters comma-separated values
+      _resultDescrs: resultDescrs,
     };
 
     handleCreateMarket(formData);
@@ -43,8 +61,9 @@ const CreateMarketModal = ({
 
   return (
     <Modal
+      sx={{ overflow: "auto" }}
       open={createModalopen}
-      onClose={handleCreateModalClose}
+      onClose={handleModalClose}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
@@ -54,7 +73,7 @@ const CreateMarketModal = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 400,
+          width: 600,
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
@@ -85,70 +104,58 @@ const CreateMarketModal = ({
         />
         <TimestampForm
           label="_dtCallDeadline"
+          value={dtCallDeadline}
           onSubmitValue={setDtCallDeadline}
         />
         <TimestampForm
           label="_dtResultVoteStart"
+          value={dtResultVoteStart}
           onSubmitValue={setDtResultVoteStart}
         />
         <TimestampForm
           label="_dtResultVoteEnd"
+          value={dtResultVoteEnd}
           onSubmitValue={setDtResultVoteEnd}
         />
-        <TextField
-          fullWidth
-          label="_resultLabels"
-          variant="outlined"
-          margin="normal"
-          value={resultLabels}
-          onChange={(e) => setResultLabels(e.target.value)} // Handle resultLabels input
-          placeholder="yes, no, other"
-        />
-        <TextField
-          fullWidth
-          label="_resultDescrs"
-          variant="outlined"
-          margin="normal"
-          value={resultDescrs}
-          onChange={(e) => setResultDescrs(e.target.value)} // Handle resultDescrs input
-          placeholder="yes means A win, no means B win, ..."
-        />
-        {outcomeState ? (
-          <Box mt={3} display="flex" justifyContent="space-between">
-            <TextField
-              fullWidth
-              label="_outcome"
-              variant="outlined"
-              margin="normal"
-              value={outcomeStr}
-              onChange={(e) => setName(e.target.value)} // Handle name input
-            />
-            <Button size="small" onClick={handleOutcomeStateClose}>
-              X
-            </Button>
-          </Box>
-        ) : null}
+        {Array(resultNum)
+          .fill("")
+          .map((item, key) => (
+            <Box
+              m={(2, 0)}
+              display="flex"
+              justifyContent="space-between"
+              flexDirection="row"
+            >
+              <TextField
+                sx={{ mr: 2 }}
+                label={
+                  resultNum > 1 ? `_resultLabel(${key + 1})` : `_resultLabel`
+                }
+                variant="outlined"
+                margin="normal"
+                onChange={(e) => handleResultLabels(e.target.value, key)}
+                placeholder="YES"
+              />
+              <TextField
+                fullWidth
+                label={
+                  resultNum > 1 ? `_resultDescr(${key + 1})` : `_resultDescr`
+                }
+                variant="outlined"
+                margin="normal"
+                onChange={(e) => handleResultDescrs(e.target.value, key)}
+                placeholder="YES means A win"
+              />
+            </Box>
+          ))}
 
-        {/* Submit and Cancel Buttons */}
+        {/* Add Outcome and Submit Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={handleOutcomeStateOpen}
-          >
+          <Button variant="outlined" color="info" onClick={handleAddResult}>
             Add Outcome
           </Button>
-        </Box>
-        <Box mt={3} display="flex" justifyContent="space-between">
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit
-          </Button>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={handleCreateModalClose}
-          >
-            Cancel
           </Button>
         </Box>
       </Box>
