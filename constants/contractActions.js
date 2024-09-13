@@ -2,7 +2,7 @@ import web3 from "../components/Connector";
 import contractABI from "../pages/abi/CallitFactory.abi.json";
 
 // Make a new market
-export const makeNewMarket = async (contract, params) => {
+export const makeNewMarket = async (contract, params, gasOptions) => {
   const {
     _name,
     _usdAmntLP,
@@ -21,7 +21,8 @@ export const makeNewMarket = async (contract, params) => {
       _dtResultVoteStart,
       _dtResultVoteEnd,
       _resultLabels,
-      _resultDescrs
+      _resultDescrs,
+      gasOptions
     );
     // Wait for the transaction to be mined
     await tx.wait();

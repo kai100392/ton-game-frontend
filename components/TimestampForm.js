@@ -5,8 +5,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 
-const TimestampForm = ({ label, value, onSubmitValue }) => {
-  const [dateTime, setDateTime] = useState(value); // Holds selected date and time
+const TimestampForm = ({ label, onSubmitValue }) => {
+  const [dateTime, setDateTime] = useState(); // Holds selected date and time
 
   // Function to handle date and time change
   const handleDateTimeChange = (newValue) => {

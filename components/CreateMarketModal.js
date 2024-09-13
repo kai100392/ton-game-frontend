@@ -102,17 +102,14 @@ const CreateMarketModal = ({
         />
         <TimestampForm
           label="_dtCallDeadline"
-          value={dtCallDeadline}
           onSubmitValue={setDtCallDeadline}
         />
         <TimestampForm
           label="_dtResultVoteStart"
-          value={dtResultVoteStart}
           onSubmitValue={setDtResultVoteStart}
         />
         <TimestampForm
           label="_dtResultVoteEnd"
-          value={dtResultVoteEnd}
           onSubmitValue={setDtResultVoteEnd}
         />
         {Array(resultNum)

@@ -43,7 +43,7 @@ import TimestampForm from "../components/TimeStampForm";
 import CreateMarketModal from "../components/CreateMarketModal";
 import SetMarketInfoModal from "../components/SetMarketInfoModal";
 
-const contractAddress = "0xA06b84577cA9e1ABC59eED62c8d0efD5F45950E3"; //  contract address : Factory
+import { contractAddress } from "../constants/address";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -175,7 +175,12 @@ export default function Home() {
     const contract = new ethers.Contract(contractAddress, abi, signer);
 
     try {
-      await makeNewMarket(contract, marketParams);
+      const gasOptions = {
+        gasLimit: ethers.utils.hexlify(15000000), // Set your gas limit
+        maxPriorityFeePerGas: ethers.utils.parseUnits("1000000", "gwei"), // Set the priority fee
+        // maxFeePerGas: ethers.utils.parseUnits("100", "gwei"), // Set the max fee
+      };
+      await makeNewMarket(contract, marketParams, gasOptions);
       console.log("Market created successfully!");
     } catch (error) {
       console.error("Error creating market:", error);
