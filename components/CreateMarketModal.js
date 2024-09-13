@@ -64,6 +64,7 @@ const CreateMarketModal = ({
       onClose={handleModalClose}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
+      key={1}
     >
       <Box
         sx={{

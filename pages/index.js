@@ -177,8 +177,8 @@ export default function Home() {
     try {
       const gasOptions = {
         gasLimit: ethers.utils.hexlify(15000000), // Set your gas limit
-        maxPriorityFeePerGas: ethers.utils.parseUnits("1000000", "gwei"), // Set the priority fee
-        // maxFeePerGas: ethers.utils.parseUnits("100", "gwei"), // Set the max fee
+        maxPriorityFeePerGas: ethers.utils.parseUnits("2.5", "gwei"), // Set the priority fee
+        maxFeePerGas: ethers.utils.parseUnits("1000000", "gwei"), // Set the max fee
       };
       await makeNewMarket(contract, marketParams, gasOptions);
       console.log("Market created successfully!");
