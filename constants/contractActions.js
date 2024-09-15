@@ -207,3 +207,14 @@ export const getMarketsForCategory = async (contract, params) => {
     throw error;
   }
 };
+
+export const getUSDBalance = async (contract, params) => {
+  const { userAddress } = params;
+  try {
+    const balance = await contract.ACCT_USD_BALANCES(userAddress);
+    console.log("USD Balance:", Number(balance));
+    return balance;
+  } catch (error) {
+    console.error("Error fetching balance:", error);
+  }
+};

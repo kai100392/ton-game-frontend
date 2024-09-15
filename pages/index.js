@@ -3,7 +3,8 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import abi from "./abi/CallitFactory.abi.json";
+import factoryAbi from "./abi/CallitFactory.abi.json";
+import vaultAbi from "./abi/CallitVault.abi.json";
 // import { abi } from "../constants/abi";
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
@@ -34,6 +35,7 @@ import {
   claimVoterRewards,
   claimPromotorRewards,
   setMarketInfo,
+  getUSDBalance,
 } from "../constants/contractActions";
 import web3 from "../components/Connector";
 import { styled } from "@mui/material/styles";
@@ -43,7 +45,7 @@ import TimestampForm from "../components/TimestampForm";
 import CreateMarketModal from "../components/CreateMarketModal";
 import SetMarketInfoModal from "../components/SetMarketInfoModal";
 
-import { contractAddress } from "../constants/address";
+import { contractAddress, ADDR_FACT, ADDR_VAULT } from "../constants/address";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -129,7 +131,7 @@ const MarketArray = [
 ];
 
 export default function Home() {
-  // const [address, setAddress] = useState(null);
+  const [balance, setBalance] = useState(null);
   const [marketParams, setMarketParams] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const [ticketId, setTicketId] = useState("");
@@ -169,10 +171,25 @@ export default function Home() {
     }
   };
 
+  // Get balance from vault
+  const handleGetBalance = async () => {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
+
+    try {
+      const usdBalance = await getUSDBalance(contract, {
+        userAddress: account,
+      });
+      setBalance(Number(usdBalance));
+    } catch (error) {
+      console.error("Error getting your balance:", error);
+    }
+  };
+
   // Trigger market creation
   const handleCreateMarket = async (marketParams) => {
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
 
     try {
       const gasOptions = {
@@ -307,7 +324,17 @@ export default function Home() {
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {hasMetamask ? (
                 active ? (
-                  "Connected Successfully! "
+                  <>
+                    <p>Wallet Connected</p>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      color="info"
+                      onClick={handleGetBalance}
+                    >
+                      balance : {balance ? balance : "Press me"}
+                    </Button>
+                  </>
                 ) : (
                   <Button
                     variant="contained"

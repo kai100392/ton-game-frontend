@@ -121,6 +121,7 @@ const CreateMarketModal = ({
               display="flex"
               justifyContent="space-between"
               flexDirection="row"
+              key={key}
             >
               <TextField
                 sx={{ mr: 2 }}
