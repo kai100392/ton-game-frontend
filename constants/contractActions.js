@@ -190,12 +190,13 @@ export const getMarketsForMaker = async (contract, params) => {
 
 // Get Market Info For Category
 export const getMarketsForCategory = async (contract, params) => {
-  const { _cat, _liveAll, _idxStart, _retCnt } = params;
+  const { _category, _all, _live, _idxStart, _retCnt } = params;
   console.log("gMFMcontract--", _category);
   try {
     const tx = await contract.getMarketsForCategory(
-      _cat,
-      _liveAll,
+      _category,
+      _all,
+      _live,
       _idxStart,
       _retCnt
     );

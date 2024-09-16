@@ -15,7 +15,7 @@ const CreateMarketModal = ({
   const [dtResultVoteEnd, setDtResultVoteEnd] = useState(null);
   const [resultLabels, setResultLabels] = useState([""]);
   const [resultDescrs, setResultDescrs] = useState([""]);
-  const [resultNum, setResultNum] = useState(1);
+  const [resultNum, setResultNum] = useState(2);
 
   const handleResultLabels = (value, key) => {
     const newLabels = resultLabels;

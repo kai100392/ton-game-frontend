@@ -36,6 +36,7 @@ import {
   claimPromotorRewards,
   setMarketInfo,
   getUSDBalance,
+  getMarketsForCategory,
 } from "../constants/contractActions";
 import web3 from "../components/Connector";
 import { styled } from "@mui/material/styles";
@@ -217,6 +218,18 @@ export default function Home() {
     }
   };
 
+  // Trigger set market infomation
+  const handleGetMarketForCategory = async (params) => {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+    try {
+      await getMarketsForCategory(contract, params);
+      console.log("Markets For Category Getted");
+    } catch (error) {
+      console.error("Error getting markets:", error);
+    }
+  };
+
   // Trigger buy ticket with promo code
   const handleBuyTicket = async () => {
     try {
@@ -375,6 +388,24 @@ export default function Home() {
               </Button>
             </Box>
 
+            {/* Get Market For Category: For test */}
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={() =>
+                  handleGetMarketForCategory({
+                    _category: "sports",
+                    _all: true,
+                    _live: true,
+                    _idxStart: 0,
+                    _retCnt: 1,
+                  })
+                }
+              >
+                GetMarketForCategory(test)
+              </Button>
+            </Box>
             {/* Sidebar Widget: Election Forecast */}
             <Card sx={{ marginBottom: 2 }}>
               <CardContent>
