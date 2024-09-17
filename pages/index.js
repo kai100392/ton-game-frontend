@@ -174,10 +174,9 @@ export default function Home() {
 
   // Get balance from vault
   const handleGetBalance = async () => {
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
-
     try {
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
       const usdBalance = await getUSDBalance(contract, {
         userAddress: account,
       });
@@ -207,10 +206,10 @@ export default function Home() {
 
   // Trigger set market infomation
   const handleSetMarketInfo = async (params) => {
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
-
     try {
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+
       await setMarketInfo(contract, params);
       console.log("Market Info Updated!");
     } catch (error) {
@@ -220,9 +219,9 @@ export default function Home() {
 
   // Trigger set market infomation
   const handleGetMarketForCategory = async (params) => {
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
     try {
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
       await getMarketsForCategory(contract, params);
       console.log("Markets For Category Getted");
     } catch (error) {
@@ -268,7 +267,7 @@ export default function Home() {
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Polymarket
+            CALL-It
           </Typography>
 
           {/* Search Bar */}
@@ -468,7 +467,7 @@ export default function Home() {
       >
         <Container maxWidth="lg">
           <Typography variant="body1" align="center">
-            © 2024 Polymarket. All rights reserved.
+            © 2024 CALL-It. All rights reserved.
           </Typography>
         </Container>
       </Box>
@@ -495,58 +494,6 @@ export default function Home() {
           </Link>
         </Box>
         <div></div>
-      </Container>
-      <Container maxWidth="md">
-        <Typography variant="h4" gutterBottom>
-          Prediction Market dApp
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          {hasMetamask ? (
-            active ? (
-              "Connected Successfully! "
-            ) : (
-              <Button variant="outlined" onClick={connectWallet}>
-                Connect MetaMask
-              </Button>
-            )
-          ) : (
-            "Please install metamask"
-          )}
-
-          {active ? <button onClick={() => execute()}>Execute</button> : ""}
-        </Typography>
-
-        <Typography variant="h6" gutterBottom>
-          Create a New Market
-        </Typography>
-        <TextField
-          label="Market Parameters"
-          value={marketParams}
-          onChange={(e) => setMarketParams(e.target.value)}
-          fullWidth
-          sx={{ mb: 2 }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleCreateMarket}
-        >
-          Create Market
-        </Button>
-
-        <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
-          Buy Call Ticket with Promo Code
-        </Typography>
-        <TextField
-          label="Promo Code"
-          value={promoCode}
-          onChange={(e) => setPromoCode(e.target.value)}
-          fullWidth
-          sx={{ mb: 2 }}
-        />
-        <Button variant="contained" color="secondary" onClick={handleBuyTicket}>
-          Buy Ticket
-        </Button>
       </Container>
 
       {/* Modal */}
