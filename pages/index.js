@@ -267,7 +267,16 @@ export default function Home() {
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            CALL-It
+            <Link href="/" passHref>
+              <Box>
+                <Image
+                  src="/logo.jpg"
+                  alt="Call-It Logo"
+                  width={150}
+                  height={50}
+                />
+              </Box>
+            </Link>
           </Typography>
 
           {/* Search Bar */}
@@ -324,11 +333,11 @@ export default function Home() {
             </Box>
 
             {/* View All Button */}
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            {/* <Box sx={{ textAlign: "center", marginTop: 4 }}>
               <Button variant="contained" color="primary">
                 View All
               </Button>
-            </Box>
+            </Box> */}
           </Box>
 
           {/* Right Column for Side Sections */}
