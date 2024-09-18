@@ -18,9 +18,14 @@ import {
   Box,
   Card,
   CardContent,
-  TextField,
-  IconButton,
-  Modal,
+  FormControl,
+  FormGroup,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import MarketCard from "../components/MarketCard";
 
@@ -300,6 +305,29 @@ export default function Home() {
             </Link>
           </Typography>
 
+          {/* Category Dropdown */}
+          <FormControl margin="none" sx={{ width: 150, m: 1 }}>
+            <Select
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+              value="All"
+              sx={{ padding: 0 }}
+            >
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Sports">Sports</MenuItem>
+              <MenuItem value="Current Events">Current Events</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* My Markets */}
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="My Markets"
+            />
+          </FormGroup>
+
           {/* Search Bar */}
           <Search>
             <SearchIconWrapper>
@@ -374,7 +402,7 @@ export default function Home() {
                       color="info"
                       onClick={handleGetBalance}
                     >
-                      balance : {balance ? balance : "Press me"}
+                      balance : {balance != null ? balance : "Press me"}
                     </Button>
                     <Typography
                       sx={{
