@@ -219,3 +219,12 @@ export const getUSDBalance = async (contract, params) => {
     console.error("Error fetching balance:", error);
   }
 };
+
+export const depositToVault = async (contract, params) => {
+  const { _depositor, _value } = params;
+  try {
+    await contract.deposit(_depositor, _value);
+  } catch (error) {
+    console.error("Error fetching balance:", error);
+  }
+};

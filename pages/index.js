@@ -37,16 +37,16 @@ import {
   setMarketInfo,
   getUSDBalance,
   getMarketsForCategory,
+  depositToVault,
 } from "../constants/contractActions";
-import web3 from "../components/Connector";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import TimestampForm from "../components/TimestampForm";
 import CreateMarketModal from "../components/CreateMarketModal";
 import SetMarketInfoModal from "../components/SetMarketInfoModal";
 
 import { contractAddress, ADDR_FACT, ADDR_VAULT } from "../constants/address";
+import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -143,6 +143,7 @@ export default function Home() {
 
   const [createModalopen, setCreateModalOpen] = useState(false);
   const [setInfoModalOpen, setSetInfoModalOpen] = useState(false);
+  const [depositModalOpen, setDepositModalOpen] = useState(false);
 
   const {
     active,
@@ -152,7 +153,7 @@ export default function Home() {
     library: provider,
   } = useWeb3React();
 
-  // Functions to handle modal close
+  // Functions to handle modal actions
   const handleCreateModalOpen = () => setCreateModalOpen(true);
 
   const handleCreateModalClose = () => setCreateModalOpen(false);
@@ -160,6 +161,10 @@ export default function Home() {
   const handleSetInfoModalOpen = () => setSetInfoModalOpen(true);
 
   const handleSetInfoModalClose = () => setSetInfoModalOpen(false);
+
+  const handleDepositModalOpen = () => setDepositModalOpen(true);
+
+  const handleDepositModalClose = () => setDepositModalOpen(false);
 
   // Connect to MetaMask
   const connectWallet = async () => {
@@ -202,6 +207,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
+    handleCreateModalClose();
   };
 
   // Trigger set market infomation
@@ -215,6 +221,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
+    handleSetInfoModalClose();
   };
 
   // Trigger set market infomation
@@ -227,6 +234,20 @@ export default function Home() {
     } catch (error) {
       console.error("Error getting markets:", error);
     }
+  };
+
+  // Trigger set market infomation
+  const handleDepositToVault = async (params) => {
+    try {
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
+      await depositToVault(contract, params);
+      console.log("You deposited successfully");
+      handleGetBalance();
+    } catch (error) {
+      console.error("Error depositing:", error);
+    }
+    handleDepositModalClose();
   };
 
   // Trigger buy ticket with promo code
@@ -355,6 +376,23 @@ export default function Home() {
                     >
                       balance : {balance ? balance : "Press me"}
                     </Button>
+                    <Typography
+                      sx={{
+                        fontFamily: "Roboto",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        lineHeight: "24px",
+                        fontSize: "14px",
+                        letterSpacing: "0.18px",
+                        color: "#0288d1",
+                        margin: "0px 0px",
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                      onClick={handleDepositModalOpen}
+                    >
+                      Click here to deposit
+                    </Typography>
                   </>
                 ) : (
                   <Button
@@ -516,6 +554,14 @@ export default function Home() {
         setInfoModalOpen={setInfoModalOpen}
         handleSetInfoModalClose={handleSetInfoModalClose}
         handleSetMarketInfo={handleSetMarketInfo}
+      />
+
+      <DepositToVaultModal
+        depositModalOpen={depositModalOpen}
+        handleDepositModalClose={handleDepositModalClose}
+        handleDepositToVault={handleDepositToVault}
+        balance={balance}
+        account={account}
       />
     </>
   );
