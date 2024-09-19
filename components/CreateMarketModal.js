@@ -36,7 +36,7 @@ const CreateMarketModal = ({
   };
 
   const handleModalClose = () => {
-    setResultNum(1);
+    setResultNum(2);
     handleCreateModalClose();
   };
 

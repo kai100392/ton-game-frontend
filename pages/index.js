@@ -43,6 +43,7 @@ import {
   getUSDBalance,
   getMarketsForMakerOrCategory,
   depositToVault,
+  getMarketCntForMakerOrCategory,
 } from "../constants/contractActions";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -137,19 +138,15 @@ const MarketArray = [
 ];
 
 export default function Home() {
-  const [balance, setBalance] = useState(null);
   const [marketParams, setMarketParams] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const [ticketId, setTicketId] = useState("");
   const [marketId, setMarketId] = useState("");
   const [vote, setVote] = useState("");
 
+  //Wallet Connecting States
+  const [balance, setBalance] = useState(null);
   const [hasMetamask, setHasMetamask] = useState(null);
-
-  const [createModalopen, setCreateModalOpen] = useState(false);
-  const [setInfoModalOpen, setSetInfoModalOpen] = useState(false);
-  const [depositModalOpen, setDepositModalOpen] = useState(false);
-
   const {
     active,
     activate,
@@ -157,6 +154,52 @@ export default function Home() {
     account,
     library: provider,
   } = useWeb3React();
+
+  //Markets Management States
+  const [onlyMyMarkets, setOnlyMyMarkets] = useState(false);
+  const [marketCategory, setMarketCategory] = useState("");
+
+  //Modal Control States
+  const [createModalopen, setCreateModalOpen] = useState(false);
+  const [setInfoModalOpen, setSetInfoModalOpen] = useState(false);
+  const [depositModalOpen, setDepositModalOpen] = useState(false);
+
+  // Using useEffect to fetch data when the component mounts
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (account == undefined) {
+      setLoading(false);
+      return;
+    }
+    // Simulate a data fetch with a timeout
+    const fetchData = async () => {
+      try {
+        const response = handleGetMarketCntForMakerOrCategory({
+          _maker: onlyMyMarkets ? account : "",
+          _category: marketCategory,
+        });
+        const result = await response;
+        console.log("useEffect worked: ", result);
+        setData(result);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [account, onlyMyMarkets, marketCategory]); // Empty dependency array means this effect runs only once when the component mounts
+
+  //Functions to manage markets
+  const handleMarketCheck = () => {
+    if (onlyMyMarkets) setOnlyMyMarkets(false);
+    else setOnlyMyMarkets(true);
+  };
+  const handleCategorySelect = (event) => {
+    setMarketCategory(event.target.value); // Update the age state based on the selected value
+  };
 
   // Functions to handle modal actions
   const handleCreateModalOpen = () => setCreateModalOpen(true);
@@ -225,7 +268,7 @@ export default function Home() {
     handleSetInfoModalClose();
   };
 
-  // Trigger set market infomation
+  // Trigger
   const handleGetMarketsForMakerOrCategory = async (params) => {
     try {
       const signer = provider.getSigner();
@@ -237,7 +280,19 @@ export default function Home() {
     }
   };
 
-  // Trigger set market infomation
+  // Trigger
+  const handleGetMarketCntForMakerOrCategory = async (params) => {
+    try {
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      const count = await getMarketCntForMakerOrCategory(contract, params);
+      console.log("Market Count For Category Getted: ", count);
+    } catch (error) {
+      console.error("Error getting markets:", error);
+    }
+  };
+
+  // Trigger
   const handleDepositToVault = async (params) => {
     try {
       const signer = provider.getSigner();
@@ -306,10 +361,11 @@ export default function Home() {
             <Select
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
-              value="All"
+              value={marketCategory}
+              onChange={handleCategorySelect}
               sx={{ padding: 0 }}
             >
-              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="">All</MenuItem>
               <MenuItem value="Sports">Sports</MenuItem>
               <MenuItem value="Current Events">Current Events</MenuItem>
               <MenuItem value="Other">Other</MenuItem>
@@ -319,8 +375,13 @@ export default function Home() {
           {/* My Markets */}
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="My Markets"
+              control={
+                <Checkbox
+                  checked={onlyMyMarkets}
+                  onChange={handleMarketCheck}
+                />
+              }
+              label={`Only My Markets`}
             />
           </FormGroup>
 
@@ -477,6 +538,22 @@ export default function Home() {
                 GetMarketForCategory(test)
               </Button>
             </Box>
+            {/* Get Market Count For Category: For test */}
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={() =>
+                  handleGetMarketCntForMakerOrCategory({
+                    _category: "",
+                    _maker: account,
+                  })
+                }
+              >
+                GetMarketCount(test)
+              </Button>
+            </Box>
+
             {/* Sidebar Widget: Election Forecast */}
             {/* <Card sx={{ marginBottom: 2 }}>
               <CardContent>

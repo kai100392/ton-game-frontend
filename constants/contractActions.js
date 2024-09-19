@@ -193,10 +193,28 @@ export const getMarketsForMaker = async (contract, params) => {
   }
 };
 
+//Get Marketget Count For Category or Maker
+export const getMarketCntForMakerOrCategory = async (contract, params) => {
+  const { _maker, _category } = params;
+  console.log("params:", params);
+  try {
+    const tx = await contract.getMarketCntForMakerOrCategory(
+      _maker,
+      _category
+      // gasOptions
+    );
+    // Wait for the transaction to be mined
+    console.log("Transaction successful:", tx);
+    return Number(tx);
+  } catch (error) {
+    console.error("Error in getMarketCntForMakerOrCategory:", error);
+    throw error;
+  }
+};
+
 // Get Market Info For Category
 export const getMarketsForMakerOrCategory = async (contract, params) => {
   const { _category, _maker, _all, _live, _idxStart, _retCnt } = params;
-  console.log("gMFMcontract--", _category);
   try {
     const tx = await contract.getMarketsForMakerOrCategory(
       _category,
