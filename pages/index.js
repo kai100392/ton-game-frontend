@@ -41,7 +41,7 @@ import {
   claimPromotorRewards,
   setMarketInfo,
   getUSDBalance,
-  getMarketsForCategory,
+  getMarketsForMakerOrCategory,
   depositToVault,
 } from "../constants/contractActions";
 import { styled } from "@mui/material/styles";
@@ -202,16 +202,12 @@ export default function Home() {
     const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
 
     try {
-      const gasOptions = {
-        gasLimit: ethers.utils.hexlify(15000000), // Set your gas limit
-        maxPriorityFeePerGas: ethers.utils.parseUnits("2.5", "gwei"), // Set the priority fee
-        maxFeePerGas: ethers.utils.parseUnits("1000000", "gwei"), // Set the max fee
-      };
-      await makeNewMarket(contract, marketParams, gasOptions);
+      await makeNewMarket(contract, marketParams);
       console.log("Market created successfully!");
     } catch (error) {
       console.error("Error creating market:", error);
     }
+    handleGetBalance();
     handleCreateModalClose();
   };
 
@@ -230,11 +226,11 @@ export default function Home() {
   };
 
   // Trigger set market infomation
-  const handleGetMarketForCategory = async (params) => {
+  const handleGetMarketsForMakerOrCategory = async (params) => {
     try {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await getMarketsForCategory(contract, params);
+      await getMarketsForMakerOrCategory(contract, params);
       console.log("Markets For Category Getted");
     } catch (error) {
       console.error("Error getting markets:", error);
@@ -306,7 +302,7 @@ export default function Home() {
           </Typography>
 
           {/* Category Dropdown */}
-          <FormControl margin="none" sx={{ width: 150, m: 1 }}>
+          <FormControl margin="none" sx={{ width: 150, mx: 4 }}>
             <Select
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
@@ -468,12 +464,13 @@ export default function Home() {
                 variant="contained"
                 color="info"
                 onClick={() =>
-                  handleGetMarketForCategory({
-                    _category: "sports",
+                  handleGetMarketsForMakerOrCategory({
+                    _category: "",
+                    _maker: account,
                     _all: true,
                     _live: true,
                     _idxStart: 0,
-                    _retCnt: 1,
+                    _retCnt: 3,
                   })
                 }
               >
@@ -481,17 +478,17 @@ export default function Home() {
               </Button>
             </Box>
             {/* Sidebar Widget: Election Forecast */}
-            <Card sx={{ marginBottom: 2 }}>
+            {/* <Card sx={{ marginBottom: 2 }}>
               <CardContent>
                 <Typography variant="h6">2024 Election Forecast</Typography>
                 <Button variant="contained" fullWidth sx={{ marginTop: 2 }}>
                   View
                 </Button>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Sidebar Widget: Recent Activity */}
-            <Card sx={{ marginBottom: 2 }}>
+            {/* <Card sx={{ marginBottom: 2 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Recent Activity
@@ -508,10 +505,10 @@ export default function Home() {
                   )
                 )}
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Sidebar Widget: Top Volume */}
-            <Card>
+            {/* <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Top Volume This Week
@@ -526,7 +523,7 @@ export default function Home() {
                   </Typography>
                 ))}
               </CardContent>
-            </Card>
+            </Card> */}
           </Box>
         </Box>
       </Container>

@@ -1,8 +1,13 @@
-import web3 from "../components/Connector";
-import contractABI from "../pages/abi/CallitFactory.abi.json";
+import { ethers } from "ethers";
+
+const gasOptions = {
+  gasLimit: ethers.utils.hexlify(15000000), // Set your gas limit
+  maxPriorityFeePerGas: ethers.utils.parseUnits("2.5", "gwei"), // Set the priority fee
+  maxFeePerGas: ethers.utils.parseUnits("1000000", "gwei"), // Set the max fee
+};
 
 // Make a new market
-export const makeNewMarket = async (contract, params, gasOptions) => {
+export const makeNewMarket = async (contract, params) => {
   const {
     _name,
     _usdAmntLP,
@@ -189,24 +194,26 @@ export const getMarketsForMaker = async (contract, params) => {
 };
 
 // Get Market Info For Category
-export const getMarketsForCategory = async (contract, params) => {
-  const { _category, _all, _live, _idxStart, _retCnt } = params;
+export const getMarketsForMakerOrCategory = async (contract, params) => {
+  const { _category, _maker, _all, _live, _idxStart, _retCnt } = params;
   console.log("gMFMcontract--", _category);
   try {
-    const tx = await contract.getMarketsForCategory(
+    const tx = await contract.getMarketsForMakerOrCategory(
       _category,
+      _maker,
       _all,
       _live,
       _idxStart,
       _retCnt
+      // gasOptions
     );
     // Wait for the transaction to be mined
-    await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
-    console.error("Error in getMarketsForCategory:", error);
+    console.error("Error in getMarketsForMakerOrCategory:", error);
     throw error;
   }
+  console.log("getMarketsForCategoryOrMaker", params);
 };
 
 export const getUSDBalance = async (contract, params) => {
