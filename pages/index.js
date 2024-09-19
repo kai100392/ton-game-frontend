@@ -165,7 +165,7 @@ export default function Home() {
   const [depositModalOpen, setDepositModalOpen] = useState(false);
 
   // Using useEffect to fetch data when the component mounts
-  const [data, setData] = useState(null);
+  const [marketCnt, setMarketCnt] = useState(0);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (account == undefined) {
@@ -181,7 +181,7 @@ export default function Home() {
         });
         const result = await response;
         console.log("useEffect worked: ", result);
-        setData(result);
+        setMarketCnt(result);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -434,6 +434,8 @@ export default function Home() {
                   prediction={market.prediction}
                   bets={market.bets}
                   participants={market.participants}
+                  isMine={true}
+                  handleSetInfoModalOpen={handleSetInfoModalOpen}
                 />
               ))}
             </Box>

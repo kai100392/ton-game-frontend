@@ -7,15 +7,21 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
-import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import Settings from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
-const MarketCard = ({ id, title, bets, participants }) => {
+const MarketCard = ({
+  id,
+  title,
+  bets,
+  participants,
+  isMine,
+  handleSetInfoModalOpen,
+}) => {
   return (
     <Card sx={{ width: 300, margin: 2, borderRadius: 2, boxShadow: 3 }}>
       <CardContent>
@@ -30,6 +36,15 @@ const MarketCard = ({ id, title, bets, participants }) => {
             <Typography variant="h6" component="div">
               {title}
             </Typography>
+            {isMine ? (
+              <IconButton
+                aria-label="comments"
+                size="small"
+                onClick={handleSetInfoModalOpen}
+              >
+                <Settings />
+              </IconButton>
+            ) : null}
           </Box>
         </Link>
 
