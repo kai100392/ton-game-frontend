@@ -27,8 +27,9 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import MarketCard from "../components/MarketCard";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import {
   makeNewMarket,
   buyCallTicketWithPromoCode,
@@ -48,6 +49,8 @@ import {
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+
+import MarketCard from "../components/MarketCard";
 import CreateMarketModal from "../components/CreateMarketModal";
 import SetMarketInfoModal from "../components/SetMarketInfoModal";
 
@@ -161,69 +164,85 @@ export default function Home() {
   const [setInfoModalOpen, setSetInfoModalOpen] = useState(false);
   const [depositModalOpen, setDepositModalOpen] = useState(false);
 
+  //For Pagination
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const maxCntPerPage = 6;
+  const handlePaginationChange = (event, value) => {
+    setPage(value);
+  };
+
   // Using useEffect to fetch data when the component mounts
   const [loading, setLoading] = useState(true); // For Spinner Screen - potential
   useEffect(() => {
+    refreshMarketList();
+  }, [account, onlyMyMarkets, marketCategory, page, totalPages]); // Empty dependency array means this effect runs only once when the component mounts
+
+  const refreshMarketList = async () => {
+    console.log("Market List refreshing...");
     if (account == undefined) {
       setLoading(false);
       return;
     }
+
     let maker = "";
     if (onlyMyMarkets) maker = account;
     else maker = "0x0000000000000000000000000000000000000000";
-    // Simulate a data fetch with a timeout
-    const fetchData = async () => {
-      const response = await handleGetMarketCntForMakerOrCategory({
-        _maker: maker,
-        // _maker: account,
-        _category: marketCategory,
-      });
-      console.log("market count: ", response);
 
-      const params = {
-        _category: marketCategory,
-        _maker: maker,
-        _all: true,
-        _live: true,
-        _idxStart: 0,
-        _retCnt: response,
-      };
-      console.log("getMarkets Function's params: ", params);
-      const tempArray = await handleGetMarketsForMakerOrCategory(params);
-      if (tempArray == undefined) return;
-      console.log("marketArray displays :", tempArray.length);
-      for (let i = 0; i < tempArray.length; i++) {
-        marketsArray[i] = {
-          marketNum: tempArray[i]["marketNum"],
-          name: tempArray[i]["name"],
-          imgURL: tempArray[i]["imgURL"],
-          maker: tempArray[i]["maker"],
-          category: tempArray[i]["category"],
-          live: tempArray[i]["live"],
-          rules: tempArray[i]["rules"],
-          winningVoteResult: tempArray[i]["winningVoteResult"],
-          blockNumber: tempArray[i]["blockNumber"],
-          blockTimestamp: tempArray[i]["blockTimestamp"],
-          marketResults: { resultLabels: [], resultOptionTokens: [] },
-        };
-        for (
-          let j = 0;
-          j < tempArray[i]["marketResults"]["resultLabels"].length;
-          j++
-        ) {
-          marketsArray[i].marketResults.resultLabels[j] =
-            tempArray[i]["marketResults"]["resultLabels"][j];
-          marketsArray[i].marketResults.resultOptionTokens[j] =
-            tempArray[i]["marketResults"]["resultOptionTokens"][j];
-        }
-      }
-      setMarketsList(marketsArray);
-      setLoading(false);
+    const marektCnt = await handleGetMarketCntForMakerOrCategory({
+      _maker: maker,
+      // _maker: account,
+      _category: marketCategory,
+    });
+    console.log("market count: ", marektCnt);
+
+    //page control
+    setTotalPages(Math.ceil(marektCnt / maxCntPerPage));
+    console.log("totalPage is ", totalPages);
+
+    let idxStart = (page - 1) * maxCntPerPage;
+    let retCnt = page < totalPages ? maxCntPerPage : marektCnt % maxCntPerPage;
+    const params = {
+      _category: marketCategory,
+      _maker: maker,
+      _all: true,
+      _live: true,
+      _idxStart: idxStart,
+      _retCnt: retCnt,
     };
-
-    fetchData();
-  }, [account, onlyMyMarkets, marketCategory]); // Empty dependency array means this effect runs only once when the component mounts
-
+    console.log("getMarkets Function's params: ", params);
+    const tempArray = await handleGetMarketsForMakerOrCategory(params);
+    if (tempArray == undefined) return;
+    console.log("marketArray displays :", tempArray.length);
+    for (let i = 0; i < tempArray.length; i++) {
+      marketsArray[i] = {
+        marketNum: tempArray[i]["marketNum"],
+        name: tempArray[i]["name"],
+        imgURL: tempArray[i]["imgURL"],
+        maker: tempArray[i]["maker"],
+        category: tempArray[i]["category"],
+        live: tempArray[i]["live"],
+        rules: tempArray[i]["rules"],
+        winningVoteResult: tempArray[i]["winningVoteResult"],
+        blockNumber: tempArray[i]["blockNumber"],
+        blockTimestamp: tempArray[i]["blockTimestamp"],
+        marketResults: { resultLabels: [], resultOptionTokens: [] },
+      };
+      for (
+        let j = 0;
+        j < tempArray[i]["marketResults"]["resultLabels"].length;
+        j++
+      ) {
+        marketsArray[i].marketResults.resultLabels[j] =
+          tempArray[i]["marketResults"]["resultLabels"][j];
+        marketsArray[i].marketResults.resultOptionTokens[j] =
+          tempArray[i]["marketResults"]["resultOptionTokens"][j];
+      }
+    }
+    setMarketsList(marketsArray);
+    setLoading(false);
+    console.log("Market List Updated");
+  };
   //Functions to manage markets
   const handleMarketCheck = () => {
     if (onlyMyMarkets) setOnlyMyMarkets(false);
@@ -282,6 +301,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
+    refreshMarketList();
     handleGetBalance();
     handleCreateModalClose();
   };
@@ -296,6 +316,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
+    refreshMarketList();
     handleSetInfoModalClose();
   };
 
@@ -439,6 +460,13 @@ export default function Home() {
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ marginTop: 4 }}>
+        <Stack spacing={2} alignItems="center">
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePaginationChange}
+          />
+        </Stack>
         <Box
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
@@ -545,28 +573,6 @@ export default function Home() {
                 </Button>
               )}
             </Box>
-
-            {/* Get Market For Category: For test */}
-            {/* <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button
-                variant="contained"
-                color="info"
-                onClick={() =>
-                  handleGetMarketsForMakerOrCategory({
-                    _category: "",
-                    _maker: account,
-                    _all: true,
-                    _live: true,
-                    _idxStart: 0,
-                    // _retCnt: 3,
-                    _retCnt: marketCnt,
-                  })
-                }
-              >
-                GetMarketForCategory(test)
-              </Button>
-            </Box>
-             */}
 
             {/* Sidebar Widget: Election Forecast */}
             {/* <Card sx={{ marginBottom: 2 }}>

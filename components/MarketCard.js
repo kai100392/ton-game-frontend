@@ -79,7 +79,7 @@ const MarketCard = ({
             </Typography>
           </Box>
           <Box display="flex" alignItems="center">
-            <MonetizationOnOutlinedIcon sx={{ marginRight: 0.5 }} />
+            <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
             <Typography variant="body2" color="text.secondary">
               {live}
             </Typography>
