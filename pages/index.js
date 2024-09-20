@@ -175,7 +175,7 @@ export default function Home() {
       setLoading(false);
       return;
     }
-    let maker = "0x0000000000000000000000000000000000000000";
+    let maker = "";
     if (onlyMyMarkets) maker = account;
     else maker = "0x0000000000000000000000000000000000000000";
     // Simulate a data fetch with a timeout
@@ -470,7 +470,7 @@ export default function Home() {
                       winningVoteResult={market.winningVoteResult}
                       blockNumber={market.blockNumber}
                       blockTimestamp={market.blockTimestamp}
-                      isMine={true}
+                      isMine={market.maker == account}
                       handleSetInfoModalOpen={handleSetInfoModalOpen}
                     />
                   ))
