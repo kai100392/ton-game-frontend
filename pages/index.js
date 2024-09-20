@@ -156,8 +156,11 @@ export default function Home() {
   } = useWeb3React();
 
   //Markets Management States
-  const [onlyMyMarkets, setOnlyMyMarkets] = useState(false);
+  const [onlyMyMarkets, setOnlyMyMarkets] = useState(true);
   const [marketCategory, setMarketCategory] = useState("");
+  const [marketsList, setMarketsList] = useState([]);
+  let marketsArray = [];
+  let marketsComponent = <></>;
 
   //Modal Control States
   const [createModalopen, setCreateModalOpen] = useState(false);
@@ -172,21 +175,47 @@ export default function Home() {
       setLoading(false);
       return;
     }
+    let maker = " ";
+    if (onlyMyMarkets) maker = account;
+    else maker = "0x0";
     // Simulate a data fetch with a timeout
     const fetchData = async () => {
-      try {
-        const response = handleGetMarketCntForMakerOrCategory({
-          _maker: onlyMyMarkets ? account : "",
-          _category: marketCategory,
-        });
-        const result = await response;
-        console.log("useEffect worked: ", result);
-        setMarketCnt(result);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
+      const response = await handleGetMarketCntForMakerOrCategory({
+        _maker: maker,
+        // _maker: account,
+        _category: marketCategory,
+      });
+      setMarketCnt(response);
+      console.log("market count: ", response);
+
+      const params = {
+        _category: marketCategory,
+        _maker: maker,
+        _all: true,
+        _live: true,
+        _idxStart: 0,
+        _retCnt: response,
+      };
+      console.log("getMarkets Function's params: ", params);
+      const tempArray = await handleGetMarketsForMakerOrCategory(params);
+      if (tempArray == undefined) return;
+      console.log("marketArray displays :", tempArray.length);
+      for (let i = 0; i < tempArray.length; i++) {
+        marketsArray[i] = {
+          marketNum: tempArray[i]["marketNum"],
+          name: tempArray[i]["name"],
+          imgURL: tempArray[i]["imgURL"],
+          maker: tempArray[i]["maker"],
+          category: tempArray[i]["category"],
+          live: tempArray[i]["live"],
+          rules: tempArray[i]["rules"],
+          winningVoteResult: tempArray[i]["winningVoteResult"],
+          blockNumber: tempArray[i]["blockNumber"],
+          blockTimestamp: tempArray[i]["blockTimestamp"],
+        };
       }
+      setMarketsList(marketsArray);
+      setLoading(false);
     };
 
     fetchData();
@@ -273,8 +302,8 @@ export default function Home() {
     try {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await getMarketsForMakerOrCategory(contract, params);
-      console.log("Markets For Category Getted");
+      const marketsArray = await getMarketsForMakerOrCategory(contract, params);
+      return marketsArray;
     } catch (error) {
       console.error("Error getting markets:", error);
     }
@@ -286,7 +315,8 @@ export default function Home() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
       const count = await getMarketCntForMakerOrCategory(contract, params);
-      console.log("Market Count For Category Getted: ", count);
+      console.log("Market Count For Category Called: ", count);
+      return count;
     } catch (error) {
       console.error("Error getting markets:", error);
     }
@@ -426,18 +456,25 @@ export default function Home() {
               justifyContent="space-around"
               sx={{ padding: 2 }}
             >
-              {MarketArray.map((market, index) => (
-                <MarketCard
-                  id={market.id}
-                  key={index}
-                  title={market.title}
-                  prediction={market.prediction}
-                  bets={market.bets}
-                  participants={market.participants}
-                  isMine={true}
-                  handleSetInfoModalOpen={handleSetInfoModalOpen}
-                />
-              ))}
+              {marketsList.length > 0
+                ? marketsList.map((market, index) => (
+                    <MarketCard
+                      id={market.marketNum}
+                      key={index}
+                      title={market.name}
+                      maker={market.maker}
+                      imgURL={market.imgURL}
+                      category={market.category}
+                      live={market.live}
+                      rules={market.rules}
+                      winningVoteResult={market.winningVoteResult}
+                      blockNumber={market.blockNumber}
+                      blockTimestamp={market.blockTimestamp}
+                      isMine={true}
+                      handleSetInfoModalOpen={handleSetInfoModalOpen}
+                    />
+                  ))
+                : null}
             </Box>
 
             {/* View All Button */}
@@ -510,17 +547,6 @@ export default function Home() {
               )}
             </Box>
 
-            {/* Set Market Info: For test */}
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button
-                variant="contained"
-                color="info"
-                onClick={handleSetInfoModalOpen}
-              >
-                SetMarketInfo(test)
-              </Button>
-            </Box>
-
             {/* Get Market For Category: For test */}
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               <Button
@@ -533,7 +559,8 @@ export default function Home() {
                     _all: true,
                     _live: true,
                     _idxStart: 0,
-                    _retCnt: 3,
+                    // _retCnt: 3,
+                    _retCnt: marketCnt,
                   })
                 }
               >

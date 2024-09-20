@@ -17,8 +17,8 @@ import Link from "next/link";
 const MarketCard = ({
   id,
   title,
-  bets,
-  participants,
+  category,
+  live,
   isMine,
   handleSetInfoModalOpen,
 }) => {
@@ -58,13 +58,13 @@ const MarketCard = ({
           <Box display="flex" alignItems="center">
             <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
             <Typography variant="body2" color="text.secondary">
-              {bets}
+              {category}
             </Typography>
           </Box>
           <Box display="flex" alignItems="center">
             <MonetizationOnOutlinedIcon sx={{ marginRight: 0.5 }} />
             <Typography variant="body2" color="text.secondary">
-              {participants}
+              {live}
             </Typography>
           </Box>
           <IconButton aria-label="comments" size="small">

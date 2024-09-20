@@ -203,8 +203,6 @@ export const getMarketCntForMakerOrCategory = async (contract, params) => {
       _category
       // gasOptions
     );
-    // Wait for the transaction to be mined
-    console.log("Transaction successful:", tx);
     return Number(tx);
   } catch (error) {
     console.error("Error in getMarketCntForMakerOrCategory:", error);
@@ -226,7 +224,8 @@ export const getMarketsForMakerOrCategory = async (contract, params) => {
       // gasOptions
     );
     // Wait for the transaction to be mined
-    console.log("Transaction successful:", tx);
+    console.log("GetMarkets executed successfully:", tx);
+    return tx;
   } catch (error) {
     console.error("Error in getMarketsForMakerOrCategory:", error);
     throw error;

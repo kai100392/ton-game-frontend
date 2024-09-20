@@ -1,1 +1,465 @@
-[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"_descr","type":"string"},{"indexed":false,"internalType":"uint16","name":"_step","type":"uint16"},{"indexed":false,"internalType":"string","name":"_data0","type":"string"},{"indexed":false,"internalType":"string","name":"_data1","type":"string"}],"name":"StepLog","type":"event"},{"inputs":[],"name":"TOK_WPLS","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"},{"internalType":"address[]","name":"_arr","type":"address[]"},{"internalType":"bool","name":"_safe","type":"bool"}],"name":"_addAddressToArraySafe","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"},{"internalType":"address","name":"_markMaker","type":"address"},{"internalType":"address[]","name":"_resultOptionTokens","type":"address[]"}],"name":"_addressIsMarketMakerOrCaller","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address[]","name":"_routers","type":"address[]"}],"name":"_best_swap_v2_router_idx_quote","outputs":[{"internalType":"uint8","name":"","type":"uint8"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_pairAddr","type":"address"},{"internalType":"uint256","name":"_usdTargetPrice","type":"uint256"}],"name":"_calculateTokensToMint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint64","name":"_net_usdAmnt","type":"uint64"},{"internalType":"uint16","name":"_feePerc","type":"uint16"},{"internalType":"uint64","name":"_usdAmnt","type":"uint64"}],"name":"_deductFeePerc","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"host","type":"address"},{"internalType":"string","name":"uid","type":"string"}],"name":"_generateAddressHash","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"_usdAmntLP","type":"uint256"},{"internalType":"uint256","name":"_resultOptionCnt","type":"uint256"},{"internalType":"uint32","name":"_tokPerUsd","type":"uint32"}],"name":"_getAmountsForInitLP","outputs":[{"internalType":"uint64","name":"","type":"uint64"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"components":[{"internalType":"address","name":"maker","type":"address"},{"internalType":"uint256","name":"marketNum","type":"uint256"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"category","type":"string"},{"internalType":"string","name":"rules","type":"string"},{"internalType":"string","name":"imgUrl","type":"string"},{"components":[{"internalType":"uint64","name":"usdAmntLP","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool_net","type":"uint64"},{"internalType":"uint64","name":"usdVoterRewardPool","type":"uint64"},{"internalType":"uint64","name":"usdRewardPerVote","type":"uint64"}],"internalType":"struct ICallitLib.MARKET_USD_AMNTS","name":"marketUsdAmnts","type":"tuple"},{"components":[{"internalType":"uint256","name":"dtCallDeadline","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteStart","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteEnd","type":"uint256"}],"internalType":"struct ICallitLib.MARKET_DATETIMES","name":"marketDatetimes","type":"tuple"},{"components":[{"internalType":"string[]","name":"resultLabels","type":"string[]"},{"internalType":"string[]","name":"resultDescrs","type":"string[]"},{"internalType":"address[]","name":"resultOptionTokens","type":"address[]"},{"internalType":"address[]","name":"resultTokenLPs","type":"address[]"},{"internalType":"address[]","name":"resultTokenRouters","type":"address[]"},{"internalType":"address[]","name":"resultTokenUsdStables","type":"address[]"},{"internalType":"uint64[]","name":"resultTokenVotes","type":"uint64[]"}],"internalType":"struct ICallitLib.MARKET_RESULTS","name":"marketResults","type":"tuple"},{"internalType":"uint16","name":"winningVoteResultIdx","type":"uint16"},{"internalType":"uint256","name":"blockTimestamp","type":"uint256"},{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"bool","name":"live","type":"bool"}],"internalType":"struct ICallitLib.MARKET","name":"_mark","type":"tuple"},{"internalType":"uint16","name":"_tickIdx","type":"uint16"},{"internalType":"uint64","name":"_usdMinTargetPrice","type":"uint64"},{"internalType":"uint8","name":"_usd_decs","type":"uint8"}],"name":"_getCallTicketUsdTargetPrice","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"_stables","type":"address[]"},{"internalType":"address[]","name":"_routers","type":"address[]"}],"name":"_getStableTokenHighMarketValue","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"_stables","type":"address[]"},{"internalType":"address[]","name":"_routers","type":"address[]"}],"name":"_getStableTokenLowMarketValue","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint64[]","name":"_resultTokenVotes","type":"uint64[]"}],"name":"_getWinningVoteIdxForMarket","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"},{"internalType":"address[]","name":"_addrArr","type":"address[]"}],"name":"_isAddressInArray","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_maker","type":"address"},{"internalType":"uint256","name":"_markNum","type":"uint256"},{"components":[{"internalType":"address","name":"caller","type":"address"},{"internalType":"bool","name":"resultAgree","type":"bool"},{"internalType":"address","name":"marketMaker","type":"address"},{"internalType":"uint256","name":"marketNum","type":"uint256"},{"internalType":"uint64","name":"agreeCnt","type":"uint64"},{"internalType":"uint64","name":"disagreeCnt","type":"uint64"}],"internalType":"struct ICallitLib.MARKET_REVIEW[]","name":"_makerReviews","type":"tuple[]"},{"internalType":"bool","name":"_resultAgree","type":"bool"}],"name":"_logMarketResultReview","outputs":[{"components":[{"internalType":"address","name":"caller","type":"address"},{"internalType":"bool","name":"resultAgree","type":"bool"},{"internalType":"address","name":"marketMaker","type":"address"},{"internalType":"uint256","name":"marketNum","type":"uint256"},{"internalType":"uint64","name":"agreeCnt","type":"uint64"},{"internalType":"uint64","name":"disagreeCnt","type":"uint64"}],"internalType":"struct ICallitLib.MARKET_REVIEW","name":"","type":"tuple"},{"internalType":"uint64","name":"","type":"uint64"},{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint8","name":"_fromDecimals","type":"uint8"},{"internalType":"uint256","name":"_usdAmnt","type":"uint256"},{"internalType":"uint8","name":"_toDecimals","type":"uint8"}],"name":"_normalizeStableAmnt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint32","name":"_perc","type":"uint32"},{"internalType":"uint64","name":"_num","type":"uint64"}],"name":"_perc_of_uint64","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint32","name":"_perc","type":"uint32"},{"internalType":"uint64","name":"_num","type":"uint64"}],"name":"_perc_of_uint64_unchecked","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_token","type":"address"},{"internalType":"address","name":"_account","type":"address"}],"name":"_perc_total_supply_owned","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"},{"internalType":"address[]","name":"_arr","type":"address[]"}],"name":"_remAddressFromArray","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"value","type":"uint256"}],"name":"_uint64_from_uint256","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"string","name":"_s","type":"string"}],"name":"_validNonWhiteSpaceString","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint64","name":"votes_held","type":"uint64"},{"internalType":"uint64","name":"_votesEarned","type":"uint64"},{"internalType":"uint256","name":"_voterLockTime","type":"uint256"},{"internalType":"uint256","name":"_markCreateTime","type":"uint256"}],"name":"_validVoteCount","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"tVERSION","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_descr",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "_step",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_data0",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_data1",
+        "type": "string"
+      }
+    ],
+    "name": "StepLog",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "TOK_WPLS",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" },
+      { "internalType": "address[]", "name": "_arr", "type": "address[]" },
+      { "internalType": "bool", "name": "_safe", "type": "bool" }
+    ],
+    "name": "_addAddressToArraySafe",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" },
+      { "internalType": "address", "name": "_markMaker", "type": "address" },
+      {
+        "internalType": "address[]",
+        "name": "_resultOptionTokens",
+        "type": "address[]"
+      }
+    ],
+    "name": "_addressIsMarketMakerOrCaller",
+    "outputs": [
+      { "internalType": "bool", "name": "", "type": "bool" },
+      { "internalType": "bool", "name": "", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "path", "type": "address[]" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "address[]", "name": "_routers", "type": "address[]" }
+    ],
+    "name": "_best_swap_v2_router_idx_quote",
+    "outputs": [
+      { "internalType": "uint8", "name": "", "type": "uint8" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_pairAddr", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "_usdTargetPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "_calculateTokensToMint",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint64", "name": "_net_usdAmnt", "type": "uint64" },
+      { "internalType": "uint16", "name": "_feePerc", "type": "uint16" },
+      { "internalType": "uint64", "name": "_usdAmnt", "type": "uint64" }
+    ],
+    "name": "_deductFeePerc",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "host", "type": "address" },
+      { "internalType": "string", "name": "uid", "type": "string" }
+    ],
+    "name": "_generateAddressHash",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_usdAmntLP", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_resultOptionCnt",
+        "type": "uint256"
+      },
+      { "internalType": "uint32", "name": "_tokPerUsd", "type": "uint32" }
+    ],
+    "name": "_getAmountsForInitLP",
+    "outputs": [
+      { "internalType": "uint64", "name": "", "type": "uint64" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "category", "type": "string" },
+          { "internalType": "string", "name": "rules", "type": "string" },
+          { "internalType": "string", "name": "imgUrl", "type": "string" },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "usdAmntLP",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool_net",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdVoterRewardPool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdRewardPerVote",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_USD_AMNTS",
+            "name": "marketUsdAmnts",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "dtCallDeadline",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteStart",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteEnd",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_DATETIMES",
+            "name": "marketDatetimes",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string[]",
+                "name": "resultLabels",
+                "type": "string[]"
+              },
+              {
+                "internalType": "string[]",
+                "name": "resultDescrs",
+                "type": "string[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultOptionTokens",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenLPs",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenRouters",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenUsdStables",
+                "type": "address[]"
+              },
+              {
+                "internalType": "uint64[]",
+                "name": "resultTokenVotes",
+                "type": "uint64[]"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_RESULTS",
+            "name": "marketResults",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint16",
+            "name": "winningVoteResultIdx",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockNumber",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "live", "type": "bool" }
+        ],
+        "internalType": "struct ICallitLib.MARKET",
+        "name": "_mark",
+        "type": "tuple"
+      },
+      { "internalType": "uint16", "name": "_tickIdx", "type": "uint16" },
+      {
+        "internalType": "uint64",
+        "name": "_usdMinTargetPrice",
+        "type": "uint64"
+      },
+      { "internalType": "uint8", "name": "_usd_decs", "type": "uint8" }
+    ],
+    "name": "_getCallTicketUsdTargetPrice",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "_stables", "type": "address[]" },
+      { "internalType": "address[]", "name": "_routers", "type": "address[]" }
+    ],
+    "name": "_getStableTokenHighMarketValue",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "_stables", "type": "address[]" },
+      { "internalType": "address[]", "name": "_routers", "type": "address[]" }
+    ],
+    "name": "_getStableTokenLowMarketValue",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64[]",
+        "name": "_resultTokenVotes",
+        "type": "uint64[]"
+      }
+    ],
+    "name": "_getWinningVoteIdxForMarket",
+    "outputs": [{ "internalType": "uint16", "name": "", "type": "uint16" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" },
+      { "internalType": "address[]", "name": "_addrArr", "type": "address[]" }
+    ],
+    "name": "_isAddressInArray",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_maker", "type": "address" },
+      { "internalType": "uint256", "name": "_markNum", "type": "uint256" },
+      {
+        "components": [
+          { "internalType": "address", "name": "caller", "type": "address" },
+          { "internalType": "bool", "name": "resultAgree", "type": "bool" },
+          {
+            "internalType": "address",
+            "name": "marketMaker",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          { "internalType": "uint64", "name": "agreeCnt", "type": "uint64" },
+          { "internalType": "uint64", "name": "disagreeCnt", "type": "uint64" }
+        ],
+        "internalType": "struct ICallitLib.MARKET_REVIEW[]",
+        "name": "_makerReviews",
+        "type": "tuple[]"
+      },
+      { "internalType": "bool", "name": "_resultAgree", "type": "bool" }
+    ],
+    "name": "_logMarketResultReview",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "caller", "type": "address" },
+          { "internalType": "bool", "name": "resultAgree", "type": "bool" },
+          {
+            "internalType": "address",
+            "name": "marketMaker",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          { "internalType": "uint64", "name": "agreeCnt", "type": "uint64" },
+          { "internalType": "uint64", "name": "disagreeCnt", "type": "uint64" }
+        ],
+        "internalType": "struct ICallitLib.MARKET_REVIEW",
+        "name": "",
+        "type": "tuple"
+      },
+      { "internalType": "uint64", "name": "", "type": "uint64" },
+      { "internalType": "uint64", "name": "", "type": "uint64" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint8", "name": "_fromDecimals", "type": "uint8" },
+      { "internalType": "uint256", "name": "_usdAmnt", "type": "uint256" },
+      { "internalType": "uint8", "name": "_toDecimals", "type": "uint8" }
+    ],
+    "name": "_normalizeStableAmnt",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint32", "name": "_perc", "type": "uint32" },
+      { "internalType": "uint64", "name": "_num", "type": "uint64" }
+    ],
+    "name": "_perc_of_uint64",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint32", "name": "_perc", "type": "uint32" },
+      { "internalType": "uint64", "name": "_num", "type": "uint64" }
+    ],
+    "name": "_perc_of_uint64_unchecked",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_token", "type": "address" },
+      { "internalType": "address", "name": "_account", "type": "address" }
+    ],
+    "name": "_perc_total_supply_owned",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" },
+      { "internalType": "address[]", "name": "_arr", "type": "address[]" }
+    ],
+    "name": "_remAddressFromArray",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ],
+    "name": "_uint64_from_uint256",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "string", "name": "_s", "type": "string" }],
+    "name": "_validNonWhiteSpaceString",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint64", "name": "votes_held", "type": "uint64" },
+      { "internalType": "uint64", "name": "_votesEarned", "type": "uint64" },
+      {
+        "internalType": "uint256",
+        "name": "_voterLockTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_markCreateTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "_validVoteCount",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tVERSION",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
