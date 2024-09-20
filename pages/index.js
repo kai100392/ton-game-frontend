@@ -175,9 +175,9 @@ export default function Home() {
       setLoading(false);
       return;
     }
-    let maker = " ";
+    let maker = "0x0000000000000000000000000000000000000000";
     if (onlyMyMarkets) maker = account;
-    else maker = "0x0";
+    else maker = "0x0000000000000000000000000000000000000000";
     // Simulate a data fetch with a timeout
     const fetchData = async () => {
       const response = await handleGetMarketCntForMakerOrCategory({
