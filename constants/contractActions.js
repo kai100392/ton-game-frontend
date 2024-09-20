@@ -156,13 +156,14 @@ export const claimPromotorRewards = async (contract, params) => {
 // Set Market Information
 export const setMarketInfo = async (contract, params) => {
   const { _anyTicket, _category, _descr, _imgUrl } = params;
-  console.log("sMIcontract--", _category);
+  console.log("sMIcontract--", params);
   try {
     const tx = await contract.setMarketInfo(
       _anyTicket,
       _category,
       _descr,
-      _imgUrl
+      _imgUrl,
+      gasOptions
     );
     // Wait for the transaction to be mined
     await tx.wait();

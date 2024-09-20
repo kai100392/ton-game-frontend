@@ -138,12 +138,6 @@ const MarketArray = [
 ];
 
 export default function Home() {
-  const [marketParams, setMarketParams] = useState("");
-  const [promoCode, setPromoCode] = useState("");
-  const [ticketId, setTicketId] = useState("");
-  const [marketId, setMarketId] = useState("");
-  const [vote, setVote] = useState("");
-
   //Wallet Connecting States
   const [balance, setBalance] = useState(null);
   const [hasMetamask, setHasMetamask] = useState(null);
@@ -156,11 +150,11 @@ export default function Home() {
   } = useWeb3React();
 
   //Markets Management States
-  const [onlyMyMarkets, setOnlyMyMarkets] = useState(true);
-  const [marketCategory, setMarketCategory] = useState("");
-  const [marketsList, setMarketsList] = useState([]);
+  const [onlyMyMarkets, setOnlyMyMarkets] = useState(false); //Checkbox for mine filter
+  const [marketCategory, setMarketCategory] = useState(""); //Combobox for category filter
+  const [marketsList, setMarketsList] = useState([]); //Main Data for Grid View
   let marketsArray = [];
-  let marketsComponent = <></>;
+  const [ticketForSetInfo, setTicketForSetInfo] = useState(""); // input as _anyTicket for SM setMarketInfo
 
   //Modal Control States
   const [createModalopen, setCreateModalOpen] = useState(false);
@@ -168,8 +162,7 @@ export default function Home() {
   const [depositModalOpen, setDepositModalOpen] = useState(false);
 
   // Using useEffect to fetch data when the component mounts
-  const [marketCnt, setMarketCnt] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // For Spinner Screen - potential
   useEffect(() => {
     if (account == undefined) {
       setLoading(false);
@@ -185,7 +178,6 @@ export default function Home() {
         // _maker: account,
         _category: marketCategory,
       });
-      setMarketCnt(response);
       console.log("market count: ", response);
 
       const params = {
@@ -212,7 +204,18 @@ export default function Home() {
           winningVoteResult: tempArray[i]["winningVoteResult"],
           blockNumber: tempArray[i]["blockNumber"],
           blockTimestamp: tempArray[i]["blockTimestamp"],
+          marketResults: { resultLabels: [], resultOptionTokens: [] },
         };
+        for (
+          let j = 0;
+          j < tempArray[i]["marketResults"]["resultLabels"].length;
+          j++
+        ) {
+          marketsArray[i].marketResults.resultLabels[j] =
+            tempArray[i]["marketResults"]["resultLabels"][j];
+          marketsArray[i].marketResults.resultOptionTokens[j] =
+            tempArray[i]["marketResults"]["resultOptionTokens"][j];
+        }
       }
       setMarketsList(marketsArray);
       setLoading(false);
@@ -287,8 +290,7 @@ export default function Home() {
   const handleSetMarketInfo = async (params) => {
     try {
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
       await setMarketInfo(contract, params);
       console.log("Market Info Updated!");
     } catch (error) {
@@ -466,23 +468,18 @@ export default function Home() {
                       imgURL={market.imgURL}
                       category={market.category}
                       live={market.live}
+                      marketResults={market.marketResults}
                       rules={market.rules}
                       winningVoteResult={market.winningVoteResult}
                       blockNumber={market.blockNumber}
                       blockTimestamp={market.blockTimestamp}
                       isMine={market.maker == account}
                       handleSetInfoModalOpen={handleSetInfoModalOpen}
+                      setTicketForSetInfo={setTicketForSetInfo}
                     />
                   ))
                 : null}
             </Box>
-
-            {/* View All Button */}
-            {/* <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button variant="contained" color="primary">
-                View All
-              </Button>
-            </Box> */}
           </Box>
 
           {/* Right Column for Side Sections */}
@@ -520,6 +517,7 @@ export default function Home() {
                   </>
                 ) : (
                   <Button
+                    fullWidth
                     variant="contained"
                     color="error"
                     onClick={connectWallet}
@@ -534,6 +532,7 @@ export default function Home() {
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {active ? (
                 <Button
+                  fullWidth
                   variant="contained"
                   color="error"
                   onClick={handleCreateModalOpen}
@@ -541,14 +540,14 @@ export default function Home() {
                   Create New Market
                 </Button>
               ) : (
-                <Button variant="contained" color="warning" disabled>
+                <Button fullWidth variant="contained" color="warning" disabled>
                   Create New Market
                 </Button>
               )}
             </Box>
 
             {/* Get Market For Category: For test */}
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            {/* <Box sx={{ textAlign: "center", marginTop: 4 }}>
               <Button
                 variant="contained"
                 color="info"
@@ -567,21 +566,7 @@ export default function Home() {
                 GetMarketForCategory(test)
               </Button>
             </Box>
-            {/* Get Market Count For Category: For test */}
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button
-                variant="contained"
-                color="info"
-                onClick={() =>
-                  handleGetMarketCntForMakerOrCategory({
-                    _category: "",
-                    _maker: account,
-                  })
-                }
-              >
-                GetMarketCount(test)
-              </Button>
-            </Box>
+             */}
 
             {/* Sidebar Widget: Election Forecast */}
             {/* <Card sx={{ marginBottom: 2 }}>
@@ -685,6 +670,7 @@ export default function Home() {
         setInfoModalOpen={setInfoModalOpen}
         handleSetInfoModalClose={handleSetInfoModalClose}
         handleSetMarketInfo={handleSetMarketInfo}
+        ticket={ticketForSetInfo}
       />
 
       <DepositToVaultModal

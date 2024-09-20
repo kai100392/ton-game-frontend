@@ -17,9 +17,9 @@ const SetMarketInfoModal = ({
   setInfoModalOpen,
   handleSetInfoModalClose,
   handleSetMarketInfo,
+  ticket,
 }) => {
   // State to manage form input values
-  const [anyTicket, setAnyTicket] = useState("");
   const [category, setCategory] = useState("");
   const [descr, setDescr] = useState("");
   const [imgUrl, setImgUrl] = useState("");
@@ -37,14 +37,13 @@ const SetMarketInfoModal = ({
   const handleSubmit = async () => {
     // Prepare data as JSON
     const formData = {
-      _anyTicket: anyTicket,
+      _anyTicket: ticket,
       _category: category,
       _descr: descr,
       _imgUrl: imgUrl,
     };
 
     handleSetMarketInfo(formData);
-    console.log(formData);
   };
 
   return (
@@ -78,8 +77,8 @@ const SetMarketInfoModal = ({
           label="_anyTicket"
           variant="outlined"
           margin="normal"
-          value={anyTicket}
-          onChange={(e) => setAnyTicket(e.target.value)} // Handle name input
+          value={ticket}
+          disabled
         />
         <FormControl fullWidth margin="normal">
           <InputLabel id="category-label">_category</InputLabel>

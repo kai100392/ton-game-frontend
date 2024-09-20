@@ -11,6 +11,7 @@ import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import Settings from "@mui/icons-material/Settings";
+import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
@@ -21,13 +22,20 @@ const MarketCard = ({
   live,
   isMine,
   handleSetInfoModalOpen,
+  setTicketForSetInfo,
+  marketResults,
 }) => {
   return (
     <Card sx={{ width: 300, margin: 2, borderRadius: 2, boxShadow: 3 }}>
       <CardContent>
         <Link href={`/market/${id}`} passHref>
           {/* Top Section: Icon and Title */}
-          <Box display="flex" alignItems="center" mb={2}>
+          <Box
+            display="flex"
+            alignItems="center"
+            mb={2}
+            justifyContent="space-between"
+          >
             <Avatar
               alt="Presidential Seal"
               src="/vote_img.jpg"
@@ -38,13 +46,22 @@ const MarketCard = ({
             </Typography>
             {isMine ? (
               <IconButton
+                color="primary"
                 aria-label="comments"
                 size="small"
-                onClick={handleSetInfoModalOpen}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent Link navigation
+                  setTicketForSetInfo(marketResults.resultOptionTokens[0]);
+                  handleSetInfoModalOpen();
+                }}
               >
                 <Settings />
               </IconButton>
-            ) : null}
+            ) : (
+              <IconButton aria-label="comments" size="small" disabled>
+                <SettingsOutlined />
+              </IconButton>
+            )}
           </Box>
         </Link>
 
