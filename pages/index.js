@@ -360,9 +360,11 @@ export default function Home() {
   };
 
   // Trigger buy ticket with promo code
-  const handleBuyTicket = async () => {
+  const handleBuyTicket = async (params) => {
     try {
-      await buyCallTicketWithPromoCode(contractAddress, promoCode);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      await buyCallTicketWithPromoCode(contract, params);
       console.log("Ticket bought successfully!");
     } catch (error) {
       console.error("Error buying ticket:", error);
