@@ -1,4 +1,5 @@
-import React from "react";
+import { ethers } from "ethers";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   Avatar,
@@ -9,6 +10,9 @@ import {
   CardContent,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { getMarketForTicket } from "../../constants/contractActions";
+import { ADDR_DELEGATE } from "../../constants/address";
+import delegateAbi from "../abi/CallitDelegate.abi.json";
 
 const marketData = [
   {
@@ -62,9 +66,54 @@ const marketData = [
   },
 ];
 
+// Trigger
+const handleGetMarketDetailForTicket = async (signer, params) => {
+  try {
+    const contract = new ethers.Contract(ADDR_DELEGATE, delegateAbi, signer);
+
+    const marketDetailData = await getMarketForTicket(contract, params);
+    console.log(marketDetailData[0]["name"]);
+    return marketDetailData;
+  } catch (error) {
+    console.error("Error getting market detail :", error);
+  }
+};
+
 const MarketPage = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, account } = router.query;
+
+  const [signer, setSigner] = useState(null);
+  const [marketDetailData, setMarketDetailData] = useState(null);
+
+  useEffect(() => {
+    if (account == undefined) router.push("/");
+    if (account) {
+      // Create an ethers provider from the URL (web3 provider)
+      const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      // Ensure provider is connected
+      web3Provider.ready
+        .then(() => {
+          const signer = web3Provider.getSigner(); // Get the signer from the provider
+          setSigner(signer);
+          console.log("Signer is set successfully!");
+        })
+        .catch((error) => {
+          console.error("Error setting up signer:", error);
+        });
+    }
+  }, [account]);
+
+  // Another useEffect for handling the market detail call
+  useEffect(() => {
+    if (signer && id) {
+      const detailData = handleGetMarketDetailForTicket(signer, {
+        _ticket: id,
+      });
+      setMarketDetailData(detailData);
+    }
+  }, [signer, id]); // Re-run only when `signer` or `id` changes
   return (
     <Box
       sx={{
@@ -82,14 +131,17 @@ const MarketPage = () => {
             src="/vote_img.jpg"
             sx={{ width: 80, height: 80, marginRight: 2 }}
           />
-          <Box>
-            <Typography variant="h5" fontWeight="bold">
-              Popular Vote Winner 2024
-            </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              $196,900,355 Bet &nbsp; • &nbsp; Nov 4, 2024
-            </Typography>
-          </Box>
+          {marketDetailData && marketDetailData.length > 0 ? (
+            <Box>
+              <Typography variant="h5" fontWeight="bold">
+                {marketDetailData[0]["name"]}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                $196,900,355 Bet &nbsp; • &nbsp;{" "}
+                {/* {marketDetailData ? marketDetailData : null} */}
+              </Typography>
+            </Box>
+          ) : null}
         </Box>
 
         <Box mb={2}>

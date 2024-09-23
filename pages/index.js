@@ -54,7 +54,12 @@ import MarketCard from "../components/MarketCard";
 import CreateMarketModal from "../components/CreateMarketModal";
 import SetMarketInfoModal from "../components/SetMarketInfoModal";
 
-import { contractAddress, ADDR_FACT, ADDR_VAULT } from "../constants/address";
+import {
+  contractAddress,
+  ADDR_FACT,
+  ADDR_VAULT,
+  ADDR_DELEGATE,
+} from "../constants/address";
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // Custom style for the search bar
@@ -326,6 +331,8 @@ export default function Home() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
       const marketsArray = await getMarketsForMakerOrCategory(contract, params);
+      // await getMarketHashesForMakerOrCategory(contract,params); //TEST
+
       return marketsArray;
     } catch (error) {
       console.error("Error getting markets:", error);
@@ -491,6 +498,7 @@ export default function Home() {
               {marketsList.length > 0
                 ? marketsList.map((market, index) => (
                     <MarketCard
+                      account={account}
                       id={market.marketNum}
                       key={index}
                       title={market.name}

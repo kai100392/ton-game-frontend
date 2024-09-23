@@ -253,3 +253,41 @@ export const depositToVault = async (contract, params) => {
     console.error("Error fetching balance:", error);
   }
 };
+
+export const getMarketHashesForMakerOrCategory = async (contract, params) => {
+  const { _category, _maker, _all, _live, _idxStart, _retCnt } = params;
+  try {
+    const tx = await contract.getMarketHashesForMakerOrCategory(
+      _category,
+      _maker,
+      _all,
+      _live,
+      _idxStart,
+      _retCnt
+      // gasOptions
+    );
+    // Wait for the transaction to be mined
+    console.log("GetMarketHashes executed successfully:", tx);
+    return tx;
+  } catch (error) {
+    console.error("Error in getMarketHashesForMakerOrCategory:", error);
+    throw error;
+  }
+};
+
+export const getMarketForTicket = async (contract, params) => {
+  console.log("getMarketForTicket params;", params);
+  const { _ticket } = params;
+  try {
+    const tx = await contract._getMarketForTicket(
+      _ticket
+      // gasOptions
+    );
+    // Wait for the transaction to be mined
+    console.log("GetMarketForTicket executed successfully:", tx);
+    return tx;
+  } catch (error) {
+    console.error("Error in getMarketForTicket:", error);
+    throw error;
+  }
+};

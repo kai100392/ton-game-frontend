@@ -16,6 +16,7 @@ import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
 const MarketCard = ({
+  account,
   id,
   title,
   category,
@@ -25,10 +26,30 @@ const MarketCard = ({
   setTicketForSetInfo,
   marketResults,
 }) => {
+  const aTicketAddress = marketResults.resultOptionTokens[0];
   return (
-    <Card sx={{ width: 300, margin: 2, borderRadius: 2, boxShadow: 3 }}>
-      <CardContent>
-        <Link href={`/market/${id}`} passHref>
+    <Card
+      sx={{
+        width: 300,
+        margin: 2,
+        borderRadius: 2,
+        boxShadow: 3,
+      }}
+    >
+      <Link
+        href={{
+          pathname: `/market/${aTicketAddress}`,
+          query: { account: account },
+        }}
+        passHref
+      >
+        <CardContent
+          sx={{
+            ":hover": {
+              border: "1px solid darkblue",
+            },
+          }}
+        >
           {/* Top Section: Icon and Title */}
           <Box
             display="flex"
@@ -51,7 +72,7 @@ const MarketCard = ({
                 size="small"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent Link navigation
-                  setTicketForSetInfo(marketResults.resultOptionTokens[0]);
+                  setTicketForSetInfo(aTicketAddress);
                   handleSetInfoModalOpen();
                 }}
               >
@@ -63,32 +84,32 @@ const MarketCard = ({
               </IconButton>
             )}
           </Box>
-        </Link>
 
-        {/* Middle Section: Stats */}
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          mt={2}
-        >
-          <Box display="flex" alignItems="center">
-            <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
-            <Typography variant="body2" color="text.secondary">
-              {category}
-            </Typography>
+          {/* Middle Section: Stats */}
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            mt={2}
+          >
+            <Box display="flex" alignItems="center">
+              <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
+              <Typography variant="body2" color="text.secondary">
+                {category}
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
+              <Typography variant="body2" color="text.secondary">
+                {live}
+              </Typography>
+            </Box>
+            <IconButton aria-label="comments" size="small">
+              <CommentOutlinedIcon />
+            </IconButton>
           </Box>
-          <Box display="flex" alignItems="center">
-            <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
-            <Typography variant="body2" color="text.secondary">
-              {live}
-            </Typography>
-          </Box>
-          <IconButton aria-label="comments" size="small">
-            <CommentOutlinedIcon />
-          </IconButton>
-        </Box>
-      </CardContent>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
