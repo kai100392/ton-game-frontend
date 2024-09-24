@@ -235,9 +235,9 @@ export const getMarketsForMakerOrCategory = async (contract, params) => {
 };
 
 export const getUSDBalance = async (contract, params) => {
-  const { userAddress } = params;
+  const { _acct } = params;
   try {
-    const balance = await contract.ACCT_USD_BALANCES(userAddress);
+    const balance = await contract.getUsdBalanceForAcct(_acct);
     console.log("USD Balance:", Number(balance));
     return balance;
   } catch (error) {
@@ -279,7 +279,7 @@ export const getMarketForTicket = async (contract, params) => {
   console.log("getMarketForTicket params;", params);
   const { _ticket } = params;
   try {
-    const tx = await contract._getMarketForTicket(
+    const tx = await contract.getMarketForTicket(
       _ticket
       // gasOptions
     );
