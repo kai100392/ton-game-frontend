@@ -5,6 +5,74 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "_tickStableReq",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_contrStableBal",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_swapFromStab",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_swapToTickStab",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_tickStabAmntNeeded",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_swapAmountOut",
+        "type": "uint256"
+      }
+    ],
+    "name": "AlertStableSwap",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdReward",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_receiver",
+        "type": "address"
+      }
+    ],
+    "name": "AlertZeroReward",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "_account",
         "type": "address"
@@ -64,20 +132,6 @@
   },
   { "stateMutability": "payable", "type": "fallback" },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "ACCOUNTS",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "ACCT_USD_BALANCES",
-    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "ADDR_CONFIG",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
@@ -118,18 +172,14 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_ticket", "type": "address" }
+      { "internalType": "address", "name": "_erc20", "type": "address" },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "bool", "name": "_totBal", "type": "bool" },
+      { "internalType": "bool", "name": "_all", "type": "bool" }
     ],
-    "name": "KEEPER_withdrawTicketLP",
+    "name": "KEEPER_maintenanceLP",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "PROMO_USD_OWED",
-    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -272,21 +322,15 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_acct", "type": "address" },
-      { "internalType": "uint64", "name": "_usdAmnt", "type": "uint64" },
-      { "internalType": "bool", "name": "_add", "type": "bool" }
-    ],
-    "name": "edit_ACCT_USD_BALANCES",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
       {
         "components": [
           { "internalType": "address", "name": "maker", "type": "address" },
           { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "marketHash",
+            "type": "address"
+          },
           { "internalType": "string", "name": "name", "type": "string" },
           { "internalType": "string", "name": "category", "type": "string" },
           { "internalType": "string", "name": "rules", "type": "string" },
@@ -423,11 +467,11 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getAccounts",
-    "outputs": [
-      { "internalType": "address[]", "name": "", "type": "address[]" }
+    "inputs": [
+      { "internalType": "address", "name": "_acct", "type": "address" }
     ],
+    "name": "getUsdBalanceForAcct",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
     "stateMutability": "view",
     "type": "function"
   },

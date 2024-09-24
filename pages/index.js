@@ -287,7 +287,7 @@ export default function Home() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
       const usdBalance = await getUSDBalance(contract, {
-        userAddress: account,
+        _acct: account,
       });
       setBalance(Number(usdBalance));
     } catch (error) {
@@ -448,7 +448,7 @@ export default function Home() {
           </FormGroup>
 
           {/* Search Bar */}
-          <Search>
+          <Search sx={{ marginRight: 40 }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -457,13 +457,6 @@ export default function Home() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-
-          <Button variant="contained" color="primary" sx={{ marginRight: 2 }}>
-            Log In
-          </Button>
-          <Button variant="outlined" color="primary">
-            Sign Up
-          </Button>
         </Toolbar>
       </AppBar>
 
@@ -543,6 +536,19 @@ export default function Home() {
                         lineHeight: "24px",
                         fontSize: "14px",
                         letterSpacing: "0.18px",
+                        margin: "0px 0px",
+                      }}
+                    >
+                      Transfer native PLS to <b>{ADDR_FACT}</b> for depositing
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "Roboto",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        lineHeight: "24px",
+                        fontSize: "14px",
+                        letterSpacing: "0.18px",
                         color: "#0288d1",
                         margin: "0px 0px",
                         textDecoration: "underline",
@@ -582,6 +588,16 @@ export default function Home() {
                   Create New Market
                 </Button>
               )}
+            </Box>
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button fullWidth variant="contained" color="warning">
+                claim Voter Rewards
+              </Button>
+            </Box>
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+              <Button fullWidth variant="contained" color="warning">
+                claim Promotor Rewards
+              </Button>
             </Box>
 
             {/* Sidebar Widget: Election Forecast */}

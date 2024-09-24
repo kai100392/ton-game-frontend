@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getMarketForTicket } from "../../constants/contractActions";
-import { ADDR_DELEGATE } from "../../constants/address";
-import delegateAbi from "../abi/CallitDelegate.abi.json";
+import { ADDR_FACT } from "../../constants/address";
+import factoryAbi from "../abi/CallitFactory.abi.json";
 
 const marketData = [
   {
@@ -69,10 +69,24 @@ const marketData = [
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
   try {
-    const contract = new ethers.Contract(ADDR_DELEGATE, delegateAbi, signer);
+    const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
 
-    const marketDetailData = await getMarketForTicket(contract, params);
-    console.log(marketDetailData[0]["name"]);
+    const tempArray = await getMarketForTicket(contract, params);
+    console.log(tempArray["name"]);
+    let marketDetailData = {
+      marketNum: tempArray["marketNum"],
+      name: tempArray["name"],
+      imgURL: tempArray["imgURL"],
+      maker: tempArray["maker"],
+      category: tempArray["category"],
+      live: tempArray["live"],
+      rules: tempArray["rules"],
+      winningVoteResult: tempArray["winningVoteResult"],
+      blockNumber: tempArray["blockNumber"],
+      blockTimestamp: tempArray["blockTimestamp"],
+      marketResults: { resultLabels: [], resultOptionTokens: [] },
+    };
+    console.log("market Data");
     return marketDetailData;
   } catch (error) {
     console.error("Error getting market detail :", error);
@@ -106,9 +120,9 @@ const MarketPage = () => {
   }, [account]);
 
   // Another useEffect for handling the market detail call
-  useEffect(() => {
+  useEffect(async () => {
     if (signer && id) {
-      const detailData = handleGetMarketDetailForTicket(signer, {
+      const detailData = await handleGetMarketDetailForTicket(signer, {
         _ticket: id,
       });
       setMarketDetailData(detailData);
@@ -131,13 +145,13 @@ const MarketPage = () => {
             src="/vote_img.jpg"
             sx={{ width: 80, height: 80, marginRight: 2 }}
           />
-          {marketDetailData && marketDetailData.length > 0 ? (
+          {marketDetailData && marketDetailData.name ? (
             <Box>
               <Typography variant="h5" fontWeight="bold">
-                {marketDetailData[0]["name"]}
+                {marketDetailData.name}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary">
-                $196,900,355 Bet &nbsp; • &nbsp;{" "}
+                $196,900,355 Bet &nbsp; • &nbsp;{marketDetailData.category}
                 {/* {marketDetailData ? marketDetailData : null} */}
               </Typography>
             </Box>
@@ -195,16 +209,7 @@ const MarketPage = () => {
 
       {/* Right Section */}
       <Card sx={{ flex: 1, padding: "20px" }}>
-        <Box display="flex" alignItems="center" mb={3}>
-          <Avatar
-            alt="Kamala Harris"
-            src="/kamala_harris.jpg" // Replace with actual image
-            sx={{ width: 60, height: 60, marginRight: 2 }}
-          />
-          <Typography variant="h6">Kamala Harris</Typography>
-        </Box>
-
-        <Box display="flex" justifyContent="space-between" mb={2}>
+        {/* <Box display="flex" justifyContent="space-between" mb={2}>
           <Button
             variant="contained"
             color="success"
@@ -216,9 +221,9 @@ const MarketPage = () => {
           <Button variant="outlined" fullWidth>
             No 26.7¢
           </Button>
-        </Box>
+        </Box> */}
 
-        <Typography
+        {/* <Typography
           variant="caption"
           color="text.secondary"
           display="block"
@@ -240,40 +245,76 @@ const MarketPage = () => {
           <Button variant="outlined" endIcon={<ArrowForwardIosIcon />}>
             Market
           </Button>
-        </Box>
+        </Box> */}
 
-        <Box display="flex" justifyContent="space-between" mb={2}>
+        {/* <Box display="flex" justifyContent="space-between" mb={2}>
           <Typography>Amount</Typography>
           <Box display="flex" alignItems="center">
             <Button>-</Button>
             <Typography mx={2}>$0</Typography>
             <Button>+</Button>
           </Box>
+        </Box> */}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={2}
+          mt={10}
+        >
+          <Button variant="contained" color="primary" fullWidth>
+            buyCallTicketWithPromoCode
+          </Button>
         </Box>
-
-        <Button variant="contained" color="primary" fullWidth>
-          Log In
-        </Button>
-
-        <Box display="flex" justifyContent="space-between" mt={3}>
-          <Typography variant="caption" color="text.secondary">
-            Avg price
-          </Typography>
-          <Typography variant="caption">0.0¢</Typography>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={2}
+        >
+          <Button variant="contained" color="primary" fullWidth>
+            exeArbPriceParityForTicket
+          </Button>
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={1}>
-          <Typography variant="caption" color="text.secondary">
-            Shares
-          </Typography>
-          <Typography variant="caption">0.00</Typography>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={2}
+        >
+          <Button variant="contained" color="primary" fullWidth>
+            closeMarketCallsForTicket
+          </Button>
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={1}>
-          <Typography variant="caption" color="text.secondary">
-            Potential return
-          </Typography>
-          <Typography variant="caption" color="green">
-            $0.00 (0.00%)
-          </Typography>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={2}
+        >
+          <Button variant="contained" color="primary" fullWidth>
+            castVoteForMarketTicket
+          </Button>
+        </Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={2}
+        >
+          <Button variant="contained" color="primary" fullWidth>
+            closeMarketForTicket
+          </Button>
+        </Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={2}
+        >
+          <Button variant="contained" color="primary" fullWidth>
+            claimTicketRewards
+          </Button>
         </Box>
       </Card>
     </Box>
