@@ -84,9 +84,22 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
       winningVoteResult: tempArray["winningVoteResult"],
       blockNumber: tempArray["blockNumber"],
       blockTimestamp: tempArray["blockTimestamp"],
-      marketResults: { resultLabels: [], resultOptionTokens: [] },
+      marketResults: {
+        // outcomeCnt: tempArray["marketResults"]["resultLabels"].length,
+        // resultLabels: [],
+        // resultDescrs: [],
+        // resultOptionTokens: [],
+      },
     };
-    console.log("market Data");
+    // for (let j = 0; j < marketDetailData.marketResults.outcomeCnt; j++) {
+    //   marketDetailData.marketResults.resultLabels[j] =
+    //     tempArray["marketResults"]["resultLabels"][j];
+    //   marketDetailData.marketResults.resultDescrs[j] =
+    //     tempArray["marketResults"]["resultDescrs"][j];
+    //   marketDetailData.marketResults.resultOptionTokens[j] =
+    //     tempArray["marketResults"]["resultOptionTokens"][j];
+    // }
+    console.log("market Data", marketDetailData);
     return marketDetailData;
   } catch (error) {
     console.error("Error getting market detail :", error);
@@ -99,6 +112,7 @@ const MarketPage = () => {
 
   const [signer, setSigner] = useState(null);
   const [marketDetailData, setMarketDetailData] = useState(null);
+  const [marketResults, setMarketResults] = useState(null);
 
   useEffect(() => {
     if (account == undefined) router.push("/");
@@ -158,53 +172,70 @@ const MarketPage = () => {
           ) : null}
         </Box>
 
+        {marketDetailData && marketDetailData.name ? (
+          <Box mb={2}>
+            <Typography variant="caption" color="text.secondary">
+              MarketNum: {marketDetailData.marketNum}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              Maker: {marketDetailData.maker}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              Rule: {marketDetailData.rule}
+            </Typography>
+          </Box>
+        ) : null}
         <Box mb={2}>
           <Typography variant="caption" color="text.secondary">
             OUTCOME
           </Typography>
         </Box>
 
-        {marketData.map((outcome, index) => (
-          <Box
-            key={index}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            mb={2}
-          >
-            <Box display="flex" alignItems="center">
-              <Avatar
-                alt={outcome.name}
-                src={`/candidate_${index + 1}.jpg`} // Replace with actual images
-                sx={{ width: 40, height: 40, marginRight: 2 }}
-              />
-              <Box>
-                <Typography>{outcome.name}</Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {outcome.amount} Bet
-                </Typography>
-              </Box>
-            </Box>
+        {/* {marketDetailData &&
+        marketDetailData.marketResults &&
+        marketDetailData.marketResults.resultLabels
+          ? marketDetailData.marketResults.resultLabels.map((label, index) => (
+              <Box
+                key={index}
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                mb={2}
+              >
+                <Box display="flex" alignItems="center">
+                  <Avatar
+                    alt={label}
+                    src={`/candidate_${index + 1}.jpg`} // Replace with actual images
+                    sx={{ width: 40, height: 40, marginRight: 2 }}
+                  />
+                  <Box>
+                    <Typography>{label}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      5000 Bet
+                    </Typography>
+                  </Box>
+                </Box>
 
-            <Box display="flex" alignItems="center">
-              <Typography variant="h4" fontWeight="bold">
-                {outcome.percentage}%
-              </Typography>
-              <Box display="flex" ml={2}>
-                <Button
-                  variant="contained"
-                  color="success"
-                  sx={{ marginRight: 1 }}
-                >
-                  Bet Yes {outcome.betYes}¢
-                </Button>
-                <Button variant="contained" color="error">
-                  Bet No {outcome.betNo}¢
-                </Button>
+                <Box display="flex" alignItems="center">
+                  <Typography variant="h4" fontWeight="bold">
+                    37%
+                  </Typography>
+                  <Box display="flex" ml={2}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      sx={{ marginRight: 1 }}
+                    >
+                      Bet Yes 34¢
+                    </Button>
+                    <Button variant="contained" color="error">
+                      Bet No 67¢
+                    </Button>
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-          </Box>
-        ))}
+            ))
+          : null} */}
       </Card>
 
       {/* Right Section */}

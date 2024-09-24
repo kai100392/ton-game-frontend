@@ -448,7 +448,7 @@ export default function Home() {
           </FormGroup>
 
           {/* Search Bar */}
-          <Search sx={{ marginRight: 40 }}>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
