@@ -89,6 +89,7 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         resultLabels: [],
         resultDescrs: [],
         resultOptionTokens: [],
+<<<<<<< HEAD
         resultTokenLPs: [],
         resultTokenVotes: [],
       },
@@ -98,7 +99,12 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         usdAmntPrizePool_net: null,
         usdRewwardPerVote: null,
         usdVoterRewardPool: null,
+=======
+        resultTokensLPs: [],
+        resultTokenVotes: [],
+>>>>>>> d4a652a (detailDataConnect_LP)
       },
+      marketUsdAmnts: {},
     };
     for (let j = 0; j < marketDetailData.marketResults.outcomeCnt; j++) {
       marketDetailData.marketResults.resultLabels[j] =
@@ -107,6 +113,7 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         tempArray["marketResults"]["resultDescrs"][j];
       marketDetailData.marketResults.resultOptionTokens[j] =
         tempArray["marketResults"]["resultOptionTokens"][j];
+<<<<<<< HEAD
       marketDetailData.marketResults.resultTokenLPs[j] =
         tempArray["marketResults"]["resultTokenLPs"][j];
       marketDetailData.marketResults.resultTokenVotes[j] =
@@ -122,6 +129,23 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         tempArray["marketUsdAmnts"]["usdRewardPerVote"].toNumber();
       marketDetailData.marketUsdAmnts.usdVoterRewardPool =
         tempArray["marketUsdAmnts"]["usdVoterRewardPool"].toNumber();
+=======
+      marketDetailData.marketResults.resultTokensLPs[j] =
+        tempArray["marketResults"]["resultTokensLPs"][j];
+      marketDetailData.marketResults.resultTokenVotes[j] =
+        tempArray["marketResults"]["resultTokenVotes"][j];
+
+      marketUsdAmnts.usdAmntLP =
+        marketDetailData["marketUsdAmnts"]["usdAmntLP"].toNumber();
+      marketUsdAmnts.usdAmntPrizePool =
+        marketDetailData["marketUsdAmnts"]["usdAmntPrizePool"].toNumber();
+      marketUsdAmnts.usdAmntPrizePool_net =
+        marketDetailData["marketUsdAmnts"]["usdAmntPrizePool_net"].toNumber();
+      marketUsdAmnts.usdRewwardPerVote =
+        marketDetailData["marketUsdAmnts"]["usdRewwardPerVote"].toNumber();
+      marketUsdAmnts.usdVoterRewardPool =
+        marketDetailData["marketUsdAmnts"]["usdVoterRewardPool"].toNumber();
+>>>>>>> d4a652a (detailDataConnect_LP)
     }
     console.log("market Data", marketDetailData);
     return marketDetailData;
@@ -198,6 +222,7 @@ const MarketPage = () => {
 
         {marketDetailData && marketDetailData.name ? (
           <Box mb={2}>
+<<<<<<< HEAD
             <Typography variant="h6" color="text.secondary">
               MarketNum:
               {marketDetailData.marketNum}
@@ -207,6 +232,17 @@ const MarketPage = () => {
               {marketDetailData.maker}
             </Typography>
             <Typography variant="h6" color="text.secondary">
+=======
+            <Typography variant="caption" color="text.secondary">
+              MarketNum:
+              {marketDetailData.marketNum}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              Maker:
+              {marketDetailData.maker}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+>>>>>>> d4a652a (detailDataConnect_LP)
               Rule:
               {marketDetailData.rule}
             </Typography>
@@ -238,7 +274,11 @@ const MarketPage = () => {
                   <Box>
                     <Typography>{label}</Typography>
                     <Typography variant="caption" color="text.secondary">
+<<<<<<< HEAD
                       {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`}
+=======
+                      {`$${marketDetailData.marketResults.resultTokensLPs} bet`}
+>>>>>>> d4a652a (detailDataConnect_LP)
                     </Typography>
                   </Box>
                 </Box>
