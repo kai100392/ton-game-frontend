@@ -519,7 +519,22 @@ export default function Home() {
               {hasMetamask ? (
                 active ? (
                   <>
-                    <p>Wallet Connected</p>
+                    <Typography
+                      sx={{
+                        fontFamily: "Roboto",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        lineHeight: "14px",
+                        fontSize: "14px",
+                        letterSpacing: "0.18px",
+                        margin: "0px 0px",
+                      }}
+                    >
+                      <p>Your Wallet Connected</p>
+                      <p>
+                        <b>{account}</b>
+                      </p>
+                    </Typography>
                     <Button
                       fullWidth
                       variant="outlined"

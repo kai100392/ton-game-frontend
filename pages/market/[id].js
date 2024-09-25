@@ -74,7 +74,7 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
     const tempArray = await getMarketForTicket(contract, params);
     console.log(tempArray["name"]);
     let marketDetailData = {
-      marketNum: tempArray["marketNum"],
+      marketNum: tempArray["marketNum"].toNumber(),
       name: tempArray["name"],
       imgURL: tempArray["imgURL"],
       maker: tempArray["maker"],
@@ -85,20 +85,38 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
       blockNumber: tempArray["blockNumber"],
       blockTimestamp: tempArray["blockTimestamp"],
       marketResults: {
-        // outcomeCnt: tempArray["marketResults"]["resultLabels"].length,
-        // resultLabels: [],
-        // resultDescrs: [],
-        // resultOptionTokens: [],
+        outcomeCnt: tempArray["marketResults"]["resultLabels"].length,
+        resultLabels: [],
+        resultDescrs: [],
+        resultOptionTokens: [],
+        resultTokensLPs: [],
+        resultTokenVotes: [],
       },
+      marketUsdAmnts: {},
     };
-    // for (let j = 0; j < marketDetailData.marketResults.outcomeCnt; j++) {
-    //   marketDetailData.marketResults.resultLabels[j] =
-    //     tempArray["marketResults"]["resultLabels"][j];
-    //   marketDetailData.marketResults.resultDescrs[j] =
-    //     tempArray["marketResults"]["resultDescrs"][j];
-    //   marketDetailData.marketResults.resultOptionTokens[j] =
-    //     tempArray["marketResults"]["resultOptionTokens"][j];
-    // }
+    for (let j = 0; j < marketDetailData.marketResults.outcomeCnt; j++) {
+      marketDetailData.marketResults.resultLabels[j] =
+        tempArray["marketResults"]["resultLabels"][j];
+      marketDetailData.marketResults.resultDescrs[j] =
+        tempArray["marketResults"]["resultDescrs"][j];
+      marketDetailData.marketResults.resultOptionTokens[j] =
+        tempArray["marketResults"]["resultOptionTokens"][j];
+      marketDetailData.marketResults.resultTokensLPs[j] =
+        tempArray["marketResults"]["resultTokensLPs"][j];
+      marketDetailData.marketResults.resultTokenVotes[j] =
+        tempArray["marketResults"]["resultTokenVotes"][j];
+
+      marketUsdAmnts.usdAmntLP =
+        marketDetailData["marketUsdAmnts"]["usdAmntLP"].toNumber();
+      marketUsdAmnts.usdAmntPrizePool =
+        marketDetailData["marketUsdAmnts"]["usdAmntPrizePool"].toNumber();
+      marketUsdAmnts.usdAmntPrizePool_net =
+        marketDetailData["marketUsdAmnts"]["usdAmntPrizePool_net"].toNumber();
+      marketUsdAmnts.usdRewwardPerVote =
+        marketDetailData["marketUsdAmnts"]["usdRewwardPerVote"].toNumber();
+      marketUsdAmnts.usdVoterRewardPool =
+        marketDetailData["marketUsdAmnts"]["usdVoterRewardPool"].toNumber();
+    }
     console.log("market Data", marketDetailData);
     return marketDetailData;
   } catch (error) {
@@ -175,13 +193,16 @@ const MarketPage = () => {
         {marketDetailData && marketDetailData.name ? (
           <Box mb={2}>
             <Typography variant="caption" color="text.secondary">
-              MarketNum: {marketDetailData.marketNum}
+              MarketNum:
+              {marketDetailData.marketNum}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              Maker: {marketDetailData.maker}
+              Maker:
+              {marketDetailData.maker}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              Rule: {marketDetailData.rule}
+              Rule:
+              {marketDetailData.rule}
             </Typography>
           </Box>
         ) : null}
@@ -191,7 +212,7 @@ const MarketPage = () => {
           </Typography>
         </Box>
 
-        {/* {marketDetailData &&
+        {marketDetailData &&
         marketDetailData.marketResults &&
         marketDetailData.marketResults.resultLabels
           ? marketDetailData.marketResults.resultLabels.map((label, index) => (
@@ -211,14 +232,14 @@ const MarketPage = () => {
                   <Box>
                     <Typography>{label}</Typography>
                     <Typography variant="caption" color="text.secondary">
-                      5000 Bet
+                      {`$${marketDetailData.marketResults.resultTokensLPs} bet`}
                     </Typography>
                   </Box>
                 </Box>
 
                 <Box display="flex" alignItems="center">
-                  <Typography variant="h4" fontWeight="bold">
-                    37%
+                  <Typography variant="p" fontWeight="bold">
+                    {marketDetailData.marketResults.resultOptionTokens[index]}
                   </Typography>
                   <Box display="flex" ml={2}>
                     <Button
@@ -226,16 +247,16 @@ const MarketPage = () => {
                       color="success"
                       sx={{ marginRight: 1 }}
                     >
-                      Bet Yes 34¢
+                      Bet Yes
                     </Button>
                     <Button variant="contained" color="error">
-                      Bet No 67¢
+                      Bet No
                     </Button>
                   </Box>
                 </Box>
               </Box>
             ))
-          : null} */}
+          : null}
       </Card>
 
       {/* Right Section */}
