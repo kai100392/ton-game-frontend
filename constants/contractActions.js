@@ -202,7 +202,7 @@ export const getMarketCntForMakerOrCategory = async (contract, params) => {
       _category
       // gasOptions
     );
-    return Number(tx);
+    return tx.toNumber();
   } catch (error) {
     console.error("Error in getMarketCntForMakerOrCategory:", error);
     throw error;

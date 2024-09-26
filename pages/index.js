@@ -203,6 +203,7 @@ export default function Home() {
 
     //page control
     setTotalPages(Math.ceil(marektCnt / maxCntPerPage));
+    console.log("ceil value is ", Math.ceil(marektCnt / maxCntPerPage));
     console.log("totalPage is ", totalPages);
 
     let idxStart = (page - 1) * maxCntPerPage;
