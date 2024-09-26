@@ -206,7 +206,12 @@ export default function Home() {
     console.log("totalPage is ", totalPages);
 
     let idxStart = (page - 1) * maxCntPerPage;
-    let retCnt = page < totalPages ? maxCntPerPage : marektCnt % maxCntPerPage;
+    let retCnt =
+      page < totalPages
+        ? maxCntPerPage
+        : marektCnt % maxCntPerPage == 0
+        ? maxCntPerPage
+        : marektCnt % maxCntPerPage;
     const params = {
       _category: marketCategory,
       _maker: maker,
