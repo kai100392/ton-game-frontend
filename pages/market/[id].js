@@ -10,61 +10,14 @@ import {
   CardContent,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { getMarketForTicket } from "../../constants/contractActions";
+import {
+  buyCallTicketWithPromoCode,
+  getMarketForTicket,
+} from "../../constants/contractActions";
 import { ADDR_FACT } from "../../constants/address";
 import factoryAbi from "../abi/CallitFactory.abi.json";
-
-const marketData = [
-  {
-    name: "Kamala Harris",
-    percentage: 74,
-    betYes: 73.7,
-    betNo: 26.7,
-    amount: "$14,723,544",
-  },
-  {
-    name: "Donald Trump",
-    percentage: 26,
-    betYes: 27,
-    betNo: 75,
-    amount: "$13,866,606",
-  },
-  {
-    name: "Michelle Obama",
-    percentage: 1,
-    betYes: 0.6,
-    betNo: 99.6,
-    amount: "$13,174,885",
-  },
-  {
-    name: "Other Democrat Politician",
-    percentage: "<1",
-    betYes: 0.4,
-    betNo: 99.7,
-    amount: "$9,792,490",
-  },
-  {
-    name: "Hillary Clinton",
-    percentage: "<1",
-    betYes: 0.2,
-    betNo: 99.9,
-    amount: "$20,632,915",
-  },
-  {
-    name: "Other Republican Politician",
-    percentage: "<1",
-    betYes: 0.3,
-    betNo: 99.8,
-    amount: "$13,328,889",
-  },
-  {
-    name: "Robert F. Kennedy Jr.",
-    percentage: "<1",
-    betYes: 0.2,
-    betNo: 99.9,
-    amount: "$13,328,889",
-  },
-];
+import BuyCallTicketModal from "../../components/BuyCallTicketModal";
+import TicketButton from "../../components/TicketButton";
 
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
@@ -136,7 +89,10 @@ const MarketPage = () => {
 
   const [signer, setSigner] = useState(null);
   const [marketDetailData, setMarketDetailData] = useState(null);
-  const [marketResults, setMarketResults] = useState(null);
+
+  // To Buy Ticket
+  const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
+  const [ticketAddr, setTicketAddr] = useState(null);
 
   useEffect(() => {
     if (account == undefined) router.push("/");
@@ -166,108 +122,141 @@ const MarketPage = () => {
       setMarketDetailData(detailData);
     }
   }, [signer, id]); // Re-run only when `signer` or `id` changes
+
+  // Trigger when ticket button is pressed
+  const handleBuyTicketModalOpen = () => setBuyTicketModalOpen(true);
+
+  const handleBuyTicketModalClose = () => setBuyTicketModalOpen(false);
+
+  const handleBuyTicketWithPromoCode = async (params) => {
+    try {
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      const tx = await buyCallTicketWithPromoCode(contract, params);
+    } catch (error) {
+      console.error("Error getting your balance:", error);
+    }
+  };
   return (
-    <Box
-      sx={{
-        padding: "20px",
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 2,
-      }}
-    >
-      {/* Left Section */}
-      <Card sx={{ flex: 3, padding: "20px" }}>
-        <Box display="flex" alignItems="center" mb={3}>
-          <Avatar
-            alt="Vote"
-            src="/vote_img.jpg"
-            sx={{ width: 80, height: 80, marginRight: 2 }}
-          />
+    <>
+      <Box
+        sx={{
+          padding: "20px",
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 2,
+        }}
+      >
+        {/* Left Section */}
+        <Card sx={{ flex: 3, padding: "20px" }}>
+          <Box display="flex" alignItems="center" mb={3}>
+            <Avatar
+              alt="Vote"
+              src="/vote_img.jpg"
+              sx={{ width: 80, height: 80, marginRight: 2 }}
+            />
+            {marketDetailData && marketDetailData.name ? (
+              <Box>
+                <Typography variant="h5" fontWeight="bold">
+                  {marketDetailData.name}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary">
+                  $196,900,355 Bet &nbsp; • &nbsp;{marketDetailData.category}
+                  {/* {marketDetailData ? marketDetailData : null} */}
+                </Typography>
+              </Box>
+            ) : null}
+          </Box>
+
           {marketDetailData && marketDetailData.name ? (
-            <Box>
-              <Typography variant="h5" fontWeight="bold">
-                {marketDetailData.name}
+            <Box mb={2}>
+              <Typography variant="h6" color="text.secondary">
+                MarketNum:
+                {marketDetailData.marketNum}
               </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                $196,900,355 Bet &nbsp; • &nbsp;{marketDetailData.category}
-                {/* {marketDetailData ? marketDetailData : null} */}
+              <Typography variant="h6" color="text.secondary">
+                Maker:
+                {marketDetailData.maker}
+              </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Rule:
+                {marketDetailData.rule}
               </Typography>
             </Box>
           ) : null}
-        </Box>
-
-        {marketDetailData && marketDetailData.name ? (
           <Box mb={2}>
-            <Typography variant="h6" color="text.secondary">
-              MarketNum:
-              {marketDetailData.marketNum}
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              Maker:
-              {marketDetailData.maker}
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              Rule:
-              {marketDetailData.rule}
+            <Typography variant="caption" color="text.secondary">
+              OUTCOME
             </Typography>
           </Box>
-        ) : null}
-        <Box mb={2}>
-          <Typography variant="caption" color="text.secondary">
-            OUTCOME
-          </Typography>
-        </Box>
 
-        {marketDetailData &&
-        marketDetailData.marketResults &&
-        marketDetailData.marketResults.resultLabels
-          ? marketDetailData.marketResults.resultLabels.map((label, index) => (
-              <Box
-                key={index}
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                mb={2}
-              >
-                <Box display="flex" alignItems="center">
-                  <Avatar
-                    alt={label}
-                    src={`/candidate_${index + 1}.jpg`} // Replace with actual images
-                    sx={{ width: 40, height: 40, marginRight: 2 }}
-                  />
-                  <Box>
-                    <Typography>{label}</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`}
-                    </Typography>
+          {marketDetailData &&
+          marketDetailData.marketResults &&
+          marketDetailData.marketResults.resultLabels
+            ? marketDetailData.marketResults.resultLabels.map(
+                (label, index) => (
+                  <Box
+                    key={index}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    mb={2}
+                  >
+                    <Box display="flex" alignItems="center">
+                      <Avatar
+                        alt={label}
+                        src={`/candidate_${index + 1}.jpg`} // Replace with actual images
+                        sx={{ width: 40, height: 40, marginRight: 2 }}
+                      />
+                      <Box>
+                        <Typography>{label}</Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`}
+                        </Typography>
+                      </Box>
+                    </Box>
+
+                    <Box display="flex" alignItems="center">
+                      <Typography variant="p" fontWeight="bold">
+                        {
+                          marketDetailData.marketResults.resultOptionTokens[
+                            index
+                          ]
+                        }
+                      </Typography>
+                      <Box display="flex" ml={2}>
+                        <TicketButton
+                          color="success"
+                          label="Bet Yes"
+                          ticketAddr={
+                            marketDetailData.marketResults.resultOptionTokens[
+                              index
+                            ]
+                          }
+                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          transferTicketAddr={setTicketAddr}
+                        />
+                        <TicketButton
+                          color="error"
+                          label="Bet No"
+                          ticketAddr={
+                            marketDetailData.marketResults.resultOptionTokens[
+                              index
+                            ]
+                          }
+                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          transferTicketAddr={setTicketAddr}
+                        />
+                      </Box>
+                    </Box>
                   </Box>
-                </Box>
+                )
+              )
+            : null}
+        </Card>
 
-                <Box display="flex" alignItems="center">
-                  <Typography variant="p" fontWeight="bold">
-                    {marketDetailData.marketResults.resultOptionTokens[index]}
-                  </Typography>
-                  <Box display="flex" ml={2}>
-                    <Button
-                      variant="contained"
-                      color="success"
-                      sx={{ marginRight: 1 }}
-                    >
-                      Bet Yes
-                    </Button>
-                    <Button variant="contained" color="error">
-                      Bet No
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            ))
-          : null}
-      </Card>
-
-      {/* Right Section */}
-      <Card sx={{ flex: 1, padding: "20px" }}>
-        {/* <Box display="flex" justifyContent="space-between" mb={2}>
+        {/* Right Section */}
+        <Card sx={{ flex: 1, padding: "20px" }}>
+          {/* <Box display="flex" justifyContent="space-between" mb={2}>
           <Button
             variant="contained"
             color="success"
@@ -281,7 +270,7 @@ const MarketPage = () => {
           </Button>
         </Box> */}
 
-        {/* <Typography
+          {/* <Typography
           variant="caption"
           color="text.secondary"
           display="block"
@@ -305,7 +294,7 @@ const MarketPage = () => {
           </Button>
         </Box> */}
 
-        {/* <Box display="flex" justifyContent="space-between" mb={2}>
+          {/* <Box display="flex" justifyContent="space-between" mb={2}>
           <Typography>Amount</Typography>
           <Box display="flex" alignItems="center">
             <Button>-</Button>
@@ -313,69 +302,81 @@ const MarketPage = () => {
             <Button>+</Button>
           </Box>
         </Box> */}
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-          mt={10}
-        >
-          <Button variant="contained" color="primary" fullWidth>
-            buyCallTicketWithPromoCode
-          </Button>
-        </Box>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-        >
-          <Button variant="contained" color="primary" fullWidth>
-            exeArbPriceParityForTicket
-          </Button>
-        </Box>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-        >
-          <Button variant="contained" color="primary" fullWidth>
-            closeMarketCallsForTicket
-          </Button>
-        </Box>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-        >
-          <Button variant="contained" color="primary" fullWidth>
-            castVoteForMarketTicket
-          </Button>
-        </Box>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-        >
-          <Button variant="contained" color="primary" fullWidth>
-            closeMarketForTicket
-          </Button>
-        </Box>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-        >
-          <Button variant="contained" color="primary" fullWidth>
-            claimTicketRewards
-          </Button>
-        </Box>
-      </Card>
-    </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+            mt={10}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={handleBuyTicketModalOpen}
+            >
+              buyCallTicketWithPromoCode
+            </Button>
+          </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+          >
+            <Button variant="contained" color="primary" fullWidth>
+              exeArbPriceParityForTicket
+            </Button>
+          </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+          >
+            <Button variant="contained" color="primary" fullWidth>
+              closeMarketCallsForTicket
+            </Button>
+          </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+          >
+            <Button variant="contained" color="primary" fullWidth>
+              castVoteForMarketTicket
+            </Button>
+          </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+          >
+            <Button variant="contained" color="primary" fullWidth>
+              closeMarketForTicket
+            </Button>
+          </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+          >
+            <Button variant="contained" color="primary" fullWidth>
+              claimTicketRewards
+            </Button>
+          </Box>
+        </Card>
+      </Box>
+      <BuyCallTicketModal
+        buyTicketModalOpen={buyTicketModalOpen}
+        handleBuyTicketModalClose={handleBuyTicketModalClose}
+        handleBuyTicketWithPromoCode={handleBuyTicketWithPromoCode}
+        ticketAddr={ticketAddr}
+      />
+    </>
   );
 };
 

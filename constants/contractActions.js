@@ -47,9 +47,7 @@ export const buyCallTicketWithPromoCode = async (contract, params) => {
       _promoCodeHash,
       _usdAmnt
     );
-    // Wait for the transaction to be mined
-    await tx.wait();
-    console.log("Transaction successful:", tx);
+    console.log("Ticket Bought successfully:", tx);
   } catch (error) {
     console.error("Error in buyCallTicketWithPromoCode:", error);
     throw error;
