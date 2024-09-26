@@ -1,4 +1,4 @@
-# nextjs-web3-react-metamask-connect
+#  nextjs-web3-react-metamask-connect
 
 This is a minimalistic project to show us how we can connect to metamask using [web3-react](https://github.com/NoahZinsmeister/web3-react) in nextjs / react.
 
