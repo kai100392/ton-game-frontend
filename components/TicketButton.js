@@ -17,7 +17,7 @@ const TicketButton = ({
       <Button
         variant="contained"
         color={color}
-        sx={{ marginRight: 1 }}
+        sx={{ marginRight: 1, textTransform: "none" }}
         onClick={handleClick}
       >
         {label}

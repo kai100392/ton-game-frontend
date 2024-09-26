@@ -7,9 +7,11 @@ import {
   Button,
   Typography,
   Card,
-  CardContent,
+  AppBar,
+  Toolbar,
+  Link,
 } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Image from "next/image";
 import {
   buyCallTicketWithPromoCode,
   getMarketForTicket,
@@ -138,6 +140,21 @@ const MarketPage = () => {
   };
   return (
     <>
+      {/* Top Navigation */}
+      <AppBar position="static" color="default" elevation={0}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+            <Image
+              src="/logo.jpg"
+              alt="Call-It Logo"
+              width={150}
+              height={50}
+              onClick={() => router.push("/")}
+            />
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
       <Box
         sx={{
           padding: "20px",
@@ -217,16 +234,12 @@ const MarketPage = () => {
 
                     <Box display="flex" alignItems="center">
                       <Typography variant="p" fontWeight="bold">
-                        {
-                          marketDetailData.marketResults.resultOptionTokens[
-                            index
-                          ]
-                        }
+                        {`Price Percent(%)`}
                       </Typography>
                       <Box display="flex" ml={2}>
                         <TicketButton
                           color="success"
-                          label="Bet Yes"
+                          label="Bet"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
                               index
@@ -237,7 +250,18 @@ const MarketPage = () => {
                         />
                         <TicketButton
                           color="error"
-                          label="Bet No"
+                          label="OnDex"
+                          ticketAddr={
+                            marketDetailData.marketResults.resultOptionTokens[
+                              index
+                            ]
+                          }
+                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          transferTicketAddr={setTicketAddr}
+                        />
+                        <TicketButton
+                          color="info"
+                          label="exeArb"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
                               index
@@ -314,6 +338,7 @@ const MarketPage = () => {
               color="primary"
               fullWidth
               onClick={handleBuyTicketModalOpen}
+              sx={{ textTransform: "none" }}
             >
               buyCallTicketWithPromoCode
             </Button>
@@ -324,7 +349,12 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <Button variant="contained" color="primary" fullWidth>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
               exeArbPriceParityForTicket
             </Button>
           </Box>
@@ -334,7 +364,12 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <Button variant="contained" color="primary" fullWidth>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
               closeMarketCallsForTicket
             </Button>
           </Box>
@@ -344,7 +379,12 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <Button variant="contained" color="primary" fullWidth>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
               castVoteForMarketTicket
             </Button>
           </Box>
@@ -354,7 +394,12 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <Button variant="contained" color="primary" fullWidth>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
               closeMarketForTicket
             </Button>
           </Box>
@@ -364,7 +409,12 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <Button variant="contained" color="primary" fullWidth>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
               claimTicketRewards
             </Button>
           </Box>

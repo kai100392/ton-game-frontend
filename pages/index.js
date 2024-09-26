@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import factoryAbi from "./abi/CallitFactory.abi.json";
@@ -61,6 +61,9 @@ import {
   ADDR_DELEGATE,
 } from "../constants/address";
 import DepositToVaultModal from "../components/DepositToVaultModal";
+
+// version display
+const currentVersion = "0.2";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -146,6 +149,7 @@ const MarketArray = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   //Wallet Connecting States
   const [balance, setBalance] = useState(null);
   const [hasMetamask, setHasMetamask] = useState(null);
@@ -372,17 +376,6 @@ export default function Home() {
     handleDepositModalClose();
   };
 
-  // Trigger buy ticket with promo code
-  const handleBuyTicket = async (params) => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await buyCallTicketWithPromoCode(contract, params);
-      console.log("Ticket bought successfully!");
-    } catch (error) {
-      console.error("Error buying ticket:", error);
-    }
-  };
   // Add similar handlers for all other functions like exeAerriceParityForTicket, castVoteForMarketTicket, claim rewards, etc.
 
   useEffect(() => {
@@ -412,16 +405,14 @@ export default function Home() {
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            <Link href="/" passHref>
-              <Box>
-                <Image
-                  src="/logo.jpg"
-                  alt="Call-It Logo"
-                  width={150}
-                  height={50}
-                />
-              </Box>
-            </Link>
+            <Image
+              src="/logo.jpg"
+              alt="Call-It Logo"
+              width={150}
+              height={50}
+              onClick={() => router.push("/")}
+            />
+            {`version ${currentVersion}`}
           </Typography>
 
           {/* Category Dropdown */}
