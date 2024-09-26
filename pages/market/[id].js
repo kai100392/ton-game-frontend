@@ -10,8 +10,8 @@ import {
   AppBar,
   Toolbar,
   Link,
-  Image,
 } from "@mui/material";
+import Image from "next/image";
 import {
   buyCallTicketWithPromoCode,
   getMarketForTicket,
@@ -144,16 +144,13 @@ const MarketPage = () => {
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            <Link href="/" passHref>
-              <Box>
-                {/* <Image
-                  src="./logo.jpg"
-                  alt="Call-It Logo"
-                  width={150}
-                  height={50}
-                /> */}
-              </Box>
-            </Link>
+            <Image
+              src="/logo.jpg"
+              alt="Call-It Logo"
+              width={150}
+              height={50}
+              onClick={() => router.push("/")}
+            />
           </Typography>
         </Toolbar>
       </AppBar>

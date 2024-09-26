@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import {
   Card,
   CardContent,
@@ -26,6 +27,7 @@ const MarketCard = ({
   setTicketForSetInfo,
   marketResults,
 }) => {
+  const router = useRouter();
   const aTicketAddress = marketResults.resultOptionTokens[0];
   return (
     <Card
