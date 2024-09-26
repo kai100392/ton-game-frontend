@@ -7,9 +7,11 @@ import {
   Button,
   Typography,
   Card,
-  CardContent,
+  AppBar,
+  Toolbar,
+  Link,
+  Image,
 } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {
   buyCallTicketWithPromoCode,
   getMarketForTicket,
@@ -138,6 +140,24 @@ const MarketPage = () => {
   };
   return (
     <>
+      {/* Top Navigation */}
+      <AppBar position="static" color="default" elevation={0}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+            <Link href="/" passHref>
+              <Box>
+                {/* <Image
+                  src="./logo.jpg"
+                  alt="Call-It Logo"
+                  width={150}
+                  height={50}
+                /> */}
+              </Box>
+            </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
       <Box
         sx={{
           padding: "20px",

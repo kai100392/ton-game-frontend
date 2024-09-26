@@ -371,17 +371,6 @@ export default function Home() {
     handleDepositModalClose();
   };
 
-  // Trigger buy ticket with promo code
-  const handleBuyTicket = async (params) => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await buyCallTicketWithPromoCode(contract, params);
-      console.log("Ticket bought successfully!");
-    } catch (error) {
-      console.error("Error buying ticket:", error);
-    }
-  };
   // Add similar handlers for all other functions like exeAerriceParityForTicket, castVoteForMarketTicket, claim rewards, etc.
 
   useEffect(() => {
