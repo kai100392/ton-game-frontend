@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Modal,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  OutlinedInput,
-} from "@mui/material";
-import { TypeSpecimenOutlined } from "@mui/icons-material";
+import { Box, Button, TextField, Typography, Modal } from "@mui/material";
 
 const BuyCallTicketModal = ({
   buyTicketModalOpen,
@@ -19,25 +8,12 @@ const BuyCallTicketModal = ({
   ticketAddr,
 }) => {
   // State to manage form input values
-  const [promoCodeHash, setPromoCodeHash] = useState(
-    "0x0000000000000000000000000000000000000000"
-  );
-  const [withPromoCode, setWithPromoCode] = useState(false); //Checkbox for promo code
+  const [promoCodeHash, setPromoCodeHash] = useState("");
   const [usdAmnt, setUsdAmnt] = useState(null);
 
   const handleModalClose = () => {
     setDepositAmnt(null);
     handleBuyTicketModalClose();
-  };
-
-  const handlePromoCodeCheck = () => {
-    if (withPromoCode) {
-      setPromoCodeHash("0x0000000000000000000000000000000000000000");
-      setWithPromoCode(false);
-    } else {
-      setPromoCodeHash("");
-      setWithPromoCode(true);
-    }
   };
 
   // Function to handle form submission
@@ -75,7 +51,7 @@ const BuyCallTicketModal = ({
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2" mb={2}>
-          Buy CallTicket{withPromoCode ? ` with Promo Code` : null}
+          Buy CallTicket with Promo Code
         </Typography>
 
         {/* Form Fields */}
@@ -88,29 +64,14 @@ const BuyCallTicketModal = ({
           disabled
         />
 
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={withPromoCode}
-                onChange={handlePromoCodeCheck}
-                size="small"
-              />
-            }
-            label={`WithPromoCode`}
-          />
-        </FormGroup>
-
-        {withPromoCode ? (
-          <TextField
-            fullWidth
-            label="_promoCodeHash"
-            variant="outlined"
-            margin="normal"
-            value={promoCodeHash}
-            onChange={(e) => setPromoCodeHash(e.target.value)} // Handle name input
-          />
-        ) : null}
+        <TextField
+          fullWidth
+          label="_promoCodeHash"
+          variant="outlined"
+          margin="normal"
+          value={promoCodeHash}
+          onChange={(e) => setPromoCodeHash(e.target.value)} // Handle name input
+        />
 
         <TextField
           fullWidth

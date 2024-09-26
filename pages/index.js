@@ -62,6 +62,9 @@ import {
 } from "../constants/address";
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
+// version display
+const currentVersion = "0.2";
+
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -408,6 +411,7 @@ export default function Home() {
               height={50}
               onClick={() => router.push("/")}
             />
+            {`version ${currentVersion}`}
           </Typography>
 
           {/* Category Dropdown */}
