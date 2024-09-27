@@ -1,1 +1,1059 @@
-[{"inputs":[{"internalType":"uint64","name":"_CALL_initSupply","type":"uint64"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_executer","type":"address"},{"indexed":false,"internalType":"address","name":"_ticket","type":"address"},{"indexed":false,"internalType":"uint64","name":"_tickTargetPrice","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_tokenMintCnt","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_usdGrossReceived","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_usdTotalPaid","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_usdNetProfit","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_callEarnedAmnt","type":"uint64"}],"name":"ArbPriceCorrectionExecuted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_executer","type":"address"},{"indexed":false,"internalType":"address","name":"_ticket","type":"address"},{"indexed":false,"internalType":"address","name":"_marketMaker","type":"address"},{"indexed":false,"internalType":"uint256","name":"_marketNum","type":"uint256"},{"indexed":false,"internalType":"address","name":"_markHash","type":"address"},{"indexed":false,"internalType":"uint64","name":"_usdAmntPrizePool","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_callEarnedAmnt","type":"uint64"}],"name":"MarketCallsClosed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_sender","type":"address"},{"indexed":false,"internalType":"address","name":"_ticket","type":"address"},{"indexed":false,"internalType":"address","name":"_marketMaker","type":"address"},{"indexed":false,"internalType":"uint256","name":"_marketNum","type":"uint256"},{"indexed":false,"internalType":"address","name":"_markHash","type":"address"},{"indexed":false,"internalType":"uint64","name":"_winningResultIdx","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_usdPrizePoolPaid","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_usdVoterRewardPoolPaid","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_usdRewardPervote","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_callEarnedAmnt","type":"uint64"}],"name":"MarketClosed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_maker","type":"address"},{"indexed":false,"internalType":"uint256","name":"_markNum","type":"uint256"},{"indexed":false,"internalType":"address","name":"_markHash","type":"address"},{"indexed":false,"internalType":"string","name":"_name","type":"string"},{"indexed":false,"internalType":"uint64","name":"_usdAmntLP","type":"uint64"},{"indexed":false,"internalType":"uint256","name":"_dtCallDeadline","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"_dtResultVoteStart","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"_dtResultVoteEnd","type":"uint256"},{"indexed":false,"internalType":"string[]","name":"_resultLabels","type":"string[]"},{"indexed":false,"internalType":"address[]","name":"_resultOptionTokens","type":"address[]"},{"indexed":false,"internalType":"uint256","name":"_blockTime","type":"uint256"},{"indexed":false,"internalType":"bool","name":"_live","type":"bool"}],"name":"MarketCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_caller","type":"address"},{"indexed":false,"internalType":"bool","name":"_resultAgree","type":"bool"},{"indexed":false,"internalType":"address","name":"_marketMaker","type":"address"},{"indexed":false,"internalType":"uint256","name":"_marketNum","type":"uint256"},{"indexed":false,"internalType":"address","name":"_markHash","type":"address"},{"indexed":false,"internalType":"uint64","name":"_agreeCnt","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_disagreeCnt","type":"uint64"}],"name":"MarketReviewed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_buyer","type":"address"},{"indexed":false,"internalType":"address","name":"_promoCodeHash","type":"address"},{"indexed":false,"internalType":"address","name":"_usdStable","type":"address"},{"indexed":false,"internalType":"address","name":"_ticket","type":"address"},{"indexed":false,"internalType":"uint64","name":"_grossUsdAmnt","type":"uint64"},{"indexed":false,"internalType":"uint64","name":"_netUsdAmnt","type":"uint64"},{"indexed":false,"internalType":"uint256","name":"_tickAmntOut","type":"uint256"},{"indexed":false,"internalType":"uint64","name":"_callEarnedAmnt","type":"uint64"}],"name":"PromoBuyPerformed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_sender","type":"address"},{"indexed":false,"internalType":"address","name":"_ticket","type":"address"},{"indexed":false,"internalType":"bool","name":"_is_winner","type":"bool"},{"indexed":false,"internalType":"bool","name":"_resultAgree","type":"bool"}],"name":"TicketRewardsClaimed","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[],"name":"ADDR_CONFIG","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_conf","type":"address"}],"name":"CONF_setConfig","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_erc20","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"KEEPER_maintenance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ticket","type":"address"},{"internalType":"address","name":"_promoCodeHash","type":"address"},{"internalType":"uint64","name":"_usdAmnt","type":"uint64"}],"name":"buyCallTicketWithPromoCode","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_senderTicketHash","type":"address"},{"internalType":"address","name":"_markHash","type":"address"}],"name":"castVoteForMarketTicket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ticket","type":"address"},{"internalType":"bool","name":"_resultAgree","type":"bool"}],"name":"claimTicketRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimVoterRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ticket","type":"address"}],"name":"closeMarketCallsForTicket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ticket","type":"address"}],"name":"closeMarketForTicket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ticket","type":"address"}],"name":"exeArbPriceParityForTicket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_maker","type":"address"},{"internalType":"string","name":"_category","type":"string"}],"name":"getMarketCntForMakerOrCategory","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_hash","type":"address"}],"name":"getMarketForHash","outputs":[{"components":[{"internalType":"address","name":"maker","type":"address"},{"internalType":"uint256","name":"marketNum","type":"uint256"},{"internalType":"address","name":"marketHash","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"category","type":"string"},{"internalType":"string","name":"rules","type":"string"},{"internalType":"string","name":"imgUrl","type":"string"},{"components":[{"internalType":"uint64","name":"usdAmntLP","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool_net","type":"uint64"},{"internalType":"uint64","name":"usdVoterRewardPool","type":"uint64"},{"internalType":"uint64","name":"usdRewardPerVote","type":"uint64"}],"internalType":"struct ICallitLib.MARKET_USD_AMNTS","name":"marketUsdAmnts","type":"tuple"},{"components":[{"internalType":"uint256","name":"dtCallDeadline","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteStart","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteEnd","type":"uint256"}],"internalType":"struct ICallitLib.MARKET_DATETIMES","name":"marketDatetimes","type":"tuple"},{"components":[{"internalType":"string[]","name":"resultLabels","type":"string[]"},{"internalType":"string[]","name":"resultDescrs","type":"string[]"},{"internalType":"address[]","name":"resultOptionTokens","type":"address[]"},{"internalType":"address[]","name":"resultTokenLPs","type":"address[]"},{"internalType":"address[]","name":"resultTokenRouters","type":"address[]"},{"internalType":"address[]","name":"resultTokenUsdStables","type":"address[]"},{"internalType":"uint64[]","name":"resultTokenVotes","type":"uint64[]"}],"internalType":"struct ICallitLib.MARKET_RESULTS","name":"marketResults","type":"tuple"},{"internalType":"uint16","name":"winningVoteResultIdx","type":"uint16"},{"internalType":"uint256","name":"blockTimestamp","type":"uint256"},{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"bool","name":"live","type":"bool"}],"internalType":"struct ICallitLib.MARKET","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_ticket","type":"address"}],"name":"getMarketForTicket","outputs":[{"components":[{"internalType":"address","name":"maker","type":"address"},{"internalType":"uint256","name":"marketNum","type":"uint256"},{"internalType":"address","name":"marketHash","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"category","type":"string"},{"internalType":"string","name":"rules","type":"string"},{"internalType":"string","name":"imgUrl","type":"string"},{"components":[{"internalType":"uint64","name":"usdAmntLP","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool_net","type":"uint64"},{"internalType":"uint64","name":"usdVoterRewardPool","type":"uint64"},{"internalType":"uint64","name":"usdRewardPerVote","type":"uint64"}],"internalType":"struct ICallitLib.MARKET_USD_AMNTS","name":"marketUsdAmnts","type":"tuple"},{"components":[{"internalType":"uint256","name":"dtCallDeadline","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteStart","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteEnd","type":"uint256"}],"internalType":"struct ICallitLib.MARKET_DATETIMES","name":"marketDatetimes","type":"tuple"},{"components":[{"internalType":"string[]","name":"resultLabels","type":"string[]"},{"internalType":"string[]","name":"resultDescrs","type":"string[]"},{"internalType":"address[]","name":"resultOptionTokens","type":"address[]"},{"internalType":"address[]","name":"resultTokenLPs","type":"address[]"},{"internalType":"address[]","name":"resultTokenRouters","type":"address[]"},{"internalType":"address[]","name":"resultTokenUsdStables","type":"address[]"},{"internalType":"uint64[]","name":"resultTokenVotes","type":"uint64[]"}],"internalType":"struct ICallitLib.MARKET_RESULTS","name":"marketResults","type":"tuple"},{"internalType":"uint16","name":"winningVoteResultIdx","type":"uint16"},{"internalType":"uint256","name":"blockTimestamp","type":"uint256"},{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"bool","name":"live","type":"bool"}],"internalType":"struct ICallitLib.MARKET","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_category","type":"string"},{"internalType":"address","name":"_maker","type":"address"},{"internalType":"bool","name":"_all","type":"bool"},{"internalType":"bool","name":"_live","type":"bool"},{"internalType":"uint8","name":"_idxStart","type":"uint8"},{"internalType":"uint8","name":"_retCnt","type":"uint8"}],"name":"getMarketHashesForMakerOrCategory","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_category","type":"string"},{"internalType":"address","name":"_maker","type":"address"},{"internalType":"bool","name":"_all","type":"bool"},{"internalType":"bool","name":"_live","type":"bool"},{"internalType":"uint8","name":"_idxStart","type":"uint8"},{"internalType":"uint8","name":"_retCnt","type":"uint8"}],"name":"getMarketsForMakerOrCategory","outputs":[{"components":[{"internalType":"address","name":"maker","type":"address"},{"internalType":"uint256","name":"marketNum","type":"uint256"},{"internalType":"address","name":"marketHash","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"category","type":"string"},{"internalType":"string","name":"rules","type":"string"},{"internalType":"string","name":"imgUrl","type":"string"},{"components":[{"internalType":"uint64","name":"usdAmntLP","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool","type":"uint64"},{"internalType":"uint64","name":"usdAmntPrizePool_net","type":"uint64"},{"internalType":"uint64","name":"usdVoterRewardPool","type":"uint64"},{"internalType":"uint64","name":"usdRewardPerVote","type":"uint64"}],"internalType":"struct ICallitLib.MARKET_USD_AMNTS","name":"marketUsdAmnts","type":"tuple"},{"components":[{"internalType":"uint256","name":"dtCallDeadline","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteStart","type":"uint256"},{"internalType":"uint256","name":"dtResultVoteEnd","type":"uint256"}],"internalType":"struct ICallitLib.MARKET_DATETIMES","name":"marketDatetimes","type":"tuple"},{"components":[{"internalType":"string[]","name":"resultLabels","type":"string[]"},{"internalType":"string[]","name":"resultDescrs","type":"string[]"},{"internalType":"address[]","name":"resultOptionTokens","type":"address[]"},{"internalType":"address[]","name":"resultTokenLPs","type":"address[]"},{"internalType":"address[]","name":"resultTokenRouters","type":"address[]"},{"internalType":"address[]","name":"resultTokenUsdStables","type":"address[]"},{"internalType":"uint64[]","name":"resultTokenVotes","type":"uint64[]"}],"internalType":"struct ICallitLib.MARKET_RESULTS","name":"marketResults","type":"tuple"},{"internalType":"uint16","name":"winningVoteResultIdx","type":"uint16"},{"internalType":"uint256","name":"blockTimestamp","type":"uint256"},{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"bool","name":"live","type":"bool"}],"internalType":"struct ICallitLib.MARKET[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMyVoterHash","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_acct","type":"address"}],"name":"getPromosForAcct","outputs":[{"components":[{"internalType":"address","name":"promotor","type":"address"},{"internalType":"string","name":"promoCode","type":"string"},{"internalType":"address","name":"promoCodeHash","type":"address"},{"internalType":"uint64","name":"usdTarget","type":"uint64"},{"internalType":"uint64","name":"usdUsed","type":"uint64"},{"internalType":"uint16","name":"percReward","type":"uint16"},{"internalType":"address","name":"adminCreator","type":"address"},{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"internalType":"struct ICallitLib.PROMO[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"initMyVoterHash","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint64","name":"_usdAmntLP","type":"uint64"},{"internalType":"uint256","name":"_dtCallDeadline","type":"uint256"},{"internalType":"uint256","name":"_dtResultVoteStart","type":"uint256"},{"internalType":"uint256","name":"_dtResultVoteEnd","type":"uint256"},{"internalType":"string[]","name":"_resultLabels","type":"string[]"},{"internalType":"string[]","name":"_resultDescrs","type":"string[]"}],"name":"makeNewMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_handle","type":"string"}],"name":"setAcctHandle","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_anyTicket","type":"address"},{"internalType":"string","name":"_category","type":"string"},{"internalType":"string","name":"_rules","type":"string"},{"internalType":"string","name":"_imgUrl","type":"string"}],"name":"setMarketInfo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"tVERSION","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]
+[
+  {
+    "inputs": [
+      { "internalType": "uint64", "name": "_CALL_initSupply", "type": "uint64" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_executer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_ticket",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_tickTargetPrice",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_tokenMintCnt",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdGrossReceived",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdTotalPaid",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdNetProfit",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_callEarnedAmnt",
+        "type": "uint64"
+      }
+    ],
+    "name": "ArbPriceCorrectionExecuted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_executer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_ticket",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_marketMaker",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_marketNum",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_markHash",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdAmntPrizePool",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_callEarnedAmnt",
+        "type": "uint64"
+      }
+    ],
+    "name": "MarketCallsClosed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_ticket",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_marketMaker",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_marketNum",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_markHash",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_winningResultIdx",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdPrizePoolPaid",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdVoterRewardPoolPaid",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdRewardPervote",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_callEarnedAmnt",
+        "type": "uint64"
+      }
+    ],
+    "name": "MarketClosed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_maker",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_markNum",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_markHash",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_usdAmntLP",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_dtCallDeadline",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_dtResultVoteStart",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_dtResultVoteEnd",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "_resultLabels",
+        "type": "string[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "_resultOptionTokens",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_blockTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_live",
+        "type": "bool"
+      }
+    ],
+    "name": "MarketCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_caller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_resultAgree",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_marketMaker",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_marketNum",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_markHash",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_agreeCnt",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_disagreeCnt",
+        "type": "uint64"
+      }
+    ],
+    "name": "MarketReviewed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_promoCodeHash",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_usdStable",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_ticket",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_grossUsdAmnt",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_netUsdAmnt",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_tickAmntOut",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "_callEarnedAmnt",
+        "type": "uint64"
+      }
+    ],
+    "name": "PromoBuyPerformed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_ticket",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_is_winner",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_resultAgree",
+        "type": "bool"
+      }
+    ],
+    "name": "TicketRewardsClaimed",
+    "type": "event"
+  },
+  { "stateMutability": "payable", "type": "fallback" },
+  {
+    "inputs": [],
+    "name": "ADDR_CONFIG",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_conf", "type": "address" }
+    ],
+    "name": "CONF_setConfig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_erc20", "type": "address" },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "KEEPER_maintenance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_ticket", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_promoCodeHash",
+        "type": "address"
+      },
+      { "internalType": "uint64", "name": "_usdAmnt", "type": "uint64" }
+    ],
+    "name": "buyCallTicketWithPromoCode",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_senderTicketHash",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "_markHash", "type": "address" }
+    ],
+    "name": "castVoteForMarketTicket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_ticket", "type": "address" },
+      { "internalType": "bool", "name": "_resultAgree", "type": "bool" }
+    ],
+    "name": "claimTicketRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "claimVoterRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_ticket", "type": "address" }
+    ],
+    "name": "closeMarketCallsForTicket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_ticket", "type": "address" }
+    ],
+    "name": "closeMarketForTicket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_ticket", "type": "address" }
+    ],
+    "name": "exeArbPriceParityForTicket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_maker", "type": "address" },
+      { "internalType": "string", "name": "_category", "type": "string" }
+    ],
+    "name": "getMarketCntForMakerOrCategory",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_hash", "type": "address" }
+    ],
+    "name": "getMarketForHash",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "marketHash",
+            "type": "address"
+          },
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "category", "type": "string" },
+          { "internalType": "string", "name": "rules", "type": "string" },
+          { "internalType": "string", "name": "imgUrl", "type": "string" },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "usdAmntLP",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool_net",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdVoterRewardPool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdRewardPerVote",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_USD_AMNTS",
+            "name": "marketUsdAmnts",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "dtCallDeadline",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteStart",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteEnd",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_DATETIMES",
+            "name": "marketDatetimes",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string[]",
+                "name": "resultLabels",
+                "type": "string[]"
+              },
+              {
+                "internalType": "string[]",
+                "name": "resultDescrs",
+                "type": "string[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultOptionTokens",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenLPs",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenRouters",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenUsdStables",
+                "type": "address[]"
+              },
+              {
+                "internalType": "uint64[]",
+                "name": "resultTokenVotes",
+                "type": "uint64[]"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_RESULTS",
+            "name": "marketResults",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint16",
+            "name": "winningVoteResultIdx",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockNumber",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "live", "type": "bool" }
+        ],
+        "internalType": "struct ICallitLib.MARKET",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_ticket", "type": "address" }
+    ],
+    "name": "getMarketForTicket",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "marketHash",
+            "type": "address"
+          },
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "category", "type": "string" },
+          { "internalType": "string", "name": "rules", "type": "string" },
+          { "internalType": "string", "name": "imgUrl", "type": "string" },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "usdAmntLP",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool_net",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdVoterRewardPool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdRewardPerVote",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_USD_AMNTS",
+            "name": "marketUsdAmnts",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "dtCallDeadline",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteStart",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteEnd",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_DATETIMES",
+            "name": "marketDatetimes",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string[]",
+                "name": "resultLabels",
+                "type": "string[]"
+              },
+              {
+                "internalType": "string[]",
+                "name": "resultDescrs",
+                "type": "string[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultOptionTokens",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenLPs",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenRouters",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenUsdStables",
+                "type": "address[]"
+              },
+              {
+                "internalType": "uint64[]",
+                "name": "resultTokenVotes",
+                "type": "uint64[]"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_RESULTS",
+            "name": "marketResults",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint16",
+            "name": "winningVoteResultIdx",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockNumber",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "live", "type": "bool" }
+        ],
+        "internalType": "struct ICallitLib.MARKET",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_category", "type": "string" },
+      { "internalType": "address", "name": "_maker", "type": "address" },
+      { "internalType": "bool", "name": "_all", "type": "bool" },
+      { "internalType": "bool", "name": "_live", "type": "bool" },
+      { "internalType": "uint8", "name": "_idxStart", "type": "uint8" },
+      { "internalType": "uint8", "name": "_retCnt", "type": "uint8" }
+    ],
+    "name": "getMarketHashesForMakerOrCategory",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_category", "type": "string" },
+      { "internalType": "address", "name": "_maker", "type": "address" },
+      { "internalType": "bool", "name": "_all", "type": "bool" },
+      { "internalType": "bool", "name": "_live", "type": "bool" },
+      { "internalType": "uint8", "name": "_idxStart", "type": "uint8" },
+      { "internalType": "uint8", "name": "_retCnt", "type": "uint8" }
+    ],
+    "name": "getMarketsForMakerOrCategory",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "uint256", "name": "marketNum", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "marketHash",
+            "type": "address"
+          },
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "category", "type": "string" },
+          { "internalType": "string", "name": "rules", "type": "string" },
+          { "internalType": "string", "name": "imgUrl", "type": "string" },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "usdAmntLP",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdAmntPrizePool_net",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdVoterRewardPool",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "usdRewardPerVote",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_USD_AMNTS",
+            "name": "marketUsdAmnts",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "dtCallDeadline",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteStart",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dtResultVoteEnd",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_DATETIMES",
+            "name": "marketDatetimes",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string[]",
+                "name": "resultLabels",
+                "type": "string[]"
+              },
+              {
+                "internalType": "string[]",
+                "name": "resultDescrs",
+                "type": "string[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultOptionTokens",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenLPs",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenRouters",
+                "type": "address[]"
+              },
+              {
+                "internalType": "address[]",
+                "name": "resultTokenUsdStables",
+                "type": "address[]"
+              },
+              {
+                "internalType": "uint64[]",
+                "name": "resultTokenVotes",
+                "type": "uint64[]"
+              }
+            ],
+            "internalType": "struct ICallitLib.MARKET_RESULTS",
+            "name": "marketResults",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint16",
+            "name": "winningVoteResultIdx",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockNumber",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "live", "type": "bool" }
+        ],
+        "internalType": "struct ICallitLib.MARKET[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMyVoterHash",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_acct", "type": "address" }
+    ],
+    "name": "getPromosForAcct",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "promotor", "type": "address" },
+          { "internalType": "string", "name": "promoCode", "type": "string" },
+          {
+            "internalType": "address",
+            "name": "promoCodeHash",
+            "type": "address"
+          },
+          { "internalType": "uint64", "name": "usdTarget", "type": "uint64" },
+          { "internalType": "uint64", "name": "usdUsed", "type": "uint64" },
+          { "internalType": "uint16", "name": "percReward", "type": "uint16" },
+          {
+            "internalType": "address",
+            "name": "adminCreator",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "blockNumber",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ICallitLib.PROMO[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "initMyVoterHash",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_name", "type": "string" },
+      { "internalType": "uint64", "name": "_usdAmntLP", "type": "uint64" },
+      {
+        "internalType": "uint256",
+        "name": "_dtCallDeadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_dtResultVoteStart",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_dtResultVoteEnd",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string[]",
+        "name": "_resultLabels",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "_resultDescrs",
+        "type": "string[]"
+      }
+    ],
+    "name": "makeNewMarket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_handle", "type": "string" }
+    ],
+    "name": "setAcctHandle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_anyTicket", "type": "address" },
+      { "internalType": "string", "name": "_category", "type": "string" },
+      { "internalType": "string", "name": "_rules", "type": "string" },
+      { "internalType": "string", "name": "_imgUrl", "type": "string" }
+    ],
+    "name": "setMarketInfo",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tVERSION",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
