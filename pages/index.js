@@ -63,7 +63,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-const currentVersion = "0.2";
+export const currentVersion = "0.2";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -406,13 +406,13 @@ export default function Home() {
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Call-It Logo"
               width={150}
               height={50}
               onClick={() => router.push("/")}
             />
-            {`version ${currentVersion}`}
+            {`version_${currentVersion}`}
           </Typography>
 
           {/* Category Dropdown */}

@@ -21,6 +21,8 @@ import factoryAbi from "../abi/CallitFactory.abi.json";
 import BuyCallTicketModal from "../../components/BuyCallTicketModal";
 import TicketButton from "../../components/TicketButton";
 
+import { currentVersion } from "..";
+
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
   try {
@@ -135,7 +137,7 @@ const MarketPage = () => {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
       const tx = await buyCallTicketWithPromoCode(contract, params);
     } catch (error) {
-      console.error("Error getting your balance:", error);
+      console.error("Error buying Ticket:", error);
     }
   };
   return (
@@ -145,12 +147,13 @@ const MarketPage = () => {
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Call-It Logo"
               width={150}
               height={50}
               onClick={() => router.push("/")}
             />
+            {`version_${currentVersion}`}
           </Typography>
         </Toolbar>
       </AppBar>
