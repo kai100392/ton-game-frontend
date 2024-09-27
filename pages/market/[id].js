@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import {
   buyCallTicketWithPromoCode,
+  exeArbPriceParityForTicket,
   getMarketForTicket,
 } from "../../constants/contractActions";
 import { ADDR_FACT } from "../../constants/address";
@@ -22,6 +23,7 @@ import BuyCallTicketModal from "../../components/BuyCallTicketModal";
 import TicketButton from "../../components/TicketButton";
 
 import { currentVersion } from "..";
+import { getPricePercentDataFromDex } from "../api/getDexData";
 
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
@@ -93,6 +95,7 @@ const MarketPage = () => {
 
   const [signer, setSigner] = useState(null);
   const [marketDetailData, setMarketDetailData] = useState(null);
+  const [pricePercent, setPricePercent] = useState([]);
 
   // To Buy Ticket
   const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
@@ -127,6 +130,27 @@ const MarketPage = () => {
     }
   }, [signer, id]); // Re-run only when `signer` or `id` changes
 
+  useEffect(async () => {
+    let jsonReply = [];
+    if (marketDetailData != undefined) {
+      for (
+        let i = 0;
+        i < marketDetailData.marketResults.resultOptionTokens.length;
+        i++
+      ) {
+        jsonReply.push(
+          await getPricePercentDataFromDex(
+            marketDetailData.marketResults.resultOptionTokens[i]
+          )
+        );
+      }
+      setPricePercent(jsonReply);
+
+      console.log("pricePercent value1 is", pricePercent);
+      console.log("pricePercent value2 is", jsonReply ? jsonReply * 100 : null);
+    }
+  }, [marketDetailData]);
+
   // Trigger when ticket button is pressed
   const handleBuyTicketModalOpen = () => setBuyTicketModalOpen(true);
 
@@ -135,9 +159,19 @@ const MarketPage = () => {
   const handleBuyTicketWithPromoCode = async (params) => {
     try {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      const tx = await buyCallTicketWithPromoCode(contract, params);
+      await buyCallTicketWithPromoCode(contract, params);
+      handleBuyTicketModalClose();
     } catch (error) {
       console.error("Error buying Ticket:", error);
+    }
+  };
+
+  const handleExeArbPriceParityForTicket = async (params) => {
+    try {
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      await exeArbPriceParityForTicket(contract, params);
+    } catch (error) {
+      console.error("Error ExeArbPriceParity: ", error);
     }
   };
   return (
@@ -237,7 +271,7 @@ const MarketPage = () => {
 
                     <Box display="flex" alignItems="center">
                       <Typography variant="p" fontWeight="bold">
-                        {`Price Percent(%)`}
+                        {Math.floor(pricePercent[index] / 100)}(%)
                       </Typography>
                       <Box display="flex" ml={2}>
                         <TicketButton
@@ -262,17 +296,21 @@ const MarketPage = () => {
                           handleBuyTicketModalOpen={handleBuyTicketModalOpen}
                           transferTicketAddr={setTicketAddr}
                         />
-                        <TicketButton
+
+                        <Button
+                          variant="contained"
                           color="info"
-                          label="exeArb"
-                          ticketAddr={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
+                          sx={{ marginRight: 1, textTransform: "none" }}
+                          onClick={() =>
+                            handleExeArbPriceParityForTicket({
+                              _ticket:
+                                marketDetailData.marketResults
+                                  .resultOptionTokens[index],
+                            })
                           }
-                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-                          transferTicketAddr={setTicketAddr}
-                        />
+                        >
+                          exeArb
+                        </Button>
                       </Box>
                     </Box>
                   </Box>

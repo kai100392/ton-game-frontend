@@ -61,7 +61,7 @@ export const buyCallTicketWithPromoCode = async (contract, params) => {
 export const exeArbPriceParityForTicket = async (contract, params) => {
   const { _ticket } = params;
   try {
-    const tx = await contract.exeArbPriceParityForTicket(_ticket);
+    const tx = await contract.exeArbPriceParityForTicket(_ticket, gasOptions);
     // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
