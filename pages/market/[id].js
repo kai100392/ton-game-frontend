@@ -37,6 +37,7 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
       name: tempArray["name"],
       imgURL: tempArray["imgURL"],
       maker: tempArray["maker"],
+      marketHash: tempArray["marketHash"],
       category: tempArray["category"],
       live: tempArray["live"],
       rules: tempArray["rules"],
@@ -166,6 +167,39 @@ const MarketPage = () => {
     }
   };
 
+  const [tokenName, setTokenName] = useState('');
+  const [tokenSymbol, setTokenSymbol] = useState('');
+
+  // TokenFetcher component
+  // const TokenFetcher = ({ tokenAddress, setTokenName, setTokenSymbol }) => {
+  const TokenFetcher = ({ tokenAddress, setTokenSymbol }) => {
+    const fetchTokenData = async () => {
+      try {
+        const response = await fetch(
+          `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
+        );
+        const data = await response.json();
+  
+        // Get the baseToken name and symbol
+        const { name, symbol } = data.pairs[0].baseToken;
+  
+        // Set the token name and symbol using the passed down functions
+        setTokenName(name);
+        setTokenSymbol(symbol);
+      } catch (error) {
+        console.error('Error fetching token data:', error);
+      }
+    };
+  
+    useEffect(() => {
+      fetchTokenData();
+    }, [tokenAddress]);
+  
+    return null; // No UI to render
+  };
+  
+  // export default TokenFetcher;
+
   const handleExeArbPriceParityForTicket = async (params) => {
     try {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
@@ -224,15 +258,19 @@ const MarketPage = () => {
           {marketDetailData && marketDetailData.name ? (
             <Box mb={2}>
               <Typography variant="h6" color="text.secondary">
-                MarketNum:
-                {marketDetailData.marketNum}
-              </Typography>
-              <Typography variant="h6" color="text.secondary">
-                Maker:
+                Maker: 
                 {marketDetailData.maker}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                Rule:
+                MarketHash: 
+                {marketDetailData.marketHash}
+              </Typography>
+              <Typography variant="h6" color="text.secondary">
+                MarketNum: 
+                {marketDetailData.marketNum}
+              </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Rules: 
                 {marketDetailData.rule}
               </Typography>
             </Box>
@@ -264,19 +302,27 @@ const MarketPage = () => {
                       <Box>
                         <Typography>{label}</Typography>
                         <Typography variant="caption" color="text.secondary">
-                          {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`}
+                          {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
+                          {`${marketDetailData.marketResults.resultDescrs[index]}`}
                         </Typography>
                       </Box>
                     </Box>
 
                     <Box display="flex" alignItems="center">
                       <Typography variant="p" fontWeight="bold">
-                        {Math.floor(pricePercent[index] / 100)}(%)
+                        {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
+                        <br />
+                        {/* Display token name and symbol if available */}
+                        {tokenName && tokenSymbol && `${tokenName} (${tokenSymbol})`}
+                        {/* <TokenFetcher tokenAddress={marketDetailData.marketResults.resultOptionTokens[index]} setTokenName={setTokenName} setTokenSymbol={setTokenSymbol} /> */}
+                        <TokenFetcher tokenAddress={marketDetailData.marketResults.resultOptionTokens[index]} setTokenSymbol={setTokenSymbol} />
+                        <br/>
+                        {`${Math.floor(pricePercent[index] / 100)} % to win`}
                       </Typography>
                       <Box display="flex" ml={2}>
                         <TicketButton
                           color="success"
-                          label="Bet"
+                          label="PROMO Buy"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
                               index
@@ -287,13 +333,19 @@ const MarketPage = () => {
                         />
                         <TicketButton
                           color="error"
-                          label="OnDex"
+                          label="VIEW/TRADE"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
                               index
                             ]
                           }
-                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          // handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          handleBuyTicketModalOpen={() => {
+                            // window.open(`https://pulsex.mypinata.cloud/ipfs/bafybeift2yakeymqmjmonkzlx2zyc4tty7clkwvg37suffn5bncjx4e6xq/`, `_blank`);
+                            // window.open(`https://app.pulsex.com/`,`_blank`);
+                            window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,`_blank`);
+                            // window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultTokenLPs[index]}`,`_blank`);
+                          }}
                           transferTicketAddr={setTicketAddr}
                         />
 
