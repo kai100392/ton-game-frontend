@@ -23,6 +23,7 @@ import BuyCallTicketModal from "../../components/BuyCallTicketModal";
 import TicketButton from "../../components/TicketButton";
 
 import { currentVersion } from "..";
+import { getPricePercentDataFromDex } from "../api/getDexData";
 
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
@@ -94,6 +95,7 @@ const MarketPage = () => {
 
   const [signer, setSigner] = useState(null);
   const [marketDetailData, setMarketDetailData] = useState(null);
+  const [pricePercent, setPricePercent] = useState([]);
 
   // To Buy Ticket
   const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
@@ -127,6 +129,27 @@ const MarketPage = () => {
       setMarketDetailData(detailData);
     }
   }, [signer, id]); // Re-run only when `signer` or `id` changes
+
+  useEffect(async () => {
+    let jsonReply = [];
+    if (marketDetailData != undefined) {
+      for (
+        let i = 0;
+        i < marketDetailData.marketResults.resultOptionTokens.length;
+        i++
+      ) {
+        jsonReply.push(
+          await getPricePercentDataFromDex(
+            marketDetailData.marketResults.resultOptionTokens[i]
+          )
+        );
+      }
+      setPricePercent(jsonReply);
+
+      console.log("pricePercent value1 is", pricePercent);
+      console.log("pricePercent value2 is", jsonReply ? jsonReply * 100 : null);
+    }
+  }, [marketDetailData]);
 
   // Trigger when ticket button is pressed
   const handleBuyTicketModalOpen = () => setBuyTicketModalOpen(true);
@@ -248,7 +271,7 @@ const MarketPage = () => {
 
                     <Box display="flex" alignItems="center">
                       <Typography variant="p" fontWeight="bold">
-                        {`Price Percent(%)`}
+                        {Math.floor(pricePercent[index] / 100)}(%)
                       </Typography>
                       <Box display="flex" ml={2}>
                         <TicketButton
