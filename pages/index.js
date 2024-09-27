@@ -63,7 +63,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-export const currentVersion = "0.2";
+export const currentVersion = "0.22";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -103,51 +103,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const injected = new InjectedConnector();
 
-const MarketArray = [
-  {
-    id: 2423,
-    title: "2024 Presidential Election",
-    prediction: "Kamala Harris vs Donald Trump",
-    bets: "$5,000.2m Bet",
-    participants: "15,000",
-  },
-  {
-    id: 2423,
-    title: "Popular Vote Winner",
-    prediction: "Kamala Harris",
-    bets: "$4,723.9m Bet",
-    participants: "15,000",
-  },
-  {
-    id: 13684,
-    title: "Super Bowl Champion 2025",
-    prediction: "Chiefs",
-    bets: "$3,123.8m Bet",
-    participants: "15,000",
-  },
-  {
-    id: 463,
-    title: "2024 Presidential Election",
-    prediction: "Kamala Harris vs Donald Trump",
-    bets: "$5,000.2m Bet",
-    participants: "15,000",
-  },
-  {
-    id: 2246264423,
-    title: "Popular Vote Winner",
-    prediction: "Kamala Harris",
-    bets: "$4,723.9m Bet",
-    participants: "15,000",
-  },
-  {
-    id: 456,
-    title: "Super Bowl Champion 2025",
-    prediction: "Chiefs",
-    bets: "$3,123.8m Bet",
-    participants: "15,000",
-  },
-];
-
 export default function Home() {
   const router = useRouter();
   //Wallet Connecting States
@@ -185,6 +140,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true); // For Spinner Screen - potential
   useEffect(() => {
     refreshMarketList();
+    handleGetBalance();
   }, [account, onlyMyMarkets, marketCategory, page, totalPages]); // Empty dependency array means this effect runs only once when the component mounts
 
   const refreshMarketList = async () => {
@@ -298,7 +254,7 @@ export default function Home() {
       const usdBalance = await getUSDBalance(contract, {
         _acct: account,
       });
-      setBalance(Number(usdBalance));
+      setBalance(usdBalance.toNumber());
     } catch (error) {
       console.error("Error getting your balance:", error);
     }

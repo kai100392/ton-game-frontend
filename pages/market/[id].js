@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import {
   buyCallTicketWithPromoCode,
+  exeArbPriceParityForTicket,
   getMarketForTicket,
 } from "../../constants/contractActions";
 import { ADDR_FACT } from "../../constants/address";
@@ -135,9 +136,19 @@ const MarketPage = () => {
   const handleBuyTicketWithPromoCode = async (params) => {
     try {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      const tx = await buyCallTicketWithPromoCode(contract, params);
+      await buyCallTicketWithPromoCode(contract, params);
+      handleBuyTicketModalClose();
     } catch (error) {
       console.error("Error buying Ticket:", error);
+    }
+  };
+
+  const handleExeArbPriceParityForTicket = async (params) => {
+    try {
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      await exeArbPriceParityForTicket(contract, params);
+    } catch (error) {
+      console.error("Error ExeArbPriceParity: ", error);
     }
   };
   return (
@@ -262,17 +273,21 @@ const MarketPage = () => {
                           handleBuyTicketModalOpen={handleBuyTicketModalOpen}
                           transferTicketAddr={setTicketAddr}
                         />
-                        <TicketButton
+
+                        <Button
+                          variant="contained"
                           color="info"
-                          label="exeArb"
-                          ticketAddr={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
+                          sx={{ marginRight: 1, textTransform: "none" }}
+                          onClick={() =>
+                            handleExeArbPriceParityForTicket({
+                              _ticket:
+                                marketDetailData.marketResults
+                                  .resultOptionTokens[index],
+                            })
                           }
-                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-                          transferTicketAddr={setTicketAddr}
-                        />
+                        >
+                          exeArb
+                        </Button>
                       </Box>
                     </Box>
                   </Box>
