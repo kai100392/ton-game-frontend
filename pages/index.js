@@ -63,7 +63,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-export const currentVersion = "0.22";
+export const currentVersion = "0.23";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -271,7 +271,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
-    refreshMarketList();
+    await refreshMarketList();
     handleGetBalance();
     handleCreateModalClose();
   };
@@ -286,7 +286,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
-    refreshMarketList();
+    await refreshMarketList();
     handleSetInfoModalClose();
   };
 

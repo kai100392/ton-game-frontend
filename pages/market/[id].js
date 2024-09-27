@@ -16,9 +16,11 @@ import {
   buyCallTicketWithPromoCode,
   exeArbPriceParityForTicket,
   getMarketForTicket,
+  getUSDBalance,
 } from "../../constants/contractActions";
-import { ADDR_FACT } from "../../constants/address";
+import { ADDR_FACT, ADDR_VAULT } from "../../constants/address";
 import factoryAbi from "../abi/CallitFactory.abi.json";
+import vaultAbi from "../abi/CallitVault.abi.json";
 import BuyCallTicketModal from "../../components/BuyCallTicketModal";
 import TicketButton from "../../components/TicketButton";
 
@@ -94,6 +96,7 @@ const MarketPage = () => {
   const { id, account } = router.query;
 
   const [signer, setSigner] = useState(null);
+  const [balance, setBalance] = useState(null);
   const [marketDetailData, setMarketDetailData] = useState(null);
   const [pricePercent, setPricePercent] = useState([]);
 
@@ -122,6 +125,7 @@ const MarketPage = () => {
 
   // Another useEffect for handling the market detail call
   useEffect(async () => {
+    handleGetBalance();
     if (signer && id) {
       const detailData = await handleGetMarketDetailForTicket(signer, {
         _ticket: id,
@@ -151,6 +155,19 @@ const MarketPage = () => {
     }
   }, [marketDetailData]);
 
+  // Get balance from vault
+  const handleGetBalance = async () => {
+    try {
+      const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
+      const usdBalance = await getUSDBalance(contract, {
+        _acct: account,
+      });
+      setBalance(usdBalance.toNumber());
+    } catch (error) {
+      console.error("Error getting your balance:", error);
+    }
+  };
+
   // Trigger when ticket button is pressed
   const handleBuyTicketModalOpen = () => setBuyTicketModalOpen(true);
 
@@ -161,6 +178,7 @@ const MarketPage = () => {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
       await buyCallTicketWithPromoCode(contract, params);
       handleBuyTicketModalClose();
+      handleGetBalance();
     } catch (error) {
       console.error("Error buying Ticket:", error);
     }
@@ -189,6 +207,10 @@ const MarketPage = () => {
             />
             {`version_${currentVersion}`}
           </Typography>
+
+          <Button variant="outlined" color="info" onClick={handleGetBalance}>
+            balance : {balance != null ? balance : "Press me"}
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -380,6 +402,7 @@ const MarketPage = () => {
               fullWidth
               onClick={handleBuyTicketModalOpen}
               sx={{ textTransform: "none" }}
+              disabled
             >
               buyCallTicketWithPromoCode
             </Button>
