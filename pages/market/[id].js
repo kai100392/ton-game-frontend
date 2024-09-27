@@ -171,32 +171,34 @@ const MarketPage = () => {
   const [tokenSymbol, setTokenSymbol] = useState('');
 
   // TokenFetcher component
-  // const TokenFetcher = ({ tokenAddress, setTokenName, setTokenSymbol }) => {
-  const TokenFetcher = ({ tokenAddress, setTokenSymbol }) => {
-    const fetchTokenData = async () => {
-      try {
-        const response = await fetch(
-          `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
-        );
-        const data = await response.json();
-  
-        // Get the baseToken name and symbol
-        const { name, symbol } = data.pairs[0].baseToken;
-  
-        // Set the token name and symbol using the passed down functions
-        setTokenName(name);
-        setTokenSymbol(symbol);
-      } catch (error) {
-        console.error('Error fetching token data:', error);
-      }
-    };
-  
-    useEffect(() => {
-      fetchTokenData();
-    }, [tokenAddress]);
-  
-    return null; // No UI to render
+// TokenFetcher component
+const TokenFetcher = ({ tokenAddress, setTokenData }) => {
+  const fetchTokenData = async () => {
+    try {
+      const response = await fetch(
+        `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
+      );
+      const data = await response.json();
+
+      // Get the baseToken name and symbol
+      const { name, symbol } = data.pairs[0].baseToken;
+
+      // Set the token data using the passed down function
+      setTokenData(prevData => ({
+        ...prevData,
+        [tokenAddress]: { name, symbol } // Store data by token address
+      }));
+    } catch (error) {
+      console.error('Error fetching token data:', error);
+    }
   };
+
+  useEffect(() => {
+    fetchTokenData();
+  }, [tokenAddress]);
+
+  return null; // No UI to render
+};
   
   // export default TokenFetcher;
 
@@ -208,6 +210,10 @@ const MarketPage = () => {
       console.error("Error ExeArbPriceParity: ", error);
     }
   };
+
+  // State to hold all token names and symbols from dex screener
+  const [tokenData, setTokenData] = useState({}); 
+
   return (
     <>
       {/* Top Navigation */}
@@ -313,9 +319,11 @@ const MarketPage = () => {
                         {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
                         {/* Display token name and symbol if available */}
-                        {tokenName && tokenSymbol && `${tokenName} (${tokenSymbol})`}
-                        {/* <TokenFetcher tokenAddress={marketDetailData.marketResults.resultOptionTokens[index]} setTokenName={setTokenName} setTokenSymbol={setTokenSymbol} /> */}
-                        <TokenFetcher tokenAddress={marketDetailData.marketResults.resultOptionTokens[index]} setTokenSymbol={setTokenSymbol} />
+                        {tokenData[marketDetailData.marketResults.resultOptionTokens[index]] && (
+                          `${tokenData[marketDetailData.marketResults.resultOptionTokens[index]].name} (${tokenData[marketDetailData.marketResults.resultOptionTokens[index]].symbol})`
+                        )}
+                        <TokenFetcher tokenAddress={marketDetailData.marketResults.resultOptionTokens[index]} setTokenData={setTokenData} />
+
                         <br/>
                         {`${Math.floor(pricePercent[index] / 100)} % to win`}
                       </Typography>
