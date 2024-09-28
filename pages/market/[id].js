@@ -52,6 +52,11 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         resultTokenLPs: [],
         resultTokenVotes: [],
       },
+      marketDatetimes: {
+        dtCallDeadline: tempArray["marketDatetimes"]["dtCallDeadline"].toNumber(),
+        dtResultVoteStart: tempArray["marketDatetimes"]["dtResultVoteStart"].toNumber(),
+        dtResultVoteEnd: tempArray["marketDatetimes"]["dtResultVoteEnd"].toNumber(),
+      },
       marketUsdAmnts: {
         usdAmntLP: null,
         usdAmntPrizePool: null,
@@ -279,6 +284,18 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
                 Rules: 
                 {marketDetailData.rule}
               </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Call Deadline Date: 
+                {marketDetailData.marketDatetimes.dtCallDeadline}
+              </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Result Voting Start Date: 
+                {marketDetailData.marketDatetimes.dtResultVoteStart}
+              </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Result Voting End Date: 
+                {marketDetailData.marketDatetimes.dtResultVoteEnd}
+              </Typography>
             </Box>
           ) : null}
           <Box mb={2}>
@@ -434,7 +451,7 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
             mb={2}
             mt={10}
           >
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               fullWidth
@@ -442,7 +459,7 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
               sx={{ textTransform: "none" }}
             >
               buyCallTicketWithPromoCode
-            </Button>
+            </Button> */}
           </Box>
           <Box
             display="flex"

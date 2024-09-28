@@ -63,7 +63,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-export const currentVersion = "0.22";
+export const currentVersion = "0.23";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -507,7 +507,7 @@ export default function Home() {
                         margin: "0px 0px",
                       }}
                     >
-                      Transfer native PLS to <b>{ADDR_FACT}</b> for depositing
+                      Transfer native PLS to <b>{ADDR_VAULT}</b> for depositing
                     </Typography>
                     <Typography
                       sx={{
@@ -524,7 +524,7 @@ export default function Home() {
                       }}
                       onClick={handleDepositModalOpen}
                     >
-                      Click here to deposit
+                      Click here to deposit (testing)
                     </Typography>
                   </>
                 ) : (
