@@ -444,14 +444,14 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
             <Button>+</Button>
           </Box>
         </Box> */}
-          <Box
+          {/* <Box
             display="flex"
             alignItems="center"
             justifyContent="space-between"
             mb={2}
             mt={10}
           >
-            {/* <Button
+            <Button
               variant="contained"
               color="primary"
               fullWidth
@@ -459,9 +459,9 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
               sx={{ textTransform: "none" }}
             >
               buyCallTicketWithPromoCode
-            </Button> */}
-          </Box>
-          <Box
+            </Button>
+          </Box> */}
+          {/* <Box
             display="flex"
             alignItems="center"
             justifyContent="space-between"
@@ -471,11 +471,12 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
               variant="contained"
               color="primary"
               fullWidth
+              onClick={handleBuyTicketModalOpen}
               sx={{ textTransform: "none" }}
             >
               exeArbPriceParityForTicket
             </Button>
-          </Box>
+          </Box> */}
           <Box
             display="flex"
             alignItems="center"
@@ -484,11 +485,13 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
           >
             <Button
               variant="contained"
-              color="primary"
+              color="error"
               fullWidth
+              onClick={handleBuyTicketModalOpen}
+              // onClick={handleCloseMarketCallsModalOpen}
               sx={{ textTransform: "none" }}
             >
-              closeMarketCallsForTicket
+              NO MORE BETS!
             </Button>
           </Box>
           <Box
@@ -501,6 +504,7 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
               variant="contained"
               color="primary"
               fullWidth
+              onClick={handleBuyTicketModalOpen}
               sx={{ textTransform: "none" }}
             >
               castVoteForMarketTicket
@@ -514,11 +518,13 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
           >
             <Button
               variant="contained"
-              color="primary"
+              color="error"
               fullWidth
+              onClick={handleBuyTicketModalOpen}
+              // onClick={handleCloseMarketModalOpen}
               sx={{ textTransform: "none" }}
             >
-              closeMarketForTicket
+              CLOSE THIS MARKET
             </Button>
           </Box>
           <Box
@@ -531,6 +537,7 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
               variant="contained"
               color="primary"
               fullWidth
+              onClick={handleBuyTicketModalOpen}
               sx={{ textTransform: "none" }}
             >
               claimTicketRewards
