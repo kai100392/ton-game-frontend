@@ -9,11 +9,14 @@ import {
   Card,
   AppBar,
   Toolbar,
-  Link,
+  FormControl,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import Image from "next/image";
 import {
   buyCallTicketWithPromoCode,
+  castVoteForMarketTicket,
   exeArbPriceParityForTicket,
   getMarketForTicket,
   getUSDBalance,
@@ -33,7 +36,6 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
     const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
 
     const tempArray = await getMarketForTicket(contract, params);
-    console.log(tempArray["name"]);
     let marketDetailData = {
       marketNum: tempArray["marketNum"].toNumber(),
       name: tempArray["name"],
@@ -55,9 +57,12 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         resultTokenVotes: [],
       },
       marketDatetimes: {
-        dtCallDeadline: tempArray["marketDatetimes"]["dtCallDeadline"].toNumber(),
-        dtResultVoteStart: tempArray["marketDatetimes"]["dtResultVoteStart"].toNumber(),
-        dtResultVoteEnd: tempArray["marketDatetimes"]["dtResultVoteEnd"].toNumber(),
+        dtCallDeadline:
+          tempArray["marketDatetimes"]["dtCallDeadline"].toNumber(),
+        dtResultVoteStart:
+          tempArray["marketDatetimes"]["dtResultVoteStart"].toNumber(),
+        dtResultVoteEnd:
+          tempArray["marketDatetimes"]["dtResultVoteEnd"].toNumber(),
       },
       marketUsdAmnts: {
         usdAmntLP: null,
@@ -90,7 +95,6 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
       marketDetailData.marketUsdAmnts.usdVoterRewardPool =
         tempArray["marketUsdAmnts"]["usdVoterRewardPool"].toNumber();
     }
-    console.log("market Data", marketDetailData);
     return marketDetailData;
   } catch (error) {
     console.error("Error getting market detail :", error);
@@ -109,6 +113,9 @@ const MarketPage = () => {
   // To Buy Ticket
   const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
   const [ticketAddr, setTicketAddr] = useState(null);
+
+  // To castVote
+  const [voteOption, setVoteOption] = useState("");
 
   useEffect(() => {
     if (account == undefined) router.push("/");
@@ -190,39 +197,64 @@ const MarketPage = () => {
     }
   };
 
-  const [tokenName, setTokenName] = useState('');
-  const [tokenSymbol, setTokenSymbol] = useState('');
-
-  // TokenFetcher component
-// TokenFetcher component
-const TokenFetcher = ({ tokenAddress, setTokenData }) => {
-  const fetchTokenData = async () => {
-    try {
-      const response = await fetch(
-        `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
-      );
-      const data = await response.json();
-
-      // Get the baseToken name and symbol
-      const { name, symbol } = data.pairs[0].baseToken;
-
-      // Set the token data using the passed down function
-      setTokenData(prevData => ({
-        ...prevData,
-        [tokenAddress]: { name, symbol } // Store data by token address
-      }));
-    } catch (error) {
-      console.error('Error fetching token data:', error);
-    }
+  const handleVoteSelect = (event) => {
+    setVoteOption(event.target.value);
   };
 
   useEffect(() => {
-    fetchTokenData();
-  }, [tokenAddress]);
+    if (marketDetailData == undefined || voteOption == "") return;
+    console.log("voteOption selected: ", voteOption);
 
-  return null; // No UI to render
-};
-  
+    handleCastVoteForMarketTicket({
+      _senderTicketHash:
+        marketDetailData.marketResults.resultOptionTokens[voteOption],
+      _markHash: marketDetailData.marketHash,
+    });
+  }, [voteOption]);
+
+  const handleCastVoteForMarketTicket = async (params) => {
+    try {
+      console.log("castVote params...", params);
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      await castVoteForMarketTicket(contract, params);
+      handleGetBalance();
+    } catch (error) {
+      console.error("Error Cast Vote:", error);
+    }
+  };
+
+  const [tokenName, setTokenName] = useState("");
+  const [tokenSymbol, setTokenSymbol] = useState("");
+
+  // TokenFetcher component
+  const TokenFetcher = ({ tokenAddress, setTokenData }) => {
+    const fetchTokenData = async () => {
+      try {
+        const response = await fetch(
+          `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
+        );
+        const data = await response.json();
+
+        // Get the baseToken name and symbol
+        const { name, symbol } = data.pairs[0].baseToken;
+
+        // Set the token data using the passed down function
+        setTokenData((prevData) => ({
+          ...prevData,
+          [tokenAddress]: { name, symbol }, // Store data by token address
+        }));
+      } catch (error) {
+        console.error("Error fetching token data:", error);
+      }
+    };
+
+    useEffect(() => {
+      fetchTokenData();
+    }, [tokenAddress]);
+
+    return null; // No UI to render
+  };
+
   // export default TokenFetcher;
 
   const handleExeArbPriceParityForTicket = async (params) => {
@@ -235,7 +267,7 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
   };
 
   // State to hold all token names and symbols from dex screener
-  const [tokenData, setTokenData] = useState({}); 
+  const [tokenData, setTokenData] = useState({});
 
   return (
     <>
@@ -291,31 +323,31 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
           {marketDetailData && marketDetailData.name ? (
             <Box mb={2}>
               <Typography variant="h6" color="text.secondary">
-                Maker: 
+                Maker:
                 {marketDetailData.maker}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                MarketHash: 
+                MarketHash:
                 {marketDetailData.marketHash}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                MarketNum: 
+                MarketNum:
                 {marketDetailData.marketNum}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                Rules: 
+                Rules:
                 {marketDetailData.rule}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                Call Deadline Date: 
+                Call Deadline Date:
                 {marketDetailData.marketDatetimes.dtCallDeadline}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                Result Voting Start Date: 
+                Result Voting Start Date:
                 {marketDetailData.marketDatetimes.dtResultVoteStart}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                Result Voting End Date: 
+                Result Voting End Date:
                 {marketDetailData.marketDatetimes.dtResultVoteEnd}
               </Typography>
             </Box>
@@ -358,12 +390,34 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
                         {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
                         {/* Display token name and symbol if available */}
-                        {tokenData[marketDetailData.marketResults.resultOptionTokens[index]] && (
-                          `${tokenData[marketDetailData.marketResults.resultOptionTokens[index]].name} (${tokenData[marketDetailData.marketResults.resultOptionTokens[index]].symbol})`
-                        )}
-                        <TokenFetcher tokenAddress={marketDetailData.marketResults.resultOptionTokens[index]} setTokenData={setTokenData} />
+                        {tokenData[
+                          marketDetailData.marketResults.resultOptionTokens[
+                            index
+                          ]
+                        ] &&
+                          `${
+                            tokenData[
+                              marketDetailData.marketResults.resultOptionTokens[
+                                index
+                              ]
+                            ].name
+                          } (${
+                            tokenData[
+                              marketDetailData.marketResults.resultOptionTokens[
+                                index
+                              ]
+                            ].symbol
+                          })`}
+                        {/* <TokenFetcher
+                          tokenAddress={
+                            marketDetailData.marketResults.resultOptionTokens[
+                              index
+                            ]
+                          }
+                          setTokenData={setTokenData}
+                        /> */}
 
-                        <br/>
+                        <br />
                         {`${Math.floor(pricePercent[index] / 100)} % to win`}
                       </Typography>
                       <Box display="flex" ml={2}>
@@ -390,7 +444,10 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
                           handleBuyTicketModalOpen={() => {
                             // window.open(`https://pulsex.mypinata.cloud/ipfs/bafybeift2yakeymqmjmonkzlx2zyc4tty7clkwvg37suffn5bncjx4e6xq/`, `_blank`);
                             // window.open(`https://app.pulsex.com/`,`_blank`);
-                            window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,`_blank`);
+                            window.open(
+                              `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
+                              `_blank`
+                            );
                             // window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultTokenLPs[index]}`,`_blank`);
                           }}
                           transferTicketAddr={setTicketAddr}
@@ -420,86 +477,6 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
 
         {/* Right Section */}
         <Card sx={{ flex: 1, padding: "20px" }}>
-          {/* <Box display="flex" justifyContent="space-between" mb={2}>
-          <Button
-            variant="contained"
-            color="success"
-            fullWidth
-            sx={{ marginRight: 1 }}
-          >
-            Yes 73.7¢
-          </Button>
-          <Button variant="outlined" fullWidth>
-            No 26.7¢
-          </Button>
-        </Box> */}
-
-          {/* <Typography
-          variant="caption"
-          color="text.secondary"
-          display="block"
-          gutterBottom
-        >
-          Outcome
-        </Typography>
-
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={2}
-        >
-          <Button variant="contained" color="success">
-            Buy
-          </Button>
-          <Button variant="outlined">Sell</Button>
-          <Button variant="outlined" endIcon={<ArrowForwardIosIcon />}>
-            Market
-          </Button>
-        </Box> */}
-
-          {/* <Box display="flex" justifyContent="space-between" mb={2}>
-          <Typography>Amount</Typography>
-          <Box display="flex" alignItems="center">
-            <Button>-</Button>
-            <Typography mx={2}>$0</Typography>
-            <Button>+</Button>
-          </Box>
-        </Box> */}
-          {/* <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-            mt={10}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={handleBuyTicketModalOpen}
-              sx={{ textTransform: "none" }}
-              disabled
-            >
-              buyCallTicketWithPromoCode
-            </Button>
-          </Box> */}
-          {/* <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={handleBuyTicketModalOpen}
-              sx={{ textTransform: "none" }}
-            >
-              exeArbPriceParityForTicket
-            </Button>
-          </Box> */}
           <Box
             display="flex"
             alignItems="center"
@@ -523,15 +500,28 @@ const TokenFetcher = ({ tokenAddress, setTokenData }) => {
             justifyContent="space-between"
             mb={2}
           >
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={handleBuyTicketModalOpen}
-              sx={{ textTransform: "none" }}
-            >
-              castVoteForMarketTicket
-            </Button>
+            <FormControl margin="none" sx={{ width: 150, mx: 4 }}>
+              <Select
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                value={voteOption}
+                onChange={handleVoteSelect}
+                sx={{ padding: 0 }}
+              >
+                <MenuItem value="">castVoteForMarketTicket</MenuItem>
+                {marketDetailData &&
+                marketDetailData.marketResults &&
+                marketDetailData.marketResults.resultLabels
+                  ? marketDetailData.marketResults.resultLabels.map(
+                      (label, index) => (
+                        <MenuItem key={index} value={`${index}`}>
+                          {label}
+                        </MenuItem>
+                      )
+                    )
+                  : null}
+              </Select>
+            </FormControl>
           </Box>
           <Box
             display="flex"

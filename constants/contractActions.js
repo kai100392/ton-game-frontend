@@ -87,9 +87,14 @@ export const closeMarketCallsForTicket = async (contract, params) => {
 
 // Cast vote for market ticket
 export const castVoteForMarketTicket = async (contract, params) => {
-  const { _ticket } = params;
+  console.log("castVoteFor... params...", params);
+  const { _senderTicketHash, _markHash } = params;
   try {
-    const tx = await contract.castVoteForMarketTicket(_ticket);
+    const tx = await contract.castVoteForMarketTicket(
+      _senderTicketHash,
+      _markHash,
+      gasOptions
+    );
     // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
