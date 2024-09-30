@@ -24,8 +24,13 @@ const SetMarketInfoModal = ({
   const [descr, setDescr] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
-  const handleModalClose = () => {
+  const formatInputForms = () => {
     setCategory("");
+    setDescr("");
+    setImgUrl("");
+  };
+
+  const handleModalClose = () => {
     handleSetInfoModalClose();
   };
 
@@ -44,6 +49,7 @@ const SetMarketInfoModal = ({
     };
 
     handleSetMarketInfo(formData);
+    formatInputForms();
   };
 
   return (

@@ -272,7 +272,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
-    refreshMarketList();
+    await refreshMarketList();
     handleGetBalance();
     handleCreateModalClose();
   };
@@ -287,7 +287,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error creating market:", error);
     }
-    refreshMarketList();
+    await refreshMarketList();
     handleSetInfoModalClose();
   };
 
