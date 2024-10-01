@@ -358,33 +358,33 @@ const MarketPage = () => {
           {marketDetailData && marketDetailData.name ? (
             <Box mb={2}>
               <Typography variant="body2" color="text.secondary">
-                Maker:
+                Maker: &nbsp;
                 {marketDetailData.maker}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                MarketHash:
+                MarketHash: &nbsp;
                 {marketDetailData.marketHash}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                MarketNum:
+                MarketNum: &nbsp;
                 {marketDetailData.marketNum}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Rules:
+                Rules: &nbsp;
                 {marketDetailData.rule}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Call Deadline Date:
+                Call Deadline: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
                 {deadlineDate}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Result Voting Start Date:
+                Voting Starts: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
                 {votingStartDate}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Result Voting End Date:
+                Voting Ends: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
                 {votingEndDate}
               </Typography>
