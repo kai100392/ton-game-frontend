@@ -48,7 +48,7 @@ const SetMarketInfoModal = ({
       _imgUrl: imgUrl,
     };
 
-    handleSetMarketInfo(formData);
+    await handleSetMarketInfo(formData);
     formatInputForms();
   };
 

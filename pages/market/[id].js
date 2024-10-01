@@ -35,7 +35,7 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
   try {
     const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
 
-    const tempArray = await getMarketForTicket(contract, params);
+    let tempArray = await getMarketForTicket(contract, params);
     let marketDetailData = {
       marketNum: tempArray["marketNum"].toNumber(),
       name: tempArray["name"],
@@ -96,6 +96,7 @@ const handleGetMarketDetailForTicket = async (signer, params) => {
         tempArray["marketUsdAmnts"]["usdVoterRewardPool"].toNumber();
     }
     return marketDetailData;
+    // return tempArray.json();
   } catch (error) {
     console.error("Error getting market detail :", error);
   }
@@ -165,6 +166,22 @@ const MarketPage = () => {
 
       console.log("pricePercent value1 is", pricePercent);
       console.log("pricePercent value2 is", jsonReply ? jsonReply * 100 : null);
+
+      setDeadlineDate(
+        convertUnixTimestampToDateTime(
+          marketDetailData.marketDatetimes.dtCallDeadline
+        )
+      );
+      setVotingStartDate(
+        convertUnixTimestampToDateTime(
+          marketDetailData.marketDatetimes.dtResultVoteStart
+        )
+      );
+      setVotingEndDate(
+        convertUnixTimestampToDateTime(
+          marketDetailData.marketDatetimes.dtResultVoteEnd
+        )
+      );
     }
   }, [marketDetailData]);
 
@@ -221,6 +238,24 @@ const MarketPage = () => {
     } catch (error) {
       console.error("Error Cast Vote:", error);
     }
+  };
+
+  const [deadlineDate, setDeadlineDate] = useState("");
+  const [votingStartDate, setVotingStartDate] = useState("");
+  const [votingEndDate, setVotingEndDate] = useState("");
+  const convertUnixTimestampToDateTime = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: userTimezone, // Specify your desired timezone
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+
+    return formatter.format(date);
   };
 
   const [tokenName, setTokenName] = useState("");
@@ -322,33 +357,36 @@ const MarketPage = () => {
 
           {marketDetailData && marketDetailData.name ? (
             <Box mb={2}>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 Maker:
                 {marketDetailData.maker}
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 MarketHash:
                 {marketDetailData.marketHash}
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 MarketNum:
                 {marketDetailData.marketNum}
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 Rules:
                 {marketDetailData.rule}
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 Call Deadline Date:
-                {marketDetailData.marketDatetimes.dtCallDeadline}
+                {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
+                {deadlineDate}
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 Result Voting Start Date:
-                {marketDetailData.marketDatetimes.dtResultVoteStart}
+                {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
+                {votingStartDate}
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 Result Voting End Date:
-                {marketDetailData.marketDatetimes.dtResultVoteEnd}
+                {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
+                {votingEndDate}
               </Typography>
             </Box>
           ) : null}
@@ -500,7 +538,7 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <FormControl margin="none" sx={{ width: 150, mx: 4 }}>
+            <FormControl fullWidth color="info">
               <Select
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
