@@ -314,14 +314,17 @@ const MarketPage = () => {
               src="/vote_img.jpg"
               sx={{ width: 80, height: 80, marginRight: 2 }}
             />
-            {marketDetailData && marketDetailData.name ? (
+            {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
               <Box>
                 <Typography variant="h5" fontWeight="bold">
-                  {marketDetailData.name}
+                  {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
-                  $196,900,355 Bet &nbsp; • &nbsp;{marketDetailData.category}
-                  {/* {marketDetailData ? marketDetailData : null} */}
+                  Status: {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
+                  {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
+                  {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
+                  <br/>
+                  Prize Pool: $196,900,355  &nbsp; 
                 </Typography>
               </Box>
             ) : null}
@@ -481,8 +484,7 @@ const MarketPage = () => {
               }
               sx={{ textTransform: "none" }}
             >
-              {/* NO MORE BETS! */}
-              {`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'Call Deadline? (earns $CALL)': 'NO MORE BETS! (after call deadline)'}`}
+              {`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'Call Deadline Passesd? (earn $CALL)': 'Calls Closed (NO MORE BETS!)'}`}
             </Button>
           </Box>
           <Box
