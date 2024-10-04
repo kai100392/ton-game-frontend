@@ -29,6 +29,7 @@ import TicketButton from "../../components/TicketButton";
 
 import { currentVersion } from "..";
 import { getPricePercentDataFromDex } from "../api/getDexData";
+import { getNameSymbolDataFromDex } from "../api/getDexData";
 
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
@@ -110,6 +111,7 @@ const MarketPage = () => {
   const [balance, setBalance] = useState(null);
   const [marketDetailData, setMarketDetailData] = useState(null);
   const [pricePercent, setPricePercent] = useState([]);
+  const [nameSymbol, setNameSymbol] = useState([]);
 
   // To Buy Ticket
   const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
@@ -149,23 +151,17 @@ const MarketPage = () => {
   }, [signer, id]); // Re-run only when `signer` or `id` changes
 
   useEffect(async () => {
-    let jsonReply = [];
+    let priceStrArr = [];
+    let nameSymbStr = []
     if (marketDetailData != undefined) {
-      for (
-        let i = 0;
-        i < marketDetailData.marketResults.resultOptionTokens.length;
-        i++
-      ) {
-        jsonReply.push(
-          await getPricePercentDataFromDex(
-            marketDetailData.marketResults.resultOptionTokens[i]
-          )
-        );
+      for (let i = 0; i < marketDetailData.marketResults.resultOptionTokens.length; i++) {
+        let tokAddr = marketDetailData.marketResults.resultOptionTokens[i];
+        priceStrArr.push(await getPricePercentDataFromDex(tokAddr));
+        nameSymbStr.push(await getNameSymbolDataFromDex(tokAddr));
       }
-      setPricePercent(jsonReply);
-
-      console.log("pricePercent value1 is", pricePercent);
-      console.log("pricePercent value2 is", jsonReply ? jsonReply * 100 : null);
+      
+      setPricePercent(priceStrArr);
+      setNameSymbol(nameSymbStr);
 
       setDeadlineDate(
         convertUnixTimestampToDateTime(
@@ -258,40 +254,6 @@ const MarketPage = () => {
     return formatter.format(date);
   };
 
-  const [tokenName, setTokenName] = useState("");
-  const [tokenSymbol, setTokenSymbol] = useState("");
-
-  // TokenFetcher component
-  const TokenFetcher = ({ tokenAddress, setTokenData }) => {
-    const fetchTokenData = async () => {
-      try {
-        const response = await fetch(
-          `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
-        );
-        const data = await response.json();
-
-        // Get the baseToken name and symbol
-        const { name, symbol } = data.pairs[0].baseToken;
-
-        // Set the token data using the passed down function
-        setTokenData((prevData) => ({
-          ...prevData,
-          [tokenAddress]: { name, symbol }, // Store data by token address
-        }));
-      } catch (error) {
-        console.error("Error fetching token data:", error);
-      }
-    };
-
-    useEffect(() => {
-      fetchTokenData();
-    }, [tokenAddress]);
-
-    return null; // No UI to render
-  };
-
-  // export default TokenFetcher;
-
   const handleExeArbPriceParityForTicket = async (params) => {
     try {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
@@ -376,7 +338,7 @@ const MarketPage = () => {
               <Typography variant="body2" color="text.secondary">
                 Call Deadline: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
-                {deadlineDate}
+                {deadlineDate} (no more bets!)
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Voting Starts: &nbsp;
@@ -427,36 +389,10 @@ const MarketPage = () => {
                       <Typography variant="p" fontWeight="bold">
                         {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
-                        {/* Display token name and symbol if available */}
-                        {tokenData[
-                          marketDetailData.marketResults.resultOptionTokens[
-                            index
-                          ]
-                        ] &&
-                          `${
-                            tokenData[
-                              marketDetailData.marketResults.resultOptionTokens[
-                                index
-                              ]
-                            ].name
-                          } (${
-                            tokenData[
-                              marketDetailData.marketResults.resultOptionTokens[
-                                index
-                              ]
-                            ].symbol
-                          })`}
-                        {/* <TokenFetcher
-                          tokenAddress={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
-                          }
-                          setTokenData={setTokenData}
-                        /> */}
-
+                        {`${nameSymbol[index]}`}
                         <br />
-                        {`${Math.floor(pricePercent[index] / 100)} % to win`}
+                        {/* {`${Math.floor(pricePercent[index] / 100)} % to win`} */}
+                        {`$${pricePercent[index]} (% to win)`}
                       </Typography>
                       <Box display="flex" ml={2}>
                         <TicketButton
