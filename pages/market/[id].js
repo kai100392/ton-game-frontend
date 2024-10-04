@@ -386,7 +386,7 @@ const MarketPage = () => {
                     </Box>
 
                     <Box display="flex" alignItems="center">
-                      <Typography variant="p" fontWeight="bold">
+                      <Typography variant="body2" color="text.secondary">
                         {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
                         {`${nameSymbol[index]}`}
