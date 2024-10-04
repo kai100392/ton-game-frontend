@@ -18,6 +18,7 @@ import {
   buyCallTicketWithPromoCode,
   castVoteForMarketTicket,
   exeArbPriceParityForTicket,
+  closeMarketCallsForTicket,
   getMarketForTicket,
   getUSDBalance,
 } from "../../constants/contractActions";
@@ -254,6 +255,15 @@ const MarketPage = () => {
     return formatter.format(date);
   };
 
+  const handleCloseMarketCallsModalOpen = async (params) => {
+    try {
+      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
+      await closeMarketCallsForTicket(contract, params);
+    } catch (error) {
+      console.error(" error w/ closeMarketCallsForTicket ");
+    }
+  }
+
   const handleExeArbPriceParityForTicket = async (params) => {
     try {
       const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
@@ -459,13 +469,20 @@ const MarketPage = () => {
           >
             <Button
               variant="contained"
-              color="error"
+              // color="error"
+              color={`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'info': 'error'}`}
               fullWidth
-              onClick={handleBuyTicketModalOpen}
-              // onClick={handleCloseMarketCallsModalOpen}
+              onClick={() =>
+                handleCloseMarketCallsModalOpen({
+                  _ticket:
+                    marketDetailData.marketResults
+                      .resultOptionTokens[0],
+                })
+              }
               sx={{ textTransform: "none" }}
             >
-              NO MORE BETS!
+              {/* NO MORE BETS! */}
+              {`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'Call Deadline? (earns $CALL)': 'NO MORE BETS! (after call deadline)'}`}
             </Button>
           </Box>
           <Box
