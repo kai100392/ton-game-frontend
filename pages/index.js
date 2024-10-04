@@ -63,7 +63,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-export const currentVersion = "0.26";
+export const currentVersion = "0.27";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
