@@ -32,7 +32,7 @@ export const getNameSymbolDataFromDex = async (tokenAddresses) => {
   console.log("dex response...", data);
   // if (data.pairs == null) return null;
   // return data.pairs[0].priceUsd;
-  const { name = '', symbol ='no-trades' } = data.pairs ? data.pairs[0].baseToken : {};
+  const { name = '', symbol ='no trades yet' } = data.pairs ? data.pairs[0].baseToken : {};
   console.log("dex name/symb...", name, symbol);
   return name + ' (' + symbol + ')'
 };
