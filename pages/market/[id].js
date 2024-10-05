@@ -31,6 +31,7 @@ import TicketButton from "../../components/TicketButton";
 import { currentVersion } from "..";
 import { getPricePercentDataFromDex } from "../api/getDexData";
 import { getNameSymbolDataFromDex } from "../api/getDexData";
+import { getLiquidityDataFromDex } from "../api/getDexData";
 
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
@@ -113,6 +114,8 @@ const MarketPage = () => {
   const [marketDetailData, setMarketDetailData] = useState(null);
   const [pricePercent, setPricePercent] = useState([]);
   const [nameSymbol, setNameSymbol] = useState([]);
+  const [usdLiquidty, setUsdLquidity] = useState(-1);
+  
 
   // To Buy Ticket
   const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
@@ -153,16 +156,19 @@ const MarketPage = () => {
 
   useEffect(async () => {
     let priceStrArr = [];
-    let nameSymbStr = []
+    let nameSymbStr = [];
+    let usdLiquidity = 0;
     if (marketDetailData != undefined) {
       for (let i = 0; i < marketDetailData.marketResults.resultOptionTokens.length; i++) {
         let tokAddr = marketDetailData.marketResults.resultOptionTokens[i];
         priceStrArr.push(await getPricePercentDataFromDex(tokAddr));
         nameSymbStr.push(await getNameSymbolDataFromDex(tokAddr));
+        usdLiquidity += await getLiquidityDataFromDex(tokAddr);
       }
       
       setPricePercent(priceStrArr);
       setNameSymbol(nameSymbStr);
+      setUsdLquidity(usdLiquidity);
 
       setDeadlineDate(
         convertUnixTimestampToDateTime(
@@ -324,7 +330,7 @@ const MarketPage = () => {
                   {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
                   {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
                   <br/>
-                  Prize Pool: $196,900,355  &nbsp; 
+                  Prize Pool: ${usdLiquidty} &nbsp; 
                 </Typography>
               </Box>
             ) : null}
