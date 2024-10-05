@@ -289,7 +289,7 @@ const MarketPage = () => {
               height={50}
               onClick={() => router.push("/")}
             />
-            {`version_${currentVersion}`}
+            {`v${currentVersion}`}
           </Typography>
 
           <Button variant="outlined" color="info" onClick={handleGetBalance}>
