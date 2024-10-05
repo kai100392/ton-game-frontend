@@ -483,6 +483,21 @@ export default function Home() {
                         margin: "0px 0px",
                       }}
                     >
+                      {/* <p>Welcome to Call-It</p> */}
+                      <p style={{ textAlign: 'left' }}>
+                      Welcome to Call-It! <br /><br />
+                      USD balance is required to:
+                        <br /> 1) Create new markets
+                        <br /> 2) Buy call tickets w/ promo codes
+                        <br /> 3) Execute Arbitrage Price Parity for tickets
+                      </p>
+                      {/* <p>USD balance is required to:</p>
+                      <ul style={{ textAlign: 'left' }}>
+                          <li>create markets</li>
+                          <li>Make calls with promo codes</li>
+                          <li>Execute Arbitrage Price Parity</li>
+                      </ul> */}
+                      
                       <p>Your Wallet Connected</p>
                       <p>
                         <b>{account}</b>
@@ -507,7 +522,7 @@ export default function Home() {
                         margin: "0px 0px",
                       }}
                     >
-                      Transfer native PLS to <b>{ADDR_VAULT}</b> for depositing
+                      To make a USD deposit, transfer native PLS to the CallitVault <b>{ADDR_VAULT}</b>
                     </Typography>
                     <Typography
                       sx={{
@@ -524,7 +539,7 @@ export default function Home() {
                       }}
                       onClick={handleDepositModalOpen}
                     >
-                      Click here to deposit (testing)
+                      Make deposit for someone else (testing)
                     </Typography>
                   </>
                 ) : (
