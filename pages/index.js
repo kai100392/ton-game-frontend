@@ -255,7 +255,7 @@ export default function Home() {
       const usdBalance = await getUSDBalance(contract, {
         _acct: account,
       });
-      setBalance(usdBalance.toNumber());
+      setBalance(usdBalance.toNumber() / 10**6);
     } catch (error) {
       console.error("Error getting your balance:", error);
     }
@@ -494,7 +494,7 @@ export default function Home() {
                       color="info"
                       onClick={handleGetBalance}
                     >
-                      balance : {balance != null ? balance : "Press me"}
+                      balance : ${balance != null ? balance : "Press me"}
                     </Button>
                     <Typography
                       sx={{
