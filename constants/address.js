@@ -1,14 +1,23 @@
 // export const contractAddress = "0xf9Aede2C017A2cF51eB00d7f2C5b59d388440068"; // My Wallet
 
 
-export const ADDR_LIB = "0x437dedd662736d6303fFB7ACd321966f4a81da3d"; // CallitLib v0.32
+export const ADDR_LIB = "0xb053888ba4c42e10e1Fc29fD8B1B9B40C04B438C"; // CallitLib v0.33
 export const ADDR_VAULT = "0xc82D3e9Ed0B92EF0a6273090DC7F79EF2F53ACa4"; // CallitVault v0.53
 export const ADDR_DELEGATE = "0xB4300bCdE9BE07B3057C36D1F05BBb8F0D0128b8"; // CallitDelegate v0.50
 export const ADDR_CALL = "0x200F9C731c72Dce8974B28B52d39c20381efb37e"; // CallitToken v0.21
-export const ADDR_FACT = "0xD1F3fCa3ae3846EF75d08927A4566CD206D6C60C"; // CallitFactory v0.70
+export const ADDR_FACT = "0x26477F11AE1bAD4a97045217C03251Be25E43fCa"; // CallitFactory v0.72
 export const ADDR_VOTER = "0x01b5DC472bd537A95f5a51672902560610802d9c"; // CallitVoter v0.3
 export const ADDR_CONFM = "0x0718a6271A36D5cc9Fc9cE3e994A0A64F9611EC0"; // CallitConfigMarket v0.6
 export const ADDR_CONF = "0xc5FB01Dea1e819bFcfF1690a2ffA493fDfeFae32"; // CallitConfig v0.23
+
+// export const ADDR_LIB = "0x437dedd662736d6303fFB7ACd321966f4a81da3d"; // CallitLib v0.32
+// export const ADDR_VAULT = "0xc82D3e9Ed0B92EF0a6273090DC7F79EF2F53ACa4"; // CallitVault v0.53
+// export const ADDR_DELEGATE = "0xB4300bCdE9BE07B3057C36D1F05BBb8F0D0128b8"; // CallitDelegate v0.50
+// export const ADDR_CALL = "0x200F9C731c72Dce8974B28B52d39c20381efb37e"; // CallitToken v0.21
+// export const ADDR_FACT = "0xD1F3fCa3ae3846EF75d08927A4566CD206D6C60C"; // CallitFactory v0.70
+// export const ADDR_VOTER = "0x01b5DC472bd537A95f5a51672902560610802d9c"; // CallitVoter v0.3
+// export const ADDR_CONFM = "0x0718a6271A36D5cc9Fc9cE3e994A0A64F9611EC0"; // CallitConfigMarket v0.6
+// export const ADDR_CONF = "0xc5FB01Dea1e819bFcfF1690a2ffA493fDfeFae32"; // CallitConfig v0.23
 
 // export const ADDR_LIB = "0x437dedd662736d6303fFB7ACd321966f4a81da3d"; // CallitLib v0.32
 // export const ADDR_VAULT = "0xc82D3e9Ed0B92EF0a6273090DC7F79EF2F53ACa4"; // CallitVault v0.53
