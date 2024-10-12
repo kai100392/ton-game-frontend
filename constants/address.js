@@ -1,7 +1,7 @@
 // export const contractAddress = "0xf9Aede2C017A2cF51eB00d7f2C5b59d388440068"; // My Wallet
 
 
-export const ADDR_LIB = "0xb053888ba4c42e10e1Fc29fD8B1B9B40C04B438C"; // CallitLib v0.33
+export const ADDR_LIB = "0x96abd4aad1F2d0d22d3c5B26AFeD80affA10663F"; // CallitLib v0.34
 export const ADDR_VAULT = "0xbD161ED28a24AB6F6dB35Cf6CF0A4363d4A09CC1"; // CallitVault v0.54
 export const ADDR_DELEGATE = "0xe7A20DF5bda3f435122EC66024e2A5AAB3DF4045"; // CallitDelegate v0.51
 export const ADDR_CALL = "0x200F9C731c72Dce8974B28B52d39c20381efb37e"; // CallitToken v0.21
