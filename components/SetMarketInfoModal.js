@@ -61,17 +61,7 @@ const SetMarketInfoModal = ({
       aria-describedby="modal-description"
     >
       <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 400,
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          p: 4,
-          borderRadius: 2,
-        }}
+       className="glowBox"
       >
         <Typography id="modal-title" variant="h6" component="h2" mb={2}>
           Set Market Infomation
@@ -122,7 +112,7 @@ const SetMarketInfoModal = ({
           <Button variant="outlined" color="info" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button className="button-submit" variant="contained" color="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Box>

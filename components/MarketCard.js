@@ -29,6 +29,7 @@ const MarketCard = ({
 }) => {
   const router = useRouter();
   const aTicketAddress = marketResults.resultOptionTokens[0];
+  
   return (
     <Card
       sx={{
@@ -36,6 +37,29 @@ const MarketCard = ({
         margin: 2,
         borderRadius: 2,
         boxShadow: 3,
+        marginTop: "80px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        justifyContent: "center",
+        padding: "24px 24px 8px 24px",
+        borderRadius: "8px",
+        boxSizing: "border-box",
+
+        /* Custom glowBox styles */
+        background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+                     radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+                     radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+                     radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+                     linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+                     linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+                     linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
+        boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
+                    0 0 20px 10px rgba(164, 93, 187, 0.3)`,
+        transition: "border 0.2s ease-in-out", /* Hover effect transition */
+        "&:hover": {
+          border: "1px solid darkblue",
+        },
       }}
     >
       <Link
@@ -45,13 +69,7 @@ const MarketCard = ({
         }}
         passHref
       >
-        <CardContent
-          sx={{
-            ":hover": {
-              border: "1px solid darkblue",
-            },
-          }}
-        >
+        <CardContent>
           {/* Top Section: Icon and Title */}
           <Box
             display="flex"
@@ -70,7 +88,7 @@ const MarketCard = ({
             {isMine ? (
               <IconButton
                 color="primary"
-                aria-label="comments"
+                aria-label="settings"
                 size="small"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent Link navigation
@@ -81,7 +99,7 @@ const MarketCard = ({
                 <Settings />
               </IconButton>
             ) : (
-              <IconButton aria-label="comments" size="small" disabled>
+              <IconButton aria-label="settings" size="small" disabled>
                 <SettingsOutlined />
               </IconButton>
             )}
@@ -89,10 +107,7 @@ const MarketCard = ({
 
           {/* Middle Section: Stats */}
           <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            mt={2}
+    className="glowBox"
           >
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />

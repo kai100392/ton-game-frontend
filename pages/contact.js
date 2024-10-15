@@ -21,7 +21,7 @@ const Contact = () => {
           rows={4}
           fullWidth
         />
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+        <Button className="button-submit" variant="contained" color="primary" sx={{ mt: 2 }}>
           Submit
         </Button>
       </Box>

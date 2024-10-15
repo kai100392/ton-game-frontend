@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -11,7 +11,6 @@ import {
   FormControl,
   OutlinedInput,
 } from "@mui/material";
-import { TypeSpecimenOutlined } from "@mui/icons-material";
 
 const DepositToVaultModal = ({
   depositModalOpen,
@@ -36,10 +35,10 @@ const DepositToVaultModal = ({
 
   // Function to handle form submission
   const handleSubmit = async () => {
-    // Prepare data as JSON
     const formData = {
-      _depositor: depositor,
+      _depositor: depositorAddr,
       _depositAmnt: depositAmnt,
+      _currencyType: currencyType,
     };
 
     handleDepositToVault(formData);
@@ -55,17 +54,7 @@ const DepositToVaultModal = ({
       aria-describedby="modal-description"
     >
       <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 400,
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          p: 4,
-          borderRadius: 2,
-        }}
+        className="glowBox"
       >
         <Typography id="modal-title" variant="h6" component="h2" mb={2}>
           Deposit
@@ -78,7 +67,7 @@ const DepositToVaultModal = ({
           variant="outlined"
           margin="normal"
           value={depositorAddr}
-          onChange={(e) => setDepositorAddr(e.target.value)} // Handle usdAmntLP input
+          onChange={(e) => setDepositorAddr(e.target.value)}
         />
         <FormControl fullWidth margin="normal">
           <InputLabel id="currency-label">_currencyType</InputLabel>
@@ -89,8 +78,8 @@ const DepositToVaultModal = ({
             label="_currencyType"
             input={<OutlinedInput label="_currencyType" />}
           >
-            <MenuItem value="Sports">PLS</MenuItem>
-            <MenuItem value="Current Events">USD</MenuItem>
+            <MenuItem value="PLS">PLS</MenuItem>
+            <MenuItem value="USD">USD</MenuItem>
           </Select>
         </FormControl>
         <TextField
@@ -99,7 +88,7 @@ const DepositToVaultModal = ({
           variant="outlined"
           margin="normal"
           value={depositAmnt}
-          onChange={(e) => setDepositAmnt(e.target.value)} // Handle name input
+          onChange={(e) => setDepositAmnt(e.target.value)}
         />
 
         {/* Add Outcome and Submit Buttons */}
@@ -107,7 +96,7 @@ const DepositToVaultModal = ({
           <Button variant="outlined" color="info" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button className="button-submit" variant="contained" color="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Box>

@@ -358,7 +358,7 @@ export default function Home() {
   return (
     <>
       {/* Top Navigation */}
-      <AppBar position="static" color="default" elevation={0}>
+      <AppBar className="navbar" position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
@@ -544,6 +544,7 @@ export default function Home() {
                   </>
                 ) : (
                   <Button
+                    className="button"
                     fullWidth
                     variant="contained"
                     color="error"
@@ -559,6 +560,7 @@ export default function Home() {
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {active ? (
                 <Button
+                  className="button"
                   fullWidth
                   variant="contained"
                   color="error"
@@ -567,18 +569,18 @@ export default function Home() {
                   Create New Market
                 </Button>
               ) : (
-                <Button fullWidth variant="contained" color="warning" disabled>
+                <Button className="button1" fullWidth variant="contained" color="warning" disabled>
                   Create New Market
                 </Button>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button fullWidth variant="contained" color="warning">
+              <Button className="button1" fullWidth variant="contained" color="warning">
                 claim Voter Rewards
               </Button>
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button fullWidth variant="contained" color="warning">
+              <Button className="button1" fullWidth variant="contained" color="warning" >
                 claim Promotor Rewards
               </Button>
             </Box>
