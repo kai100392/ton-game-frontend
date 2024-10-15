@@ -429,7 +429,7 @@ export default function Home() {
         >
           {/* Left Column for Market Cards */}
           <Box flex="1" marginRight={{ md: 2 }}>
-            <Typography variant="h5" gutterBottom>
+            <Typography className="typography" variant="h5" gutterBottom>
               Top Markets
             </Typography>
 

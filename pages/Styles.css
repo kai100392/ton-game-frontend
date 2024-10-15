@@ -268,7 +268,7 @@
 /* Navbar Styles */
 .navbar {
   z-index: 10;
-  background: linear-gradient(90deg, #921dff, #6a58df, #51acf7);
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   display: block;
   position: fixed;
   top: 0;
@@ -313,3 +313,28 @@
 .navbar-links a:hover {
   color: #00B6D1; /* Color change on hover */
 }
+
+
+.typography {
+  font-size: 50px; /* Default font size */
+  font-weight: bold; /* Make the font bold */
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 15%, #FF0000 37%, #FF0000 100%);
+  -webkit-background-clip: text; /* For Safari */
+  -webkit-text-fill-color: transparent; /* For Safari */
+  background-clip: text; /* For other browsers */
+  color: transparent; /* Set text color to transparent to show gradient */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .typography {
+      font-size: 30px; /* Adjust font size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .typography {
+      font-size: 24px; /* Adjust font size for mobile phones */
+  }
+}
+
