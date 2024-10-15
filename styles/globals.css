@@ -1,16 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
 html,
 body {
-  padding: 0;
+  font-family: "Poppins", "IBM Plex Sans", monospace;
+  font-style: normal;
+  background-color: #151029;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: white;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+:root {
+  --gap: 1rem;
+  --color-grey-gradient-start: #272a2a;
+  --color-grey-gradient-end: #141414;
+  --color-grey-24: #3b4040;
+  --border-radius-44: 44px;
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
 }
 
-* {
-  box-sizing: border-box;
+@keyframes scroll-abs {
+  from {
+    transform: translateX(calc(100% + var(--gap)));
+  }
+  to {
+    transform: translateX(0);
+  }
 }
+

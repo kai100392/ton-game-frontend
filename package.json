@@ -19,11 +19,14 @@
     "@mui/x-date-pickers": "^7.16.0",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
+    "commons": "^0.0.1-pre",
     "dayjs": "^1.11.13",
     "ethers": "^5.5.4",
     "next": "12.0.9",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "styled-components": "^6.1.13",
+    "vercel": "^37.8.0",
     "web3": "^4.12.1"
   },
   "devDependencies": {
