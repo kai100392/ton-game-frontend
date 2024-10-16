@@ -480,7 +480,7 @@ const MarketPage = () => {
               variant="contained"
               // color="error"
               color={`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'info': 'error'}`}
-              fullWidth
+              fullwidth={true}
               onClick={() =>
                 handleCloseMarketCallsModalOpen({
                   _ticket:
@@ -499,7 +499,7 @@ const MarketPage = () => {
             justifyContent="space-between"
             mb={2}
           >
-            <FormControl fullWidth color="info">
+            <FormControl fullwidth={true} color="info">
               <Select
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
@@ -531,7 +531,7 @@ const MarketPage = () => {
             <Button
               variant="contained"
               color="error"
-              fullWidth
+              fullwidth={true}
               onClick={handleBuyTicketModalOpen}
               // onClick={handleCloseMarketModalOpen}
               sx={{ textTransform: "none" }}
@@ -548,7 +548,7 @@ const MarketPage = () => {
             <Button
               variant="contained"
               color="primary"
-              fullWidth
+              fullwidth={true}
               onClick={handleBuyTicketModalOpen}
               sx={{ textTransform: "none" }}
             >

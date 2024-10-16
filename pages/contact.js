@@ -8,7 +8,7 @@ const Contact = () => {
         <Typography
           variant="h4"
           component="h1"
-          gutterBottom
+          gutterbottom="true"
           sx={{ color: "#FFFFFF", fontSize: "25px" }}
         >
           Contact Us
@@ -16,7 +16,7 @@ const Contact = () => {
         <TextField
           label="Your Email"
           variant="outlined"
-          fullWidth
+          fullwidth={true}
           sx={{
             mb: 2,
             input: { color: "#FFFFFF", fontSize: "25px" },
@@ -29,7 +29,7 @@ const Contact = () => {
           variant="outlined"
           multiline
           rows={4}
-          fullWidth
+          fullwidth={true}
           sx={{
             input: { color: "#FFFFFF", fontSize: "25px" },
             label: { color: "#FFFFFF", fontSize: "25px" },

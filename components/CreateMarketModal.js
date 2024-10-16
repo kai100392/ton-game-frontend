@@ -111,7 +111,7 @@ const CreateMarketModal = ({
         </Typography>
 
         <TextField
-          fullWidth
+          fullwidth={true}
           label="NAME"
           variant="outlined"
           margin="normal"
@@ -120,7 +120,7 @@ const CreateMarketModal = ({
           sx={textFieldSx}
         />
         <TextField
-          fullWidth
+          fullwidth={true}
           label="LP AMOUNT"
           variant="outlined"
           margin="normal"
@@ -166,7 +166,7 @@ const CreateMarketModal = ({
               />
 
               <TextField
-                fullWidth
+                fullwidth={true}
                 label={resultNum > 1 ? `DESCRIPTION(${key + 1})` : `DESCRIPTION`}
                 variant="outlined"
                 margin="normal"

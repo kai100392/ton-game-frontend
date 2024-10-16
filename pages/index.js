@@ -463,7 +463,7 @@ export default function Home() {
         >
           {/* Left Column for Market Cards */}
           <Box flex="1" marginRight={{ md: 2 }}>
-            <div className="typography" variant="h5" gutterBottom>
+            <div className="typography" variant="h5" gutterbottom="true">
               Top Markets
             </div>
 
@@ -546,7 +546,7 @@ export default function Home() {
                       </p>
                     </div>
                     <Button
-                      fullWidth
+                      fullwidth={true}
                       variant="outlined"
                       color="info"
                       onClick={handleGetBalance}
@@ -576,7 +576,7 @@ export default function Home() {
                 ) : (
                   <div
                     className="button"
-                    fullWidth
+                    fullwidth={true}
                     variant="contained"
                     color="error"
                     onClick={connectWallet}
@@ -592,7 +592,7 @@ export default function Home() {
               {active ? (
                 <div
                   className="button"
-                  fullWidth
+                  fullwidth={true}
                   variant="contained"
                   color="error"
                   onClick={handleCreateModalOpen}
@@ -608,12 +608,12 @@ export default function Home() {
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <div className="button1" fullWidth variant="contained" color="warning">
+              <div className="button1" fullwidth={true} variant="contained" color="warning">
                 CLAIM VOTER REWARDS
               </div>
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <div className="button1" fullWidth variant="contained" color="warning" >
+              <div className="button1" fullwidth={true} variant="contained" color="warning" >
                 CLAIM PROMOTOR REWARDS
               </div>
             </Box>
@@ -622,7 +622,7 @@ export default function Home() {
             {/* <Card sx={{ marginBottom: 2 }}>
               <CardContent>
                 <Typography variant="h6">2024 Election Forecast</Typography>
-                <Button variant="contained" fullWidth sx={{ marginTop: 2 }}>
+                <Button variant="contained" fullwidth={true} sx={{ marginTop: 2 }}>
                   View
                 </Button>
               </CardContent>
@@ -631,7 +631,7 @@ export default function Home() {
             {/* Sidebar Widget: Recent Activity */}
             {/* <Card sx={{ marginBottom: 2 }}>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h6" gutterbottom="true">
                   Recent Activity
                 </Typography>
                 {["User1 bet $1000 on Harris", "User2 bet $2000 on Trump"].map(
@@ -651,7 +651,7 @@ export default function Home() {
             {/* Sidebar Widget: Top Volume */}
             {/* <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h6" gutterbottom="true">
                   Top Volume This Week
                 </Typography>
                 {["UserA: $1.2m", "UserB: $800k"].map((volume, index) => (
@@ -688,7 +688,7 @@ export default function Home() {
 
       <Container maxWidth="sm">
       <center><Box sx={{ my: 4 }}>
-          <div className="typography" variant="h4" component="h1" gutterBottom align="center"> 
+          <div className="typography" variant="h4" component="h1" gutterbottom="true" align="center"> 
             Welcome to the Prediction Market App
           </div>
           <Link href="/about" passHref>

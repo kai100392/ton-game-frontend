@@ -62,14 +62,14 @@ const DepositToVaultModal = ({
 
         {/* Form Fields */}
         <TextField
-          fullWidth
+          fullwidth={true}
           label="_depositorAddr"
           variant="outlined"
           margin="normal"
           value={depositorAddr}
           onChange={(e) => setDepositorAddr(e.target.value)}
         />
-        <FormControl fullWidth margin="normal">
+        <FormControl fullwidth={true} margin="normal">
           <InputLabel id="currency-label">_currencyType</InputLabel>
           <Select
             labelId="currency-label"
@@ -83,7 +83,7 @@ const DepositToVaultModal = ({
           </Select>
         </FormControl>
         <TextField
-          fullWidth
+          fullwidth={true}
           label="_depositAmnt"
           variant="outlined"
           margin="normal"

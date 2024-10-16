@@ -69,7 +69,7 @@ const SetMarketInfoModal = ({
 
         {/* Form Fields */}
         <TextField
-          fullWidth
+          fullwidth={true}
           label="_anyTicket"
           variant="outlined"
           margin="normal"
@@ -77,7 +77,7 @@ const SetMarketInfoModal = ({
           disabled
         />
        <FormControl
-  fullWidth
+  fullwidth={true}
   margin="normal"
   sx={{
     border: '1px solid white', // Adds a white border
@@ -120,7 +120,7 @@ const SetMarketInfoModal = ({
 </FormControl>
 
         <TextField
-          fullWidth
+          fullwidth={true}
           label="_descr"
           variant="outlined"
           margin="normal"
@@ -128,7 +128,7 @@ const SetMarketInfoModal = ({
           onChange={(e) => setDescr(e.target.value)} // Handle usdAmntLP input
         />
         <TextField
-          fullWidth
+          fullwidth={true}
           label="_imgUrl"
           variant="outlined"
           margin="normal"
