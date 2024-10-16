@@ -31,7 +31,8 @@ const MarketCard = ({
   const aTicketAddress = marketResults.resultOptionTokens[0];
   
   return (
-    <Card className="cardBox">
+    <div className="cardBox">
+    <Card>
       <Link
         href={{
           pathname: `/market/${aTicketAddress}`,
@@ -98,6 +99,7 @@ const MarketCard = ({
         </CardContent>
       </Link>
     </Card>
+    </div>
   );
 };
 
