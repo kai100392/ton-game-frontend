@@ -49,7 +49,7 @@ const MarketCard = ({
     },
     gap: "1rem", // Space between grid items
     padding: "20px 16px 16px 16px", // Adjust padding to increase space for text
-    boxSizing: "border-box",
+    boxSizing: "border-box", // Ensure padding and border are included in width/height
     color: "white",
     background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
                  radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
@@ -60,11 +60,17 @@ const MarketCard = ({
                  linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
     boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
                 0 0 20px 10px rgba(164, 93, 187, 0.3)`,
-    transition: "border 0.2s ease-in-out", /* Hover effect transition */
+    transition: "border 0.2s ease-in-out", // Hover effect transition
     "&:hover": {
       border: "1px solid darkblue",
     },
+    overflow: "hidden", // Hide overflowed text
+    whiteSpace: "nowrap", // Prevent text from wrapping
+    textOverflow: "ellipsis", // Show ellipsis for overflowed text
+    fontSize: { xs: '14px', sm: '16px' }, // Responsive font size
+    lineHeight: '1.4', // Adjust line height
   }}
+  
 >
 
       <Link
