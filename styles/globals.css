@@ -351,7 +351,7 @@ body {
   }
 
   @media (max-width: 768px) {
-    width: 90%; /* Responsive width adjustment */
+    width: 100%; /* Responsive width adjustment */
   }
 }
 
@@ -437,7 +437,7 @@ body {
   }
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 100%;
   }
 }
 
