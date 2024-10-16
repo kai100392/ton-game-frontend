@@ -362,7 +362,7 @@ export default function Home() {
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar">
+      <div className="navbar">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
@@ -445,7 +445,7 @@ export default function Home() {
   />
 </Search>
         </Toolbar>
-      </AppBar>
+      </div>
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ marginTop: 4 }}>
