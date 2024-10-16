@@ -373,19 +373,27 @@ export default function Home() {
 
           {/* Category Dropdown */}
           <FormControl margin="none" sx={{ width: 150, mx: 4 }}>
-            <Select
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-              value={marketCategory}
-              onChange={handleCategorySelect}
-              sx={{ padding: 0 }}
-            >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="Sports">Sports</MenuItem>
-              <MenuItem value="Current Events">Current Events</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </FormControl>
+  <Select
+    displayEmpty
+    inputProps={{ "aria-label": "Without label" }}
+    value={marketCategory}
+    onChange={handleCategorySelect}
+    sx={{ padding: 0, color: 'white' }}  // Makes the font white
+    MenuProps={{
+      PaperProps: {
+        sx: {
+          backgroundColor: 'black',  // Makes the dropdown background black
+          color: 'white',  // Ensures the font in the dropdown is also white
+        },
+      },
+    }}
+  >
+    <MenuItem value="">All</MenuItem>
+    <MenuItem value="Sports">Sports</MenuItem>
+    <MenuItem value="Current Events">Current Events</MenuItem>
+    <MenuItem value="Other">Other</MenuItem>
+  </Select>
+</FormControl>
 
           {/* My Markets */}
           <FormGroup>
@@ -401,15 +409,15 @@ export default function Home() {
           </FormGroup>
 
           {/* Search Bar */}
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search markets"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Search style={{ backgroundColor: 'black' }}>
+  <SearchIconWrapper>
+    <SearchIcon />
+  </SearchIconWrapper>
+  <StyledInputBase
+    placeholder="Search markets"
+    inputProps={{ "aria-label": "search" }}
+  />
+</Search>
         </Toolbar>
       </AppBar>
 
@@ -532,7 +540,7 @@ export default function Home() {
                         lineHeight: "24px",
                         fontSize: "14px",
                         letterSpacing: "0.18px",
-                        color: "#0288d1",
+                        color: "#FFFFFF",
                         margin: "0px 0px",
                         textDecoration: "underline",
                         cursor: "pointer",
@@ -638,15 +646,16 @@ export default function Home() {
 
       {/* Footer */}
       <Box
-        sx={{
-          backgroundColor: "#1976d2",
-          color: "#fff",
-          padding: 2,
-          marginTop: 6,
-        }}
+       sx={{
+        background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+        color: "#ffffff",
+        padding: 2,
+        marginTop: 6,
+        fontWeight: 'bold', // This makes the font bold
+      }}
       >
         <Container maxWidth="lg">
-          <Typography variant="body1" align="center">
+          <Typography variant="body1" align="center"  fontWeight="bold">
             © 2024 CALL-It. All rights reserved.
           </Typography>
         </Container>
@@ -654,7 +663,7 @@ export default function Home() {
 
       <Container maxWidth="sm">
         <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
+          <Typography className="typography" variant="h4" component="h1" gutterBottom align="center"> 
             Welcome to the Prediction Market App
           </Typography>
           <Link href="/about" passHref>

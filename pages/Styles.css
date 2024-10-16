@@ -268,18 +268,30 @@
 /* Navbar Styles */
 .navbar {
   z-index: 10;
-  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+
+  background: transparent;
+  
+  /* Backdrop filter for blurring the background */
+  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+  
   display: block;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  transition: background-color 0.3s; /* Smooth transition */
+  transition: background-color 0.3s, backdrop-filter 0.3s; /* Smooth transition */
+  padding: 1px 20px; /* Optional: Adjust padding as needed */
+  
+  /* Add white font color */
+  color: white;
 }
 
+/* Optional: Change the background when scrolling */
 .navbar.scrolled {
-  background-color: rgba(4, 22, 61, 0.5); /* White color with 50% opacity */
+  background: rgba(0, 182, 209, 0.8); /* Darken the background on scroll */
 }
+
+
 
 .navbar-content {
   display: flex;
@@ -318,7 +330,7 @@
 .typography {
   font-size: 50px; /* Default font size */
   font-weight: bold; /* Make the font bold */
-  background: linear-gradient(to right, #00B6D1 0%, #314BFF 15%, #FF0000 37%, #FF0000 100%);
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   -webkit-background-clip: text; /* For Safari */
   -webkit-text-fill-color: transparent; /* For Safari */
   background-clip: text; /* For other browsers */
@@ -338,3 +350,8 @@
   }
 }
 
+
+
+.white-label {
+  color: white;
+}
