@@ -580,7 +580,7 @@ body {
 border-radius: 8px;
 padding: 16px 16px 8px 16px; /* Reduced padding */
 box-sizing: border-box;
-color: white;
+font: white;
 font-size: 14px; /* Smaller font size for glowBox text */
 
 /* Updated Glow Effect - confined to borders */
