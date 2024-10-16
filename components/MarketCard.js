@@ -77,9 +77,7 @@ const MarketCard = ({
           </Box>
 
           {/* Middle Section: Stats */}
-          <Box
-    className="glowBox"
-          >
+          <Box className="cardBox">
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
               <Typography variant="body2" color="text.secondary">
