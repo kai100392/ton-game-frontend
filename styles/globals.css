@@ -43,6 +43,11 @@ body {
   @media (max-width: 768px) {
     padding: 2rem 0;
   }
+  /* Existing properties retained */
+  @media (max-width: 480px) {
+    gap: 1rem; /* Reduce gap for smaller screens */
+  }
+  
 
 :root {
   --gap: 1rem;
@@ -126,6 +131,18 @@ body {
   z-index: -1; /* Behind the content */
   box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8); /* Confined glow inside the box */
   pointer-events: none;
+}
+
+/* glowBox adjustments for small screens */
+.glowBox {
+  @media (max-width: 768px) {
+    width: 90%; /* Ensure glowBox adjusts width for mobile screens */
+  }
+  @media (max-width: 480px) {
+    padding: 12px 12px 4px 12px; /* Reduce padding on small screens */
+    gap: 0.5rem; /* Smaller gap */
+    font-size: 12px; /* Smaller font size */
+  }
 }
 
 .button-submit {
@@ -427,6 +444,16 @@ body {
 }
 
 
+/* button responsiveness */
+.button-submit, .button-add, .button, .button1 {
+  @media (max-width: 480px) {
+    font-size: 14px; /* Adjust button font size for mobile */
+    padding: 8px 12px; /* Slightly reduce padding */
+    width: 80%; /* Ensure buttons fit on mobile */
+    min-width: unset; /* Remove min-width constraint */
+  }
+}
+
 /* Navbar Styles */
 .navbar {
   z-index: 10;
@@ -580,7 +607,7 @@ body {
 border-radius: 8px;
 padding: 16px 16px 8px 16px; /* Reduced padding */
 box-sizing: border-box;
-font: white;
+color: white;
 font-size: 14px; /* Smaller font size for glowBox text */
 
 /* Updated Glow Effect - confined to borders */
@@ -616,5 +643,28 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
     padding: 12px 12px 4px 12px;
     gap: 0.5rem;
     margin-top: 40px;
+  }
+}
+
+
+/* Navbar mobile adjustments */
+.navbar {
+  @media (max-width: 480px) {
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* typography adjustments for smaller screens */
+.typography {
+  @media (max-width: 480px) {
+    font-size: 22px; /* Even smaller text size for mobile phones */
+  }
+}
+
+/* cardBox adjustments for smaller screens */
+.cardBox {
+  @media (max-width: 480px) {
+    width: 160px; /* Make card smaller for mobile */
+    padding: 12px 12px 4px 12px; /* Adjust padding */
   }
 }
