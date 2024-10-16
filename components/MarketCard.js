@@ -44,6 +44,7 @@ const MarketCard = ({
         padding: "24px 24px 8px 24px",
         borderRadius: "8px",
         boxSizing: "border-box",
+        color: "white",
 
         /* Custom glowBox styles */
         background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
