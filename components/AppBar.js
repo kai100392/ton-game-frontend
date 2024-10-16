@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
 const MyAppBar = () => {
   return (
-    <AppBar>
+    <AppBar className="navbar">
       <Toolbar>
         <Typography>
           MyMarket
