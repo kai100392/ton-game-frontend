@@ -333,6 +333,8 @@ export default function Home() {
     handleDepositModalClose();
   };
 
+  
+
   // Add similar handlers for all other functions like exeAerriceParityForTicket, castVoteForMarketTicket, claim rewards, etc.
 
   useEffect(() => {
@@ -356,10 +358,24 @@ export default function Home() {
     }
   }
 
+ 
+    const navbarStyle = {
+        zIndex: 10,
+        background: 'transparent',
+        backdropFilter: 'blur(10px)', // Adjust the blur amount as needed
+        display: 'block',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        transition: 'background-color 0.3s, backdrop-filter 0.3s', // Smooth transition
+        padding: '1px 20px', // Optional: Adjust padding as needed
+    };
+
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar">
+      <AppBar style={navbarStyle}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
