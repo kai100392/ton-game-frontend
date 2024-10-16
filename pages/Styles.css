@@ -356,7 +356,6 @@
 }
 
 .navbarTitle {
-  color: white; /* Logo color */
   font-size: 24px; /* Logo font size */
   font-weight: bold; /* Bold font for the logo */
 }
@@ -367,7 +366,6 @@
 }
 
 .navbarMenuItemLink {
-  color: white; /* Link color */
   transition: color 0.3s ease; /* Smooth transition for hover effect */
 }
 
