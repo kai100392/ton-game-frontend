@@ -2,12 +2,46 @@
 
 html,
 body {
-  font-family: "Poppins", "IBM Plex Sans", monospace;
-  font-style: normal;
-  background-color: #151029;
-  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: url("/Glow2.svg") #151029;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  z-index: 1;
+  position: relative;
   color: white;
-}
+  &::before {
+    background-image: url("/GroupLines.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 1;
+  }
+  &::after {
+    background-image: url("/Mesh.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
 
 :root {
   --gap: 1rem;
@@ -33,4 +67,468 @@ body {
     transform: translateX(0);
   }
 }
+}
 
+
+
+
+
+.glowBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  margin-top: 40px; /* Reduced margin-top */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Reduced gap between items */
+  justify-content: center;
+
+  /* Background with radial and linear gradients */
+  background: radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+              radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+              radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+              radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+              linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+              linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+              linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%);
+  
+  border-radius: 8px;
+  padding: 16px 16px 8px 16px; /* Reduced padding */
+  box-sizing: border-box;
+  color: white;
+  font-size: 14px; /* Smaller font size for glowBox text */
+
+  /* Updated Glow Effect - confined to borders */
+  box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
+              0 0 20px 10px rgba(164, 93, 187, 0.3); /* Subtle outer glow */
+}
+
+.glowBox img {
+  margin-top: -80px; /* Adjust the image position to fit */
+}
+
+.AboutCardContent {
+  margin-top: -20px; /* Adjust the content position to fit */
+}
+
+.glowBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit; /* Make sure it follows the same border-radius */
+  background-image: url("/Glow.svg");
+  z-index: -1; /* Behind the content */
+  box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8); /* Confined glow inside the box */
+  pointer-events: none;
+}
+
+.button-submit {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px; /* Adjusted button padding for better fit */
+  gap: 10px;
+  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
+  min-height: 40px; /* Minimum height */
+  font-weight: 700;
+  font-size: 20px; /* Smaller font size for button text */
+  background: #00B6D1;
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  
+  border-radius: 8px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 125px; /* Adjusted hover effect size */
+    left: -50px; /* Adjusted hover effect position */
+    opacity: .2;
+    position: absolute;
+    top: -40px; /* Adjusted hover effect position */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 40px; /* Adjusted hover effect size */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* Adjusted hover effect position */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Responsive width adjustment */
+  }
+}
+
+
+.button-add {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px; /* Adjusted button padding for better fit */
+  gap: 10px;
+  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
+  min-height: 40px; /* Minimum height */
+  font-weight: 700;
+  font-size: 20px; /* Smaller font size for button text */
+  background: #00B6D1;
+  background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
+  
+  border-radius: 8px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 125px; /* Adjusted hover effect size */
+    left: -50px; /* Adjusted hover effect position */
+    opacity: .2;
+    position: absolute;
+    top: -40px; /* Adjusted hover effect position */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 40px; /* Adjusted hover effect size */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* Adjusted hover effect position */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Responsive width adjustment */
+  }
+}
+
+
+/* Button Class */
+.button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.375em 1em; /* 6px and 16px in em for padding */
+  gap: 0.625em; /* 10px in em for gap */
+  width: 22.5em; /* 360px in em (360px/16px = 22.5em) */
+  height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
+  font-weight: 700;
+  font-size: 1.5rem; /* 14px in rem (14px/16px = 0.875rem) */
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  border-radius: 0.5em; /* 8px in em */
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 7.8125em; /* 125px in em */
+    left: -3.125em; /* -50px in em */
+    opacity: .2;
+    position: absolute;
+    top: -2.5em; /* -40px in em */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 2.5em; /* 40px in em */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* No change, relative positioning */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Responsive width adjustment */
+  }
+}
+
+.button1 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.375em 1em; /* 6px and 16px in em for padding */
+  gap: 0.625em; /* 10px in em for gap */
+  width: 22.5em; /* 360px in em (360px/16px = 22.5em) */
+  height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
+  font-weight: 700;
+  font-size: 1.5rem; /* 14px in rem (14px/16px = 0.875rem) */
+  background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
+  border-radius: 0.5em; /* 8px in em */
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 7.8125em; /* 125px in em */
+    left: -3.125em; /* -50px in em */
+    opacity: .2;
+    position: absolute;
+    top: -2.5em; /* -40px in em */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 2.5em; /* 40px in em */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* No change, relative positioning */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Responsive width adjustment */
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+      transform: scale(0.95);
+      opacity: 0.7;
+  }
+  50% {
+      transform: scale(1.1);
+      opacity: 1;
+  }
+  100% {
+      transform: scale(0.95);
+      opacity: 0.7;
+  }
+}
+
+
+/* Navbar Styles */
+.navbar {
+  z-index: 10;
+  background: transparent;
+  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: background-color 0.3s, backdrop-filter 0.3s; /* Smooth transition */
+  padding: 1px 20px; /* Optional: Adjust padding as needed */
+
+}
+
+.navbar .MuiToolbar-root {
+  /* Targeting MUI components specifically */
+}
+
+/* Optional: Change the background when scrolling */
+.navbar.scrolled {
+  background: rgba(0, 182, 209, 0.8); /* Darken the background on scroll */
+}
+
+.navbarContainer {
+  display: flex;
+  justify-content: space-between; /* Space between logo and links */
+  align-items: center; /* Center items vertically */
+}
+
+.navbarTitle {
+  font-size: 24px; /* Logo font size */
+  font-weight: bold; /* Bold font for the logo */
+}
+
+.navbarMenu {
+  display: flex;
+  gap: 20px; /* Space between links */
+}
+
+.navbarMenuItemLink {
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.navbarMenuItemLink:hover {
+  color: #00B6D1; /* Color change on hover */
+}
+
+.navbarButton {
+  padding: 10px 16px; /* Button padding */
+  font-weight: 700;
+  font-size: 20px; /* Button font size */
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease; /* Smooth transition for background */
+}
+
+.navbarButton:hover {
+  background: #00B6D1; /* Change background on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbarTitle {
+    font-size: 18px; /* Adjust font size for tablets */
+  }
+
+  .navbarButton {
+    font-size: 16px; /* Adjust button font size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .navbarTitle {
+    font-size: 16px; /* Adjust font size for mobile phones */
+  }
+
+  .navbarButton {
+    font-size: 14px; /* Adjust button font size for mobile phones */
+  }
+}
+
+
+
+.typography {
+  font-size: 50px; /* Default font size */
+  font-weight: bold; /* Make the font bold */
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  -webkit-background-clip: text; /* For Safari */
+  -webkit-text-fill-color: transparent; /* For Safari */
+  background-clip: text; /* For other browsers */
+  color: transparent; /* Set text color to transparent to show gradient */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .typography {
+      font-size: 30px; /* Adjust font size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .typography {
+      font-size: 24px; /* Adjust font size for mobile phones */
+  }
+}
+
+
+
+.white-label {
+  color: white;
+}
+
+/* styles.css */
+.custom-checkbox {
+  /* Use an appropriate selector to target the checkbox. */
+  accent-color: white; /* For modern browsers */
+  width: 16px; /* Adjust width if needed */
+  height: 16px; /* Adjust height if needed */
+}
+
+.custom-checkbox:checked {
+  background-color: white; /* Change background color when checked */
+  border: 1px solid white; /* Adjust border if needed */
+}

@@ -28,6 +28,7 @@ import {
   Checkbox,
 } from "@mui/material";
 
+
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import {
@@ -90,7 +91,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
-  "& .MuiInputBase-input": {
+  "": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
@@ -332,13 +333,15 @@ export default function Home() {
     handleDepositModalClose();
   };
 
+  
+
   // Add similar handlers for all other functions like exeAerriceParityForTicket, castVoteForMarketTicket, claim rewards, etc.
 
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {
       setHasMetamask(true);
     }
-  });
+  }, [setHasMetamask]);
 
   async function execute() {
     if (active) {
@@ -355,10 +358,12 @@ export default function Home() {
     }
   }
 
+  
+
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar" position="static" color="default" elevation={0}>
+      <AppBar className="navbar">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
@@ -372,44 +377,74 @@ export default function Home() {
           </Typography>
 
           {/* Category Dropdown */}
-          <FormControl margin="none" sx={{ width: 150, mx: 4 }}>
-            <Select
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-              value={marketCategory}
-              onChange={handleCategorySelect}
-              sx={{ padding: 0 }}
-            >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="Sports">Sports</MenuItem>
-              <MenuItem value="Current Events">Current Events</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </FormControl>
+          <FormControl
+  margin="none"
+  sx={{
+    width: 150,
+    mx: 4,
+    border: '1px solid white', // Adds a white border
+    borderRadius: '4px', // Optional: Adds rounded corners
+    '&:hover': {
+      border: '1px solid white', // Keeps the border white on hover
+    },
+    '': {
+      border: '1px solid white', // Keeps the border white when focused
+    },
+  }}
+>
+  <Select
+    displayEmpty
+    inputProps={{ "aria-label": "Without label" }}
+    value={marketCategory}
+    onChange={handleCategorySelect}
+    sx={{
+      padding: 0,
+      color: 'white', // Makes the font white
+      '': {
+        padding: '8px 16px', // Adjusts padding to make it look better
+      },
+    }}
+    MenuProps={{
+      PaperProps: {
+        sx: {
+          backgroundColor: 'black', // Makes the dropdown background black
+          color: 'white', // Ensures the font in the dropdown is also white
+        },
+      },
+    }}
+  >
+    <MenuItem value="">All</MenuItem>
+    <MenuItem value="Sports">Sports</MenuItem>
+    <MenuItem value="Current Events">Current Events</MenuItem>
+    <MenuItem value="Other">Other</MenuItem>
+  </Select>
+</FormControl>
+
 
           {/* My Markets */}
           <FormGroup>
-            <FormControlLabel
+            <FormControlLabel 
               control={
-                <Checkbox
-                  checked={onlyMyMarkets}
-                  onChange={handleMarketCheck}
-                />
+                <Checkbox 
+                checked={onlyMyMarkets}
+                onChange={handleMarketCheck}
+            
+              />
               }
               label={`Only My Markets`}
             />
           </FormGroup>
 
           {/* Search Bar */}
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search markets"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Search style={{ backgroundColor: 'black' }}>
+  <SearchIconWrapper>
+    <SearchIcon />
+  </SearchIconWrapper>
+  <StyledInputBase
+    placeholder="Search markets"
+    inputProps={{ "aria-label": "search" }}
+  />
+</Search>
         </Toolbar>
       </AppBar>
 
@@ -472,24 +507,43 @@ export default function Home() {
               {hasMetamask ? (
                 active ? (
                   <>
+                  
+                   <Typography
+                   sx={{
+                    fontFamily: "Roboto",
+                    fontStyle: "normal",
+                    fontWeight: "normal",
+                    lineHeight: "30px",
+                    fontSize: "20px",
+                    letterSpacing: "0.18px",
+                    margin: "0px 0px",
+                    background: "linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)",
+                    backgroundClip: "text", // Ensures the gradient applies to the text
+                    WebkitBackgroundClip: "text", // For Safari support
+                    color: "transparent", // Makes the text color transparent to show the gradient
+                    
+                  }}>
+                   
+                 <p>
+                      <h1>Welcome to Call-It!</h1>
+                      </p>
+                      </Typography>
                     <Typography
                       sx={{
                         fontFamily: "Roboto",
                         fontStyle: "normal",
                         fontWeight: "normal",
                         lineHeight: "14px",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         letterSpacing: "0.18px",
                         margin: "0px 0px",
                       }}
                     >
-                      {/* <p>Welcome to Call-It</p> */}
-                      <p style={{ textAlign: 'left' }}>
-                      Welcome to Call-It! <br /><br />
-                      USD balance is required to:
-                        <br /> 1) Create new markets
-                        <br /> 2) Buy call tickets w/ promo codes
-                        <br /> 3) Execute Arbitrage Price Parity for tickets
+ <p style={{ textAlign: 'left' }}>
+                      <h2>USD balance is required to:
+                      <p>1) Create new markets</p> 
+                      <p>2) Buy call tickets w/ promo codes</p> 
+                      <p>3) Execute Arbitrage Price Parity for tickets</p> </h2>
                       </p>
                       {/* <p>USD balance is required to:</p>
                       <ul style={{ textAlign: 'left' }}>
@@ -498,9 +552,9 @@ export default function Home() {
                           <li>Execute Arbitrage Price Parity</li>
                       </ul> */}
                       
-                      <p>Your Wallet Connected</p>
+                      <h3><p><u>Your Wallet Connected</u></p></h3>
                       <p>
-                        <b>{account}</b>
+                      <h3><b>{account}</b></h3>
                       </p>
                     </Typography>
                     <Button
@@ -532,7 +586,7 @@ export default function Home() {
                         lineHeight: "24px",
                         fontSize: "14px",
                         letterSpacing: "0.18px",
-                        color: "#0288d1",
+                        color: "#FFFFFF",
                         margin: "0px 0px",
                         textDecoration: "underline",
                         cursor: "pointer",
@@ -638,29 +692,39 @@ export default function Home() {
 
       {/* Footer */}
       <Box
-        sx={{
-          backgroundColor: "#1976d2",
-          color: "#fff",
-          padding: 2,
-          marginTop: 6,
-        }}
+       sx={{
+        background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+        color: "#ffffff",
+        padding: 2,
+        marginTop: 6,
+        fontWeight: 'bold', // This makes the font bold
+      }}
       >
         <Container maxWidth="lg">
-          <Typography variant="body1" align="center">
+          <Typography variant="body1" align="center"  fontWeight="bold">
             © 2024 CALL-It. All rights reserved.
           </Typography>
         </Container>
       </Box>
 
       <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
+      <center><Box sx={{ my: 4 }}>
+          <Typography className="typography" variant="h4" component="h1" gutterBottom align="center"> 
             Welcome to the Prediction Market App
           </Typography>
           <Link href="/about" passHref>
-            <Button variant="contained" color="primary">
-              About Us
-            </Button>
+          <Button
+        variant="contained"
+        style={{
+          background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+          color: 'white', // Ensures the text color is visible
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        About Us
+      </Button>
+
           </Link>
           <Link href="/contact" passHref>
             <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
@@ -672,7 +736,7 @@ export default function Home() {
               Market Page
             </Button>
           </Link>
-        </Box>
+        </Box></center>
         <div></div>
       </Container>
 
