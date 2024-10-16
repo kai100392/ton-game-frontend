@@ -523,7 +523,13 @@ export default function Home() {
                   }}>
                    
                  <p>
-                      <h1>Welcome to Call-It!</h1>
+                      <h1>Welcome to </h1>            <Image
+              src="/logo.png"
+              alt="Call-It Logo"
+              width={150}
+              height={50}
+              onClick={() => router.push("/")}
+            />!
                       </p>
                       </Typography>
                     <div>
