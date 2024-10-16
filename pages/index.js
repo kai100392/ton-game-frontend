@@ -91,7 +91,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
-  "": {
+  "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
@@ -357,13 +357,12 @@ export default function Home() {
       console.log("Please install MetaMask");
     }
   }
-
   
 
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar">
+      <AppBar>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
@@ -387,7 +386,7 @@ export default function Home() {
     '&:hover': {
       border: '1px solid white', // Keeps the border white on hover
     },
-    '': {
+    '&.Mui-focused': {
       border: '1px solid white', // Keeps the border white when focused
     },
   }}
@@ -400,7 +399,7 @@ export default function Home() {
     sx={{
       padding: 0,
       color: 'white', // Makes the font white
-      '': {
+      '& .MuiSelect-select': {
         padding: '8px 16px', // Adjusts padding to make it look better
       },
     }}
