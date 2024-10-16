@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
 const MyAppBar = () => {
   return (
-    <AppBar className="navbar">
+    <div className="navbar">
       <Toolbar>
         <Typography>
           MyMarket
@@ -35,7 +35,7 @@ const MyAppBar = () => {
           Login
         </Button>
       </Toolbar>
-    </AppBar>
+    </div>
   );
 };
 

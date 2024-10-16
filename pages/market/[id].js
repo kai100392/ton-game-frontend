@@ -285,7 +285,7 @@ const MarketPage = () => {
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar" position="static" color="default" elevation={0}>
+      <div className="navbar" position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
@@ -302,7 +302,7 @@ const MarketPage = () => {
             balance : ${balance != null ? balance : "Press me"}
           </Button>
         </Toolbar>
-      </AppBar>
+      </div>
 
       <Box
         sx={{
