@@ -5,14 +5,14 @@ body {
   font-family: "Poppins", "IBM Plex Sans", monospace;
   width: 100%;
   height: 100%;
-  position: relative; /* Changed from absolute to relative for better responsiveness */
+  position: relative; /* Use relative positioning for better responsiveness */
   display: flex;
   flex-direction: column;
   gap: 2rem;
   background: url("/Glow2.svg") #151029;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: left;
+  background-position: center; /* Center background image for better appearance */
   z-index: 1;
   color: white;
 
@@ -44,11 +44,12 @@ body {
 
   /* Mobile responsive styles */
   @media (max-width: 768px) {
-    padding: 2rem 0;
+    padding: 2rem 1rem; /* Add padding to prevent content from touching edges */
     gap: 1.5rem; /* Adjust gap for better spacing on tablets */
-    flex-direction: column; /* Ensure content stacks on smaller screens */
+    flex-direction: column; /* Stack content vertically */
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
+    overflow: hidden; /* Prevent overflow of content */
   }
   
   @media (max-width: 480px) {
@@ -56,6 +57,7 @@ body {
     padding: 1rem; /* Add padding for smaller screens */
     width: 100vw; /* Ensure full viewport width */
     height: auto; /* Allow height to adjust automatically */
+    overflow-x: hidden; /* Hide horizontal overflow */
   }
 }
 
@@ -84,6 +86,7 @@ body {
     transform: translateX(0);
   }
 }
+
 
 
 
