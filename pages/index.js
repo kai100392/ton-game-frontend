@@ -461,46 +461,8 @@ export default function Home() {
           flexDirection={{ xs: "column", md: "row" }}
           justifyContent="space-between"
         >
-          {/* Left Column for Market Cards */}
-          <Box flex="1" marginRight={{ md: 2 }}>
-            <div className="typography" variant="h5" gutterbottom="true">
-              Top Markets
-            </div>
 
-            {/* Market Cards */}
-            <Box
-              display="flex"
-              flexDirection="row"
-              flexWrap="wrap"
-              justifyContent="space-around"
-              sx={{ padding: 2 }}
-            >
-              {marketsList.length > 0
-                ? marketsList.map((market, index) => (
-                    <MarketCard
-                      account={account}
-                      id={market.marketNum}
-                      key={index}
-                      title={market.name}
-                      maker={market.maker}
-                      imgURL={market.imgURL}
-                      category={market.category}
-                      live={market.live}
-                      marketResults={market.marketResults}
-                      rules={market.rules}
-                      winningVoteResult={market.winningVoteResult}
-                      blockNumber={market.blockNumber}
-                      blockTimestamp={market.blockTimestamp}
-                      isMine={market.maker == account}
-                      handleSetInfoModalOpen={handleSetInfoModalOpen}
-                      setTicketForSetInfo={setTicketForSetInfo}
-                    />
-                  ))
-                : null}
-            </Box>
-          </Box>
-
-          {/* Right Column for Side Sections */}
+          {/* Left Column for Side Sections */}
           <Box flexBasis="300px">
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {hasMetamask ? (
@@ -666,6 +628,45 @@ export default function Home() {
               </CardContent>
             </Card> */}
           </Box>
+          {/* RIght Column for Market Cards */}
+          <Box flex="1" marginRight={{ md: 2 }}>
+            <div className="typography" variant="h5" gutterbottom="true">
+              Top Markets
+            </div>
+
+            {/* Market Cards */}
+            <Box
+              display="flex"
+              flexDirection="row"
+              flexWrap="wrap"
+              justifyContent="space-around"
+              sx={{ padding: 2 }}
+            >
+              {marketsList.length > 0
+                ? marketsList.map((market, index) => (
+                    <MarketCard
+                      account={account}
+                      id={market.marketNum}
+                      key={index}
+                      title={market.name}
+                      maker={market.maker}
+                      imgURL={market.imgURL}
+                      category={market.category}
+                      live={market.live}
+                      marketResults={market.marketResults}
+                      rules={market.rules}
+                      winningVoteResult={market.winningVoteResult}
+                      blockNumber={market.blockNumber}
+                      blockTimestamp={market.blockTimestamp}
+                      isMine={market.maker == account}
+                      handleSetInfoModalOpen={handleSetInfoModalOpen}
+                      setTicketForSetInfo={setTicketForSetInfo}
+                    />
+                  ))
+                : null}
+            </Box>
+          </Box>
+
         </Box>
       </Container>
 
