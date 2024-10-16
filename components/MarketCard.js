@@ -32,7 +32,7 @@ const MarketCard = ({
   const aTicketAddress = marketResults.resultOptionTokens[0];
 
   return (
-    <Card
+    <Card className="glowBox"
       sx={{
         width: 300,
         margin: 2,
@@ -95,7 +95,7 @@ const MarketCard = ({
           </Box>
 
           {/* Middle Section: Stats */}
-          <Box className="glowBox-card">
+          <Box>
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
               <Typography variant="body2" color="text.secondary">
@@ -117,18 +117,3 @@ const MarketCard = ({
     </Card>
   );
 };
-
-// Main component to render MarketCards in a grid layout
-const MarketCardGrid = ({ marketCards }) => {
-  return (
-    <Grid2 container spacing={2} sx={{ marginTop: "80px" }}>
-      {marketCards.map((cardProps, index) => (
-        <Grid2 item xs={12} sm={6} md={4} key={index}> {/* Adjust sizing here */}
-          <MarketCard {...cardProps} />
-        </Grid2>
-      ))}
-    </Grid2>
-  );
-};
-
-export default MarketCardGrid;
