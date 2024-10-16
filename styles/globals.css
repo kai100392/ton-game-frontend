@@ -565,23 +565,24 @@ body {
   background-clip: text; /* For other browsers */
   color: transparent; /* Set text color to transparent to show gradient */
   text-align: center; /* Center text for all devices */
-  margin: 0; /* Remove default margin */
+  display: block; /* Ensure it behaves like a block element */
+  width: 100%; /* Full width */
+  margin: 0 auto; /* Centering */
   padding: 0; /* Remove default padding */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .typography {
-    font-size: 15px; /* Adjust font size for tablets */
+      font-size: 15px; /* Adjust font size for tablets */
   }
 }
 
 @media (max-width: 480px) {
   .typography {
-    font-size: 12px; /* Adjust font size for mobile phones */
+      font-size: 12px; /* Adjust font size for mobile phones */
   }
 }
-
 
 
 
