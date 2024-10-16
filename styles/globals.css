@@ -55,9 +55,7 @@ body {
   @media (max-width: 480px) {
     gap: 1rem; /* Reduce gap for smaller screens */
     padding: 1rem; /* Add padding for smaller screens */
-    max-width: 480px; /* Set a max-width to prevent stretching */
-    width: 100%; /* Ensure full viewport width */
-    margin: 0 auto; /* Center the container horizontally */
+    width: 100vw; /* Ensure full viewport width */
     height: auto; /* Allow height to adjust automatically */
     overflow-x: hidden; /* Hide horizontal overflow */
   }

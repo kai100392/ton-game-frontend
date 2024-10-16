@@ -34,7 +34,7 @@ const MarketCard = ({
 <Card
   sx={{
     width: {
-      xs: '100%', // Full width on mobile devices
+      xs: '50%', // Full width on mobile devices
       sm: 'calc(45% - 5px)' // Adjust width for larger devices
     },
     height: 'calc(25% - 5px)',
