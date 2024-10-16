@@ -4,34 +4,34 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
 const MyAppBar = () => {
   return (
-    <AppBar position="fixed" className={styles.navbarWrapper}>
-      <Toolbar className={styles.navbarContainer}>
-        <Typography variant="h6" className={styles.navbarTitle}>
+    <AppBar position="fixed" className="navbar">
+      <Toolbar className="navbarContainer">
+        <Typography variant="h6" className="navbarTitle">
           MyMarket
         </Typography>
-        <Box className={styles.navbarMenu}>
+        <Box className="navbarMenu">
           <Link href="/" passHref>
-            <Button className={styles.navbarMenuItemLink}>
+            <Button className="navbarMenuItemLink">
               Home
             </Button>
           </Link>
           <Link href="/markets" passHref>
-            <Button className={styles.navbarMenuItemLink}>
+            <Button className="navbarMenuItemLink">
               Markets
             </Button>
           </Link>
           <Link href="/about" passHref>
-            <Button className={styles.navbarMenuItemLink}>
+            <Button className="navbarMenuItemLink">
               About
             </Button>
           </Link>
           <Link href="/contact" passHref>
-            <Button className={styles.navbarMenuItemLink}>
+            <Button className="navbarMenuItemLink">
               Contact
             </Button>
           </Link>
         </Box>
-        <Button className={styles.navbarButton} onClick={() => alert('Login functionality here')}>
+        <Button className="navbarButton" onClick={() => alert('Login functionality here')}>
           Login
         </Button>
       </Toolbar>
