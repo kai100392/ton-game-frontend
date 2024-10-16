@@ -33,7 +33,7 @@ const MarketCard = ({
   return (
     <Card
     sx={{
-      width: 'calc(40% - 16px)', // Adjust width to fit two items with gap
+      width: 'calc(50% - 5px)', // Adjust width to fit two items with gap
       margin: 2,
       borderRadius: 2,
       boxShadow: 3,
