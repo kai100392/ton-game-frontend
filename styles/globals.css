@@ -50,6 +50,7 @@ body {
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
     overflow: hidden; /* Prevent overflow of content */
+    overflow-y: auto;
   }
   
   @media (max-width: 480px) {
@@ -58,6 +59,7 @@ body {
     width: 100vw; /* Ensure full viewport width */
     height: auto; /* Allow height to adjust automatically */
     overflow-x: hidden; /* Hide horizontal overflow */
+    overflow-y: auto;
   }
 }
 
