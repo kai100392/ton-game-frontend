@@ -407,7 +407,7 @@ body {
 /* Navbar Styles */
 .navbar {
   z-index: 10;
-  background: transparent;
+  background: transparent !important;
   backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
   display: block;
   position: fixed;
