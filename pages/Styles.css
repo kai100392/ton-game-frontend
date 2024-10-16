@@ -357,38 +357,6 @@
 
 
 
-.navbar-content {
-  display: flex;
-  justify-content: space-between; /* Space between logo and links */
-  align-items: center; /* Center items vertically */
-}
-
-.navbar-logo {
-  color: white; /* Logo color */
-  font-size: 24px; /* Logo font size */
-  font-weight: bold; /* Bold font for the logo */
-}
-
-.navbar-links {
-  list-style: none; /* Remove default list styles */
-  display: flex; /* Display links in a row */
-  gap: 20px; /* Space between links */
-}
-
-.navbar-links li {
-  display: inline; /* Inline list items */
-}
-
-.navbar-links a {
-  text-decoration: none; /* Remove underline from links */
-  color: white; /* Link color */
-  font-size: 16px; /* Link font size */
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.navbar-links a:hover {
-  color: #00B6D1; /* Color change on hover */
-}
 
 
 .typography {
