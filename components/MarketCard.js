@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import {
-  Grid2,
   Card,
   CardContent,
   Typography,
@@ -32,9 +31,6 @@ const MarketCard = ({
   const aTicketAddress = marketResults.resultOptionTokens[0];
   
   return (
-    <Grid2 container spacing={2} sx={{ marginTop: "80px" }}>
-    {cards.map((card) => (
-      <Grid2 item xs={12} sm={6} md={4} key={card.aTicketAddress}>
     <Card
       sx={{
         width: 300,
@@ -132,12 +128,7 @@ const MarketCard = ({
         </CardContent>
       </Link>
     </Card>
-    </Grid2>
-      ))}
-    </Grid2>
   );
 };
-
-
 
 export default MarketCard;
