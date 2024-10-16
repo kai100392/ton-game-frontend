@@ -32,19 +32,20 @@ const MarketCard = ({
   
   return (
     <Card
-      sx={{
-        width: 200,
-        margin: 2,
-        borderRadius: 2,
-        boxShadow: 3,
-        marginTop: "80px",
-        display: "flex",
-        gap: "1rem",
-        justifyContent: "center",
-        padding: "24px 24px 8px 24px",
-        borderRadius: "8px",
-        boxSizing: "border-box",
-        color: "white",
+    sx={{
+      width: 'calc(50% - 16px)', // Adjust width to fit two items with gap
+      margin: 2,
+      borderRadius: 2,
+      boxShadow: 3,
+      marginTop: "80px",
+      display: "grid", // Change display to grid
+      gridTemplateColumns: "repeat(2, 1fr)", // Two columns
+      gap: "1rem", // Space between grid items
+      padding: "24px 24px 8px 24px",
+      borderRadius: "8px",
+      boxSizing: "border-box",
+      color: "white",
+  
 
         /* Custom glowBox styles */
         background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
@@ -107,7 +108,7 @@ const MarketCard = ({
 
           {/* Middle Section: Stats */}
           <Box
-    className="cardBox"
+    className="glowBox"
           >
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
