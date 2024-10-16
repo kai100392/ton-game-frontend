@@ -7,7 +7,6 @@ body {
   height: 100%;
   position: relative;
   display: flex;
-  flex-direction: column;
   gap: 2rem;
   background: url("/Glow2.svg") #151029;
   background-repeat: no-repeat;
