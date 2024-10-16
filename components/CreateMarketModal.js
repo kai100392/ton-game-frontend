@@ -95,14 +95,24 @@ const CreateMarketModal = ({
           variant="h6"
           component="h2"
           mb={2}
-          sx={{ color: colors.text, fontSize: '20px' }}
+          sx={{ color: colors.text, fontSize: '20px', 
+            background: "linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)",
+            backgroundClip: "text", // Ensures the gradient applies to the text
+            WebkitBackgroundClip: "text", // For Safari support
+            color: "transparent", // Makes the text color transparent to show the gradient
+            lineHeight: "10px",
+            textAlign: "center"
+           }}
         >
+           <p>
+           <h1>
           Create New Market
+          </h1></p>
         </Typography>
 
         <TextField
           fullWidth
-          label="_name"
+          label="NAME"
           variant="outlined"
           margin="normal"
           value={name}
@@ -111,7 +121,7 @@ const CreateMarketModal = ({
         />
         <TextField
           fullWidth
-          label="_usdAmntLP"
+          label="LP AMOUNT"
           variant="outlined"
           margin="normal"
           value={usdAmntLP}
@@ -121,17 +131,17 @@ const CreateMarketModal = ({
         />
         
         <TimestampForm
-          label="_dtCallDeadline"
+          label="DEADLINE"
           onSubmitValue={setDtCallDeadline}
           textColor={colors.text}
         />
         <TimestampForm
-          label="_dtResultVoteStart"
+          label="START DATE"
           onSubmitValue={setDtResultVoteStart}
           textColor={colors.text}
         />
         <TimestampForm
-          label="_dtResultVoteEnd"
+          label="END DATE"
           onSubmitValue={setDtResultVoteEnd}
           textColor={colors.text}
         />
@@ -148,7 +158,7 @@ const CreateMarketModal = ({
             >
               <TextField
                 sx={{ ...textFieldSx, mr: 2 }}
-                label={resultNum > 1 ? `_resultLabel(${key + 1})` : `_resultLabel`}
+                label={resultNum > 1 ? `OPTION(${key + 1})` : `OPTION`}
                 variant="outlined"
                 margin="normal"
                 onChange={(e) => handleResultLabels(e.target.value, key)}
@@ -157,7 +167,7 @@ const CreateMarketModal = ({
 
               <TextField
                 fullWidth
-                label={resultNum > 1 ? `_resultDescr(${key + 1})` : `_resultDescr`}
+                label={resultNum > 1 ? `DESCRIPTION(${key + 1})` : `DESCRIPTION`}
                 variant="outlined"
                 margin="normal"
                 onChange={(e) => handleResultDescrs(e.target.value, key)}
@@ -169,6 +179,7 @@ const CreateMarketModal = ({
 
         <Box mt={3} display="flex" justifyContent="space-between">
           <Button 
+            className="button-add"
             variant="outlined" 
             color="info" 
             onClick={handleAddResult} 

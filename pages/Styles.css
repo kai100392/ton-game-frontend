@@ -118,84 +118,18 @@
 }
 
 
-/* Button Class */
-.button {
+.button-add {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 6px 16px; /* Adjusted button padding */
+  padding: 10px 16px; /* Adjusted button padding for better fit */
   gap: 10px;
-  width: 360px; /* Reduced width */
-  height: 40px; /* Reduced height */
+  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
+  min-height: 40px; /* Minimum height */
   font-weight: 700;
-  font-size: 14px; /* Smaller font size for button text */
-  background: #00B6D1;
-  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
-  
-  border-radius: 8px;
-  color: #fff;
-  backdrop-filter: blur(10px);
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-
-  /* Link styling within the button */
-  a {
-    text-decoration: none;
-    color: #fff;
-  }
-  a:hover {
-    color: #fff;
-  }
-
-  /* Ensure text in button is styled */
-  span {
-    z-index: 20;
-    text-decoration: none !important;
-  }
-
-  /* Button hover effect */
-  &:after {
-    background: #241f1f;
-    content: "";
-    height: 125px; /* Adjusted hover effect size */
-    left: -50px; /* Adjusted hover effect position */
-    opacity: .2;
-    position: absolute;
-    top: -40px; /* Adjusted hover effect position */
-    transform: rotate(35deg);
-    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
-    width: 40px; /* Adjusted hover effect size */
-    z-index: -10;
-  }
-
-  &:hover {
-    &:after {
-      left: 110%; /* Adjusted hover effect position */
-      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
-    }
-  }
-
-  @media (max-width: 768px) {
-    width: 90%; /* Responsive width adjustment */
-  }
-}
-
-.button1 {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 16px; /* Adjusted button padding */
-  gap: 10px;
-  width: 360px; /* Reduced width */
-  height: 40px; /* Reduced height */
-  font-weight: 700;
-  font-size: 14px; /* Smaller font size for button text */
+  font-size: 20px; /* Smaller font size for button text */
   background: #00B6D1;
   background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
   
@@ -240,6 +174,136 @@
   &:hover {
     &:after {
       left: 110%; /* Adjusted hover effect position */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Responsive width adjustment */
+  }
+}
+
+
+/* Button Class */
+.button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.375em 1em; /* 6px and 16px in em for padding */
+  gap: 0.625em; /* 10px in em for gap */
+  width: 22.5em; /* 360px in em (360px/16px = 22.5em) */
+  height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
+  font-weight: 700;
+  font-size: 1.5rem; /* 14px in rem (14px/16px = 0.875rem) */
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  border-radius: 0.5em; /* 8px in em */
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 7.8125em; /* 125px in em */
+    left: -3.125em; /* -50px in em */
+    opacity: .2;
+    position: absolute;
+    top: -2.5em; /* -40px in em */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 2.5em; /* 40px in em */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* No change, relative positioning */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Responsive width adjustment */
+  }
+}
+
+.button1 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.375em 1em; /* 6px and 16px in em for padding */
+  gap: 0.625em; /* 10px in em for gap */
+  width: 22.5em; /* 360px in em (360px/16px = 22.5em) */
+  height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
+  font-weight: 700;
+  font-size: 1.5rem; /* 14px in rem (14px/16px = 0.875rem) */
+  background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
+  border-radius: 0.5em; /* 8px in em */
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 7.8125em; /* 125px in em */
+    left: -3.125em; /* -50px in em */
+    opacity: .2;
+    position: absolute;
+    top: -2.5em; /* -40px in em */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 2.5em; /* 40px in em */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* No change, relative positioning */
       transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
@@ -354,4 +418,17 @@
 
 .white-label {
   color: white;
+}
+
+/* styles.css */
+.custom-checkbox {
+  /* Use an appropriate selector to target the checkbox. */
+  accent-color: white; /* For modern browsers */
+  width: 16px; /* Adjust width if needed */
+  height: 16px; /* Adjust height if needed */
+}
+
+.custom-checkbox:checked {
+  background-color: white; /* Change background color when checked */
+  border: 1px solid white; /* Adjust border if needed */
 }

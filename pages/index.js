@@ -28,6 +28,7 @@ import {
   Checkbox,
 } from "@mui/material";
 
+
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import {
@@ -372,18 +373,38 @@ export default function Home() {
           </Typography>
 
           {/* Category Dropdown */}
-          <FormControl margin="none" sx={{ width: 150, mx: 4 }}>
+          <FormControl
+  margin="none"
+  sx={{
+    width: 150,
+    mx: 4,
+    border: '1px solid white', // Adds a white border
+    borderRadius: '4px', // Optional: Adds rounded corners
+    '&:hover': {
+      border: '1px solid white', // Keeps the border white on hover
+    },
+    '&.Mui-focused': {
+      border: '1px solid white', // Keeps the border white when focused
+    },
+  }}
+>
   <Select
     displayEmpty
     inputProps={{ "aria-label": "Without label" }}
     value={marketCategory}
     onChange={handleCategorySelect}
-    sx={{ padding: 0, color: 'white' }}  // Makes the font white
+    sx={{
+      padding: 0,
+      color: 'white', // Makes the font white
+      '& .MuiSelect-select': {
+        padding: '8px 16px', // Adjusts padding to make it look better
+      },
+    }}
     MenuProps={{
       PaperProps: {
         sx: {
-          backgroundColor: 'black',  // Makes the dropdown background black
-          color: 'white',  // Ensures the font in the dropdown is also white
+          backgroundColor: 'black', // Makes the dropdown background black
+          color: 'white', // Ensures the font in the dropdown is also white
         },
       },
     }}
@@ -395,14 +416,16 @@ export default function Home() {
   </Select>
 </FormControl>
 
+
           {/* My Markets */}
           <FormGroup>
-            <FormControlLabel
+            <FormControlLabel 
               control={
-                <Checkbox
-                  checked={onlyMyMarkets}
-                  onChange={handleMarketCheck}
-                />
+                <Checkbox 
+                checked={onlyMyMarkets}
+                onChange={handleMarketCheck}
+            
+              />
               }
               label={`Only My Markets`}
             />
@@ -480,24 +503,43 @@ export default function Home() {
               {hasMetamask ? (
                 active ? (
                   <>
+                  
+                   <Typography
+                   sx={{
+                    fontFamily: "Roboto",
+                    fontStyle: "normal",
+                    fontWeight: "normal",
+                    lineHeight: "30px",
+                    fontSize: "20px",
+                    letterSpacing: "0.18px",
+                    margin: "0px 0px",
+                    background: "linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)",
+                    backgroundClip: "text", // Ensures the gradient applies to the text
+                    WebkitBackgroundClip: "text", // For Safari support
+                    color: "transparent", // Makes the text color transparent to show the gradient
+                    
+                  }}>
+                   
+                 <p>
+                      <h1>Welcome to Call-It!</h1>
+                      </p>
+                      </Typography>
                     <Typography
                       sx={{
                         fontFamily: "Roboto",
                         fontStyle: "normal",
                         fontWeight: "normal",
                         lineHeight: "14px",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         letterSpacing: "0.18px",
                         margin: "0px 0px",
                       }}
                     >
-                      {/* <p>Welcome to Call-It</p> */}
-                      <p style={{ textAlign: 'left' }}>
-                      Welcome to Call-It! <br /><br />
-                      USD balance is required to:
-                        <br /> 1) Create new markets
-                        <br /> 2) Buy call tickets w/ promo codes
-                        <br /> 3) Execute Arbitrage Price Parity for tickets
+ <p style={{ textAlign: 'left' }}>
+                      <h2>USD balance is required to:
+                      <p>1) Create new markets</p> 
+                      <p>2) Buy call tickets w/ promo codes</p> 
+                      <p>3) Execute Arbitrage Price Parity for tickets</p> </h2>
                       </p>
                       {/* <p>USD balance is required to:</p>
                       <ul style={{ textAlign: 'left' }}>
@@ -506,9 +548,9 @@ export default function Home() {
                           <li>Execute Arbitrage Price Parity</li>
                       </ul> */}
                       
-                      <p>Your Wallet Connected</p>
+                      <h3><p><u>Your Wallet Connected</u></p></h3>
                       <p>
-                        <b>{account}</b>
+                      <h3><b>{account}</b></h3>
                       </p>
                     </Typography>
                     <Button

@@ -76,20 +76,49 @@ const SetMarketInfoModal = ({
           value={ticket}
           disabled
         />
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="category-label">_category</InputLabel>
-          <Select
-            labelId="category-label"
-            value={category}
-            onChange={handleDropdownChange}
-            label="_category"
-            input={<OutlinedInput label="_category" />}
-          >
-            <MenuItem value="Sports">Sports</MenuItem>
-            <MenuItem value="Current Events">Current Events</MenuItem>
-            <MenuItem value="Other">Other</MenuItem>
-          </Select>
-        </FormControl>
+       <FormControl
+  fullWidth
+  margin="normal"
+  sx={{
+    border: '1px solid white', // Adds a white border
+    borderRadius: '4px', // Optional: Adds rounded corners
+    '&:hover': {
+      border: '1px solid white', // Keeps the border white on hover
+    },
+    '&.Mui-focused': {
+      border: '1px solid white', // Keeps the border white when focused
+    },
+  }}
+>
+  <InputLabel id="category-label" sx={{ color: 'white' }}> {/* Optional: Change label color */}
+    _category
+  </InputLabel>
+  <Select
+    labelId="category-label"
+    value={category}
+    onChange={handleDropdownChange}
+    label="_category"
+    input={
+      <OutlinedInput
+        label="_category"
+        sx={{
+          borderColor: 'white', // Makes the input border white
+          '&:hover': {
+            borderColor: 'white', // Keeps the border white on hover
+          },
+          '&.Mui-focused': {
+            borderColor: 'white', // Keeps the border white when focused
+          },
+        }}
+      />
+    }
+  >
+    <MenuItem value="Sports">Sports</MenuItem>
+    <MenuItem value="Current Events">Current Events</MenuItem>
+    <MenuItem value="Other">Other</MenuItem>
+  </Select>
+</FormControl>
+
         <TextField
           fullWidth
           label="_descr"
