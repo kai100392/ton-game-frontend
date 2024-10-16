@@ -41,7 +41,7 @@ const MarketCard = ({
       display: "grid", // Change display to grid
       gridTemplateColumns: "repeat(2, 1fr)", // Two columns
       gap: "1rem", // Space between grid items
-      padding: "24px 24px 8px 24px",
+      padding: "16px 16px 8px 16px",
       borderRadius: "8px",
       boxSizing: "border-box",
       color: "white",
