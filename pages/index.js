@@ -469,25 +469,9 @@ export default function Home() {
                 active ? (
                   <>
                   
-                   <Typography
-                   sx={{
-                    fontFamily: "Poppins",
-                    fontWeight: "normal",
-                    lineHeight: "30px",
-                    fontSize: "20px",
-                    letterSpacing: "0.18px",
-                    margin: "0px 0px",
-                    background: "linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)",
-                    backgroundClip: "text", // Ensures the gradient applies to the text
-                    WebkitBackgroundClip: "text", // For Safari support
-                    color: "transparent", // Makes the text color transparent to show the gradient
-                    
-                  }}>
-                   
-                 <p>
-                      <h1>Welcome to Call-It!</h1>
-                      </p>
-                      </Typography>
+                  <div className="typography" variant="h5" gutterbottom="true">
+                      Welcome to Call-It!
+                      </div>
                     <div>
  <p style={{ textAlign: 'left' }}>
                       <h2>USD balance is required to:
@@ -629,7 +613,7 @@ export default function Home() {
             </Card> */}
           </Box>
           {/* RIght Column for Market Cards */}
-          <Box flex="1" marginRight={{ md: 2 }}>
+          <Box sx={{ textAlign: "center", marginTop: 4 }}>
             <div className="typography" variant="h5" gutterbottom="true">
               Top Markets
             </div>
