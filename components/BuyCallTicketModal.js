@@ -45,7 +45,7 @@ const BuyCallTicketModal = ({
 
         {/* Form Fields */}
         <TextField
-          fullwidth={true}
+          fullwidth="true"
           label="_ticket"
           variant="outlined"
           margin="normal"
@@ -54,7 +54,7 @@ const BuyCallTicketModal = ({
         />
 
         <TextField
-          fullwidth={true}
+          fullwidth="true"
           label="_promoCodeHash"
           variant="outlined"
           margin="normal"
@@ -63,7 +63,7 @@ const BuyCallTicketModal = ({
         />
 
         <TextField
-          fullwidth={true}
+          fullwidth="true"
           label="_usdAmnt"
           variant="outlined"
           margin="normal"

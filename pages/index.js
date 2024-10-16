@@ -546,7 +546,7 @@ export default function Home() {
                       </p>
                     </div>
                     <Button
-                      fullwidth={true}
+                      fullwidth="true"
                       variant="outlined"
                       color="info"
                       onClick={handleGetBalance}
@@ -576,7 +576,7 @@ export default function Home() {
                 ) : (
                   <div
                     className="button"
-                    fullwidth={true}
+                    fullwidth="true"
                     variant="contained"
                     color="error"
                     onClick={connectWallet}
@@ -592,7 +592,7 @@ export default function Home() {
               {active ? (
                 <div
                   className="button"
-                  fullwidth={true}
+                  fullwidth="true"
                   variant="contained"
                   color="error"
                   onClick={handleCreateModalOpen}
@@ -608,12 +608,12 @@ export default function Home() {
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <div className="button1" fullwidth={true} variant="contained" color="warning">
+              <div className="button1" fullwidth="true" variant="contained" color="warning">
                 CLAIM VOTER REWARDS
               </div>
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <div className="button1" fullwidth={true} variant="contained" color="warning" >
+              <div className="button1" fullwidth="true" variant="contained" color="warning" >
                 CLAIM PROMOTOR REWARDS
               </div>
             </Box>
@@ -622,7 +622,7 @@ export default function Home() {
             {/* <Card sx={{ marginBottom: 2 }}>
               <CardContent>
                 <Typography variant="h6">2024 Election Forecast</Typography>
-                <Button variant="contained" fullwidth={true} sx={{ marginTop: 2 }}>
+                <Button variant="contained" fullwidth="true" sx={{ marginTop: 2 }}>
                   View
                 </Button>
               </CardContent>

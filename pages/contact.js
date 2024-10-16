@@ -16,7 +16,7 @@ const Contact = () => {
         <TextField
           label="Your Email"
           variant="outlined"
-          fullwidth={true}
+          fullwidth="true"
           sx={{
             mb: 2,
             input: { color: "#FFFFFF", fontSize: "25px" },
@@ -29,7 +29,7 @@ const Contact = () => {
           variant="outlined"
           multiline
           rows={4}
-          fullwidth={true}
+          fullwidth="true"
           sx={{
             input: { color: "#FFFFFF", fontSize: "25px" },
             label: { color: "#FFFFFF", fontSize: "25px" },
