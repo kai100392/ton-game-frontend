@@ -39,7 +39,6 @@ const MarketCard = ({
         boxShadow: 3,
         marginTop: "80px",
         display: "flex",
-        flexDirection: "column",
         gap: "1rem",
         justifyContent: "center",
         padding: "24px 24px 8px 24px",
