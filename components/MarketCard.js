@@ -33,6 +33,7 @@ const MarketCard = ({
   return (
     <Card
       sx={{
+        fontFamily: "Poppins",
         width: 300,
         margin: 2,
         borderRadius: 2,
