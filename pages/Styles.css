@@ -332,12 +332,8 @@
 /* Navbar Styles */
 .navbar {
   z-index: 10;
-
   background: transparent;
-  
-  /* Backdrop filter for blurring the background */
   backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
-  
   display: block;
   position: fixed;
   top: 0;
@@ -345,8 +341,6 @@
   right: 0;
   transition: background-color 0.3s, backdrop-filter 0.3s; /* Smooth transition */
   padding: 1px 20px; /* Optional: Adjust padding as needed */
-  
-  /* Add white font color */
   color: white;
 }
 
@@ -355,7 +349,68 @@
   background: rgba(0, 182, 209, 0.8); /* Darken the background on scroll */
 }
 
+.navbarContainer {
+  display: flex;
+  justify-content: space-between; /* Space between logo and links */
+  align-items: center; /* Center items vertically */
+}
 
+.navbarTitle {
+  color: white; /* Logo color */
+  font-size: 24px; /* Logo font size */
+  font-weight: bold; /* Bold font for the logo */
+}
+
+.navbarMenu {
+  display: flex;
+  gap: 20px; /* Space between links */
+}
+
+.navbarMenuItemLink {
+  color: white; /* Link color */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.navbarMenuItemLink:hover {
+  color: #00B6D1; /* Color change on hover */
+}
+
+.navbarButton {
+  padding: 10px 16px; /* Button padding */
+  font-weight: 700;
+  font-size: 20px; /* Button font size */
+  background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease; /* Smooth transition for background */
+}
+
+.navbarButton:hover {
+  background: #00B6D1; /* Change background on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbarTitle {
+    font-size: 18px; /* Adjust font size for tablets */
+  }
+
+  .navbarButton {
+    font-size: 16px; /* Adjust button font size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .navbarTitle {
+    font-size: 16px; /* Adjust font size for mobile phones */
+  }
+
+  .navbarButton {
+    font-size: 14px; /* Adjust button font size for mobile phones */
+  }
+}
 
 
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import styles from '../styles/Home.module.css';
 
 const MyAppBar = () => {
   return (
