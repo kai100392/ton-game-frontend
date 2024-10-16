@@ -33,7 +33,7 @@ const MarketCard = ({
   return (
     <Card
     sx={{
-      width: '100%',
+      width: '50%',
       margin: 2,
       borderRadius: 2,
       boxShadow: 3,
