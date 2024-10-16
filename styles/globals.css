@@ -304,7 +304,7 @@ body {
   width: 22.5em; /* 360px in em (360px/16px = 22.5em) */
   height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
   font-weight: 700;
-  font-size: 1.5rem; /* 14px in rem (14px/16px = 0.875rem) */
+  font-size: 1.5rem; /* 24px in rem */
   background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   border-radius: 0.5em; /* 8px in em */
   color: #fff;
@@ -336,7 +336,7 @@ body {
     content: "";
     height: 7.8125em; /* 125px in em */
     left: -3.125em; /* -50px in em */
-    opacity: .2;
+    opacity: 0.2;
     position: absolute;
     top: -2.5em; /* -40px in em */
     transform: rotate(35deg);
@@ -352,10 +352,19 @@ body {
     }
   }
 
+  /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
-    width: 100%; /* Responsive width adjustment */
+    width: 100%; /* Make button full width on smaller screens */
+    font-size: 1.2rem; /* Adjust font size for better fit */
+    padding: 0.5em; /* Add more padding for touch targets */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem; /* Further adjust font size for very small screens */
+    padding: 0.375em; /* Adjust padding for smaller screens */
   }
 }
+
 
 .button1 {
   font-family: "Poppins", "IBM Plex Sans", monospace;
@@ -366,7 +375,7 @@ body {
   align-items: center;
   padding: 0.375em 1em;
   gap: 0.625em;
-  width: 22.5em;
+  width: 22.5em; /* Default width */
   height: 2.5em;
   font-weight: 700;
   font-size: 1.5rem;
@@ -439,7 +448,14 @@ body {
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 100%; /* Make button full width on smaller screens */
+    font-size: 1.2rem; /* Adjust font size for better fit */
+    padding: 0.5em; /* Add more padding for touch targets */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem; /* Further adjust font size for very small screens */
+    padding: 0.375em; /* Adjust padding for smaller screens */
   }
 }
 
@@ -457,6 +473,7 @@ body {
     opacity: 0.7;
   }
 }
+
 
 
 /* button responsiveness */
@@ -585,10 +602,6 @@ body {
 }
 
 
-
-.white-label {
-  color: white;
-}
 
 /* styles.css */
 .custom-checkbox {
