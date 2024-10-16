@@ -34,20 +34,21 @@ const MarketCard = ({
 <Card
   sx={{
     width: {
-      xs: '50%', // Full width on mobile devices
-      sm: 'calc(45% - 5px)' // Adjust width for larger devices
+      xs: '90%', // Centered width on mobile devices (90%)
+      sm: 'calc(45% - 5px)', // Adjust width for larger devices
     },
-    height: 'calc(25% - 5px)',
+    maxWidth: '400px', // Optional: Limit maximum width for better appearance on large screens
+    height: 'auto', // Allow height to auto-adjust based on content
     borderRadius: 2,
     boxShadow: 3,
-    marginTop: "80px",
+    margin: "80px auto 0 auto", // Center the card on mobile
     display: "grid", // Change display to grid
     gridTemplateColumns: {
       xs: '1fr', // One column on mobile devices
-      sm: 'repeat(2, 1fr)' // Two columns for larger devices
+      sm: 'repeat(2, 1fr)', // Two columns for larger devices
     },
     gap: "1rem", // Space between grid items
-    padding: "16px 16px 8px 16px",
+    padding: "20px 16px 16px 16px", // Adjust padding to increase space for text
     boxSizing: "border-box",
     color: "white",
     background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
@@ -64,7 +65,8 @@ const MarketCard = ({
       border: "1px solid darkblue",
     },
   }}
-    >
+>
+
       <Link
         href={{
           pathname: `/market/${aTicketAddress}`,
