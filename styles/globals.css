@@ -14,6 +14,7 @@ body {
   background-position: left;
   z-index: 1;
   position: relative;
+  color: white;
   &::before {
     background-image: url("/GroupLines.svg");
     background-repeat: no-repeat;
@@ -514,6 +515,10 @@ body {
 }
 
 
+
+.white-label {
+  color: white;
+}
 
 /* styles.css */
 .custom-checkbox {
