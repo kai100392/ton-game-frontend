@@ -121,13 +121,13 @@ const MarketCard = ({
 // Main component to render MarketCards in a grid layout
 const MarketCardGrid = ({ marketCards }) => {
   return (
-    <Grid container spacing={2} sx={{ marginTop: "80px" }}>
+    <Grid2 container spacing={2} sx={{ marginTop: "80px" }}>
       {marketCards.map((cardProps, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}> {/* Adjust sizing here */}
+        <Grid2 item xs={12} sm={6} md={4} key={index}> {/* Adjust sizing here */}
           <MarketCard {...cardProps} />
-        </Grid>
+        </Grid2>
       ))}
-    </Grid>
+    </Grid2>
   );
 };
 
