@@ -285,7 +285,7 @@ const MarketPage = () => {
   return (
     <>
       {/* Top Navigation */}
-      <AppBar position="static" color="default" elevation={0}>
+      <AppBar className="navbar" position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
