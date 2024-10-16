@@ -159,7 +159,7 @@
 
   /* Button hover effect */
   &:after {
-    background: #fff;
+    background: #241f1f;
     content: "";
     height: 125px; /* Adjusted hover effect size */
     left: -50px; /* Adjusted hover effect position */

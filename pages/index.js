@@ -63,7 +63,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-export const currentVersion = "0.34";
+export const currentVersion = "0.33";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -662,14 +662,23 @@ export default function Home() {
       </Box>
 
       <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
+      <center><Box sx={{ my: 4 }}>
           <Typography className="typography" variant="h4" component="h1" gutterBottom align="center"> 
             Welcome to the Prediction Market App
           </Typography>
           <Link href="/about" passHref>
-            <Button variant="contained" color="primary">
-              About Us
-            </Button>
+          <Button
+        variant="contained"
+        style={{
+          background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+          color: 'white', // Ensures the text color is visible
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        About Us
+      </Button>
+
           </Link>
           <Link href="/contact" passHref>
             <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
@@ -681,7 +690,7 @@ export default function Home() {
               Market Page
             </Button>
           </Link>
-        </Box>
+        </Box></center>
         <div></div>
       </Container>
 
