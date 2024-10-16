@@ -359,7 +359,7 @@ export default function Home() {
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar" position="static" color="default" elevation={0}>
+      <AppBar className="navbar">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image

@@ -1,41 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import './Styles.css'; // Make sure to import your CSS file
 
 const MyAppBar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50; // Adjust threshold as needed
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <AppBar>
-      <Toolbar>
-        <Typography>
-          MyMarket
-        </Typography>
-        <Box>
+    <div className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbarContainer">
+        <div className="navbarTitle">MyMarket</div>
+        <div className="navbarMenu">
           <Link href="/" passHref>
-            <Button>
-              Home
-            </Button>
+            <a className="navbarMenuItemLink">Home</a>
           </Link>
           <Link href="/markets" passHref>
-            <Button>
-              Markets
-            </Button>
+            <a className="navbarMenuItemLink">Markets</a>
           </Link>
           <Link href="/about" passHref>
-            <Button>
-              About
-            </Button>
+            <a className="navbarMenuItemLink">About</a>
           </Link>
           <Link href="/contact" passHref>
-            <Button>
-              Contact
-            </Button>
+            <a className="navbarMenuItemLink">Contact</a>
           </Link>
-        </Box>
-        <Button onClick={() => alert('Login functionality here')}>
+        </div>
+        <button className="navbarButton" onClick={() => alert('Login functionality here')}>
           Login
-        </Button>
-      </Toolbar>
-    </AppBar>
+        </button>
+      </div>
+    </div>
   );
 };
 
