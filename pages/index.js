@@ -362,7 +362,7 @@ export default function Home() {
   return (
     <>
       {/* Top Navigation */}
-      <AppBar className="navbar" position="static" color="default" elevation={0}>
+      <div className="navbar" position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             <Image
@@ -445,7 +445,7 @@ export default function Home() {
   />
 </Search>
         </Toolbar>
-      </AppBar>
+      </div>
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ marginTop: 4 }}>
@@ -463,9 +463,9 @@ export default function Home() {
         >
           {/* Left Column for Market Cards */}
           <Box flex="1" marginRight={{ md: 2 }}>
-            <Typography className="typography" variant="h5" gutterBottom>
+            <div className="typography" variant="h5" gutterBottom>
               Top Markets
-            </Typography>
+            </div>
 
             {/* Market Cards */}
             <Box
@@ -509,8 +509,7 @@ export default function Home() {
                   
                    <Typography
                    sx={{
-                    fontFamily: "Roboto",
-                    fontStyle: "normal",
+                    fontFamily: "Poppins",
                     fontWeight: "normal",
                     lineHeight: "30px",
                     fontSize: "20px",
@@ -527,17 +526,7 @@ export default function Home() {
                       <h1>Welcome to Call-It!</h1>
                       </p>
                       </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "Roboto",
-                        fontStyle: "normal",
-                        fontWeight: "normal",
-                        lineHeight: "14px",
-                        fontSize: "15px",
-                        letterSpacing: "0.18px",
-                        margin: "0px 0px",
-                      }}
-                    >
+                    <div>
  <p style={{ textAlign: 'left' }}>
                       <h2>USD balance is required to:
                       <p>1) Create new markets</p> 
@@ -555,7 +544,7 @@ export default function Home() {
                       <p>
                       <h3><b>{account}</b></h3>
                       </p>
-                    </Typography>
+                    </div>
                     <Button
                       fullWidth
                       variant="outlined"
@@ -564,22 +553,11 @@ export default function Home() {
                     >
                       balance : ${balance != null ? balance : "Press me"}
                     </Button>
-                    <Typography
-                      sx={{
-                        fontFamily: "Roboto",
-                        fontStyle: "normal",
-                        fontWeight: "normal",
-                        lineHeight: "24px",
-                        fontSize: "14px",
-                        letterSpacing: "0.18px",
-                        margin: "0px 0px",
-                      }}
-                    >
+                    <div>
                       To make a USD deposit, transfer native PLS to the CallitVault <b>{ADDR_VAULT}</b>
-                    </Typography>
+                    </div>
                     <Typography
                       sx={{
-                        fontFamily: "Roboto",
                         fontStyle: "normal",
                         fontWeight: "normal",
                         lineHeight: "24px",
@@ -596,46 +574,48 @@ export default function Home() {
                     </Typography>
                   </>
                 ) : (
-                  <Button
+                  <div
                     className="button"
                     fullWidth
                     variant="contained"
                     color="error"
                     onClick={connectWallet}
                   >
-                    Connect MetaMask
-                  </Button>
+                    CONNECT METAMASK
+                  </div>
                 )
               ) : (
-                <h3>"Please install metamask"</h3>
+                <h2>Install metamask, please.</h2>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {active ? (
-                <Button
+                <div
                   className="button"
                   fullWidth
                   variant="contained"
                   color="error"
                   onClick={handleCreateModalOpen}
                 >
-                  Create New Market
-                </Button>
+                  CREATE NEW MARKET
+                </div>
               ) : (
-                <Button className="button1" fullWidth variant="contained" color="warning" disabled>
-                  Create New Market
-                </Button>
+<Box sx={{ textAlign: "center", marginTop: 4 }}>
+  <button className="button1 disabled">
+    CREATE NEW MARKET
+  </button>
+</Box>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button className="button1" fullWidth variant="contained" color="warning">
-                claim Voter Rewards
-              </Button>
+              <div className="button1" fullWidth variant="contained" color="warning">
+                CLAIM VOTER REWARDS
+              </div>
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              <Button className="button1" fullWidth variant="contained" color="warning" >
-                claim Promotor Rewards
-              </Button>
+              <div className="button1" fullWidth variant="contained" color="warning" >
+                CLAIM PROMOTOR REWARDS
+              </div>
             </Box>
 
             {/* Sidebar Widget: Election Forecast */}
@@ -708,9 +688,9 @@ export default function Home() {
 
       <Container maxWidth="sm">
       <center><Box sx={{ my: 4 }}>
-          <Typography className="typography" variant="h4" component="h1" gutterBottom align="center"> 
+          <div className="typography" variant="h4" component="h1" gutterBottom align="center"> 
             Welcome to the Prediction Market App
-          </Typography>
+          </div>
           <Link href="/about" passHref>
           <Button
         variant="contained"
