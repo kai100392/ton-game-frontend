@@ -2,10 +2,10 @@
   "name": "nextjs-web3-react-metamask-connect",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "yarn dev",
+    "build": "yarn build",
+    "start": "yarn start",
+    "lint": "yarns lint"
   },
   "dependencies": {
     "@emotion/css": "^11.13.0",
