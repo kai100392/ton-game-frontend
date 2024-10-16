@@ -355,12 +355,12 @@ body {
   /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
     width: 100%; /* Make button full width on smaller screens */
-    font-size: 1.2rem; /* Adjust font size for better fit */
+    font-size: 1.8rem; /* Adjust font size for better fit */
     padding: 0.5em; /* Add more padding for touch targets */
   }
 
   @media (max-width: 480px) {
-    font-size: 1rem; /* Further adjust font size for very small screens */
+    font-size: 1.6rem; /* Further adjust font size for very small screens */
     padding: 0.375em; /* Adjust padding for smaller screens */
   }
 }
@@ -449,12 +449,12 @@ body {
 
   @media (max-width: 768px) {
     width: 100%; /* Make button full width on smaller screens */
-    font-size: 1.2rem; /* Adjust font size for better fit */
+    font-size: 1.8rem; /* Adjust font size for better fit */
     padding: 0.5em; /* Add more padding for touch targets */
   }
 
   @media (max-width: 480px) {
-    font-size: 1rem; /* Further adjust font size for very small screens */
+    font-size: 1.6rem; /* Further adjust font size for very small screens */
     padding: 0.375em; /* Adjust padding for smaller screens */
   }
 }
@@ -684,13 +684,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 .navbar {
   @media (max-width: 480px) {
     padding: 8px 16px; /* Adjust padding for smaller screens */
-  }
-}
-
-/* typography adjustments for smaller screens */
-.typography {
-  @media (max-width: 480px) {
-    font-size: 22px; /* Even smaller text size for mobile phones */
   }
 }
 
