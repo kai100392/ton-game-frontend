@@ -33,14 +33,17 @@ const MarketCard = ({
   return (
     <Card
     sx={{
-      width: 'calc(50% - 16px)', // Adjust width to fit two items with gap
+      width: '100%',
       margin: 2,
       borderRadius: 2,
       boxShadow: 3,
       marginTop: "80px",
-      display: "grid", // Change display to grid
-      gridTemplateColumns: "repeat(2, 1fr)", // Two columns
-      gap: "1rem", // Space between grid items
+      display: "grid",
+      gridTemplateColumns: {
+          xs: '1fr', // 1 column on extra small screens
+          sm: 'repeat(2, 1fr)', // 2 columns on small screens and up
+      },
+      gap: "1rem",
       padding: "24px 24px 8px 24px",
       borderRadius: "8px",
       boxSizing: "border-box",
