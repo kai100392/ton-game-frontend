@@ -28,6 +28,7 @@ import {
   Checkbox,
 } from "@mui/material";
 
+import './Styles.css'; // Import the CSS file
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
