@@ -7,7 +7,7 @@ import {
   Box,
   Button,
   IconButton,
-  Grid, // Import Grid component
+  Grid2, // Import Grid component
 } from "@mui/material";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
