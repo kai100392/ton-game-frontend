@@ -31,7 +31,6 @@ const MarketCard = ({
   const aTicketAddress = marketResults.resultOptionTokens[0];
   
   return (
-    <div className="cardBox">
     <Card
       sx={{
         width: 200,
@@ -108,7 +107,7 @@ const MarketCard = ({
 
           {/* Middle Section: Stats */}
           <Box
-    className="glowBox"
+    className="cardBox"
           >
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
@@ -129,7 +128,6 @@ const MarketCard = ({
         </CardContent>
       </Link>
     </Card>
-    </div>
   );
 };
 
