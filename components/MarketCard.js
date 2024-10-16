@@ -31,8 +31,8 @@ const MarketCard = ({
   const aTicketAddress = marketResults.resultOptionTokens[0];
   
   return (
-    <div className="cardBox">
-    <Card>
+
+    <Card className="cardBox">
       <Link
         href={{
           pathname: `/market/${aTicketAddress}`,
@@ -77,7 +77,7 @@ const MarketCard = ({
           </Box>
 
           {/* Middle Section: Stats */}
-          <Box className="cardBox">
+          <Box>
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
               <Typography variant="body2" color="text.secondary">
@@ -97,7 +97,7 @@ const MarketCard = ({
         </CardContent>
       </Link>
     </Card>
-    </div>
+
   );
 };
 
