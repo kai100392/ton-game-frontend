@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   IconButton,
+  Grid, // Import Grid component
 } from "@mui/material";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
@@ -29,7 +30,7 @@ const MarketCard = ({
 }) => {
   const router = useRouter();
   const aTicketAddress = marketResults.resultOptionTokens[0];
-  
+
   return (
     <Card
       sx={{
@@ -37,7 +38,6 @@ const MarketCard = ({
         margin: 2,
         borderRadius: 2,
         boxShadow: 3,
-        marginTop: "80px",
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
@@ -45,8 +45,6 @@ const MarketCard = ({
         padding: "24px 24px 8px 24px",
         borderRadius: "8px",
         boxSizing: "border-box",
-
-        /* Custom glowBox styles */
         background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
                      radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
                      radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
@@ -56,7 +54,7 @@ const MarketCard = ({
                      linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
         boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
                     0 0 20px 10px rgba(164, 93, 187, 0.3)`,
-        transition: "border 0.2s ease-in-out", /* Hover effect transition */
+        transition: "border 0.2s ease-in-out",
         "&:hover": {
           border: "1px solid darkblue",
         },
@@ -71,17 +69,8 @@ const MarketCard = ({
       >
         <CardContent>
           {/* Top Section: Icon and Title */}
-          <Box
-            display="flex"
-            alignItems="center"
-            mb={2}
-            justifyContent="space-between"
-          >
-            <Avatar
-              alt="Presidential Seal"
-              src="/vote_img.jpg"
-              sx={{ width: 40, height: 40, marginRight: 2 }}
-            />
+          <Box display="flex" alignItems="center" mb={2} justifyContent="space-between">
+            <Avatar alt="Presidential Seal" src="/vote_img.jpg" sx={{ width: 40, height: 40, marginRight: 2 }} />
             <Typography variant="h6" component="div">
               {title}
             </Typography>
@@ -91,7 +80,7 @@ const MarketCard = ({
                 aria-label="settings"
                 size="small"
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent Link navigation
+                  e.stopPropagation();
                   setTicketForSetInfo(aTicketAddress);
                   handleSetInfoModalOpen();
                 }}
@@ -106,9 +95,7 @@ const MarketCard = ({
           </Box>
 
           {/* Middle Section: Stats */}
-          <Box
-    className="glowBox"
-          >
+          <Box className="glowBox-card">
             <Box display="flex" alignItems="center">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
               <Typography variant="body2" color="text.secondary">
@@ -131,4 +118,17 @@ const MarketCard = ({
   );
 };
 
-export default MarketCard;
+// Main component to render MarketCards in a grid layout
+const MarketCardGrid = ({ marketCards }) => {
+  return (
+    <Grid container spacing={2} sx={{ marginTop: "80px" }}>
+      {marketCards.map((cardProps, index) => (
+        <Grid item xs={12} sm={6} md={4} key={index}> {/* Adjust sizing here */}
+          <MarketCard {...cardProps} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
+
+export default MarketCardGrid;
