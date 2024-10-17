@@ -38,7 +38,7 @@ const MarketCard = ({
       sm: 'calc(45% - 5px)', // Adjust width for larger devices
     },
     maxWidth: '400px', // Limit maximum width for better appearance on large screens
-    height: 'auto', // Allow height to auto-adjust based on content
+    height: '200px', // Allow height to auto-adjust based on content
     borderRadius: 2,
     boxShadow: 3,
     margin: "auto auto 10px auto", // Reduce margin above grid columns
@@ -48,7 +48,7 @@ const MarketCard = ({
       sm: 'repeat(2, 1fr)', // Two columns for larger devices
     },
     gap: "1rem", // Reduce space between grid items
-    padding: "10px 10px 10px 10px"; /* Top, Right, Bottom, Left */
+    padding: "10px 10px 10px 10px", /* Top, Right, Bottom, Left */
     boxSizing: "border-box", // Ensure padding and border are included in width/height
     color: "white",
     background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
