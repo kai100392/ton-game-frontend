@@ -639,22 +639,43 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 
 .container {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column; /* Stack items vertically on small screens */
   align-items: center; /* Center items horizontally */
-  padding: 20px;
+  padding: 10px;
+  width: 100%; /* Ensure the container takes full width */
 }
 
-/* Responsive styles */
+/* Base styles for items */
+.item {
+  width: 100%; /* Full width on mobile */
+  margin: 10px 0; /* Spacing between items */
+  text-align: center; /* Center text */
+}
+
+/* Responsive styles for slightly larger mobile screens */
 @media (min-width: 480px) {
   .item {
-      width: 80%; /* Increase width for slightly larger mobile screens */
+    width: 80%; /* Increase width for slightly larger mobile screens */
   }
 }
 
+/* Responsive styles for tablets and larger screens */
 @media (min-width: 768px) {
   .container {
-      flex-direction: row; /* Change to row on larger screens */
-      flex-wrap: wrap; /* Allow wrapping */
-      justify-content: center; /* Center items horizontally */
+    flex-direction: row; /* Change to row on larger screens */
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center; /* Center items horizontally */
+  }
+
+  .item {
+    width: 45%; /* Adjust item width for tablets */
+    margin: 10px; /* Margin for spacing */
+  }
+}
+
+/* Additional styles for larger screens (optional) */
+@media (min-width: 1024px) {
+  .item {
+    width: 30%; /* Adjust item width for desktops */
   }
 }
