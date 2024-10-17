@@ -149,16 +149,27 @@ body {
 }
 
 /* glowBox adjustments for small screens */
-.glowBox {
-  @media (max-width: 768px) {
-    width: 90%; /* Ensure glowBox adjusts width for mobile screens */
-  }
-  @media (max-width: 480px) {
-    padding: 12px 12px 4px 12px; /* Reduce padding on small screens */
+@media (max-width: 768px) {
+  .glowBox {
+    width: 80%; /* Ensure glowBox adjusts width for mobile screens */
+    height: 80%;
+    padding: 12px; /* Uniform padding on small screens */
     gap: 0.5rem; /* Smaller gap */
     font-size: 12px; /* Smaller font size */
   }
 }
+
+@media (max-width: 480px) {
+  .glowBox {
+    padding: 10px; /* Uniform padding on small screens */
+    gap: 0.5rem; /* Smaller gap */
+    font-size: 10px; /* Smaller font size */
+    width: 65%; /* Ensure glowBox adjusts width for mobile screens */
+    height: 65%;
+  }
+}
+
+
 
 .button-submit {
   box-sizing: border-box;
