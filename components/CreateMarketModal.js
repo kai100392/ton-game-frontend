@@ -169,7 +169,6 @@ const CreateMarketModal = ({
           <Button 
             className="button-add"
             variant="outlined" 
-            color="info" 
             onClick={handleAddResult} 
           >
             Add Outcome

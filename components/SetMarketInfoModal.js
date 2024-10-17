@@ -139,10 +139,10 @@ const SetMarketInfoModal = ({
 
         {/* Add Outcome and Submit Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button className="button-add" variant="outlined" color="info" onClick={handleModalClose}>
+          <Button className="button-add" variant="outlined" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button className="button-submit" variant="contained" color="info" onClick={handleSubmit}>
+          <Button className="button-submit" variant="contained" onClick={handleSubmit}>
             Submit
           </Button>
         </Box>
