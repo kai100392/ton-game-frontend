@@ -304,8 +304,8 @@ const MarketPage = () => {
           </Button>
         </Toolbar>
       </div>
-
-      <Box className="container"
+      <div className="container">
+      <Box
         sx={{
           padding: "20px",
           display: "flex",
@@ -564,6 +564,7 @@ const MarketPage = () => {
         handleBuyTicketWithPromoCode={handleBuyTicketWithPromoCode}
         ticketAddr={ticketAddr}
       />
+      </div>
     </>
   );
 };
