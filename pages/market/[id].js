@@ -314,7 +314,7 @@ const MarketPage = () => {
           gap: 2,
         }}
       >
- <Grid2 container spacing={2}>
+ <Grid2 container spacing={2} className="container">
           {/* Left Section */}
           <Grid2 item xs={12} sm={8} md={9}> {/* Adjust the sizes for different breakpoints */}
         <Card sx={{ flex: 3, padding: "20px" }} >
