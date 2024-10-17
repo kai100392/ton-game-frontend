@@ -53,6 +53,7 @@ const SetMarketInfoModal = ({
   };
 
   return (
+    <div  className="container">
     <Modal
       sx={{ overflow: "auto" }}
       open={setInfoModalOpen}
@@ -60,7 +61,7 @@ const SetMarketInfoModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <div  className="container">
+    
       <Box
        className="glowBox"
       >
@@ -147,8 +148,9 @@ const SetMarketInfoModal = ({
           </Button>
         </Box>
       </Box>
-      </div>
+     
     </Modal>
+    </div>
   );
 };
 
