@@ -498,7 +498,7 @@ export default function Home() {
                       
                       <h2><p><u>Your Wallet Connected</u></p></h2>
                       <p>
-                      <h2><b>{account}</b></h2>
+                      <h3><b>{account}</b></h3>
                       </p>
                     </div>
                     <Button
@@ -509,9 +509,11 @@ export default function Home() {
                     >
                       balance : ${balance != null ? balance : "Press me"}
                     </Button>
-                    <div>
+                    <div><h4>
                       To make a USD deposit, transfer native PLS to the CallitVault <b>{ADDR_VAULT}</b>
+                      </h4>
                     </div>
+                    <h3>
                     <Typography
                       sx={{
                         fontStyle: "normal",
@@ -528,6 +530,7 @@ export default function Home() {
                     >
                       Make deposit for someone else (testing)
                     </Typography>
+                    </h3>
                     </div>
                   </>
                 ) : (
