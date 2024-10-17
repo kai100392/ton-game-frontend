@@ -368,7 +368,7 @@ const MarketPage = () => {
           "&:hover": {
             border: "1px solid darkblue",
           },
-          overflow: "hidden",
+          overflow: "auto",
           whiteSpace: "normal",
           textOverflow: "clip",
           fontSize: { xs: '12px', sm: '14px' },
@@ -560,7 +560,7 @@ const MarketPage = () => {
           "&:hover": {
             border: "1px solid darkblue",
           },
-          overflow: "hidden",
+          overflow: "auto",
           whiteSpace: "normal",
           textOverflow: "clip",
           fontSize: { xs: '12px', sm: '14px' },
