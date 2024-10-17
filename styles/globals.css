@@ -151,8 +151,8 @@ body {
 /* glowBox adjustments for small screens */
 @media (max-width: 768px) {
   .glowBox {
-    width: 80%; /* Ensure glowBox adjusts width for mobile screens */
-    height: 80%;
+    width: 90%; /* Ensure glowBox adjusts width for mobile screens */
+    height: 90%;
     padding: 12px; /* Uniform padding on small screens */
     gap: 0.5rem; /* Smaller gap */
     font-size: 12px; /* Smaller font size */
@@ -164,8 +164,8 @@ body {
     padding: 10px; /* Uniform padding on small screens */
     gap: 0.5rem; /* Smaller gap */
     font-size: 10px; /* Smaller font size */
-    width: 65%; /* Ensure glowBox adjusts width for mobile screens */
-    height: 65%;
+    width: 85%; /* Ensure glowBox adjusts width for mobile screens */
+    height: 85%;
   }
 }
 
