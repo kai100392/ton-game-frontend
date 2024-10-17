@@ -343,22 +343,7 @@ body {
 
 }
 
-@media (max-width: 768px) {
-  .button-submit, .button-add {
-  font-size: 16px; /* Adjust button font size for mobile */
-  padding: 8px 12px; /* Slightly reduce padding */
-  width: 30%; /* Ensure buttons fit on mobile */
-  min-width: unset; /* Remove min-width constraint */
-}
-}
-@media (max-width: 480px) {
-  .button-submit, .button-add {
-  font-size: 14px; /* Adjust button font size for mobile */
-  padding: 8px 12px; /* Slightly reduce padding */
-  width: 30%; /* Ensure buttons fit on mobile */
-  min-width: unset; /* Remove min-width constraint */
-}
-}
+
 
 
 .button-add {
@@ -434,6 +419,23 @@ body {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically, if needed */
+}
+
+@media (max-width: 768px) {
+  .button-submit, .button-add {
+  font-size: 16px; /* Adjust button font size for mobile */
+  padding: 8px 12px; /* Slightly reduce padding */
+  width: 30%; /* Ensure buttons fit on mobile */
+  min-width: unset; /* Remove min-width constraint */
+}
+}
+@media (max-width: 480px) {
+  .button-submit, .button-add {
+  font-size: 14px; /* Adjust button font size for mobile */
+  padding: 8px 12px; /* Slightly reduce padding */
+  width: 30%; /* Ensure buttons fit on mobile */
+  min-width: unset; /* Remove min-width constraint */
+}
 }
 
 /* Button Class */

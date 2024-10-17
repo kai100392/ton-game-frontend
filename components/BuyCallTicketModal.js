@@ -74,7 +74,7 @@ const BuyCallTicketModal = ({
 
         {/* Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button variant="outlined" color="info" onClick={handleModalClose}>
+          <Button className="button-add" variant="contained" color="info" onClick={handleModalClose}>
             Cancel
           </Button>
           <Button className="button-submit" variant="contained" color="primary" onClick={handleSubmit}>
