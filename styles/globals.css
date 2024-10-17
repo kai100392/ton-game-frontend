@@ -649,7 +649,7 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 /* Responsive styles for small mobile phones (max-width: 480px) */
 @media (max-width: 480px) {
   .container {
-    font-size: 14px; /* Set an even smaller font size for extra small devices */
+    font-size: 10px; /* Set an even smaller font size for extra small devices */
   }
 }
 
@@ -659,6 +659,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
     flex-direction: row; /* Change to row on larger screens */
     flex-wrap: wrap; /* Allow wrapping */
     justify-content: center; /* Center items horizontally */
-    font-size: 20px; /* Adjust font size for larger screens */
+    font-size: 16px; /* Adjust font size for larger screens */
   }
 }
