@@ -221,8 +221,130 @@ body {
 
 }
 
+
+.button-close {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px; /* Adjusted button padding for better fit */
+  gap: 10px;
+  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
+  min-height: 40px; /* Minimum height */
+  font-weight: 700;
+  font-size: 20px; /* Smaller font size for button text */
+  background: linear-gradient(to right, #890501 0%, #b90903 35%, #eb2c01 67%, #ff6868 100%);
+  
+  border-radius: 8px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 125px; /* Adjusted hover effect size */
+    left: -50px; /* Adjusted hover effect position */
+    opacity: .2;
+    position: absolute;
+    top: -40px; /* Adjusted hover effect position */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 40px; /* Adjusted hover effect size */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* Adjusted hover effect position */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+}
+
+.button-claim {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px; /* Adjusted button padding for better fit */
+  gap: 10px;
+  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
+  min-height: 40px; /* Minimum height */
+  font-weight: 700;
+  font-size: 20px; /* Smaller font size for button text */
+  background: linear-gradient(to right, #0c0182 0%, #1f01c8 35%, #3146ca 67%, #007dd1 100%);
+  border-radius: 8px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  /* Link styling within the button */
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover {
+    color: #fff;
+  }
+
+  /* Ensure text in button is styled */
+  span {
+    z-index: 20;
+    text-decoration: none !important;
+  }
+
+  /* Button hover effect */
+  &:after {
+    background: #fff;
+    content: "";
+    height: 125px; /* Adjusted hover effect size */
+    left: -50px; /* Adjusted hover effect position */
+    opacity: .2;
+    position: absolute;
+    top: -40px; /* Adjusted hover effect position */
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 40px; /* Adjusted hover effect size */
+    z-index: -10;
+  }
+
+  &:hover {
+    &:after {
+      left: 110%; /* Adjusted hover effect position */
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+}
+
 @media (max-width: 768px) {
-  .button-submit, .button-add {
+  .button-submit, .button-add, .button-close, .button-claim {
   font-size: 16px; /* Adjust button font size for mobile */
   padding: 8px 12px; /* Slightly reduce padding */
   width: 30%; /* Ensure buttons fit on mobile */
@@ -230,7 +352,7 @@ body {
 }
 }
 @media (max-width: 480px) {
-  .button-submit, .button-add {
+  .button-submit, .button-add, .button-close, .button-claim {
   font-size: 14px; /* Adjust button font size for mobile */
   padding: 8px 12px; /* Slightly reduce padding */
   width: 30%; /* Ensure buttons fit on mobile */

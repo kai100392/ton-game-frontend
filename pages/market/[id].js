@@ -612,6 +612,7 @@ const MarketPage = () => {
             mb={2}
           >
             <Button
+              className="button-close"
               variant="contained"
               color="error"
               fullwidth="true"
@@ -629,13 +630,14 @@ const MarketPage = () => {
             mb={2}
           >
             <Button
+              className="button-claim"
               variant="contained"
               color="primary"
               fullwidth="true"
               onClick={handleBuyTicketModalOpen}
               sx={{ textTransform: "none" }}
             >
-              claimTicketRewards
+              Claim Ticket Rewards
             </Button>
           </Box>
         </Card>
