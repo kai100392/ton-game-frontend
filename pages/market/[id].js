@@ -328,7 +328,7 @@ const MarketPage = () => {
 
       <Card   
         sx={{
-
+          padding: "10px",
           borderRadius: 2,
           boxShadow: 3,
           margin: "auto",
@@ -451,7 +451,7 @@ const MarketPage = () => {
                         {/* {`${Math.floor(pricePercent[index] / 100)} % to win`} */}
                         {`$${pricePercent[index]} (% to win)`}</h4>
                       </Typography>
-                      <br />
+                      
                       <Box display="flex" ml={2}>
                         <TicketButton
                           color="success"
@@ -511,7 +511,7 @@ const MarketPage = () => {
  
         <Card   
         sx={{
-
+          padding: "10px",
           borderRadius: 2,
           boxShadow: 3,
           margin: "auto",
