@@ -312,20 +312,14 @@ const MarketPage = () => {
         </Toolbar>
       </div>
 
-
-<Box
-  sx={{
-    padding: "20px",
-    justifyContent: "space-between",
-    gap: 2,
-    display: 'flex',        // Ensures the children are laid out horizontally
-    overflowX: 'auto',      // Allows horizontal scrolling
-    scrollbarWidth: 'none', // Hide scrollbar in Firefox
-    '&::-webkit-scrollbar': {
-      display: 'none',      // Hide scrollbar in Chrome/Safari
-    },
-  }}
->
+      <Box
+        sx={{
+          padding: "20px",
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 2,
+        }}
+      >
         {/* Left Section */}
         
         <div style={{
@@ -339,7 +333,6 @@ const MarketPage = () => {
       maxWidth: '1200px', // Max width to center content
       margin: 'auto', // Center grid container
     }}>
-
       
       {/* Left Section */}
 
@@ -368,7 +361,7 @@ const MarketPage = () => {
           "&:hover": {
             border: "1px solid darkblue",
           },
-          overflow: "auto",
+          overflow: "hidden",
           whiteSpace: "normal",
           textOverflow: "clip",
           fontSize: { xs: '12px', sm: '14px' },
@@ -560,7 +553,7 @@ const MarketPage = () => {
           "&:hover": {
             border: "1px solid darkblue",
           },
-          overflow: "auto",
+          overflow: "hidden",
           whiteSpace: "normal",
           textOverflow: "clip",
           fontSize: { xs: '12px', sm: '14px' },
