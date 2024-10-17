@@ -325,18 +325,7 @@ const MarketPage = () => {
         <div className="grid-container">
       
       {/* Left Section */}
-      <Box 
-  sx={{
-    overflowX: 'auto',
-    whiteSpace: 'nowrap',
-    padding: '10px',
-    // Hide the scrollbar
-    scrollbarWidth: 'none', // For Firefox
-    '&::-webkit-scrollbar': {
-      display: 'none', // For Chrome, Safari, and Opera
-    },
-  }}
->
+
       <Card   
         sx={{
           padding: "10px",
@@ -517,7 +506,6 @@ const MarketPage = () => {
               )
             : null}
         </Card>
-        </Box>
 
         {/* Right Section */}
  
