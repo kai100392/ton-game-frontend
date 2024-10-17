@@ -643,21 +643,13 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   align-items: center; /* Center items horizontally */
   padding: 10px;
   width: 100%; /* Ensure the container takes full width */
+  font-size: 10px; /* Set a smaller font size for very small mobile devices */
 }
 
-/* Base styles for items */
-.item {
-  width: 100%; /* Full width on mobile */
-  margin: 10px 0; /* Spacing between items */
-  text-align: center; /* Center text */
-}
-
-/* Responsive styles for slightly larger mobile screens */
-@media (min-width: 480px) {
-  .item {
-    width: 80%; /* Increase width for slightly larger mobile screens */
-    font-size: 14px; /* Adjust font size for readability */
-    padding: 10px; /* Add some padding for better touch targets */
+/* Responsive styles for small mobile phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .container {
+    font-size: 8px; /* Set an even smaller font size for extra small devices */
   }
 }
 
@@ -667,19 +659,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
     flex-direction: row; /* Change to row on larger screens */
     flex-wrap: wrap; /* Allow wrapping */
     justify-content: center; /* Center items horizontally */
-  }
-
-  .item {
-    width: 45%; /* Adjust item width for tablets */
-    margin: 10px; /* Margin for spacing */
-    font-size: 16px; /* Increase font size for readability on larger screens */
-  }
-}
-
-/* Additional styles for larger screens */
-@media (min-width: 1024px) {
-  .item {
-    width: 30%; /* Further adjust item width for larger screens */
-    font-size: 18px; /* Increase font size for readability */
+    font-size: 14px; /* Adjust font size for larger screens */
   }
 }
