@@ -454,9 +454,8 @@ const MarketPage = () => {
                       </Typography>
                       
                       <Box display="flex" ml={2}>
-                        <Button
+                      <Button
                           className="button-card button-green"
-                          label="PROMO Buy"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
                               index
@@ -464,10 +463,11 @@ const MarketPage = () => {
                           }
                           handleBuyTicketModalOpen={handleBuyTicketModalOpen}
                           transferTicketAddr={setTicketAddr}
-                        />
+                        >
+                        PROMO Buy
+                        </Button>
                         <Button
                           className="button-card button-orange"
-                          label="VIEW/TRADE"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
                               index
@@ -484,12 +484,13 @@ const MarketPage = () => {
                             // window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultTokenLPs[index]}`,`_blank`);
                           }}
                           transferTicketAddr={setTicketAddr}
-                        />
+                        >
+                        VIEW/TRADE
+                        </Button>
 
                         <Button
                           className="button-card button-bluesky"
                           variant="contained"
-                          color="info"
                           sx={{ marginRight: 1, textTransform: "none" }}
                           onClick={() =>
                             handleExeArbPriceParityForTicket({
@@ -504,6 +505,7 @@ const MarketPage = () => {
                       </Box>
                     </Box>
                   </Box>
+                  
                 )
               )
             : null}
