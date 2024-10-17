@@ -389,6 +389,7 @@ const MarketPage = () => {
           </Box>
 
           {marketDetailData && marketDetailData.name ? (
+            <div className="container">
             <Box mb={2}>
               <Typography variant="body2" textColor={colors.text}>
                 Maker: &nbsp;
@@ -422,6 +423,7 @@ const MarketPage = () => {
                 {votingEndDate}
               </Typography>
             </Box>
+            </div>
           ) : null}
           <Box mb={2}>
             <Typography variant="caption" textColor={colors.text}>
