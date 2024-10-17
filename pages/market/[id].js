@@ -348,7 +348,6 @@ const MarketPage = () => {
           <Box
             display="flex"
             alignItems="center"
-            justifyContent="space-between"
             mb={3}
           >
             <Avatar
