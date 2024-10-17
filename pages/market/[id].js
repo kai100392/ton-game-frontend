@@ -320,7 +320,7 @@ const MarketPage = () => {
           gap: 2,
         }}
       >
-        {/* Left Section */}
+
         
         <div className="grid-container">
       
@@ -515,9 +515,9 @@ const MarketPage = () => {
               )
             : null}
         </Card>
- </div>
+
         {/* Right Section */}
-        <div className="container">
+ 
         <Card   
         sx={{
           width: {
