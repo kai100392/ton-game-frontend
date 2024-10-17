@@ -380,11 +380,11 @@ const MarketPage = () => {
                   {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
                 </Typography>
                 <Typography variant="subtitle1" textColor={colors.text}>
-                  Status: {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
+                  <b>Status:</b> {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
                   {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
                   {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
                   <br/>
-                  Prize Pool:  ${usdLiquidty} &nbsp;
+                  <b>Prize Pool: </b> ${usdLiquidty} &nbsp;
                 </Typography>
               </Box>
             ) : null}
@@ -395,33 +395,33 @@ const MarketPage = () => {
               
             <Box mb={2}>
               <Typography variant="body2" textColor={colors.text}>
-              Maker:  &nbsp;
+              <b>Maker: </b> &nbsp;
                 {marketDetailData.maker}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-               MarketHash: &nbsp;
+              <b> MarketHash: &nbsp;</b>
                 {marketDetailData.marketHash}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-               MarketNum: &nbsp;
+              <b> MarketNum: &nbsp;</b>
                 {marketDetailData.marketNum}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-               Rules: &nbsp;
+              <b> Rules: &nbsp;</b>
                 {marketDetailData.rule}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-              Call Deadline: &nbsp;
+              <b>Call Deadline: &nbsp;</b>
                 {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
                 {deadlineDate} (no more bets!)
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-              Voting Starts: &nbsp;
+              <b>Voting Starts: &nbsp;</b>
                 {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
                 {votingStartDate}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-              Voting Ends: &nbsp;
+              <b>Voting Ends: &nbsp;</b>
                 {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
                 {votingEndDate}
               </Typography>
