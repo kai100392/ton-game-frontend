@@ -314,43 +314,51 @@ const MarketPage = () => {
         }}
       >
         {/* Left Section */}
-        <Card   
-    sx={{
-    width: {
-      xs: '90%', // Centered width on mobile devices (90%)
-      sm: 'calc(45% - 5px)', // Adjust width for larger devices
-    },
-    borderRadius: 2,
-    boxShadow: 3,
-    margin: "auto auto 10px auto", // Reduce margin above grid columns
-    display: "grid", // Change display to grid
-    gridTemplateColumns: {
-      xs: '1fr', // One column on mobile devices
-      sm: 'repeat(2, 1fr)', // Two columns for larger devices
-    },
-    gap: "1rem", // Reduce space between grid items
-    padding: "10px 10px 10px 10px", /* Top, Right, Bottom, Left */
-    boxSizing: "border-box", // Ensure padding and border are included in width/height
-    color: "white",
-    background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-                 linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
-    boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
-                0 0 20px 10px rgba(164, 93, 187, 0.3)`,
-    transition: "border 0.2s ease-in-out", // Hover effect transition
-    "&:hover": {
-      border: "1px solid darkblue",
-    },
-    overflow: "hidden", // Hide overflowed text
-    whiteSpace: "normal", // Allow text to wrap
-    textOverflow: "clip", // Do not show ellipsis for overflowed text
-    fontSize: { xs: '12px', sm: '14px' }, // Smaller responsive font size
-    lineHeight: '1.4', // Adjust line height
-  }}>
+        
+        <div style={{
+      display: 'grid',
+      gridTemplateColumns: {
+        xs: '1fr', // One column on mobile
+        sm: 'repeat(2, 1fr)', // Two columns on larger devices
+      },
+      gap: '10px', // Space between grid items
+      padding: '10px', // Overall padding
+      maxWidth: '1200px', // Max width to center content
+      margin: 'auto', // Center grid container
+    }}>
+      {/* Left Section */}
+      <Card   
+        sx={{
+          width: {
+            xs: '100%', // Full width on mobile
+            sm: 'calc(45% - 5px)', // Adjust width for larger devices
+          },
+          borderRadius: 2,
+          boxShadow: 3,
+          margin: "auto",
+          display: "grid",
+          padding: "10px",
+          color: "white",
+          background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+                       radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+                       radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+                       radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+                       linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+                       linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+                       linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
+          boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
+                      0 0 20px 10px rgba(164, 93, 187, 0.3)`,
+          transition: "border 0.2s ease-in-out",
+          "&:hover": {
+            border: "1px solid darkblue",
+          },
+          overflow: "hidden",
+          whiteSpace: "normal",
+          textOverflow: "clip",
+          fontSize: { xs: '12px', sm: '14px' },
+          lineHeight: '1.4',
+        }}
+      >
           <Box display="flex" alignItems="center" mb={3}>
             <Avatar
               alt="Vote"
@@ -507,42 +515,37 @@ const MarketPage = () => {
 
         {/* Right Section */}
         <Card   
-    sx={{
-    width: {
-      xs: '90%', // Centered width on mobile devices (90%)
-      sm: 'calc(45% - 5px)', // Adjust width for larger devices
-    },
-    borderRadius: 2,
-    boxShadow: 3,
-    margin: "auto auto 10px auto", // Reduce margin above grid columns
-    display: "grid", // Change display to grid
-    gridTemplateColumns: {
-      xs: '1fr', // One column on mobile devices
-      sm: 'repeat(2, 1fr)', // Two columns for larger devices
-    },
-    gap: "1rem", // Reduce space between grid items
-    padding: "10px 10px 10px 10px", /* Top, Right, Bottom, Left */
-    boxSizing: "border-box", // Ensure padding and border are included in width/height
-    color: "white",
-    background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-                 linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
-    boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
-                0 0 20px 10px rgba(164, 93, 187, 0.3)`,
-    transition: "border 0.2s ease-in-out", // Hover effect transition
-    "&:hover": {
-      border: "1px solid darkblue",
-    },
-    overflow: "hidden", // Hide overflowed text
-    whiteSpace: "normal", // Allow text to wrap
-    textOverflow: "clip", // Do not show ellipsis for overflowed text
-    fontSize: { xs: '12px', sm: '14px' }, // Smaller responsive font size
-    lineHeight: '1.4', // Adjust line height
-  }}>
+        sx={{
+          width: {
+            xs: '100%', // Full width on mobile
+            sm: 'calc(45% - 5px)', // Adjust width for larger devices
+          },
+          borderRadius: 2,
+          boxShadow: 3,
+          margin: "auto",
+          display: "grid",
+          padding: "10px",
+          color: "white",
+          background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+                       radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+                       radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+                       radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+                       linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+                       linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+                       linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
+          boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
+                      0 0 20px 10px rgba(164, 93, 187, 0.3)`,
+          transition: "border 0.2s ease-in-out",
+          "&:hover": {
+            border: "1px solid darkblue",
+          },
+          overflow: "hidden",
+          whiteSpace: "normal",
+          textOverflow: "clip",
+          fontSize: { xs: '12px', sm: '14px' },
+          lineHeight: '1.4',
+        }}
+      >
           <Box
             display="flex"
             alignItems="center"
@@ -629,6 +632,7 @@ const MarketPage = () => {
             </Button>
           </Box>
         </Card>
+        </div>
       </Box>
       <BuyCallTicketModal
         buyTicketModalOpen={buyTicketModalOpen}
