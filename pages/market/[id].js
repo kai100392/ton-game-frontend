@@ -334,7 +334,7 @@ const MarketPage = () => {
       margin: 'auto', // Center grid container
     }}>
       {/* Left Section */}
-      <div className="container">
+
       <Card   
         sx={{
           width: {
@@ -648,8 +648,7 @@ const MarketPage = () => {
           </Box>
         </Card>
         </div>
-        </div>
-
+    
       </Box>
       <BuyCallTicketModal
         buyTicketModalOpen={buyTicketModalOpen}
