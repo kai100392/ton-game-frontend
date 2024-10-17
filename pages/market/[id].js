@@ -330,7 +330,7 @@ const MarketPage = () => {
         sx={{
           width: {
             xs: '100%', // Full width on mobile
-            sm: 'calc(80% - 5px)', // Adjust width for larger devices
+            sm: 'calc(100% - 5px)', // Adjust width for larger devices
           },
           borderRadius: 2,
           boxShadow: 3,
@@ -521,7 +521,7 @@ const MarketPage = () => {
         sx={{
           width: {
             xs: '100%', // Full width on mobile
-            sm: 'calc(80% - 5px)', // Adjust width for larger devices
+            sm: 'calc(100% - 5px)', // Adjust width for larger devices
           },
           borderRadius: 2,
           boxShadow: 3,
