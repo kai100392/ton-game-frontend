@@ -226,7 +226,7 @@ body {
   .button-submit, .button-add {
   font-size: 16px; /* Adjust button font size for mobile */
   padding: 8px 12px; /* Slightly reduce padding */
-  width: 60%; /* Ensure buttons fit on mobile */
+  width: 30%; /* Ensure buttons fit on mobile */
   min-width: unset; /* Remove min-width constraint */
 }
 }
@@ -234,7 +234,7 @@ body {
   .button-submit, .button-add {
   font-size: 14px; /* Adjust button font size for mobile */
   padding: 8px 12px; /* Slightly reduce padding */
-  width: 60%; /* Ensure buttons fit on mobile */
+  width: 30%; /* Ensure buttons fit on mobile */
   min-width: unset; /* Remove min-width constraint */
 }
 }
