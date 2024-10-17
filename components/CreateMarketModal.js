@@ -80,7 +80,6 @@ const CreateMarketModal = ({
   };
 
   return (
-    <div  className="container">
     <Modal
       sx={{ overflow: "auto" }}
       open={createModalopen}
@@ -202,7 +201,7 @@ const CreateMarketModal = ({
       </Box>
      
     </Modal>
-    </div>
+
   );
 };
 

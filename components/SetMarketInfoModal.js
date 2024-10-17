@@ -53,7 +53,6 @@ const SetMarketInfoModal = ({
   };
 
   return (
-    <div  className="container">
     <Modal
       sx={{ overflow: "auto" }}
       open={setInfoModalOpen}
@@ -150,7 +149,7 @@ const SetMarketInfoModal = ({
       </Box>
      
     </Modal>
-    </div>
+
   );
 };
 
