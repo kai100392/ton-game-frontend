@@ -832,17 +832,7 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 @media (max-width: 480px) { /* Adjust the breakpoint as needed */
   .grid-container {
     display: grid; /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Horizontal scrolling */
-    gap: 16px; /* Add space between items */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevent wrapping */
-    scrollbar-width: none; /* Hide scrollbar in Firefox */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile devices */
-  }
-
-  /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
-  .grid-container::-webkit-scrollbar {
-    display: none;
+    grid-template-columns: 1fr; /* One column on mobile */
   }
 }
 
@@ -851,7 +841,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   .grid-container {
     display: grid; /* Enable grid layout */
     grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
-    gap: 16px; /* Add space between items */
   }
 }
 

@@ -460,6 +460,7 @@ const MarketPage = () => {
 >
   <Button
     className="button-card button-green"
+    variant="contained"
     ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
     handleBuyTicketModalOpen={handleBuyTicketModalOpen}
     transferTicketAddr={setTicketAddr}
@@ -470,6 +471,7 @@ const MarketPage = () => {
 
   <Button
     className="button-card button-orange"
+    variant="contained"
     ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
     handleBuyTicketModalOpen={() => {
       window.open(
