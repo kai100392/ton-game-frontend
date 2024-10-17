@@ -375,14 +375,14 @@ const MarketPage = () => {
             {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
               <Box>
                 <Typography variant="h5" fontWeight="bold">
-                  {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
+                  <h2>{marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; </h2> 
                 </Typography>
                 <Typography variant="subtitle1" textColor={colors.text}>
-                  Status: {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
+                  <h3><b>Status:</b> {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
                   {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
                   {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
                   <br/>
-                  Prize Pool: ${usdLiquidty} &nbsp; 
+                  <b>Prize Pool: </b> ${usdLiquidty} &nbsp;</h3>
                 </Typography>
               </Box>
             ) : null}
