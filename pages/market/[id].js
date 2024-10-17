@@ -320,8 +320,6 @@ const MarketPage = () => {
       xs: '90%', // Centered width on mobile devices (90%)
       sm: 'calc(45% - 5px)', // Adjust width for larger devices
     },
-    maxWidth: '400px', // Limit maximum width for better appearance on large screens
-    height: '200px', // Allow height to auto-adjust based on content
     borderRadius: 2,
     boxShadow: 3,
     margin: "auto auto 10px auto", // Reduce margin above grid columns
@@ -514,8 +512,6 @@ const MarketPage = () => {
       xs: '90%', // Centered width on mobile devices (90%)
       sm: 'calc(45% - 5px)', // Adjust width for larger devices
     },
-    maxWidth: '400px', // Limit maximum width for better appearance on large screens
-    height: '200px', // Allow height to auto-adjust based on content
     borderRadius: 2,
     boxShadow: 3,
     margin: "auto auto 10px auto", // Reduce margin above grid columns
