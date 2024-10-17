@@ -349,7 +349,12 @@ const MarketPage = () => {
 
         }}
       >
-          <Box display="flex" alignItems="center" mb={3}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={2}
+          >
             <Avatar
               alt="Vote"
               src="/vote_img.jpg"
