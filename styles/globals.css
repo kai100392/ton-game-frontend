@@ -172,7 +172,6 @@ body {
   min-height: 40px; /* Minimum height */
   font-weight: 700;
   font-size: 20px; /* Smaller font size for button text */
-  background: #00B6D1;
   background: linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   
   border-radius: 8px;
@@ -252,7 +251,6 @@ body {
   min-height: 40px; /* Minimum height */
   font-weight: 700;
   font-size: 20px; /* Smaller font size for button text */
-  background: #00B6D1;
   background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
   
   border-radius: 8px;
