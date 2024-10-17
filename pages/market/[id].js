@@ -389,45 +389,46 @@ const MarketPage = () => {
           </Box>
 
           {marketDetailData && marketDetailData.name ? (
-            <div className="container">
+            <h4 className="container">
+              
             <Box mb={2}>
               <Typography variant="body2" textColor={colors.text}>
-                Maker: &nbsp;
+              <b>Maker: &nbsp;</b>
                 {marketDetailData.maker}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-                MarketHash: &nbsp;
+              <b> MarketHash: &nbsp;</b>
                 {marketDetailData.marketHash}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-                MarketNum: &nbsp;
+              <b> MarketNum: &nbsp;</b>
                 {marketDetailData.marketNum}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-                Rules: &nbsp;
+              <b> Rules: &nbsp;</b>
                 {marketDetailData.rule}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-                Call Deadline: &nbsp;
+              <b>Call Deadline: &nbsp;</b>
                 {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
                 {deadlineDate} (no more bets!)
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-                Voting Starts: &nbsp;
+              <b>Voting Starts: &nbsp;</b>
                 {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
                 {votingStartDate}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
-                Voting Ends: &nbsp;
+              <b>Voting Ends: &nbsp;</b>
                 {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
                 {votingEndDate}
               </Typography>
             </Box>
-            </div>
+            </h4>
           ) : null}
           <Box mb={2}>
             <Typography variant="caption" textColor={colors.text}>
-              OUTCOME
+              <h2>OUTCOME</h2>
             </Typography>
           </Box>
 
