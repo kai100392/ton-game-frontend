@@ -82,6 +82,7 @@ const CreateMarketModal = ({
   return (
     <Modal
       sx={{ overflow: "auto" }}
+      display="flex"
       open={createModalopen}
       onClose={handleModalClose}
       aria-labelledby="modal-title"
@@ -91,25 +92,9 @@ const CreateMarketModal = ({
       <Box
         className="glowBox" // Apply the glowBox class here
       >
-        <Typography
-          id="modal-title"
-          variant="h6"
-          component="h2"
-          mb={2}
-          sx={{ color: colors.text, fontSize: '20px', 
-            background: "linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)",
-            backgroundClip: "text", // Ensures the gradient applies to the text
-            WebkitBackgroundClip: "text", // For Safari support
-            color: "transparent", // Makes the text color transparent to show the gradient
-            lineHeight: "10px",
-            textAlign: "center"
-           }}
-        >
-           <p>
-           <h1>
+        <div className="typography" variant="h4" component="h1" align="center">
           Create New Market
-          </h1></p>
-        </Typography>
+        </div>
 
         <TextField
        

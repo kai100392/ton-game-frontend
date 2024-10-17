@@ -62,7 +62,7 @@ const SetMarketInfoModal = ({
     >
     
       <Box
-       className="glowBox"
+      className="glowBox" // Apply the glowBox class here
       >
         <Typography id="modal-title" variant="h6" component="h2" mb={2}>
           Set Market Infomation

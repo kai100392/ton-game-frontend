@@ -96,15 +96,15 @@ body {
 
 .glowBox {
   position: absolute;
-  top: 50%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
-  margin-top: 40px; /* Reduced margin-top */
   display: flex;
   flex-direction: column;
   gap: 0.5rem; /* Reduced gap between items */
   justify-content: center;
+
+  
 
   /* Background with radial and linear gradients */
   background: radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
@@ -117,7 +117,6 @@ body {
   
   border-radius: 8px;
   padding: 16px 16px 8px 16px; /* Reduced padding */
-  box-sizing: border-box;
   color: white;
   font-size: 14px; /* Smaller font size for glowBox text */
 
@@ -148,17 +147,6 @@ body {
   pointer-events: none;
 }
 
-/* glowBox adjustments for small screens */
-.glowBox {
-  @media (max-width: 768px) {
-    width: 90%; /* Ensure glowBox adjusts width for mobile screens */
-  }
-  @media (max-width: 480px) {
-    padding: 12px 12px 4px 12px; /* Reduce padding on small screens */
-    gap: 0.5rem; /* Smaller gap */
-    font-size: 12px; /* Smaller font size */
-  }
-}
 
 .button-submit {
   box-sizing: border-box;
