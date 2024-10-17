@@ -294,6 +294,7 @@ const MarketPage = () => {
               width={150}
               height={50}
               onClick={() => router.push("/")}
+              style={{ cursor: "pointer" }}
             />
             {`v${currentVersion}`}
           </Typography>

@@ -363,15 +363,19 @@ export default function Home() {
     <>
       {/* Top Navigation */}
       <div className="navbar" position="static" color="default" elevation={0}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            <Image
-              src="/logo.png"
-              alt="Call-It Logo"
-              width={150}
-              height={50}
-              onClick={() => router.push("/")}
-            />
+      <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}
+            style={{ cursor: "pointer" }}
+            component="a" // This tells the Toolbar to behave like an anchor
+            href="/">
+          <Image
+  src="/logo.png"
+  alt="Call-It Logo"
+  width={150}
+  height={50}
+  onClick={() => router.push("/")}
+  
+/>
             {`v${currentVersion}`}
           </Typography>
 
@@ -455,6 +459,11 @@ export default function Home() {
             page={page}
             onChange={handlePaginationChange}
           />
+         
+                    <div className="typography" variant="h4" component="h1" gutterbottom="true" align="center"> 
+            Welcome to the Prediction Market App
+          </div>
+       <br />
         </Stack>
         <Box
           display="flex"
@@ -687,9 +696,7 @@ export default function Home() {
 
       <Container maxWidth="sm">
       <center><Box sx={{ my: 4 }}>
-          <div className="typography" variant="h4" component="h1" gutterbottom="true" align="center"> 
-            Welcome to the Prediction Market App
-          </div>
+
           <Link href="/about" passHref>
           <Button
         variant="contained"
