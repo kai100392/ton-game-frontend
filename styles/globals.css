@@ -172,7 +172,7 @@ body {
   min-height: 40px; /* Minimum height */
   font-weight: 700;
   font-size: 20px; /* Smaller font size for button text */
-  background: linear-gradient(-40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  background: linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   
   border-radius: 8px;
   color: #fff;
@@ -234,7 +234,7 @@ body {
   height: 2.5em;
   font-weight: 700;
   font-size: 1.5rem;
-  background: linear-gradient(-40deg, #890501 0%, #b90903 35%, #eb2c01 67%, #ff6868 100%);
+  background: linear-gradient(40deg, #890501 0%, #b90903 35%, #eb2c01 67%, #ff6868 100%);
   
   border-radius: 8px;
   color: #fff;
@@ -295,7 +295,7 @@ body {
   height: 2.5em;
   font-weight: 700;
   font-size: 1.5rem;
-  background: linear-gradient(-40deg, #0c0182 0%, #1f01c8 35%, #3146ca 67%, #007dd1 100%);
+  background: linear-gradient(40deg, #0c0182 0%, #1f01c8 35%, #3146ca 67%, #007dd1 100%);
   border-radius: 8px;
   color: #fff;
   backdrop-filter: blur(10px);
@@ -451,7 +451,7 @@ body {
   height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
   font-weight: 700;
   font-size: 1.5rem; /* 24px in rem */
-  background: linear-gradient(-40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  background: linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   border-radius: 0.5em; /* 8px in em */
   color: #fff;
   backdrop-filter: blur(10px);
@@ -677,7 +677,7 @@ body {
 .typography {
   font-size: 50px; /* Default font size */
   font-weight: bold; /* Make the font bold */
-  background: linear-gradient(-40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
+  background: linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
   -webkit-background-clip: text; /* For Safari */
   -webkit-text-fill-color: transparent; /* For Safari */
   background-clip: text; /* For other browsers */
@@ -821,6 +821,8 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 
 
 
+
+
 /* CSS styles for the grid container */
 .grid-container-left {
   gap: 10px; /* Space between grid items */
@@ -830,8 +832,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 /* Mobile styles */
 @media (max-width: 480px) { /* Adjust the breakpoint as needed */
   .grid-container-left {
-    display: grid; /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Horizontal scrolling */
     gap: 16px; /* Add space between items */
     overflow-x: auto; /* Enable horizontal scrolling */
     white-space: nowrap; /* Prevent wrapping */
@@ -848,9 +848,11 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 /* Desktop styles */
 @media (min-width: 768px) { /* Adjust the breakpoint as needed */
   .grid-container-left {
-    display: grid; /* Enable grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
-    gap: 16px; /* Add space between items */
+    gap: 12px; /* Add space between items */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile devices */
   }
 }
 
@@ -864,18 +866,27 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 /* Mobile styles */
 @media (max-width: 480px) { /* Adjust the breakpoint as needed */
   .grid-container-right {
-    display: grid; /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Horizontal scrolling */
     gap: 16px; /* Add space between items */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile devices */
+  }
+
+  /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+  .grid-container-right::-webkit-scrollbar {
+    display: none;
   }
 }
 
 /* Desktop styles */
 @media (min-width: 768px) { /* Adjust the breakpoint as needed */
   .grid-container-right {
-    display: grid; /* Enable grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
-    gap: 16px; /* Add space between items */
+    gap: 12px; /* Add space between items */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile devices */
   }
 }
 
@@ -942,17 +953,17 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 
 /* Green button-card */
 .button-green {
-  background: linear-gradient(-40deg, #004d00 0%, #009900 50%, #00cc00 100%);
+  background: linear-gradient(40deg, #004d00 0%, #009900 50%, #00cc00 100%);
 }
 
 /* Orange button-card */
 .button-orange {
-  background: linear-gradient(-40deg, #993d00 0%, #ff6600 50%, #ff9933 100%);
+  background: linear-gradient(40deg, #993d00 0%, #ff6600 50%, #ff9933 100%);
 }
 
 /* Bluesky button-card */
 .button-bluesky {
-  background: linear-gradient(-40deg, #004d66 0%, #0080cc 50%, #66c2ff 100%);
+  background: linear-gradient(40deg, #004d66 0%, #0080cc 50%, #66c2ff 100%);
 }
 
 @media (max-width: 768px) {

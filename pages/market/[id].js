@@ -322,6 +322,7 @@ const MarketPage = () => {
       >
       
       {/* Left Section */}
+      <div className="grid-container">
       <div className="grid-container-left">
       <Card   
    sx={{
@@ -456,7 +457,6 @@ const MarketPage = () => {
                       <Box display="flex" ml={2}>
                         <TicketButton
                           className="button-card button-green"
-                          color="success"
                           label="PROMO Buy"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
@@ -468,7 +468,6 @@ const MarketPage = () => {
                         />
                         <TicketButton
                           className="button-card button-orange"
-                          color="error"
                           label="VIEW/TRADE"
                           ticketAddr={
                             marketDetailData.marketResults.resultOptionTokens[
@@ -625,7 +624,7 @@ const MarketPage = () => {
           </Box>
         </Card>
         </div>
-    
+        </div>
       </Box>
       <BuyCallTicketModal
         buyTicketModalOpen={buyTicketModalOpen}
