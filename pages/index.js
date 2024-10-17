@@ -472,6 +472,7 @@ export default function Home() {
                   <div className="typography" variant="h5" gutterbottom="true">
                       Welcome to Call-It!
                       </div>
+                      <div className="container">
                     <div>
  <p style={{ textAlign: 'left' }}>
                       <h2>USD balance is required to:
@@ -518,6 +519,7 @@ export default function Home() {
                     >
                       Make deposit for someone else (testing)
                     </Typography>
+                    </div>
                   </>
                 ) : (
                   <div
