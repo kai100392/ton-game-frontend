@@ -376,14 +376,14 @@ const MarketPage = () => {
             {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
               <Box>
                 <Typography variant="h5" fontWeight="bold">
-                  <h2>{marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; </h2> 
+                  {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
                 </Typography>
                 <Typography variant="subtitle1" textColor={colors.text}>
-                  <h3><b>Status:</b> {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
+                  <b>Status:</b> {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
                   {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
                   {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
                   <br/>
-                  <b>Prize Pool: </b> ${usdLiquidty} &nbsp;</h3>
+                  <b>Prize Pool: </b> ${usdLiquidty} &nbsp;
                 </Typography>
               </Box>
             ) : null}
@@ -429,7 +429,7 @@ const MarketPage = () => {
           ) : null}
           <Box mb={2}>
             <Typography variant="caption" textColor={colors.text}>
-              <h2>OUTCOME</h2>
+              OUTCOME</h2>
             </Typography>
           </Box>
 
