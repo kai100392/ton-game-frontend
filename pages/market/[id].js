@@ -436,69 +436,74 @@ const MarketPage = () => {
                       <Box>
                         <Typography>{label}</Typography>
                         <Typography variant="caption" textColor={colors.text}>
-                         <h4> {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
-                          {`${marketDetailData.marketResults.resultDescrs[index]}`}</h4>
+                          {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
+                          {`${marketDetailData.marketResults.resultDescrs[index]}`}
                         </Typography>
                       </Box>
                     </Box>
 
                     <Box display="flex" alignItems="center">
                       <Typography variant="body2" textColor={colors.text}>
-                      <h4>  {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
+                        {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
                         {`${nameSymbol[index]}`}
                         <br />
                         {/* {`${Math.floor(pricePercent[index] / 100)} % to win`} */}
-                        {`$${pricePercent[index]} (% to win)`}</h4>
+                        {`$${pricePercent[index]} (% to win)`}
                       </Typography>
                       
-                      <Box
-  display="flex"
-  ml={2}
-  flexWrap="wrap" // Allows buttons to wrap on smaller screens
-  justifyContent="flex-start" // Ensures buttons align correctly
->
-  <Button
-    className="button-card button-green"
-    variant="contained"
-    ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
-    handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-    transferTicketAddr={setTicketAddr}
-    sx={{ marginBottom: 1, minWidth: "120px" }} // Adjust width and margin for better spacing
-  >
-    PROMO Buy
-  </Button>
+                      <Box display="flex" ml={2}>
+                      <Button
+                          className="button-card button-green"
+                              variant="contained"
+                          ticketAddr={
+                            marketDetailData.marketResults.resultOptionTokens[
+                              index
+                            ]
+                          }
+                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          transferTicketAddr={setTicketAddr}
+                        >
+                        PROMO Buy
+                        </Button>
+                        <Button
+                          className="button-card button-orange"
+                              variant="contained"
+                          ticketAddr={
+                            marketDetailData.marketResults.resultOptionTokens[
+                              index
+                            ]
+                          }
+                          // handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                          handleBuyTicketModalOpen={() => {
+                            // window.open(`https://pulsex.mypinata.cloud/ipfs/bafybeift2yakeymqmjmonkzlx2zyc4tty7clkwvg37suffn5bncjx4e6xq/`, `_blank`);
+                            // window.open(`https://app.pulsex.com/`,`_blank`);
+                            window.open(
+                              `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
+                              `_blank`
+                            );
+                            // window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultTokenLPs[index]}`,`_blank`);
+                          }}
+                          transferTicketAddr={setTicketAddr}
+                        >
+                        VIEW/TRADE
+                        </Button>
 
-  <Button
-    className="button-card button-orange"
-    variant="contained"
-    ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
-    handleBuyTicketModalOpen={() => {
-      window.open(
-        `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
-        `_blank`
-      );
-    }}
-    transferTicketAddr={setTicketAddr}
-    sx={{ marginBottom: 1, minWidth: "120px" }} // Adjust width and margin
-  >
-    VIEW/TRADE
-  </Button>
-
-  <Button
-    className="button-card button-bluesky"
-    variant="contained"
-    sx={{ marginRight: 1, textTransform: "none", marginBottom: 1, minWidth: "120px" }}
-    onClick={() =>
-      handleExeArbPriceParityForTicket({
-        _ticket: marketDetailData.marketResults.resultOptionTokens[index],
-      })
-    }
-  >
-    exeArb
-  </Button>
-</Box>
-
+                        <Button
+                          className="button-card button-bluesky"
+                          variant="contained"
+                          sx={{ marginRight: 1, textTransform: "none" }}
+                          onClick={() =>
+                            handleExeArbPriceParityForTicket({
+                              _ticket:
+                                marketDetailData.marketResults
+                                  .resultOptionTokens[index],
+                            })
+                          }
+                        >
+                          exeArb
+                        </Button>
+                      </Box>
                     </Box>
                   </Box>
                   
