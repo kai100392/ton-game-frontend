@@ -220,9 +220,23 @@ body {
     }
   }
 
-  @media (max-width: 768px) {
-    width: 90%; /* Responsive width adjustment */
-  }
+}
+
+@media (max-width: 768px) {
+  .button-submit, .button-add {
+  font-size: 16px; /* Adjust button font size for mobile */
+  padding: 8px 12px; /* Slightly reduce padding */
+  width: 60%; /* Ensure buttons fit on mobile */
+  min-width: unset; /* Remove min-width constraint */
+}
+}
+@media (max-width: 480px) {
+  .button-submit, .button-add {
+  font-size: 14px; /* Adjust button font size for mobile */
+  padding: 8px 12px; /* Slightly reduce padding */
+  width: 60%; /* Ensure buttons fit on mobile */
+  min-width: unset; /* Remove min-width constraint */
+}
 }
 
 
@@ -489,7 +503,7 @@ body {
 /* button responsiveness */
 
   @media (max-width: 768px) {
-    .button-submit, .button-add, .button, .button1 {
+    .button, .button1 {
     font-size: 16px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
     width: 80%; /* Ensure buttons fit on mobile */
@@ -497,7 +511,7 @@ body {
   }
 }
   @media (max-width: 480px) {
-    .button-submit, .button-add, .button, .button1 {
+    .button, .button1 {
     font-size: 14px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
     width: 80%; /* Ensure buttons fit on mobile */
