@@ -322,7 +322,7 @@ const MarketPage = () => {
       >
 
         
- 
+        <div className="grid-container">
       
       {/* Left Section */}
 
@@ -620,7 +620,7 @@ const MarketPage = () => {
             </Button>
           </Box>
         </Card>
-  
+        </div>
     
       </Box>
       <BuyCallTicketModal
