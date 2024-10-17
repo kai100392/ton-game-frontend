@@ -147,6 +147,18 @@ body {
   pointer-events: none;
 }
 
+/* glowBox adjustments for small screens */
+@media (max-width: 768px) {
+  .glowBox { /* Add the class or selector that you want to apply the styles to */
+    width: 90%; /* Ensure glowBox adjusts width for mobile screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .glowBox { /* Add the class or selector that you want to apply the styles to */
+    width: 85%; /* Ensure glowBox adjusts width for mobile screens */
+  }
+}
 
 .button-submit {
   box-sizing: border-box;
