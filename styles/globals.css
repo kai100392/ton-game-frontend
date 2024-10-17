@@ -449,12 +449,12 @@ body {
 
   @media (max-width: 768px) {
     width: 100%; /* Make button full width on smaller screens */
-    font-size: 1.8rem; /* Adjust font size for better fit */
+    font-size: 3rem; /* Adjust font size for better fit */
     padding: 0.5em; /* Add more padding for touch targets */
   }
 
   @media (max-width: 480px) {
-    font-size: 1.6rem; /* Further adjust font size for very small screens */
+    font-size: 2.8rem; /* Further adjust font size for very small screens */
     padding: 0.375em; /* Adjust padding for smaller screens */
   }
 }
