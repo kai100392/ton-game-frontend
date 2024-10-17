@@ -168,7 +168,7 @@ const CreateMarketModal = ({
         <Box mt={3} display="flex" justifyContent="space-between">
           <Button 
             className="button-add"
-            variant="outlined" 
+            variant="contained" 
             onClick={handleAddResult} 
           >
             Add Outcome
