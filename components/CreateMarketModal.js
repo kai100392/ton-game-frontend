@@ -92,6 +92,7 @@ const CreateMarketModal = ({
       <Box
         className="glowBox" // Apply the glowBox class here
       >
+        
         <div className="typography" variant="h4" component="h1" align="center">
           Create New Market
         </div>
@@ -170,14 +171,13 @@ const CreateMarketModal = ({
             variant="outlined" 
             color="info" 
             onClick={handleAddResult} 
-            sx={{ borderColor: colors.secondary, color: colors.secondary, fontSize: '25px' }}
           >
             Add Outcome
           </Button>
+
           <Button 
             className="button-submit"
             variant="contained" 
-            sx={{ backgroundColor: colors.primary, color: colors.text, fontSize: '25px' }} 
             onClick={handleSubmit}
           >
             Submit
