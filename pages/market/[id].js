@@ -353,7 +353,7 @@ const MarketPage = () => {
             display="flex"
             alignItems="center"
             justifyContent="space-between"
-            mb={2}
+            mb={3}
           >
             <Avatar
               alt="Vote"
