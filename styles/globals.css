@@ -504,17 +504,17 @@ body {
 
   @media (max-width: 768px) {
     .button, .button1 {
-    font-size: 16px; /* Adjust button font size for mobile */
+    font-size: 18px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
-    width: 80%; /* Ensure buttons fit on mobile */
+    width: 90%; /* Ensure buttons fit on mobile */
     min-width: unset; /* Remove min-width constraint */
   }
 }
   @media (max-width: 480px) {
     .button, .button1 {
-    font-size: 14px; /* Adjust button font size for mobile */
+    font-size: 16px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
-    width: 80%; /* Ensure buttons fit on mobile */
+    width: 90%; /* Ensure buttons fit on mobile */
     min-width: unset; /* Remove min-width constraint */
   }
 }
