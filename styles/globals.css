@@ -832,6 +832,9 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   .grid-container {
     display: grid; /* Enable grid layout */
     grid-template-columns: 1fr; /* One column on mobile */
+    flex-direction: row; /* Change to row on larger screens */
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center; /* Center items horizontally */
   }
 }
 
@@ -840,5 +843,8 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   .grid-container {
     display: grid; /* Enable grid layout */
     grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
+    flex-direction: row; /* Change to row on larger screens */
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center; /* Center items horizontally */
   }
 }
