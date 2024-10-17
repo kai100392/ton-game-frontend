@@ -536,13 +536,13 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .typography {
-      font-size: 30px; /* Adjust font size for tablets */
+      font-size: 35px; /* Adjust font size for tablets */
   }
 }
 
 @media (max-width: 480px) {
   .typography {
-      font-size: 24px; /* Adjust font size for mobile phones */
+      font-size: 30px; /* Adjust font size for mobile phones */
   }
 }
 
