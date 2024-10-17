@@ -60,6 +60,7 @@ const SetMarketInfoModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
+      <div  className="container">
       <Box
        className="glowBox"
       >
@@ -146,6 +147,7 @@ const SetMarketInfoModal = ({
           </Button>
         </Box>
       </Box>
+      </div>
     </Modal>
   );
 };
