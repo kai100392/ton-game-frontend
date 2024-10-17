@@ -86,7 +86,7 @@ const CreateMarketModal = ({
       onClose={handleModalClose}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
-    >
+    ><div className="container">
       <Box
         className="glowBox" // Apply the glowBox class here
       >
@@ -197,6 +197,7 @@ const CreateMarketModal = ({
           </Button>
         </Box>
       </Box>
+      </div>
     </Modal>
   );
 };
