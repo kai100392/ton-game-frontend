@@ -472,7 +472,7 @@ const MarketPage = () => {
             : null}
       </Card>
           </Grid2>
-          </Grid2>
+        
 
          {/* Right Section */}
          <Grid2 item xs={12} sm={4} md={3}> {/* Adjust the sizes for different breakpoints */}
@@ -564,6 +564,7 @@ const MarketPage = () => {
             </Button>
           </Box>
         </Card>
+        </Grid2>
         </Grid2>
    
       </Box>
