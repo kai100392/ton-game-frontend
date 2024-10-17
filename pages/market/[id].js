@@ -322,17 +322,7 @@ const MarketPage = () => {
       >
         {/* Left Section */}
         
-        <div style={{
-      display: 'grid',
-      gridTemplateColumns: {
-        xs: '1fr', // One column on mobile
-        sm: 'repeat(2, 1fr)', // Two columns on larger devices
-      },
-      gap: '10px', // Space between grid items
-      padding: '10px', // Overall padding
-      maxWidth: '1200px', // Max width to center content
-      margin: 'auto', // Center grid container
-    }}>
+        <div className="grid-container">
       
       {/* Left Section */}
 

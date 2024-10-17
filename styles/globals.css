@@ -818,3 +818,28 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
     font-size: 16px; /* Adjust font size for larger screens */
   }
 }
+
+
+
+/* CSS styles for the grid container */
+.grid-container {
+  display: grid; /* Enable grid layout */
+  gap: 10px; /* Space between grid items */
+  padding: 10px; /* Overall padding */
+  max-width: 1200px; /* Max width to center content */
+  margin: auto; /* Center grid container */
+}
+
+/* Mobile styles */
+@media (max-width: 576px) { /* Adjust the breakpoint as needed */
+  .grid-container {
+    grid-template-columns: 1fr; /* One column on mobile */
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 577px) { /* Adjust the breakpoint as needed */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
+  }
+}
