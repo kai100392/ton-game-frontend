@@ -312,8 +312,12 @@ const MarketPage = () => {
         </Toolbar>
       </div>
 
-      <Box
+
+<Box
   sx={{
+    padding: "20px",
+    justifyContent: "space-between",
+    gap: 2,
     display: 'flex',        // Ensures the children are laid out horizontally
     overflowX: 'auto',      // Allows horizontal scrolling
     scrollbarWidth: 'none', // Hide scrollbar in Firefox
