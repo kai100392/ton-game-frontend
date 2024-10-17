@@ -429,7 +429,7 @@ const MarketPage = () => {
           ) : null}
           <Box mb={2}>
             <Typography variant="caption" textColor={colors.text}>
-              OUTCOME</h2>
+              OUTCOME
             </Typography>
           </Box>
 
