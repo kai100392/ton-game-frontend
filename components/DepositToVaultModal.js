@@ -96,10 +96,10 @@ const DepositToVaultModal = ({
           margin="normal"
           value={depositorAddr}
           onChange={(e) => setDepositorAddr(e.target.value)}
-          sx={textFieldSx}
+          
         />
-        <FormControl fullwidth="true" margin="normal">
-          <InputLabel id="currency-label" textColor={colors.text}>CURRENCY</InputLabel>
+        <FormControl fullwidth="true" margin="normal" sx={textFieldSx}>
+          <InputLabel id="currency-label">CURRENCY</InputLabel>
           <Select
             labelId="currency-label"
             value={currencyType}
@@ -107,8 +107,8 @@ const DepositToVaultModal = ({
             label="_currencyType"
             input={<OutlinedInput label="_currencyType" />}
           >
-            <MenuItem value="PLS" textColor={colors.text}>PLS</MenuItem>
-            <MenuItem value="USD" textColor={colors.text}>USD</MenuItem>
+            <MenuItem value="PLS">PLS</MenuItem>
+            <MenuItem value="USD">USD</MenuItem>
           </Select>
         </FormControl>
         <TextField
