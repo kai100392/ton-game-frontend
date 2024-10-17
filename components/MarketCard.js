@@ -48,7 +48,7 @@ const MarketCard = ({
       sm: 'repeat(2, 1fr)', // Two columns for larger devices
     },
     gap: "1rem", // Reduce space between grid items
-    padding: "20px 16px 16px 16px", // Adjust padding to increase space for text
+    padding: "10px 10px 10px 10px"; /* Top, Right, Bottom, Left */
     boxSizing: "border-box", // Ensure padding and border are included in width/height
     color: "white",
     background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
