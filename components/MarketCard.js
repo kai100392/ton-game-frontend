@@ -47,7 +47,7 @@ sx={{
     xs: '1fr', // One column on mobile devices
     sm: 'repeat(2, 1fr)', // Two columns for larger devices
   },
-  gap: "0.5rem", // Reduce space between grid items
+  gap: "1rem", // Reduce space between grid items
   padding: "20px 16px 16px 16px", // Adjust padding to increase space for text
   boxSizing: "border-box", // Ensure padding and border are included in width/height
   color: "white",
