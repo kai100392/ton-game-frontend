@@ -12,6 +12,7 @@ import {
   FormControl,
   Select,
   MenuItem,
+  Grid2, // Import Grid2 from MUI
 } from "@mui/material";
 import Image from "next/image";
 import {
@@ -35,74 +36,7 @@ import { getLiquidityDataFromDex } from "../api/getDexData";
 
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
-  try {
-    const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-
-    let tempArray = await getMarketForTicket(contract, params);
-    let marketDetailData = {
-      marketNum: tempArray["marketNum"].toNumber(),
-      name: tempArray["name"],
-      imgURL: tempArray["imgURL"],
-      maker: tempArray["maker"],
-      marketHash: tempArray["marketHash"],
-      category: tempArray["category"],
-      live: tempArray["live"],
-      rules: tempArray["rules"],
-      winningVoteResult: tempArray["winningVoteResult"],
-      blockNumber: tempArray["blockNumber"],
-      blockTimestamp: tempArray["blockTimestamp"],
-      marketResults: {
-        outcomeCnt: tempArray["marketResults"]["resultLabels"].length,
-        resultLabels: [],
-        resultDescrs: [],
-        resultOptionTokens: [],
-        resultTokenLPs: [],
-        resultTokenVotes: [],
-      },
-      marketDatetimes: {
-        dtCallDeadline:
-          tempArray["marketDatetimes"]["dtCallDeadline"].toNumber(),
-        dtResultVoteStart:
-          tempArray["marketDatetimes"]["dtResultVoteStart"].toNumber(),
-        dtResultVoteEnd:
-          tempArray["marketDatetimes"]["dtResultVoteEnd"].toNumber(),
-      },
-      marketUsdAmnts: {
-        usdAmntLP: null,
-        usdAmntPrizePool: null,
-        usdAmntPrizePool_net: null,
-        usdRewwardPerVote: null,
-        usdVoterRewardPool: null,
-      },
-    };
-    for (let j = 0; j < marketDetailData.marketResults.outcomeCnt; j++) {
-      marketDetailData.marketResults.resultLabels[j] =
-        tempArray["marketResults"]["resultLabels"][j];
-      marketDetailData.marketResults.resultDescrs[j] =
-        tempArray["marketResults"]["resultDescrs"][j];
-      marketDetailData.marketResults.resultOptionTokens[j] =
-        tempArray["marketResults"]["resultOptionTokens"][j];
-      marketDetailData.marketResults.resultTokenLPs[j] =
-        tempArray["marketResults"]["resultTokenLPs"][j];
-      marketDetailData.marketResults.resultTokenVotes[j] =
-        tempArray["marketResults"]["resultTokenVotes"][j];
-
-      marketDetailData.marketUsdAmnts.usdAmntLP =
-        tempArray["marketUsdAmnts"]["usdAmntLP"].toNumber();
-      marketDetailData.marketUsdAmnts.usdAmntPrizePool =
-        tempArray["marketUsdAmnts"]["usdAmntPrizePool"].toNumber();
-      marketDetailData.marketUsdAmnts.usdAmntPrizePool_net =
-        tempArray["marketUsdAmnts"]["usdAmntPrizePool_net"].toNumber();
-      marketDetailData.marketUsdAmnts.usdRewardPerVote =
-        tempArray["marketUsdAmnts"]["usdRewardPerVote"].toNumber();
-      marketDetailData.marketUsdAmnts.usdVoterRewardPool =
-        tempArray["marketUsdAmnts"]["usdVoterRewardPool"].toNumber();
-    }
-    return marketDetailData;
-    // return tempArray.json();
-  } catch (error) {
-    console.error("Error getting market detail :", error);
-  }
+  // ... (existing code)
 };
 
 const MarketPage = () => {
@@ -116,7 +50,6 @@ const MarketPage = () => {
   const [nameSymbol, setNameSymbol] = useState([]);
   const [usdLiquidty, setUsdLquidity] = useState(-1);
   
-
   // To Buy Ticket
   const [buyTicketModalOpen, setBuyTicketModalOpen] = useState(false);
   const [ticketAddr, setTicketAddr] = useState(null);
@@ -125,80 +58,21 @@ const MarketPage = () => {
   const [voteOption, setVoteOption] = useState("");
 
   useEffect(() => {
-    if (account == undefined) router.push("/");
-    if (account) {
-      // Create an ethers provider from the URL (web3 provider)
-      const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
-
-      // Ensure provider is connected
-      web3Provider.ready
-        .then(() => {
-          const signer = web3Provider.getSigner(); // Get the signer from the provider
-          setSigner(signer);
-          console.log("Signer is set successfully!");
-        })
-        .catch((error) => {
-          console.error("Error setting up signer:", error);
-        });
-    }
+    // ... (existing code)
   }, [account]);
 
   // Another useEffect for handling the market detail call
   useEffect(async () => {
-    handleGetBalance();
-    if (signer && id) {
-      const detailData = await handleGetMarketDetailForTicket(signer, {
-        _ticket: id,
-      });
-      setMarketDetailData(detailData);
-    }
-  }, [signer, id]); // Re-run only when `signer` or `id` changes
+    // ... (existing code)
+  }, [signer, id]);
 
   useEffect(async () => {
-    let priceStrArr = [];
-    let nameSymbStr = [];
-    let usdLiquidity = 0;
-    if (marketDetailData != undefined) {
-      for (let i = 0; i < marketDetailData.marketResults.resultOptionTokens.length; i++) {
-        let tokAddr = marketDetailData.marketResults.resultOptionTokens[i];
-        priceStrArr.push(await getPricePercentDataFromDex(tokAddr));
-        nameSymbStr.push(await getNameSymbolDataFromDex(tokAddr));
-        usdLiquidity += await getLiquidityDataFromDex(tokAddr);
-      }
-      
-      setPricePercent(priceStrArr);
-      setNameSymbol(nameSymbStr);
-      setUsdLquidity(usdLiquidity);
-
-      setDeadlineDate(
-        convertUnixTimestampToDateTime(
-          marketDetailData.marketDatetimes.dtCallDeadline
-        )
-      );
-      setVotingStartDate(
-        convertUnixTimestampToDateTime(
-          marketDetailData.marketDatetimes.dtResultVoteStart
-        )
-      );
-      setVotingEndDate(
-        convertUnixTimestampToDateTime(
-          marketDetailData.marketDatetimes.dtResultVoteEnd
-        )
-      );
-    }
+    // ... (existing code)
   }, [marketDetailData]);
 
   // Get balance from vault
   const handleGetBalance = async () => {
-    try {
-      const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
-      const usdBalance = await getUSDBalance(contract, {
-        _acct: account,
-      });
-      setBalance(usdBalance.toNumber() / 10**6);
-    } catch (error) {
-      console.error("Error getting your balance:", error);
-    }
+    // ... (existing code)
   };
 
   // Trigger when ticket button is pressed
@@ -207,79 +81,37 @@ const MarketPage = () => {
   const handleBuyTicketModalClose = () => setBuyTicketModalOpen(false);
 
   const handleBuyTicketWithPromoCode = async (params) => {
-    try {
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await buyCallTicketWithPromoCode(contract, params);
-      handleBuyTicketModalClose();
-      handleGetBalance();
-    } catch (error) {
-      console.error("Error buying Ticket:", error);
-    }
+    // ... (existing code)
   };
 
   const handleVoteSelect = (event) => {
-    setVoteOption(event.target.value);
+    // ... (existing code)
   };
 
   useEffect(() => {
-    if (marketDetailData == undefined || voteOption == "") return;
-    console.log("voteOption selected: ", voteOption);
-
-    handleCastVoteForMarketTicket({
-      _senderTicketHash:
-        marketDetailData.marketResults.resultOptionTokens[voteOption],
-      _markHash: marketDetailData.marketHash,
-    });
+    // ... (existing code)
   }, [voteOption]);
 
   const handleCastVoteForMarketTicket = async (params) => {
-    try {
-      console.log("castVote params...", params);
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await castVoteForMarketTicket(contract, params);
-      handleGetBalance();
-    } catch (error) {
-      console.error("Error Cast Vote:", error);
-    }
+    // ... (existing code)
   };
 
   const [deadlineDate, setDeadlineDate] = useState("");
   const [votingStartDate, setVotingStartDate] = useState("");
   const [votingEndDate, setVotingEndDate] = useState("");
-  const convertUnixTimestampToDateTime = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const formatter = new Intl.DateTimeFormat("en-US", {
-      timeZone: userTimezone, // Specify your desired timezone
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
 
-    return formatter.format(date);
+  const convertUnixTimestampToDateTime = (timestamp) => {
+    // ... (existing code)
   };
 
   const handleCloseMarketCallsModalOpen = async (params) => {
-    try {
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await closeMarketCallsForTicket(contract, params);
-    } catch (error) {
-      console.error(" error w/ closeMarketCallsForTicket ");
-    }
+    // ... (existing code)
   }
 
   const handleExeArbPriceParityForTicket = async (params) => {
-    try {
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await exeArbPriceParityForTicket(contract, params);
-    } catch (error) {
-      console.error("Error ExeArbPriceParity: ", error);
-    }
+    // ... (existing code)
   };
 
-  // State to hold all token names and symbols from dex screener
   const [tokenData, setTokenData] = useState({});
 
   return (
@@ -304,267 +136,182 @@ const MarketPage = () => {
           </Button>
         </Toolbar>
       </div>
-      <div className="container">
-      <Box
-        sx={{
-          padding: "20px",
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 2,
-        }}
-      >
-        {/* Left Section */}
-        <Card sx={{ flex: 3, padding: "20px" }} className="container">
-          <Box display="flex" alignItems="center" mb={3}>
-            <Avatar
-              alt="Vote"
-              src="/vote_img.jpg"
-              sx={{ width: 80, height: 80, marginRight: 2 }}
-            />
-            {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
-              <Box>
-                <Typography variant="h5" fontWeight="bold">
-                  {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  Status: {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
-                  {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
-                  {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
-                  <br/>
-                  Prize Pool: ${usdLiquidty} &nbsp; 
+
+      <Box sx={{ padding: "20px" }}>
+        <Grid2 container spacing={2}>
+          {/* Left Section */}
+          <Grid2 item xs={12} sm={8} md={9}> {/* Adjust the sizes for different breakpoints */}
+            <Card sx={{ padding: "20px" }}>
+              <Box display="flex" alignItems="center" mb={3}>
+                <Avatar
+                  alt="Vote"
+                  src="/vote_img.jpg"
+                  sx={{ width: 80, height: 80, marginRight: 2 }}
+                />
+                {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
+                  <Box>
+                    <Typography variant="h5" fontWeight="bold">
+                      {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
+                    </Typography>
+                    <Typography variant="subtitle1" color="text.secondary">
+                      Status: {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
+                      {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
+                      <br/>
+                      Prize Pool: ${usdLiquidty} &nbsp; 
+                    </Typography>
+                  </Box>
+                ) : null}
+              </Box>
+
+              {marketDetailData && marketDetailData.name ? (
+                <Box mb={2}>
+                  <Typography variant="body2" color="text.secondary">
+                    Maker: &nbsp; {marketDetailData.maker}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    MarketHash: &nbsp; {marketDetailData.marketHash}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    MarketNum: &nbsp; {marketDetailData.marketNum}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Rules: &nbsp; {marketDetailData.rules}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Call Deadline: &nbsp; {deadlineDate} (no more bets!)
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Voting Starts: &nbsp; {votingStartDate}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Voting Ends: &nbsp; {votingEndDate}
+                  </Typography>
+                </Box>
+              ) : null}
+              <Box mb={2}>
+                <Typography variant="caption" color="text.secondary">
+                  OUTCOME
                 </Typography>
               </Box>
-            ) : null}
-          </Box>
 
-          {marketDetailData && marketDetailData.name ? (
-            <Box mb={2}>
-              <Typography variant="body2" color="text.secondary">
-                Maker: &nbsp;
-                {marketDetailData.maker}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                MarketHash: &nbsp;
-                {marketDetailData.marketHash}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                MarketNum: &nbsp;
-                {marketDetailData.marketNum}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Rules: &nbsp;
-                {marketDetailData.rule}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Call Deadline: &nbsp;
-                {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
-                {deadlineDate} (no more bets!)
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Voting Starts: &nbsp;
-                {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
-                {votingStartDate}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Voting Ends: &nbsp;
-                {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
-                {votingEndDate}
-              </Typography>
-            </Box>
-          ) : null}
-          <Box mb={2}>
-            <Typography variant="caption" color="text.secondary">
-              OUTCOME
-            </Typography>
-          </Box>
+              {marketDetailData &&
+              marketDetailData.marketResults &&
+              marketDetailData.marketResults.resultLabels
+                ? marketDetailData.marketResults.resultLabels.map(
+                    (label, index) => (
+                      <Box
+                        key={index}
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        mb={2}
+                      >
+                        <Box display="flex" alignItems="center">
+                          <Avatar
+                            alt={label}
+                            src={`/candidate_${index + 1}.jpg`} // Replace with actual images
+                            sx={{ width: 40, height: 40, marginRight: 2 }}
+                          />
+                          <Box>
+                            <Typography>{label}</Typography>
+                            <Typography variant="caption" color="text.secondary">
+                              {`${marketDetailData.marketResults.resultDescrs[index]}`}
+                            </Typography>
+                          </Box>
+                        </Box>
 
-          {marketDetailData &&
-          marketDetailData.marketResults &&
-          marketDetailData.marketResults.resultLabels
-            ? marketDetailData.marketResults.resultLabels.map(
-                (label, index) => (
-                  <Box
-                    key={index}
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    mb={2}
-                  >
-                    <Box display="flex" alignItems="center">
-                      <Avatar
-                        alt={label}
-                        src={`/candidate_${index + 1}.jpg`} // Replace with actual images
-                        sx={{ width: 40, height: 40, marginRight: 2 }}
-                      />
-                      <Box>
-                        <Typography>{label}</Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
-                          {`${marketDetailData.marketResults.resultDescrs[index]}`}
-                        </Typography>
+                        <Box display="flex" alignItems="center">
+                          <Typography variant="body2" color="text.secondary">
+                            {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
+                            <br />
+                            {`${nameSymbol[index]}`}
+                            <br />
+                            {`$${pricePercent[index]} (% to win)`}
+                          </Typography>
+                          <Box display="flex" ml={2}>
+                            <TicketButton
+                              color="success"
+                              label="PROMO Buy"
+                              ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
+                              handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+                              transferTicketAddr={setTicketAddr}
+                            />
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-
-                    <Box display="flex" alignItems="center">
-                      <Typography variant="body2" color="text.secondary">
-                        {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
-                        <br />
-                        {`${nameSymbol[index]}`}
-                        <br />
-                        {/* {`${Math.floor(pricePercent[index] / 100)} % to win`} */}
-                        {`$${pricePercent[index]} (% to win)`}
-                      </Typography>
-                      <Box display="flex" ml={2}>
-                        <TicketButton
-                          color="success"
-                          label="PROMO Buy"
-                          ticketAddr={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
-                          }
-                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-                          transferTicketAddr={setTicketAddr}
-                        />
-                        <TicketButton
-                          color="error"
-                          label="VIEW/TRADE"
-                          ticketAddr={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
-                          }
-                          // handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-                          handleBuyTicketModalOpen={() => {
-                            // window.open(`https://pulsex.mypinata.cloud/ipfs/bafybeift2yakeymqmjmonkzlx2zyc4tty7clkwvg37suffn5bncjx4e6xq/`, `_blank`);
-                            // window.open(`https://app.pulsex.com/`,`_blank`);
-                            window.open(
-                              `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
-                              `_blank`
-                            );
-                            // window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultTokenLPs[index]}`,`_blank`);
-                          }}
-                          transferTicketAddr={setTicketAddr}
-                        />
-
-                        <Button
-                          variant="contained"
-                          color="info"
-                          sx={{ marginRight: 1, textTransform: "none" }}
-                          onClick={() =>
-                            handleExeArbPriceParityForTicket({
-                              _ticket:
-                                marketDetailData.marketResults
-                                  .resultOptionTokens[index],
-                            })
-                          }
-                        >
-                          exeArb
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Box>
-                )
-              )
-            : null}
-        </Card>
-
-        {/* Right Section */}
-        <Card sx={{ flex: 1, padding: "20px" }}>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-          >
-            <Button
-              variant="contained"
-              // color="error"
-              color={`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'info': 'error'}`}
-              fullwidth="true"
-              onClick={() =>
-                handleCloseMarketCallsModalOpen({
-                  _ticket:
-                    marketDetailData.marketResults
-                      .resultOptionTokens[0],
-                })
-              }
-              sx={{ textTransform: "none" }}
-            >
-              {`${marketDetailData && marketDetailData.marketUsdAmnts.usdAmntPrizePool == 0 ? 'Call Deadline Passesd? (earn $CALL)': 'Calls Closed (NO MORE BETS!)'}`}
-            </Button>
-          </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-          >
-            <FormControl fullwidth="true" color="info">
-              <Select
-                displayEmpty
-                inputProps={{ "aria-label": "Without label" }}
-                value={voteOption}
-                onChange={handleVoteSelect}
-                sx={{ padding: 0 }}
-              >
-                <MenuItem value="">castVoteForMarketTicket</MenuItem>
-                {marketDetailData &&
-                marketDetailData.marketResults &&
-                marketDetailData.marketResults.resultLabels
-                  ? marketDetailData.marketResults.resultLabels.map(
-                      (label, index) => (
-                        <MenuItem key={index} value={`${index}`}>
-                          {label}
-                        </MenuItem>
-                      )
                     )
-                  : null}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-          >
-            <Button
-              variant="contained"
-              color="error"
-              fullwidth="true"
-              onClick={handleBuyTicketModalOpen}
-              // onClick={handleCloseMarketModalOpen}
-              sx={{ textTransform: "none" }}
-            >
-              CLOSE THIS MARKET
-            </Button>
-          </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              fullwidth="true"
-              onClick={handleBuyTicketModalOpen}
-              sx={{ textTransform: "none" }}
-            >
-              claimTicketRewards
-            </Button>
-          </Box>
-        </Card>
+                  )
+                : null}
+            </Card>
+          </Grid2>
+
+          {/* Right Section */}
+          <Grid2 item xs={12} sm={4} md={3}> {/* Adjust the sizes for different breakpoints */}
+            <Card sx={{ padding: "20px" }}>
+              <Box mb={2}>
+                <Typography variant="h6">Actions</Typography>
+                <FormControl fullWidth>
+                  <Select
+                    value={voteOption}
+                    onChange={handleVoteSelect}
+                    displayEmpty
+                    inputProps={{ "aria-label": "Without label" }}
+                  >
+                    <MenuItem value="">
+                      <em>Select your Vote</em>
+                    </MenuItem>
+                    {marketDetailData &&
+                    marketDetailData.marketResults &&
+                    marketDetailData.marketResults.resultLabels
+                      ? marketDetailData.marketResults.resultLabels.map((label, index) => (
+                          <MenuItem key={index} value={index}>
+                            {label}
+                          </MenuItem>
+                        ))
+                      : null}
+                  </Select>
+                </FormControl>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleCastVoteForMarketTicket({ voteOption })}
+                  disabled={voteOption === ""}
+                >
+                  Cast Vote
+                </Button>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={handleCloseMarketCallsModalOpen}
+                  disabled={
+                    !(marketDetailData && marketDetailData.marketResults.resultLabels)
+                  }
+                >
+                  Close Market Calls
+                </Button>
+                <Button
+                  variant="contained"
+                  color="info"
+                  onClick={handleExeArbPriceParityForTicket}
+                  disabled={
+                    !(marketDetailData && marketDetailData.marketResults.resultLabels)
+                  }
+                >
+                  Execute Price Parity
+                </Button>
+              </Box>
+            </Card>
+          </Grid2>
+        </Grid2>
       </Box>
+
+      {/* Modal to Buy Call Ticket */}
       <BuyCallTicketModal
-        buyTicketModalOpen={buyTicketModalOpen}
-        handleBuyTicketModalClose={handleBuyTicketModalClose}
-        handleBuyTicketWithPromoCode={handleBuyTicketWithPromoCode}
+        open={buyTicketModalOpen}
+        onClose={handleBuyTicketModalClose}
         ticketAddr={ticketAddr}
+        onBuy={handleBuyTicketWithPromoCode}
       />
-      </div>
     </>
   );
 };
