@@ -475,10 +475,10 @@ export default function Home() {
                       <div className="container">
                     <div>
  <p style={{ textAlign: 'left' }}>
-                      <h2>USD balance is required to:
-                      <p>1) Create new markets</p> 
+                      <h2><b>USD balance is required to:</b></h2>
+                      <h3><p>1) Create new markets</p> 
                       <p>2) Buy call tickets w/ promo codes</p> 
-                      <p>3) Execute Arbitrage Price Parity for tickets</p> </h2>
+                      <p>3) Execute Arbitrage Price Parity for tickets</p></h3> 
                       </p>
                       {/* <p>USD balance is required to:</p>
                       <ul style={{ textAlign: 'left' }}>
