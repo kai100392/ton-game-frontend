@@ -305,7 +305,7 @@ const MarketPage = () => {
         </Toolbar>
       </div>
 
-      <Box
+      <Box className="container"
         sx={{
           padding: "20px",
           display: "flex",
@@ -314,7 +314,7 @@ const MarketPage = () => {
         }}
       >
         {/* Left Section */}
-        <Card sx={{ flex: 3, padding: "20px" }} className="container">
+        <Card sx={{ flex: 3, padding: "20px" }} >
           <Box display="flex" alignItems="center" mb={3}>
             <Avatar
               alt="Vote"
