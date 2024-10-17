@@ -313,13 +313,15 @@ const MarketPage = () => {
       </div>
 
       <Box
-        sx={{
-          padding: "20px",
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 2,
-        }}
-      >
+  sx={{
+    display: 'flex',        // Ensures the children are laid out horizontally
+    overflowX: 'auto',      // Allows horizontal scrolling
+    scrollbarWidth: 'none', // Hide scrollbar in Firefox
+    '&::-webkit-scrollbar': {
+      display: 'none',      // Hide scrollbar in Chrome/Safari
+    },
+  }}
+>
         {/* Left Section */}
         
         <div style={{
@@ -333,6 +335,8 @@ const MarketPage = () => {
       maxWidth: '1200px', // Max width to center content
       margin: 'auto', // Center grid container
     }}>
+
+      
       {/* Left Section */}
 
       <Card   
