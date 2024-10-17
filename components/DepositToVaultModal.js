@@ -96,7 +96,7 @@ const DepositToVaultModal = ({
           margin="normal"
           value={depositorAddr}
           onChange={(e) => setDepositorAddr(e.target.value)}
-          
+          sx={textFieldSx}
         />
         <FormControl fullwidth="true" margin="normal" sx={textFieldSx}>
           <InputLabel id="currency-label">CURRENCY</InputLabel>
