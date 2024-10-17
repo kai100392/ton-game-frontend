@@ -453,21 +453,22 @@ const MarketPage = () => {
                       <Box>
                         <Typography>{label}</Typography>
                         <Typography variant="caption" textColor={colors.text}>
-                          {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
-                          {`${marketDetailData.marketResults.resultDescrs[index]}`}
+                         <h4> {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
+                          {`${marketDetailData.marketResults.resultDescrs[index]}`}</h4>
                         </Typography>
                       </Box>
                     </Box>
 
                     <Box display="flex" alignItems="center">
                       <Typography variant="body2" textColor={colors.text}>
-                        {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
+                      <h4>  {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
                         {`${nameSymbol[index]}`}
                         <br />
                         {/* {`${Math.floor(pricePercent[index] / 100)} % to win`} */}
-                        {`$${pricePercent[index]} (% to win)`}
+                        {`$${pricePercent[index]} (% to win)`}</h4>
                       </Typography>
+                      <br />
                       <Box display="flex" ml={2}>
                         <TicketButton
                           color="success"
