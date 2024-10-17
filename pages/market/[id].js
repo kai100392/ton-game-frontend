@@ -33,6 +33,13 @@ import { getPricePercentDataFromDex } from "../api/getDexData";
 import { getNameSymbolDataFromDex } from "../api/getDexData";
 import { getLiquidityDataFromDex } from "../api/getDexData";
 
+const colors = {
+  primary: "#A45DBB",
+  secondary: "#FF0000",
+  background: "#151029",
+  text: "#FFFFFF",
+};
+
 // Trigger
 const handleGetMarketDetailForTicket = async (signer, params) => {
   try {
@@ -370,7 +377,7 @@ const MarketPage = () => {
                 <Typography variant="h5" fontWeight="bold">
                   {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
                 </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
+                <Typography variant="subtitle1" textColor={colors.text}>
                   Status: {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
                   {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
                   {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
@@ -383,33 +390,33 @@ const MarketPage = () => {
 
           {marketDetailData && marketDetailData.name ? (
             <Box mb={2}>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 Maker: &nbsp;
                 {marketDetailData.maker}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 MarketHash: &nbsp;
                 {marketDetailData.marketHash}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 MarketNum: &nbsp;
                 {marketDetailData.marketNum}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 Rules: &nbsp;
                 {marketDetailData.rule}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 Call Deadline: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
                 {deadlineDate} (no more bets!)
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 Voting Starts: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
                 {votingStartDate}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" textColor={colors.text}>
                 Voting Ends: &nbsp;
                 {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
                 {votingEndDate}
@@ -417,7 +424,7 @@ const MarketPage = () => {
             </Box>
           ) : null}
           <Box mb={2}>
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="caption" textColor={colors.text}>
               OUTCOME
             </Typography>
           </Box>
@@ -442,7 +449,7 @@ const MarketPage = () => {
                       />
                       <Box>
                         <Typography>{label}</Typography>
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography variant="caption" textColor={colors.text}>
                           {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
                           {`${marketDetailData.marketResults.resultDescrs[index]}`}
                         </Typography>
@@ -450,7 +457,7 @@ const MarketPage = () => {
                     </Box>
 
                     <Box display="flex" alignItems="center">
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" textColor={colors.text}>
                         {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
                         <br />
                         {`${nameSymbol[index]}`}
