@@ -824,8 +824,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 /* CSS styles for the grid container */
 .grid-container {
   gap: 10px; /* Space between grid items */
-  padding: 10px; /* Overall padding */
-  max-width: 1200px; /* Max width to center content */
   margin: auto; /* Center grid container */
 }
 
