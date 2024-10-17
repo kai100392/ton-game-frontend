@@ -12,6 +12,13 @@ import {
   OutlinedInput,
 } from "@mui/material";
 
+const colors = {
+  primary: "#A45DBB",
+  secondary: "#FF0000",
+  background: "#151029",
+  text: "#FFFFFF",
+};
+
 const DepositToVaultModal = ({
   depositModalOpen,
   handleDepositModalClose,
@@ -45,10 +52,31 @@ const DepositToVaultModal = ({
     console.log(formData);
   };
 
+  const textFieldSx = {
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: colors.text,
+    },
+    "& .MuiInputLabel-root": {
+      color: colors.text,
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: colors.text,
+    },
+    "&.Mui-focused .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: colors.text,
+    },
+    "& .MuiInputBase-input": {
+      color: colors.text,
+      fontSize: '25px',
+    },
+  };
+
+
   return (
     <Modal
       sx={{ overflow: "auto" }}
       open={depositModalOpen}
+      display="flex"
       onClose={handleModalClose}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
@@ -56,21 +84,21 @@ const DepositToVaultModal = ({
       <Box
         className="glowBox"
       >
-        <Typography id="modal-title" variant="h6" component="h2" mb={2}>
+        <div className="typography" variant="h4" component="h1" align="center">
           Deposit
-        </Typography>
+          </div>
 
         {/* Form Fields */}
         <TextField
           fullwidth="true"
-          label="_depositorAddr"
+          label="DEPOSITOR ADDRESS"
           variant="outlined"
           margin="normal"
           value={depositorAddr}
           onChange={(e) => setDepositorAddr(e.target.value)}
         />
         <FormControl fullwidth="true" margin="normal">
-          <InputLabel id="currency-label">_currencyType</InputLabel>
+          <InputLabel id="currency-label">CURRENCY</InputLabel>
           <Select
             labelId="currency-label"
             value={currencyType}
@@ -84,7 +112,7 @@ const DepositToVaultModal = ({
         </FormControl>
         <TextField
           fullwidth="true"
-          label="_depositAmnt"
+          label="AMOUNT"
           variant="outlined"
           margin="normal"
           value={depositAmnt}
@@ -93,10 +121,10 @@ const DepositToVaultModal = ({
 
         {/* Add Outcome and Submit Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button variant="outlined" color="info" onClick={handleModalClose}>
+          <Button className="button-add" variant="contained" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button className="button-submit" variant="contained" color="primary" onClick={handleSubmit}>
+          <Button className="button-submit" variant="contained" onClick={handleSubmit}>
             Submit
           </Button>
         </Box>
