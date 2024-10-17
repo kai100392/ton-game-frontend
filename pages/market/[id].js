@@ -395,7 +395,7 @@ const MarketPage = () => {
               
             <Box mb={2}>
               <Typography variant="body2" textColor={colors.text}>
-              <b>Maker: &nbsp;</b>
+              <b>Maker: </b> &nbsp;
                 {marketDetailData.maker}
               </Typography>
               <Typography variant="body2" textColor={colors.text}>
