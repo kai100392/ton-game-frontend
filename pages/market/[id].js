@@ -519,14 +519,10 @@ const MarketPage = () => {
  
         <Card   
         sx={{
-          width: {
-            xs: '100%', // Full width on mobile
-            sm: 'calc(100% - 5px)', // Adjust width for larger devices
-          },
+
           borderRadius: 2,
           boxShadow: 3,
           margin: "auto",
-          padding: "10px",
           color: "white",
           background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
                        radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
@@ -541,11 +537,7 @@ const MarketPage = () => {
           "&:hover": {
             border: "1px solid darkblue",
           },
-          overflow: "hidden",
-          whiteSpace: "normal",
-          textOverflow: "clip",
-          fontSize: { xs: '12px', sm: '14px' },
-          lineHeight: '1.4',
+
         }}
       >
           <Box
