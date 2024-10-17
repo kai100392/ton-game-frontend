@@ -522,6 +522,7 @@ export default function Home() {
                     </div>
                   </>
                 ) : (
+                 <div className="button-container">
                   <div
                     className="button"
                     fullwidth="true"
@@ -531,13 +532,17 @@ export default function Home() {
                   >
                     CONNECT METAMASK
                   </div>
+                  </div>
                 )
               ) : (
+                <div className="button-container">
                 <h2>Install metamask, please.</h2>
+                </div>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {active ? (
+                 <div className="button-container">
                 <div
                   className="button"
                   fullwidth="true"
@@ -547,22 +552,29 @@ export default function Home() {
                 >
                   CREATE NEW MARKET
                 </div>
+                </div>
               ) : (
 <Box sx={{ textAlign: "center", marginTop: 4 }}>
+<div className="button-container">
   <button className="button1 disabled">
     CREATE NEW MARKET
   </button>
+  </div>
 </Box>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            <div className="button-container">
               <div className="button1" fullwidth="true" variant="contained" color="warning">
                 CLAIM VOTER REWARDS
               </div>
+              </div>
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            <div className="button-container">
               <div className="button1" fullwidth="true" variant="contained" color="warning" >
                 CLAIM PROMOTOR REWARDS
+              </div>
               </div>
             </Box>
 
