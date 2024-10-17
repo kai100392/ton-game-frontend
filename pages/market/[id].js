@@ -320,12 +320,9 @@ const MarketPage = () => {
           gap: 2,
         }}
       >
-
-        
-        <div className="grid-container">
       
       {/* Left Section */}
-
+      <div className="grid-container-left">
       <Card   
    sx={{
     padding: "10px",
@@ -345,13 +342,6 @@ const MarketPage = () => {
     transition: "border 0.2s ease-in-out",
     "&:hover": {
       border: "1px solid darkblue",
-    },
-    overflowX: "auto",
-    whiteSpace: "nowrap",
-    scrollbarWidth: "none",
-    "-webkit-overflow-scrolling": "touch", // Enable smooth scrolling on mobile
-    "&::-webkit-scrollbar": {
-      display: "none",
     },
   }}
 >
@@ -517,9 +507,9 @@ const MarketPage = () => {
               )
             : null}
         </Card>
-
+</div>
         {/* Right Section */}
- 
+        <div className="grid-container-right">
         <Card   
         sx={{
           padding: "10px",

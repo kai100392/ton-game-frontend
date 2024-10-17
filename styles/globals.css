@@ -822,14 +822,14 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 
 
 /* CSS styles for the grid container */
-.grid-container {
+.grid-container-left {
   gap: 10px; /* Space between grid items */
   margin: auto; /* Center grid container */
 }
 
 /* Mobile styles */
 @media (max-width: 480px) { /* Adjust the breakpoint as needed */
-  .grid-container {
+  .grid-container-left {
     display: grid; /* Enable grid layout */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Horizontal scrolling */
     gap: 16px; /* Add space between items */
@@ -840,14 +840,39 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   }
 
   /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
-  .grid-container::-webkit-scrollbar {
+  .grid-container-left::-webkit-scrollbar {
     display: none;
   }
 }
 
 /* Desktop styles */
 @media (min-width: 768px) { /* Adjust the breakpoint as needed */
-  .grid-container {
+  .grid-container-left {
+    display: grid; /* Enable grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
+    gap: 16px; /* Add space between items */
+  }
+}
+
+
+/* CSS styles for the grid container */
+.grid-container-right {
+  gap: 10px; /* Space between grid items */
+  margin: auto; /* Center grid container */
+}
+
+/* Mobile styles */
+@media (max-width: 480px) { /* Adjust the breakpoint as needed */
+  .grid-container-right {
+    display: grid; /* Enable grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Horizontal scrolling */
+    gap: 16px; /* Add space between items */
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 768px) { /* Adjust the breakpoint as needed */
+  .grid-container-right {
     display: grid; /* Enable grid layout */
     grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
     gap: 16px; /* Add space between items */
