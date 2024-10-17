@@ -323,7 +323,6 @@ const MarketPage = () => {
       
       {/* Left Section */}
       <div className="grid-container">
-      <div className="grid-container-left">
       <Card   
    sx={{
     padding: "10px",
@@ -455,7 +454,7 @@ const MarketPage = () => {
                       </Typography>
                       
                       <Box display="flex" ml={2}>
-                        <TicketButton
+                        <Button
                           className="button-card button-green"
                           label="PROMO Buy"
                           ticketAddr={
@@ -466,7 +465,7 @@ const MarketPage = () => {
                           handleBuyTicketModalOpen={handleBuyTicketModalOpen}
                           transferTicketAddr={setTicketAddr}
                         />
-                        <TicketButton
+                        <Button
                           className="button-card button-orange"
                           label="VIEW/TRADE"
                           ticketAddr={
@@ -509,9 +508,9 @@ const MarketPage = () => {
               )
             : null}
         </Card>
-</div>
+
         {/* Right Section */}
-        <div className="grid-container-right">
+
         <Card   
         sx={{
           padding: "10px",
@@ -624,7 +623,7 @@ const MarketPage = () => {
           </Box>
         </Card>
         </div>
-        </div>
+    
       </Box>
       <BuyCallTicketModal
         buyTicketModalOpen={buyTicketModalOpen}
