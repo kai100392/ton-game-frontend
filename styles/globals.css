@@ -228,12 +228,12 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 16px; /* Adjusted button padding for better fit */
-  gap: 10px;
-  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
-  min-height: 40px; /* Minimum height */
+  padding: 0.375em 1em;
+  gap: 0.625em;
+  width: 22.5em; /* Default width */
+  height: 2.5em;
   font-weight: 700;
-  font-size: 20px; /* Smaller font size for button text */
+  font-size: 1.5rem;
   background: linear-gradient(to right, #890501 0%, #b90903 35%, #eb2c01 67%, #ff6868 100%);
   
   border-radius: 8px;
@@ -289,12 +289,12 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 16px; /* Adjusted button padding for better fit */
-  gap: 10px;
-  min-width: 120px; /* Minimum width to ensure it doesn't shrink too small */
-  min-height: 40px; /* Minimum height */
+  padding: 0.375em 1em;
+  gap: 0.625em;
+  width: 22.5em; /* Default width */
+  height: 2.5em;
   font-weight: 700;
-  font-size: 20px; /* Smaller font size for button text */
+  font-size: 1.5rem;
   background: linear-gradient(to right, #0c0182 0%, #1f01c8 35%, #3146ca 67%, #007dd1 100%);
   border-radius: 8px;
   color: #fff;
@@ -344,7 +344,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .button-submit, .button-add, .button-close, .button-claim {
+  .button-submit, .button-add {
   font-size: 16px; /* Adjust button font size for mobile */
   padding: 8px 12px; /* Slightly reduce padding */
   width: 30%; /* Ensure buttons fit on mobile */
@@ -352,7 +352,7 @@ body {
 }
 }
 @media (max-width: 480px) {
-  .button-submit, .button-add, .button-close, .button-claim {
+  .button-submit, .button-add {
   font-size: 14px; /* Adjust button font size for mobile */
   padding: 8px 12px; /* Slightly reduce padding */
   width: 30%; /* Ensure buttons fit on mobile */
@@ -623,7 +623,7 @@ body {
 /* button responsiveness */
 
   @media (max-width: 768px) {
-    .button, .button1 {
+    .button, .button1, .button-close, .button-claim {
     font-size: 18px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
     width: 90%; /* Ensure buttons fit on mobile */
@@ -631,7 +631,7 @@ body {
   }
 }
   @media (max-width: 480px) {
-    .button, .button1 {
+    .button, .button1, .button-close, .button-claim {
     font-size: 16px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
     width: 90%; /* Ensure buttons fit on mobile */
