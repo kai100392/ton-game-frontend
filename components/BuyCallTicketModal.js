@@ -37,9 +37,21 @@ const BuyCallTicketModal = ({
       aria-describedby="modal-description"
     >
       <Box
-       className="glowBox"
+        className="glowBox"
+        sx={{
+          bgcolor: "rgba(0, 0, 0, 0.9)", // Optional background color
+          padding: "2rem",
+          borderRadius: "8px",
+          color: "white", // Ensures all text inside is white
+        }}
       >
-        <Typography id="modal-title" variant="h6" component="h2" mb={2}>
+        <Typography
+          id="modal-title"
+          variant="h6"
+          component="h2"
+          mb={2}
+          sx={{ color: "white" }} // White font for modal title
+        >
           Buy CallTicket with Promo Code
         </Typography>
 
@@ -51,6 +63,7 @@ const BuyCallTicketModal = ({
           margin="normal"
           value={ticketAddr}
           disabled
+          sx={{ input: { color: "white" }, label: { color: "white" } }} // White font for TextField
         />
 
         <TextField
@@ -60,6 +73,7 @@ const BuyCallTicketModal = ({
           margin="normal"
           value={promoCodeHash}
           onChange={(e) => setPromoCodeHash(e.target.value)}
+          sx={{ input: { color: "white" }, label: { color: "white" } }} // White font for TextField
         />
 
         <TextField
@@ -70,14 +84,25 @@ const BuyCallTicketModal = ({
           type="number"
           value={usdAmnt}
           onChange={(e) => setUsdAmnt(e.target.value)}
+          sx={{ input: { color: "white" }, label: { color: "white" } }} // White font for TextField
         />
 
         {/* Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button className="button-add" variant="contained" color="info" onClick={handleModalClose}>
+          <Button
+            className="button-card button-orange"
+            variant="contained"
+            onClick={handleModalClose}
+            sx={{ color: "white" }} // White font for button text
+          >
             Cancel
           </Button>
-          <Button className="button-submit" variant="contained" color="primary" onClick={handleSubmit}>
+          <Button
+            className="button-submit"
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{ color: "white" }} // White font for button text
+          >
             Submit
           </Button>
         </Box>

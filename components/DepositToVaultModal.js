@@ -123,7 +123,7 @@ const DepositToVaultModal = ({
 
         {/* Add Outcome and Submit Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button className="button-add" variant="contained" onClick={handleModalClose}>
+          <Button className="button-card button-orange" variant="contained" onClick={handleModalClose}>
             Cancel
           </Button>
           <Button className="button-submit" variant="contained" onClick={handleSubmit}>

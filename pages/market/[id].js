@@ -455,6 +455,7 @@ const MarketPage = () => {
                       
                       <Box display="flex" ml={2}>
                         <TicketButton
+                          className="button-card button-green"
                           color="success"
                           label="PROMO Buy"
                           ticketAddr={
@@ -466,6 +467,7 @@ const MarketPage = () => {
                           transferTicketAddr={setTicketAddr}
                         />
                         <TicketButton
+                          className="button-card button-orange"
                           color="error"
                           label="VIEW/TRADE"
                           ticketAddr={
@@ -487,6 +489,7 @@ const MarketPage = () => {
                         />
 
                         <Button
+                          className="button-card button-bluesky"
                           variant="contained"
                           color="info"
                           sx={{ marginRight: 1, textTransform: "none" }}
