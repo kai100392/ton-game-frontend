@@ -86,7 +86,8 @@ const CreateMarketModal = ({
       onClose={handleModalClose}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
-    ><div className="container">
+    >
+      <div  className="container">
       <Box
         className="glowBox" // Apply the glowBox class here
       >
@@ -111,6 +112,7 @@ const CreateMarketModal = ({
         </Typography>
 
         <TextField
+       
           fullwidth="true"
           label="NAME"
           variant="outlined"
