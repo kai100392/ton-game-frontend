@@ -41,7 +41,7 @@ const MarketCard = ({
     height: 'auto', // Allow height to auto-adjust based on content
     borderRadius: 2,
     boxShadow: 3,
-    margin: "auto auto 0 5px", // Reduce margin above grid columns
+    margin: "auto auto 0 auto", // Reduce margin above grid columns
     display: "grid", // Change display to grid
     gridTemplateColumns: {
       xs: '1fr', // One column on mobile devices
