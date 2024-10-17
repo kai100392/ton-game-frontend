@@ -334,6 +334,7 @@ const MarketPage = () => {
       margin: 'auto', // Center grid container
     }}>
       {/* Left Section */}
+      <div className="container">
       <Card   
         sx={{
           width: {
@@ -389,7 +390,7 @@ const MarketPage = () => {
           </Box>
 
           {marketDetailData && marketDetailData.name ? (
-            <h4 className="container">
+
               
             <Box mb={2}>
               <Typography variant="body2" textColor={colors.text}>
@@ -424,7 +425,7 @@ const MarketPage = () => {
                 {votingEndDate}
               </Typography>
             </Box>
-            </h4>
+           
           ) : null}
           <Box mb={2}>
             <Typography variant="caption" textColor={colors.text}>
@@ -523,8 +524,9 @@ const MarketPage = () => {
               )
             : null}
         </Card>
-
+ </div>
         {/* Right Section */}
+        <div className="container">
         <Card   
         sx={{
           width: {
@@ -646,6 +648,8 @@ const MarketPage = () => {
           </Box>
         </Card>
         </div>
+        </div>
+
       </Box>
       <BuyCallTicketModal
         buyTicketModalOpen={buyTicketModalOpen}
