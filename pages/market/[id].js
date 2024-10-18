@@ -315,7 +315,7 @@ const MarketPage = () => {
           </Button>
         </Toolbar>
       </div>
-      <Container maxWidth="lg" sx={{ marginTop: 4 }}>
+      <Container maxWidth={false} sx={{ marginTop: 4 }}>
       <Box
         sx={{
           padding: "20px",
