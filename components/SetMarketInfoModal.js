@@ -60,8 +60,9 @@ const SetMarketInfoModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
+    
       <Box
-       className="glowBox"
+      className="glowBox" // Apply the glowBox class here
       >
         <Typography id="modal-title" variant="h6" component="h2" mb={2}>
           Set Market Infomation
@@ -138,15 +139,17 @@ const SetMarketInfoModal = ({
 
         {/* Add Outcome and Submit Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button variant="outlined" color="info" onClick={handleModalClose}>
+          <Button className="button-card button-orange" variant="contained" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button className="button-submit" variant="contained" color="primary" onClick={handleSubmit}>
+          <Button className="button-submit" variant="contained" onClick={handleSubmit}>
             Submit
           </Button>
         </Box>
       </Box>
+     
     </Modal>
+
   );
 };
 

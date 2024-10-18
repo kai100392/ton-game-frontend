@@ -484,10 +484,10 @@ export default function Home() {
                       <div className="container">
                     <div>
  <p style={{ textAlign: 'left' }}>
-                      <h2><b>USD balance is required to:</b></h2>
-                      <h3><p>1) Create new markets</p> 
+                      <h1><b>USD balance is required to:</b></h1>
+                      <h2><p>1) Create new markets</p> 
                       <p>2) Buy call tickets w/ promo codes</p> 
-                      <p>3) Execute Arbitrage Price Parity for tickets</p></h3> 
+                      <p>3) Execute Arbitrage Price Parity for tickets</p></h2> 
                       </p>
                       {/* <p>USD balance is required to:</p>
                       <ul style={{ textAlign: 'left' }}>
@@ -496,7 +496,7 @@ export default function Home() {
                           <li>Execute Arbitrage Price Parity</li>
                       </ul> */}
                       
-                      <h3><p><u>Your Wallet Connected</u></p></h3>
+                      <h2><p><u>Your Wallet Connected</u></p></h2>
                       <p>
                       <h3><b>{account}</b></h3>
                       </p>
@@ -509,9 +509,11 @@ export default function Home() {
                     >
                       balance : ${balance != null ? balance : "Press me"}
                     </Button>
-                    <div>
+                    <div><h4>
                       To make a USD deposit, transfer native PLS to the CallitVault <b>{ADDR_VAULT}</b>
+                      </h4>
                     </div>
+                    <h3>
                     <Typography
                       sx={{
                         fontStyle: "normal",
@@ -528,6 +530,7 @@ export default function Home() {
                     >
                       Make deposit for someone else (testing)
                     </Typography>
+                    </h3>
                     </div>
                   </>
                 ) : (
