@@ -337,8 +337,8 @@ const MarketPage = () => {
       sm: "auto",  // Center margin for medium and larger screens
     },
     width: {
-      xs: "90%",    // Make the width responsive for mobile devices
-      sm: "80%",    // For tablets
+      xs: "100%",    // Make the width responsive for mobile devices
+      sm: "100%",    // For tablets
       md: "100%",    // For desktops
     },
     color: "white",
@@ -571,8 +571,8 @@ const MarketPage = () => {
             sm: "auto",  // Center margin for medium and larger screens
           },
           width: {
-            xs: "90%",    // Make the width responsive for mobile devices
-            sm: "80%",    // For tablets
+            xs: "100%",    // Make the width responsive for mobile devices
+            sm: "100%",    // For tablets
             md: "50%",    // For desktops
           },
           color: "white",
