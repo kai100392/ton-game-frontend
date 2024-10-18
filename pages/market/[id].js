@@ -332,9 +332,9 @@ const MarketPage = () => {
     },
     borderRadius: 2,
     boxShadow: 3,
-    margin: {
+    marginTop: {
       xs: "5px",   // Margin for small screens
-      sm: "auto",  // Center margin for medium and larger screens
+      sm: "15px",  // Center margin for medium and larger screens
       md: "15px",    // For desktops
     },
     width: {
@@ -567,14 +567,14 @@ const MarketPage = () => {
           },
           borderRadius: 2,
           boxShadow: 3,
-          margin: {
+          marginTop: {
             xs: "5px",   // Margin for small screens
-            sm: "auto",  // Center margin for medium and larger screens
+            sm: "15px",  // Center margin for medium and larger screens
             md: "15px",
           },
           width: {
             xs: "100%",    // Make the width responsive for mobile devices
-            sm: "100%",    // For tablets
+            sm: "40%",    // For tablets
             md: "40%",    // For desktops
           },
           color: "white",
