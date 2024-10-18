@@ -406,19 +406,35 @@ const MarketPage = () => {
 
 {marketDetailData && marketDetailData.name ? (
   <Box mb={2}>
-    <Typography
-      variant="body2"
-      sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
-    >
+  <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
       <b>Maker: </b>&nbsp;{marketDetailData.maker}
     </Typography>
-    <Typography
-      variant="body2"
-      sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
-    >
+    <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
       <b>MarketHash: &nbsp;</b>{marketDetailData.marketHash}
     </Typography>
-    {/* Add more Typography items here similarly */}
+    <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+              <b> MarketNum: &nbsp;</b>
+                {marketDetailData.marketNum}
+              </Typography>
+              <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+              <b> Rules: &nbsp;</b>
+                {marketDetailData.rule}
+              </Typography>
+              <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+              <b>Call Deadline: &nbsp;</b>
+                {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
+                {deadlineDate} (no more bets!)
+              </Typography>
+              <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+              <b>Voting Starts: &nbsp;</b>
+                {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
+                {votingStartDate}
+              </Typography>
+              <Typography variant="body2" sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+              <b>Voting Ends: &nbsp;</b>
+                {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
+                {votingEndDate}
+              </Typography>
   </Box>
 ) : null}
 
