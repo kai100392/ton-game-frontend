@@ -498,7 +498,13 @@ const MarketPage = () => {
           {`$${pricePercent[index]} (% to win)`}
         </Typography>
 
-        <Box display="flex" ml={2}>
+        {/* Wrap buttons in a Box to control layout */}
+        <Box
+          display="flex"
+          flexDirection={{ xs: 'column', sm: 'row' }} // Stack buttons vertically on mobile
+          ml={{ xs: 0, sm: 2 }} // Adjust margin for mobile
+          mt={{ xs: 1, sm: 0 }} // Add margin on top for mobile
+        >
           <Button
             className="button-card button-green"
             variant="contained"
@@ -512,7 +518,7 @@ const MarketPage = () => {
           <Button
             className="button-card button-orange"
             variant="contained"
-            sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' }, ml: 1 }} // Add margin on larger screens
+            sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' }, mt: { xs: 1, sm: 0 }, ml: { xs: 0, sm: 1 } }} // Margin adjustments for mobile
             ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
             handleBuyTicketModalOpen={() => {
               window.open(
@@ -531,6 +537,7 @@ const MarketPage = () => {
               marginRight: 1,
               textTransform: "none",
               fontSize: { xs: '0.7rem', sm: '0.875rem' }, // Adjust text for button
+              mt: { xs: 1, sm: 0 }, // Add top margin for mobile
             }}
             onClick={() =>
               handleExeArbPriceParityForTicket({
@@ -543,9 +550,9 @@ const MarketPage = () => {
         </Box>
       </Box>
     </Box>
-                  
-                ))
-              ) : null}
+  )) 
+) : null}
+
         </Card>
 
         {/* Right Section */}
