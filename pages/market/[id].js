@@ -323,12 +323,24 @@ const MarketPage = () => {
       
       {/* Left Section */}
       <div className="grid-container">
-      <Card   
-   sx={{
-    padding: "10px",
+      <Card
+  sx={{
+    padding: {
+      xs: "5px",  // For extra small devices (mobile phones)
+      sm: "10px", // For small devices (tablets)
+      md: "15px", // For medium devices (desktops)
+    },
     borderRadius: 2,
     boxShadow: 3,
-    margin: "auto",
+    margin: {
+      xs: "5px",   // Margin for small screens
+      sm: "auto",  // Center margin for medium and larger screens
+    },
+    width: {
+      xs: "90%",    // Make the width responsive for mobile devices
+      sm: "80%",    // For tablets
+      md: "60%",    // For desktops
+    },
     color: "white",
     background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
                  radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
@@ -513,13 +525,25 @@ const MarketPage = () => {
         </Card>
 
         {/* Right Section */}
-
-        <Card   
+ 
+        <Card
         sx={{
-          padding: "10px",
+          padding: {
+            xs: "5px",  // For extra small devices (mobile phones)
+            sm: "10px", // For small devices (tablets)
+            md: "15px", // For medium devices (desktops)
+          },
           borderRadius: 2,
           boxShadow: 3,
-          margin: "auto",
+          margin: {
+            xs: "5px",   // Margin for small screens
+            sm: "auto",  // Center margin for medium and larger screens
+          },
+          width: {
+            xs: "90%",    // Make the width responsive for mobile devices
+            sm: "80%",    // For tablets
+            md: "60%",    // For desktops
+          },
           color: "white",
           background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
                        radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
@@ -534,7 +558,6 @@ const MarketPage = () => {
           "&:hover": {
             border: "1px solid darkblue",
           },
-
         }}
       >
           <Box
