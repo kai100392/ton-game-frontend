@@ -357,171 +357,179 @@ const MarketPage = () => {
     },
   }}
 >
-          <Box
-            display="flex"
-            alignItems="center"
-            mb={3}
+<Box
+  display="flex"
+  alignItems="center"
+  mb={3}
+  sx={{
+    flexDirection: { xs: 'column', sm: 'row' }, // Stack vertically on smaller screens
+  }}
+>
+  <Avatar
+    alt="Vote"
+    src="/vote_img.jpg"
+    sx={{
+      width: { xs: 50, sm: 80 }, // Smaller width for mobile, larger for desktop
+      height: { xs: 50, sm: 80 },
+      marginRight: { xs: 0, sm: 2 }, // No margin on mobile
+      mb: { xs: 1, sm: 0 }, // Add margin bottom on mobile for stacking
+    }}
+  />
+  {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
+    <Box>
+      <Typography
+        variant="h5"
+        fontWeight="bold"
+        sx={{
+          fontSize: { xs: '1.2rem', sm: '1.5rem' }, // Smaller font size for mobile
+          textAlign: { xs: 'center', sm: 'left' },
+        }}
+      >
+        {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp;
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          color: colors.text,
+          fontSize: { xs: '0.875rem', sm: '1rem' }, // Adjust font size for mobile
+          textAlign: { xs: 'center', sm: 'left' },
+        }}
+      >
+        <b>Status:</b> {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed' : 'CALLS OPEN'}`} &nbsp;
+        {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended' : '+ voting started') : ''}`}
+        <br />
+        <b>Prize Pool: </b> ${usdLiquidty} &nbsp;
+      </Typography>
+    </Box>
+  ) : null}
+</Box>
+
+{marketDetailData && marketDetailData.name ? (
+  <Box mb={2}>
+    <Typography
+      variant="body2"
+      sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+    >
+      <b>Maker: </b>&nbsp;{marketDetailData.maker}
+    </Typography>
+    <Typography
+      variant="body2"
+      sx={{ color: colors.text, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+    >
+      <b>MarketHash: &nbsp;</b>{marketDetailData.marketHash}
+    </Typography>
+    {/* Add more Typography items here similarly */}
+  </Box>
+) : null}
+
+<Box mb={2}>
+  <Typography
+    variant="caption"
+    sx={{
+      color: colors.text,
+      fontSize: { xs: '0.75rem', sm: '0.875rem' }, // Smaller font size for captions
+      textAlign: { xs: 'center', sm: 'left' },
+    }}
+  >
+    OUTCOME
+  </Typography>
+</Box>
+
+{marketDetailData &&
+  marketDetailData.marketResults &&
+  marketDetailData.marketResults.resultLabels ? (
+  marketDetailData.marketResults.resultLabels.map((label, index) => (
+    <Box
+      key={index}
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      mb={2}
+      sx={{
+        flexDirection: { xs: 'column', sm: 'row' }, // Stack vertically on mobile
+      }}
+    >
+      <Box display="flex" alignItems="center" sx={{ mb: { xs: 2, sm: 0 } }}>
+        <Avatar
+          alt={label}
+          src={`/candidate_${index + 1}.jpg`} // Replace with actual images
+          sx={{ width: { xs: 30, sm: 40 }, height: { xs: 30, sm: 40 }, marginRight: 2 }}
+        />
+        <Box>
+          <Typography sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>{label}</Typography>
+          <Typography
+            variant="caption"
+            sx={{
+              color: colors.text,
+              fontSize: { xs: '0.75rem', sm: '0.875rem' },
+            }}
           >
-            <Avatar
-              alt="Vote"
-              src="/vote_img.jpg"
-              sx={{ width: 80, height: 80, marginRight: 2 }}
-            />
-            {marketDetailData && marketDetailData.name && marketDetailData.marketUsdAmnts ? (
-              <Box>
-                <Typography variant="h5" fontWeight="bold">
-                  {marketDetailData.name} &nbsp; • &nbsp;{marketDetailData.category ? marketDetailData.category : '<category>'} &nbsp; 
-                </Typography>
-                <Typography variant="subtitle1" textColor={colors.text}>
-                  <b>Status:</b> {`${marketDetailData.marketDatetimes.dtCallDeadline < Math.floor(Date.now() / 1000) ? 'call deadline passed': 'CALLS OPEN'}`} &nbsp; 
-                  {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? (marketDetailData.marketDatetimes.dtResultVoteEnd < Math.floor(Date.now() / 1000) ? '+ voting ended': '+ voting started') : ''}`}
-                  {/* • &nbsp; {`${marketDetailData.marketDatetimes.dtResultVoteStart < Math.floor(Date.now() / 1000) ? 'Voting Started': 'Voting not started'}`} &nbsp;  */}
-                  <br/>
-                  <b>Prize Pool: </b> ${usdLiquidty} &nbsp;
-                </Typography>
-              </Box>
-            ) : null}
-          </Box>
+            {`${marketDetailData.marketResults.resultDescrs[index]}`}
+          </Typography>
+        </Box>
+      </Box>
 
-          {marketDetailData && marketDetailData.name ? (
+      <Box display="flex" alignItems="center" sx={{ mt: { xs: 2, sm: 0 } }}>
+        <Typography
+          variant="body2"
+          sx={{
+            color: colors.text,
+            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+          }}
+        >
+          {`${marketDetailData.marketResults.resultOptionTokens[index]}`}<br />
+          {`${nameSymbol[index]}`}<br />
+          {`$${pricePercent[index]} (% to win)`}
+        </Typography>
 
-              
-            <Box mb={2}>
-              <Typography variant="body2" textColor={colors.text}>
-              <b>Maker: </b> &nbsp;
-                {marketDetailData.maker}
-              </Typography>
-              <Typography variant="body2" textColor={colors.text}>
-              <b> MarketHash: &nbsp;</b>
-                {marketDetailData.marketHash}
-              </Typography>
-              <Typography variant="body2" textColor={colors.text}>
-              <b> MarketNum: &nbsp;</b>
-                {marketDetailData.marketNum}
-              </Typography>
-              <Typography variant="body2" textColor={colors.text}>
-              <b> Rules: &nbsp;</b>
-                {marketDetailData.rule}
-              </Typography>
-              <Typography variant="body2" textColor={colors.text}>
-              <b>Call Deadline: &nbsp;</b>
-                {/* {marketDetailData.marketDatetimes.dtCallDeadline} */}
-                {deadlineDate} (no more bets!)
-              </Typography>
-              <Typography variant="body2" textColor={colors.text}>
-              <b>Voting Starts: &nbsp;</b>
-                {/* {marketDetailData.marketDatetimes.dtResultVoteStart} */}
-                {votingStartDate}
-              </Typography>
-              <Typography variant="body2" textColor={colors.text}>
-              <b>Voting Ends: &nbsp;</b>
-                {/* {marketDetailData.marketDatetimes.dtResultVoteEnd} */}
-                {votingEndDate}
-              </Typography>
-            </Box>
-           
-          ) : null}
-          <Box mb={2}>
-            <Typography variant="caption" textColor={colors.text}>
-              OUTCOME
-            </Typography>
-          </Box>
-
-          {marketDetailData &&
-          marketDetailData.marketResults &&
-          marketDetailData.marketResults.resultLabels
-            ? marketDetailData.marketResults.resultLabels.map(
-                (label, index) => (
-                  <Box
-                    key={index}
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    mb={2}
-                  >
-                    <Box display="flex" alignItems="center">
-                      <Avatar
-                        alt={label}
-                        src={`/candidate_${index + 1}.jpg`} // Replace with actual images
-                        sx={{ width: 40, height: 40, marginRight: 2 }}
-                      />
-                      <Box>
-                        <Typography>{label}</Typography>
-                        <Typography variant="caption" textColor={colors.text}>
-                          {/* {`${marketDetailData.marketResults.resultTokenVotes[index]} people bet`} */}
-                          {`${marketDetailData.marketResults.resultDescrs[index]}`}
-                        </Typography>
-                      </Box>
-                    </Box>
-
-                    <Box display="flex" alignItems="center">
-                      <Typography variant="body2" textColor={colors.text}>
-                        {`${marketDetailData.marketResults.resultOptionTokens[index]}`}
-                        <br />
-                        {`${nameSymbol[index]}`}
-                        <br />
-                        {/* {`${Math.floor(pricePercent[index] / 100)} % to win`} */}
-                        {`$${pricePercent[index]} (% to win)`}
-                      </Typography>
-                      
-                      <Box display="flex" ml={2}>
-                      <Button
-                          className="button-card button-green"
-                              variant="contained"
-                          ticketAddr={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
-                          }
-                          handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-                          transferTicketAddr={setTicketAddr}
-                        >
-                        PROMO Buy
-                        </Button>
-                        <Button
-                          className="button-card button-orange"
-                              variant="contained"
-                          ticketAddr={
-                            marketDetailData.marketResults.resultOptionTokens[
-                              index
-                            ]
-                          }
-                          // handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-                          handleBuyTicketModalOpen={() => {
-                            // window.open(`https://pulsex.mypinata.cloud/ipfs/bafybeift2yakeymqmjmonkzlx2zyc4tty7clkwvg37suffn5bncjx4e6xq/`, `_blank`);
-                            // window.open(`https://app.pulsex.com/`,`_blank`);
-                            window.open(
-                              `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
-                              `_blank`
-                            );
-                            // window.open(`https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultTokenLPs[index]}`,`_blank`);
-                          }}
-                          transferTicketAddr={setTicketAddr}
-                        >
-                        VIEW/TRADE
-                        </Button>
-
-                        <Button
-                          className="button-card button-bluesky"
-                          variant="contained"
-                          sx={{ marginRight: 1, textTransform: "none" }}
-                          onClick={() =>
-                            handleExeArbPriceParityForTicket({
-                              _ticket:
-                                marketDetailData.marketResults
-                                  .resultOptionTokens[index],
-                            })
-                          }
-                        >
-                          exeArb
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Box>
+        <Box display="flex" ml={2}>
+          <Button
+            className="button-card button-green"
+            variant="contained"
+            sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }} // Responsive button text
+            ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
+            handleBuyTicketModalOpen={handleBuyTicketModalOpen}
+            transferTicketAddr={setTicketAddr}
+          >
+            PROMO Buy
+          </Button>
+          <Button
+            className="button-card button-orange"
+            variant="contained"
+            sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' }, ml: 1 }} // Add margin on larger screens
+            ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
+            handleBuyTicketModalOpen={() => {
+              window.open(
+                `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
+                `_blank`
+              );
+            }}
+            transferTicketAddr={setTicketAddr}
+          >
+            VIEW/TRADE
+          </Button>
+          <Button
+            className="button-card button-bluesky"
+            variant="contained"
+            sx={{
+              marginRight: 1,
+              textTransform: "none",
+              fontSize: { xs: '0.7rem', sm: '0.875rem' }, // Adjust text for button
+            }}
+            onClick={() =>
+              handleExeArbPriceParityForTicket({
+                _ticket: marketDetailData.marketResults.resultOptionTokens[index],
+              })
+            }
+          >
+            exeArb
+          </Button>
+        </Box>
+      </Box>
+    </Box>
                   
-                )
-              )
-            : null}
+                ))
+              ) : null}
         </Card>
 
         {/* Right Section */}
