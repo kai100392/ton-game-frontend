@@ -12,6 +12,7 @@ import {
   FormControl,
   Select,
   MenuItem,
+  Container,
 } from "@mui/material";
 import Image from "next/image";
 import {
@@ -293,16 +294,19 @@ const MarketPage = () => {
     <>
       {/* Top Navigation */}
       <div className="navbar" position="static" color="default" elevation={0}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            <Image
-              src="/logo.png"
-              alt="Call-It Logo"
-              width={150}
-              height={50}
-              onClick={() => router.push("/")}
-              style={{ cursor: "pointer" }}
-            />
+            <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}
+            style={{ cursor: "pointer" }}
+            component="a" // This tells the Toolbar to behave like an anchor
+            href="/">
+          <Image
+  src="/logo.png"
+  alt="Call-It Logo"
+  width={150}
+  height={50}
+  onClick={() => router.push("/")}
+  
+/>
             {`v${currentVersion}`}
           </Typography>
 
@@ -311,7 +315,7 @@ const MarketPage = () => {
           </Button>
         </Toolbar>
       </div>
-
+      <Container maxWidth="lg" sx={{ marginTop: 4 }}>
       <Box
         sx={{
           padding: "20px",
@@ -681,15 +685,18 @@ const MarketPage = () => {
             </Button>
           </Box>
         </Card>
+        
         </div>
-    
+
       </Box>
+      </Container>
       <BuyCallTicketModal
         buyTicketModalOpen={buyTicketModalOpen}
         handleBuyTicketModalClose={handleBuyTicketModalClose}
         handleBuyTicketWithPromoCode={handleBuyTicketWithPromoCode}
         ticketAddr={ticketAddr}
       />
+      
     </>
   );
 };
