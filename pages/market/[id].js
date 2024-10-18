@@ -505,11 +505,11 @@ const MarketPage = () => {
 
         {/* Wrap buttons in a Box to control layout */}
         <Box
-          display="flex"
-          flexDirection={{ xs: 'column', sm: 'row' }} // Stack buttons vertically on mobile
-          ml={{ xs: 0, sm: 2 }} // Adjust margin for mobile
-          mt={{ xs: 1, sm: 0 }} // Add margin on top for mobile
-        >
+  display="flex"
+  flexWrap="wrap" // Allows wrapping to the next line when needed
+  ml={{ xs: 0, sm: 2 }} // Adjust margin for mobile
+  mt={{ xs: 1, sm: 0 }} // Add margin on top for mobile
+>
           <Button
             className="button-card button-green"
             variant="contained"
