@@ -698,35 +698,51 @@ export default function Home() {
       </Box>
 
       <Container maxWidth="sm">
-      <center><Box sx={{ my: 4 }}>
-
-          <Link href="/about" passHref>
-          <Button
+  <Box sx={{ my: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Link href="/about" passHref>
+      <Button
         variant="contained"
         style={{
-          background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+          background: 'linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
           color: 'white', // Ensures the text color is visible
           position: 'relative',
           zIndex: 1,
         }}
+        sx={{
+          mb: 2, // Margin bottom for spacing between buttons
+          width: ['100%', 'auto'], // Full width on small screens, auto width on larger screens
+        }}
       >
         About Us
       </Button>
+    </Link>
+    <Link href="/contact" passHref>
+      <Button
+        variant="outlined"
+        color="secondary"
+        sx={{
+          mb: 2,
+          width: ['100%', 'auto'],
+        }}
+      >
+        Contact Us
+      </Button>
+    </Link>
+    <Link href="/market" passHref>
+      <Button
+        variant="outlined"
+        color="secondary"
+        sx={{
+          mb: 2,
+          width: ['100%', 'auto'],
+        }}
+      >
+        Market Page
+      </Button>
+    </Link>
+  </Box>
+</Container>
 
-          </Link>
-          <Link href="/contact" passHref>
-            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
-              Contact Us
-            </Button>
-          </Link>
-          <Link href="/market" passHref>
-            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
-              Market Page
-            </Button>
-          </Link>
-        </Box></center>
-        <div></div>
-      </Container>
 
       {/* Modal */}
       <CreateMarketModal
