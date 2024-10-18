@@ -595,9 +595,6 @@ const MarketPage = () => {
     "&:hover": {
       border: "1px solid darkblue",
     },
-    gap: {
-      md: "15px", // Larger gap for desktops
-    }
   }}
 >
           <Box
