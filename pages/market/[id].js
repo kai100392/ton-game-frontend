@@ -335,6 +335,7 @@ const MarketPage = () => {
     margin: {
       xs: "5px",   // Margin for small screens
       sm: "auto",  // Center margin for medium and larger screens
+      md: "15px",    // For desktops
     },
     width: {
       xs: "100%",    // Make the width responsive for mobile devices
@@ -569,11 +570,12 @@ const MarketPage = () => {
           margin: {
             xs: "5px",   // Margin for small screens
             sm: "auto",  // Center margin for medium and larger screens
+            md: "15px",
           },
           width: {
             xs: "100%",    // Make the width responsive for mobile devices
             sm: "100%",    // For tablets
-            md: "50%",    // For desktops
+            md: "40%",    // For desktops
           },
           color: "white",
           background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
