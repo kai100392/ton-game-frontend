@@ -550,7 +550,7 @@ const MarketPage = () => {
           width: {
             xs: "90%",    // Make the width responsive for mobile devices
             sm: "80%",    // For tablets
-            md: "100%",    // For desktops
+            md: "50%",    // For desktops
           },
           color: "white",
           background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
