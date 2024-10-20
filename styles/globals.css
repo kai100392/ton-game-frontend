@@ -4,12 +4,11 @@ html,
 body {
   font-family: "Poppins", "IBM Plex Sans", monospace;
   width: 100%;
-  height: 100%;
   position: relative; /* Use relative positioning for better responsiveness */
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: url("/Glow2.svg") #151029;
+  background: linear-gradient(40deg, #000000 0%, #030303 33%, #1a1a1a 67%, #262626 100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; /* Center background image for better appearance */
@@ -102,24 +101,25 @@ body {
   justify-content: center;
 
   /* Background with radial and linear gradients */
-  background: radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-              radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-              radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-              radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-              linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-              linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-              linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%);
-  
+  background: 
+  radial-gradient(circle at 100% 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+  radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+  radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+  radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+   rgb(230, 1, 1);
+
   border-radius: 8px;
   padding: 16px 16px 8px 16px; /* Reduced padding */
   color: white;
   font-size: 14px; /* Smaller font size for glowBox text */
 
   /* Updated Glow Effect - confined to borders */
-  box-shadow: inset 0 0 5px rgba(164, 93, 187, 0.8), /* Inside glow reduced */
+  box-shadow: inset 0 0 5px rgba(87, 81, 88, 0.8), /* Inside glow reduced */
               0 0 10px 0px rgba(164, 93, 187, 0.3); /* Subtle outer glow reduced */
 
-  animation: shine 2s infinite; /* Add shine animation */
+  animation: shine 2s infinite; /* Add shine animatiWon */
 }
 
 .glowBox img {
@@ -140,22 +140,10 @@ body {
   border-radius: inherit; /* Make sure it follows the same border-radius */
   background-image: url("/Glow.svg");
   z-index: -1; /* Behind the content */
-  box-shadow: inset 0 0 5px rgba(164, 93, 187, 0.8); /* Confined glow inside the box */
+  box-shadow: inset 0 0 5px rgba(106, 99, 109, 0.8); /* Confined glow inside the box */
   pointer-events: none;
 }
 
-/* Shine Animation */
-@keyframes shine {
-  0% {
-    box-shadow: 0 0 5px rgba(164, 93, 187, 0.8), 0 0 10px 0px rgba(164, 93, 187, 0.3); /* Reduced shadow sizes */
-  }
-  50% {
-    box-shadow: 0 0 15px rgba(164, 93, 187, 1), 0 0 35px 10px rgba(164, 93, 187, 0.5); /* Reduced shadow sizes */
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(164, 93, 187, 0.8), 0 0 10px 0px rgba(164, 93, 187, 0.3); /* Reduced shadow sizes */
-  }
-}
 
 /* glowBox adjustments for small screens */
 @media (max-width: 768px) {
@@ -182,14 +170,13 @@ body {
   min-height: 40px; /* Minimum height */
   font-weight: 700;
   font-size: 20px; /* Smaller font size for button text */
-  background: linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
-  
+  background: #2e2e2e;
   border-radius: 8px;
-  color: #fff;
+  color: #5ae200;
   backdrop-filter: blur(10px);
-  border: none;
   cursor: pointer;
   overflow: hidden;
+  border: 2px solid rgb(230, 1, 1);
   position: relative;
 
   /* Link styling within the button */
@@ -368,12 +355,11 @@ body {
   min-height: 40px; /* Minimum height */
   font-weight: 700;
   font-size: 20px; /* Smaller font size for button text */
-  background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
-  
+  background: #32CD32;
+  border: 2px solid rgb(230, 1, 1);
   border-radius: 8px;
   color: #fff;
   backdrop-filter: blur(10px);
-  border: none;
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -450,25 +436,27 @@ body {
 
 /* Button Class */
 .button {
+  font-family: "Poppins", "IBM Plex Sans", monospace;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0.375em 1em; /* 6px and 16px in em for padding */
-  gap: 0.625em; /* 10px in em for gap */
-  width: 22.5em; /* 360px in em (360px/16px = 22.5em) */
-  height: 2.5em; /* 40px in em (40px/16px = 2.5em) */
+  padding: 0.375em 1em;
+  gap: 0.625em;
+  width: 22.5em; /* Default width */
+  height: 2.5em;
   font-weight: 700;
-  font-size: 1.5rem; /* 24px in rem */
-  background: linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
-  border-radius: 0.5em; /* 8px in em */
-  color: #fff;
+  font-size: 1.5rem;
+  background: #000000;
+  border-radius: 0.5em;
+  color: #ffffff;
   backdrop-filter: blur(10px);
-  border: none;
+  border: 2px solid rgb(230, 1, 1); /* Add grey border */
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  transition: all 0.3s ease;
 
   /* Link styling within the button */
   a {
@@ -535,15 +523,16 @@ body {
   height: 2.5em;
   font-weight: 700;
   font-size: 1.5rem;
-  background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
+  background: #000000;
   border-radius: 0.5em;
-  color: #fff;
+  color: #ffffff;
   backdrop-filter: blur(10px);
-  border: none;
+  border: 2px solid rgb(230, 1, 1); /* Add grey border */
   cursor: pointer;
   overflow: hidden;
   position: relative;
   transition: all 0.3s ease;
+
 
   a {
     text-decoration: none;
@@ -582,8 +571,8 @@ body {
 
   /* Disabled button state */
   &.disabled {
-    background: linear-gradient(90deg, #8A2BE2, #6A5ACD, #4682B4);
-    color: rgba(255, 255, 255, 0.5); /* Faded text color */
+    background: #2e2e2e;
+    color: rgba(190, 190, 190, 0.74); /* Faded text color */
     cursor: not-allowed; /* Disabled cursor */
 
     /* Remove hover effect for the disabled state */
@@ -685,32 +674,53 @@ body {
 
 
 .typography {
-  font-size: 50px; /* Default font size */
+  font-size: 40px; /* Default font size */
   font-weight: bold; /* Make the font bold */
-  background: linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%);
-  -webkit-background-clip: text; /* For Safari */
-  -webkit-text-fill-color: transparent; /* For Safari */
-  background-clip: text; /* For other browsers */
-  color: transparent; /* Set text color to transparent to show gradient */
+  color: #32CD32; /* Set text color to green */
   text-align: center; /* Center text for all devices */
   display: block; /* Ensure it behaves like a block element */
   width: 100%; /* Full width */
   margin: 0 auto; /* Centering */
   padding: 0; /* Remove default padding */
+  
+  /* Engraved effect */
+  background: linear-gradient(135deg, #32CD32, #7FFF00); /* Gradient background */
+  -webkit-background-clip: text; /* Clip background to text */
+  -webkit-text-fill-color: transparent; /* Make text color transparent */
+  
+  /* Text shadows for the engraved effect and green glow */
+  text-shadow: 
+    1px 1px 0 rgba(73, 255, 1, 0.863), /* Light shadow */
+    -1px -1px 0 rgba(255, 255, 255, 0.3), /* Light highlight */
+    10px 10px 10px rgba(0, 0, 0, 0.6), /* Wider bottom-right shadow (offset increased) */
+    0 0 10px rgba(50, 205, 50, 0.7), /* Green glow */
+    0 0 20px rgba(50, 255, 50, 0.5); /* More intense green glow */
+
+  letter-spacing: 2px; /* Increase spacing between letters */
+  line-height: 1.2; /* Adjust line height for better readability */
+  padding: 10px 0; /* Add vertical padding */
+  border-radius: 8px; /* Rounded corners for block elements */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect */
+.typography:hover {
+  transform: scale(1.05); /* Slightly scale the text on hover */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .typography {
-      font-size: 35px; /* Adjust font size for tablets */
+      font-size: 30px; /* Adjust font size for tablets */
   }
 }
 
 @media (max-width: 480px) {
   .typography {
-      font-size: 30px; /* Adjust font size for mobile phones */
+      font-size: 25px; /* Adjust font size for mobile phones */
   }
 }
+
 
 
 
@@ -746,7 +756,7 @@ body {
  radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
  linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
  linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
- linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%);
+ linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%);
 
 border-radius: 8px;
 padding: 16px 16px 8px 16px; /* Reduced padding */
@@ -948,3 +958,44 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
     min-width: unset;
   }
 }
+
+
+.logo-container {
+  position: relative; /* Necessary for positioning */
+  display: inline-block; /* Keeps the container small */
+  overflow: hidden; /* Hide overflow for smooth animation */
+}
+
+.logo {
+  position: relative; /* Positioning for child images */
+}
+
+.logo-short {
+  transition: opacity 0.5s ease; /* Smooth transition for opacity */
+  position: absolute; /* Stack on top of the full logo */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Make sure it's on top */
+}
+
+.logo-full {
+  transition: max-height 0.5s ease, opacity 0.5s ease; /* Smooth transition for height and opacity */
+  position: absolute; /* Stack under the short logo */
+  top: 0;
+  left: 0;
+  max-height: 0; /* Initially hidden (collapsed) */
+  opacity: 0; /* Initially invisible */
+  z-index: 0; /* Underneath the short logo */
+}
+
+.fold .logo-full {
+  max-height: 0; /* Collapsed state */
+  opacity: 0; /* Fully hidden */
+}
+
+.unfold .logo-full {
+  max-height: 50px; /* Set to reveal the full logo */
+  opacity: 1; /* Fully visible */
+}
+
+

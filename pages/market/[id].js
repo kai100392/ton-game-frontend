@@ -347,13 +347,13 @@ const MarketPage = () => {
       md: "100%",    // For desktops
     },
     color: "white",
-    background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-                 linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
+    background: ` radial-gradient(circle at 100% 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+  radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+  radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+  radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+   rgb(230, 1, 1)`,
     boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
                 0 0 20px 10px rgba(164, 93, 187, 0.3)`,
     transition: "border 0.2s ease-in-out",
@@ -510,29 +510,32 @@ const MarketPage = () => {
   ml={{ xs: 0, sm: 2 }} // Adjust margin for mobile
   mt={{ xs: 1, sm: 0 }} // Add margin on top for mobile
 >
-          <Button
-            className="button-card button-green"
-            variant="contained"
-            sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }} // Responsive button text
-            ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
-            handleBuyTicketModalOpen={handleBuyTicketModalOpen}
-            transferTicketAddr={setTicketAddr}
-          >
+<Button
+  className="button-card button-green"
+  variant="contained"
+  sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }} // Responsive button text
+  onClick={() => {
+    transferTicketAddr(marketDetailData.marketResults.resultOptionTokens[index]);
+    handleBuyTicketModalOpen();
+  }}
+>
             PROMO Buy
           </Button>
           <Button
-            className="button-card button-orange"
-            variant="contained"
-            sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' }, mt: { xs: 1, sm: 0 }, ml: { xs: 0, sm: 1 } }} // Margin adjustments for mobile
-            ticketAddr={marketDetailData.marketResults.resultOptionTokens[index]}
-            handleBuyTicketModalOpen={() => {
-              window.open(
-                `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
-                `_blank`
-              );
-            }}
-            transferTicketAddr={setTicketAddr}
-          >
+  className="button-card button-orange"
+  variant="contained"
+  sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' }, mt: { xs: 1, sm: 0 }, ml: { xs: 0, sm: 1 } }} // Margin adjustments for mobile
+  onClick={() => {
+    // Open the external link in a new tab
+    window.open(
+      `https://dexscreener.com/pulsechain/${marketDetailData.marketResults.resultOptionTokens[index]}`,
+      `_blank`
+    );
+    
+    // Set the ticket address
+    transferTicketAddr(marketDetailData.marketResults.resultOptionTokens[index]);
+  }}
+>
             VIEW/TRADE
           </Button>
           <Button
@@ -582,13 +585,13 @@ const MarketPage = () => {
       md: "40%",    // For desktops
     },
     color: "white",
-    background: `radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-                 radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-                 radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-                 linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-                 linear-gradient(#ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)`,
+    background: ` radial-gradient(circle at 100% 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
+  radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+  radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+  radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+   rgb(230, 1, 1)`,
     boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
                 0 0 20px 10px rgba(164, 93, 187, 0.3)`,
     transition: "border 0.2s ease-in-out",

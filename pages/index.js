@@ -105,6 +105,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const injected = new InjectedConnector();
 
 export default function Home() {
+  const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   //Wallet Connecting States
   const [balance, setBalance] = useState(null);
@@ -364,20 +365,30 @@ export default function Home() {
       {/* Top Navigation */}
       <div className="navbar" position="static" color="default" elevation={0}>
       <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}
-            style={{ cursor: "pointer" }}
-            component="a" // This tells the Toolbar to behave like an anchor
-            href="/">
-          <Image
-  src="/logo.png"
-  alt="Call-It Logo"
-  width={150}
-  height={50}
-  onClick={() => router.push("/")}
-  
-/>
-            {`v${currentVersion}`}
-          </Typography>
+      <Typography
+      variant="h6"
+      color="inherit"
+      noWrap
+      sx={{ flexGrow: 1 }}
+      style={{ cursor: "pointer" }}
+      component="a"
+      href="/"
+    >
+      <div
+        onMouseEnter={() => setIsHovered(true)}   // Set hover state to true on mouse enter
+        onMouseLeave={() => setIsHovered(false)}  // Set hover state to false on mouse leave
+        onClick={() => router.push("/")}          // Navigate on click
+        className="logo-container"
+      >
+        <Image
+          src={isHovered ? "/logo.png" : "/logo_short.png"} // Switch image based on hover state
+          alt="Call-It Logo"
+          width={150}
+          height={50}
+          className={isHovered ? "slide-right" : "slide-left"} // Apply CSS class based on hover state
+        />
+      </div>
+    </Typography>
 
           {/* Category Dropdown */}
           <FormControl
@@ -434,7 +445,7 @@ export default function Home() {
             
               />
               }
-              label={`Only My Markets`}
+              label={`My Markets`}
             />
           </FormGroup>
 
@@ -460,9 +471,18 @@ export default function Home() {
             onChange={handlePaginationChange}
           />
          
-                    <div className="typography" variant="h4" component="h1" gutterbottom="true" align="center"> 
-            Welcome to the Prediction Market App
+                    <div className="typography" variant="h10" component="h5" gutterbottom="true" align="center"> 
+                    <Image
+  src="/logo.png"
+  alt="Call-It Logo"
+  width={300}
+  height={100}
+  onClick={() => router.push("/")}
+  
+/>
+
           </div>
+          <p>Decentralized, Democratized Betting Markets</p>
        <br />
         </Stack>
         <Box
@@ -683,7 +703,7 @@ export default function Home() {
       {/* Footer */}
       <Box
        sx={{
-        background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+        background: 'linear-gradient(40deg, #000000 0%, #1a1a1a 33%, #333333 67%, #4d4d4d 100%)',
         color: "#ffffff",
         padding: 2,
         marginTop: 6,
@@ -703,7 +723,7 @@ export default function Home() {
       <Button
         variant="contained"
         style={{
-          background: 'linear-gradient(40deg, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+          background: 'linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)',
           color: 'white', // Ensures the text color is visible
           position: 'relative',
           zIndex: 1,
