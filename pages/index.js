@@ -64,7 +64,7 @@ import {
 import DepositToVaultModal from "../components/DepositToVaultModal";
 
 // version display
-export const currentVersion = "0.36";
+export const currentVersion = "0.41";
 
 // Custom style for the search bar
 const Search = styled("div")(({ theme }) => ({
@@ -105,6 +105,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const injected = new InjectedConnector();
 
 export default function Home() {
+  const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   //Wallet Connecting States
   const [balance, setBalance] = useState(null);
@@ -363,17 +364,31 @@ export default function Home() {
     <>
       {/* Top Navigation */}
       <div className="navbar" position="static" color="default" elevation={0}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            <Image
-              src="/logo.png"
-              alt="Call-It Logo"
-              width={150}
-              height={50}
-              onClick={() => router.push("/")}
-            />
-            {`v${currentVersion}`}
-          </Typography>
+      <Toolbar>
+      <Typography
+      variant="h6"
+      color="inherit"
+      noWrap
+      sx={{ flexGrow: 1 }}
+      style={{ cursor: "pointer" }}
+      component="a"
+      href="/"
+    >
+      <div
+        onMouseEnter={() => setIsHovered(true)}   // Set hover state to true on mouse enter
+        onMouseLeave={() => setIsHovered(false)}  // Set hover state to false on mouse leave
+        onClick={() => router.push("/")}          // Navigate on click
+        className="logo-container"
+      >
+        <Image
+          src={isHovered ? "/logo.png" : "/logo_short.png"} // Switch image based on hover state
+          alt="Call-It Logo"
+          width={150}
+          height={50}
+          className={isHovered ? "slide-right" : "slide-left"} // Apply CSS class based on hover state
+        />
+      </div>
+    </Typography>
 
           {/* Category Dropdown */}
           <FormControl
@@ -430,7 +445,7 @@ export default function Home() {
             
               />
               }
-              label={`Only My Markets`}
+              label={`My Markets`}
             />
           </FormGroup>
 
@@ -455,83 +470,44 @@ export default function Home() {
             page={page}
             onChange={handlePaginationChange}
           />
+         
+                    <div className="typography" variant="h10" component="h5" gutterbottom="true" align="center"> 
+                    <Image
+  src="/logo.png"
+  alt="Call-It Logo"
+  width={300}
+  height={100}
+  onClick={() => router.push("/")}
+  
+/>
+
+          </div>
+          <p>Decentralized, Democratized Betting Markets</p>
+       <br />
         </Stack>
         <Box
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
           justifyContent="space-between"
         >
-          {/* Left Column for Market Cards */}
-          <Box flex="1" marginRight={{ md: 2 }}>
-            <div className="typography" variant="h5" gutterbottom="true">
-              Top Markets
-            </div>
 
-            {/* Market Cards */}
-            <Box
-              display="flex"
-              flexDirection="row"
-              flexWrap="wrap"
-              justifyContent="space-around"
-              sx={{ padding: 2 }}
-            >
-              {marketsList.length > 0
-                ? marketsList.map((market, index) => (
-                    <MarketCard
-                      account={account}
-                      id={market.marketNum}
-                      key={index}
-                      title={market.name}
-                      maker={market.maker}
-                      imgURL={market.imgURL}
-                      category={market.category}
-                      live={market.live}
-                      marketResults={market.marketResults}
-                      rules={market.rules}
-                      winningVoteResult={market.winningVoteResult}
-                      blockNumber={market.blockNumber}
-                      blockTimestamp={market.blockTimestamp}
-                      isMine={market.maker == account}
-                      handleSetInfoModalOpen={handleSetInfoModalOpen}
-                      setTicketForSetInfo={setTicketForSetInfo}
-                    />
-                  ))
-                : null}
-            </Box>
-          </Box>
-
-          {/* Right Column for Side Sections */}
+          {/* Left Column for Side Sections */}
           <Box flexBasis="300px">
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {hasMetamask ? (
                 active ? (
                   <>
                   
-                   <Typography
-                   sx={{
-                    fontFamily: "Poppins",
-                    fontWeight: "normal",
-                    lineHeight: "30px",
-                    fontSize: "20px",
-                    letterSpacing: "0.18px",
-                    margin: "0px 0px",
-                    background: "linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)",
-                    backgroundClip: "text", // Ensures the gradient applies to the text
-                    WebkitBackgroundClip: "text", // For Safari support
-                    color: "transparent", // Makes the text color transparent to show the gradient
-                    
-                  }}>
-                   
-                 <p>
-                      <h1>Welcome to Call-It!</h1>
-                      </p>
-                      </Typography>
+                  <div className="typography" variant="h5" gutterbottom="true">
+                      Welcome to Call-It!
+                      </div>
+                      <div className="container">
                     <div>
  <p style={{ textAlign: 'left' }}>
-                      <h2>USD balance is required to:
-                      <p>1) Create new markets</p> 
+                      <h1><b>USD balance is required to:</b></h1>
+                      <h2><p>1) Create new markets</p> 
                       <p>2) Buy call tickets w/ promo codes</p> 
-                      <p>3) Execute Arbitrage Price Parity for tickets</p> </h2>
+                      <p>3) Execute Arbitrage Price Parity for tickets</p></h2> 
                       </p>
                       {/* <p>USD balance is required to:</p>
                       <ul style={{ textAlign: 'left' }}>
@@ -540,7 +516,7 @@ export default function Home() {
                           <li>Execute Arbitrage Price Parity</li>
                       </ul> */}
                       
-                      <h3><p><u>Your Wallet Connected</u></p></h3>
+                      <h2><p><u>Your Wallet Connected</u></p></h2>
                       <p>
                       <h3><b>{account}</b></h3>
                       </p>
@@ -553,9 +529,11 @@ export default function Home() {
                     >
                       balance : ${balance != null ? balance : "Press me"}
                     </Button>
-                    <div>
+                    <div><h4>
                       To make a USD deposit, transfer native PLS to the CallitVault <b>{ADDR_VAULT}</b>
+                      </h4>
                     </div>
+                    <h3>
                     <Typography
                       sx={{
                         fontStyle: "normal",
@@ -572,8 +550,11 @@ export default function Home() {
                     >
                       Make deposit for someone else (testing)
                     </Typography>
+                    </h3>
+                    </div>
                   </>
                 ) : (
+                 <div className="button-container">
                   <div
                     className="button"
                     fullwidth="true"
@@ -583,13 +564,17 @@ export default function Home() {
                   >
                     CONNECT METAMASK
                   </div>
+                  </div>
                 )
               ) : (
+                <div className="button-container">
                 <h2>Install metamask, please.</h2>
+                </div>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
               {active ? (
+                 <div className="button-container">
                 <div
                   className="button"
                   fullwidth="true"
@@ -599,22 +584,29 @@ export default function Home() {
                 >
                   CREATE NEW MARKET
                 </div>
+                </div>
               ) : (
 <Box sx={{ textAlign: "center", marginTop: 4 }}>
+<div className="button-container">
   <button className="button1 disabled">
     CREATE NEW MARKET
   </button>
+  </div>
 </Box>
               )}
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            <div className="button-container">
               <div className="button1" fullwidth="true" variant="contained" color="warning">
                 CLAIM VOTER REWARDS
               </div>
+              </div>
             </Box>
             <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            <div className="button-container">
               <div className="button1" fullwidth="true" variant="contained" color="warning" >
                 CLAIM PROMOTOR REWARDS
+              </div>
               </div>
             </Box>
 
@@ -666,13 +658,52 @@ export default function Home() {
               </CardContent>
             </Card> */}
           </Box>
+          {/* RIght Column for Market Cards */}
+          <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            <div className="typography" variant="h5" gutterbottom="true">
+              Top Markets
+            </div>
+
+            {/* Market Cards */}
+            <Box
+              display="flex"
+              flexDirection="row"
+              flexWrap="wrap"
+              justifyContent="space-around"
+              sx={{ padding: 2 }}
+            >
+              {marketsList.length > 0
+                ? marketsList.map((market, index) => (
+                    <MarketCard
+                      account={account}
+                      id={market.marketNum}
+                      key={index}
+                      title={market.name}
+                      maker={market.maker}
+                      imgURL={market.imgURL}
+                      category={market.category}
+                      live={market.live}
+                      marketResults={market.marketResults}
+                      rules={market.rules}
+                      winningVoteResult={market.winningVoteResult}
+                      blockNumber={market.blockNumber}
+                      blockTimestamp={market.blockTimestamp}
+                      isMine={market.maker == account}
+                      handleSetInfoModalOpen={handleSetInfoModalOpen}
+                      setTicketForSetInfo={setTicketForSetInfo}
+                    />
+                  ))
+                : null}
+            </Box>
+          </Box>
+
         </Box>
       </Container>
 
       {/* Footer */}
       <Box
        sx={{
-        background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+        background: 'linear-gradient(40deg, #000000 0%, #1a1a1a 33%, #333333 67%, #4d4d4d 100%)',
         color: "#ffffff",
         padding: 2,
         marginTop: 6,
@@ -687,37 +718,51 @@ export default function Home() {
       </Box>
 
       <Container maxWidth="sm">
-      <center><Box sx={{ my: 4 }}>
-          <div className="typography" variant="h4" component="h1" gutterbottom="true" align="center"> 
-            Welcome to the Prediction Market App
-          </div>
-          <Link href="/about" passHref>
-          <Button
+  <Box sx={{ my: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Link href="/about" passHref>
+      <Button
         variant="contained"
         style={{
-          background: 'linear-gradient(to right, #00B6D1 0%, #314BFF 35%, #E200F3 67%, #FF0000 100%)',
+          background: 'linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)',
           color: 'white', // Ensures the text color is visible
           position: 'relative',
           zIndex: 1,
         }}
+        sx={{
+          mb: 2, // Margin bottom for spacing between buttons
+          width: ['100%', 'auto'], // Full width on small screens, auto width on larger screens
+        }}
       >
         About Us
       </Button>
+    </Link>
+    <Link href="/contact" passHref>
+      <Button
+        variant="outlined"
+        color="secondary"
+        sx={{
+          mb: 2,
+          width: ['100%', 'auto'],
+        }}
+      >
+        Contact Us
+      </Button>
+    </Link>
+    <Link href="/market" passHref>
+      <Button
+        variant="outlined"
+        color="secondary"
+        sx={{
+          mb: 2,
+          width: ['100%', 'auto'],
+        }}
+      >
+        Market Page
+      </Button>
+    </Link>
+  </Box>
+</Container>
 
-          </Link>
-          <Link href="/contact" passHref>
-            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
-              Contact Us
-            </Button>
-          </Link>
-          <Link href="/market" passHref>
-            <Button variant="outlined" color="secondary" sx={{ ml: 2 }}>
-              Market Page
-            </Button>
-          </Link>
-        </Box></center>
-        <div></div>
-      </Container>
 
       {/* Modal */}
       <CreateMarketModal
