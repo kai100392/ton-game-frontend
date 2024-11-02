@@ -16,6 +16,8 @@ export const makeNewMarket = async (contract, params) => {
     _dtResultVoteEnd,
     _resultLabels,
     _resultDescrs,
+    _altTokAddress, // New parameter
+    _altTokAmnt // New parameter
   } = params;
   console.log("contract--", _resultLabels);
   try {
@@ -27,6 +29,8 @@ export const makeNewMarket = async (contract, params) => {
       _dtResultVoteEnd,
       _resultLabels,
       _resultDescrs,
+      _altTokAddress, // Pass new parameter
+      _altTokAmnt, // Pass new parameter
       gasOptions
     );
     // Wait for the transaction to be mined
@@ -40,12 +44,14 @@ export const makeNewMarket = async (contract, params) => {
 
 // Buy call ticket with promo code
 export const buyCallTicketWithPromoCode = async (contract, params) => {
-  const { _ticket, _promoCodeHash, _usdAmnt } = params;
+  const { _ticket, _promoCodeHash, _usdAmnt, _altTokAddress, _altTokAmnt } = params; // New parameters
   try {
     const tx = await contract.buyCallTicketWithPromoCode(
       _ticket,
       _promoCodeHash,
       _usdAmnt,
+      _altTokAddress, // Pass new parameter
+      _altTokAmnt, // Pass new parameter
       gasOptions
     );
     // Wait for the transaction to be mined
@@ -57,11 +63,16 @@ export const buyCallTicketWithPromoCode = async (contract, params) => {
   }
 };
 
-// Execute air parity for ticket
+// Execute arbitrage parity for ticket
 export const exeArbPriceParityForTicket = async (contract, params) => {
-  const { _ticket } = params;
+  const { _ticket, _altTokAddress, _altTokAmnt } = params; // New parameters
   try {
-    const tx = await contract.exeArbPriceParityForTicket(_ticket, gasOptions);
+    const tx = await contract.exeArbPriceParityForTicket(
+      _ticket,
+      _altTokAddress, // Pass new parameter
+      _altTokAmnt, // Pass new parameter
+      gasOptions
+    );
     // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
@@ -76,7 +87,6 @@ export const closeMarketCallsForTicket = async (contract, params) => {
   const { _ticket } = params;
   try {
     const tx = await contract.closeMarketCallsForTicket(_ticket);
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -95,7 +105,6 @@ export const castVoteForMarketTicket = async (contract, params) => {
       _markHash,
       gasOptions
     );
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -109,7 +118,6 @@ export const closeMarketForTicket = async (contract, params) => {
   const { _ticket } = params;
   try {
     const tx = await contract.closeMarketForTicket(_ticket);
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -123,7 +131,6 @@ export const claimTicketRewards = async (contract, params) => {
   const { _ticket, _resultAgree } = params;
   try {
     const tx = await contract.claimTicketRewards(_ticket, _resultAgree);
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -136,7 +143,6 @@ export const claimTicketRewards = async (contract, params) => {
 export const claimVoterRewards = async (contract) => {
   try {
     const tx = await contract.claimVoterRewards();
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -150,7 +156,6 @@ export const claimPromotorRewards = async (contract, params) => {
   const { _promoCodeHash } = params;
   try {
     const tx = await contract.claimPromotorRewards(_promoCodeHash);
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -171,7 +176,6 @@ export const setMarketInfo = async (contract, params) => {
       _imgUrl,
       gasOptions
     );
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -183,7 +187,7 @@ export const setMarketInfo = async (contract, params) => {
 // Get Market Information For Maker
 export const getMarketsForMaker = async (contract, params) => {
   const { _maker, _liveAll, _idxStart, _retCnt } = params;
-  console.log("gMFMcontract--", _category);
+  console.log("gMFMcontract--", _maker);
   try {
     const tx = await contract.getMarketsForMaker(
       _maker,
@@ -191,7 +195,6 @@ export const getMarketsForMaker = async (contract, params) => {
       _idxStart,
       _retCnt
     );
-    // Wait for the transaction to be mined
     await tx.wait();
     console.log("Transaction successful:", tx);
   } catch (error) {
@@ -200,7 +203,7 @@ export const getMarketsForMaker = async (contract, params) => {
   }
 };
 
-//Get Marketget Count For Category or Maker
+// Get Market Count For Category or Maker
 export const getMarketCntForMakerOrCategory = async (contract, params) => {
   const { _maker, _category } = params;
   console.log("params:", params);
@@ -208,7 +211,6 @@ export const getMarketCntForMakerOrCategory = async (contract, params) => {
     const tx = await contract.getMarketCntForMakerOrCategory(
       _maker,
       _category
-      // gasOptions
     );
     return tx.toNumber();
   } catch (error) {
@@ -228,18 +230,16 @@ export const getMarketsForMakerOrCategory = async (contract, params) => {
       _live,
       _idxStart,
       _retCnt
-      // gasOptions
     );
-    // Wait for the transaction to be mined
     console.log("GetMarkets executed successfully:", tx);
     return tx;
   } catch (error) {
     console.error("Error in getMarketsForMakerOrCategory:", error);
     throw error;
   }
-  console.log("getMarketsForCategoryOrMaker", params);
 };
 
+// Get USD Balance
 export const getUSDBalance = async (contract, params) => {
   const { _acct } = params;
   try {
@@ -251,15 +251,17 @@ export const getUSDBalance = async (contract, params) => {
   }
 };
 
+// Deposit to Vault
 export const depositToVault = async (contract, params) => {
   const { _depositor, _value } = params;
   try {
     await contract.deposit(_depositor, _value);
   } catch (error) {
-    console.error("Error fetching balance:", error);
+    console.error("Error in depositToVault:", error);
   }
 };
 
+// Get Market Hashes for Maker or Category
 export const getMarketHashesForMakerOrCategory = async (contract, params) => {
   const { _category, _maker, _all, _live, _idxStart, _retCnt } = params;
   try {
@@ -270,9 +272,7 @@ export const getMarketHashesForMakerOrCategory = async (contract, params) => {
       _live,
       _idxStart,
       _retCnt
-      // gasOptions
     );
-    // Wait for the transaction to be mined
     console.log("GetMarketHashes executed successfully:", tx);
     return tx;
   } catch (error) {
@@ -281,16 +281,12 @@ export const getMarketHashesForMakerOrCategory = async (contract, params) => {
   }
 };
 
+// Get Market for Ticket
 export const getMarketForTicket = async (contract, params) => {
-  console.log("getMarketForTicket params;", params);
+  console.log("getMarketForTicket params...", params);
   const { _ticket } = params;
   try {
-    const tx = await contract.getMarketForTicket(
-      _ticket
-      // gasOptions
-    );
-    // Wait for the transaction to be mined
-    console.log("GetMarketForTicket executed successfully:", tx);
+    const tx = await contract.getMarketForTicket(_ticket);
     return tx;
   } catch (error) {
     console.error("Error in getMarketForTicket:", error);
