@@ -16,7 +16,7 @@ import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
-const RoomCard = ({}) => {
+const RoomCard = ({ title }) => {
   const router = useRouter();
 
   return (
@@ -32,10 +32,6 @@ const RoomCard = ({}) => {
         boxShadow: 3,
         margin: "auto auto 10px auto", // Reduce margin above grid columns
         display: "grid", // Change display to grid
-        gridTemplateColumns: {
-          xs: "1fr", // One column on mobile devices
-          sm: "repeat(2, 1fr)", // Two columns for larger devices
-        },
         gap: "1rem", // Reduce space between grid items
         padding: "10px 10px 10px 10px" /* Top, Right, Bottom, Left */,
         boxSizing: "border-box", // Ensure padding and border are included in width/height
@@ -62,7 +58,7 @@ const RoomCard = ({}) => {
     >
       <Link
         href={{
-          pathname: `/`,
+          pathname: `/market/${title}`,
         }}
         passHref
       >
@@ -71,21 +67,17 @@ const RoomCard = ({}) => {
           <Box
             display="flex"
             alignItems="center"
-            mb={2}
-            justifyContent="space-between"
+            mb={1}
+            justifyContent="space-around"
           >
             <Avatar
               alt="Presidential Seal"
               src="/vote_img.jpg"
               sx={{ width: 40, height: 40, marginRight: 2 }}
             />
-            <Typography variant="h6" component="div">
-              title
+            <Typography variant="h4" component="div">
+              {`${title} TON ROOM`}
             </Typography>
-
-            <IconButton aria-label="settings" size="small" disabled>
-              <SettingsOutlined />
-            </IconButton>
           </Box>
 
           {/* Middle Section: Stats */}

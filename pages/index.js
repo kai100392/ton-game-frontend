@@ -387,63 +387,6 @@ export default function Home() {
             </div>
           </Typography>
 
-          {/* Category Dropdown */}
-          <FormControl
-            margin="none"
-            sx={{
-              width: 150,
-              mx: 4,
-              border: "1px solid white", // Adds a white border
-              borderRadius: "4px", // Optional: Adds rounded corners
-              "&:hover": {
-                border: "1px solid white", // Keeps the border white on hover
-              },
-              "&.Mui-focused": {
-                border: "1px solid white", // Keeps the border white when focused
-              },
-            }}
-          >
-            <Select
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-              value={marketCategory}
-              onChange={handleCategorySelect}
-              sx={{
-                padding: 0,
-                color: "white", // Makes the font white
-                "& .MuiSelect-select": {
-                  padding: "8px 16px", // Adjusts padding to make it look better
-                },
-              }}
-              MenuProps={{
-                PaperProps: {
-                  sx: {
-                    backgroundColor: "black", // Makes the dropdown background black
-                    color: "white", // Ensures the font in the dropdown is also white
-                  },
-                },
-              }}
-            >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="Sports">Sports</MenuItem>
-              <MenuItem value="Current Events">Current Events</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </FormControl>
-
-          {/* My Markets */}
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={onlyMyMarkets}
-                  onChange={handleMarketCheck}
-                />
-              }
-              label={`My Markets`}
-            />
-          </FormGroup>
-
           {/* Search Bar */}
           <Search style={{ backgroundColor: "black" }}>
             <SearchIconWrapper>
@@ -454,6 +397,8 @@ export default function Home() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          {/* Connect Wallet Button */}
+          <Button>Connect</Button>
         </Toolbar>
       </div>
 
@@ -487,8 +432,8 @@ export default function Home() {
             justifyContent="space-around"
             sx={{ padding: 2 }}
           >
-            {[1, 2, 3, 4].map((market, index) => (
-              <RoomCard />
+            {[1, 2, 3, 4].map((weight, index) => (
+              <RoomCard title={weight} />
             ))}
           </Box>
         </Box>
