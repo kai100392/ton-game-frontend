@@ -28,7 +28,6 @@ import {
   Checkbox,
 } from "@mui/material";
 
-
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import {
@@ -62,6 +61,7 @@ import {
   ADDR_DELEGATE,
 } from "../constants/address";
 import DepositToVaultModal from "../components/DepositToVaultModal";
+import RoomCard from "../components/RoomCard";
 
 // version display
 export const currentVersion = "0.41";
@@ -257,7 +257,7 @@ export default function Home() {
       const usdBalance = await getUSDBalance(contract, {
         _acct: account,
       });
-      setBalance(usdBalance.toNumber() / 10**6);
+      setBalance(usdBalance.toNumber() / 10 ** 6);
     } catch (error) {
       console.error("Error getting your balance:", error);
     }
@@ -334,8 +334,6 @@ export default function Home() {
     handleDepositModalClose();
   };
 
-  
-
   // Add similar handlers for all other functions like exeAerriceParityForTicket, castVoteForMarketTicket, claim rewards, etc.
 
   useEffect(() => {
@@ -358,411 +356,215 @@ export default function Home() {
       console.log("Please install MetaMask");
     }
   }
-  
 
   return (
     <>
       {/* Top Navigation */}
       <div className="navbar" position="static" color="default" elevation={0}>
-      <Toolbar>
-      <Typography
-      variant="h6"
-      color="inherit"
-      noWrap
-      sx={{ flexGrow: 1 }}
-      style={{ cursor: "pointer" }}
-      component="a"
-      href="/"
-    >
-      <div
-        onMouseEnter={() => setIsHovered(true)}   // Set hover state to true on mouse enter
-        onMouseLeave={() => setIsHovered(false)}  // Set hover state to false on mouse leave
-        onClick={() => router.push("/")}          // Navigate on click
-        className="logo-container"
-      >
-        <Image
-          src={isHovered ? "/logo.png" : "/logo_short.png"} // Switch image based on hover state
-          alt="Call-It Logo"
-          width={150}
-          height={50}
-          className={isHovered ? "slide-right" : "slide-left"} // Apply CSS class based on hover state
-        />
-      </div>
-    </Typography>
+        <Toolbar>
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+            style={{ cursor: "pointer" }}
+            component="a"
+            href="/"
+          >
+            <div
+              onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
+              onMouseLeave={() => setIsHovered(false)} // Set hover state to false on mouse leave
+              onClick={() => router.push("/")} // Navigate on click
+              className="logo-container"
+            >
+              <Image
+                src={isHovered ? "/logo.png" : "/logo_short.png"} // Switch image based on hover state
+                alt="Call-It Logo"
+                width={150}
+                height={50}
+                className={isHovered ? "slide-right" : "slide-left"} // Apply CSS class based on hover state
+              />
+            </div>
+          </Typography>
 
           {/* Category Dropdown */}
           <FormControl
-  margin="none"
-  sx={{
-    width: 150,
-    mx: 4,
-    border: '1px solid white', // Adds a white border
-    borderRadius: '4px', // Optional: Adds rounded corners
-    '&:hover': {
-      border: '1px solid white', // Keeps the border white on hover
-    },
-    '&.Mui-focused': {
-      border: '1px solid white', // Keeps the border white when focused
-    },
-  }}
->
-  <Select
-    displayEmpty
-    inputProps={{ "aria-label": "Without label" }}
-    value={marketCategory}
-    onChange={handleCategorySelect}
-    sx={{
-      padding: 0,
-      color: 'white', // Makes the font white
-      '& .MuiSelect-select': {
-        padding: '8px 16px', // Adjusts padding to make it look better
-      },
-    }}
-    MenuProps={{
-      PaperProps: {
-        sx: {
-          backgroundColor: 'black', // Makes the dropdown background black
-          color: 'white', // Ensures the font in the dropdown is also white
-        },
-      },
-    }}
-  >
-    <MenuItem value="">All</MenuItem>
-    <MenuItem value="Sports">Sports</MenuItem>
-    <MenuItem value="Current Events">Current Events</MenuItem>
-    <MenuItem value="Other">Other</MenuItem>
-  </Select>
-</FormControl>
-
+            margin="none"
+            sx={{
+              width: 150,
+              mx: 4,
+              border: "1px solid white", // Adds a white border
+              borderRadius: "4px", // Optional: Adds rounded corners
+              "&:hover": {
+                border: "1px solid white", // Keeps the border white on hover
+              },
+              "&.Mui-focused": {
+                border: "1px solid white", // Keeps the border white when focused
+              },
+            }}
+          >
+            <Select
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+              value={marketCategory}
+              onChange={handleCategorySelect}
+              sx={{
+                padding: 0,
+                color: "white", // Makes the font white
+                "& .MuiSelect-select": {
+                  padding: "8px 16px", // Adjusts padding to make it look better
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "black", // Makes the dropdown background black
+                    color: "white", // Ensures the font in the dropdown is also white
+                  },
+                },
+              }}
+            >
+              <MenuItem value="">All</MenuItem>
+              <MenuItem value="Sports">Sports</MenuItem>
+              <MenuItem value="Current Events">Current Events</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
 
           {/* My Markets */}
           <FormGroup>
-            <FormControlLabel 
+            <FormControlLabel
               control={
-                <Checkbox 
-                checked={onlyMyMarkets}
-                onChange={handleMarketCheck}
-            
-              />
+                <Checkbox
+                  checked={onlyMyMarkets}
+                  onChange={handleMarketCheck}
+                />
               }
               label={`My Markets`}
             />
           </FormGroup>
 
           {/* Search Bar */}
-          <Search style={{ backgroundColor: 'black' }}>
-  <SearchIconWrapper>
-    <SearchIcon />
-  </SearchIconWrapper>
-  <StyledInputBase
-    placeholder="Search markets"
-    inputProps={{ "aria-label": "search" }}
-  />
-</Search>
+          <Search style={{ backgroundColor: "black" }}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search markets"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
         </Toolbar>
       </div>
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ marginTop: 4 }}>
-        <Stack spacing={2} alignItems="center">
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={handlePaginationChange}
-          />
-         
-                    <div className="typography" variant="h10" component="h5" gutterbottom="true" align="center"> 
-                    <Image
-  src="/logo.png"
-  alt="Call-It Logo"
-  width={300}
-  height={100}
-  onClick={() => router.push("/")}
-  
-/>
-
-          </div>
-          <p>Decentralized, Democratized Betting Markets</p>
-       <br />
-        </Stack>
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", md: "row" }}
-          justifyContent="space-between"
+        <div
+          className="typography"
+          variant="h10"
+          component="h5"
+          gutterbottom="true"
+          align="center"
         >
+          <Image
+            src="/logo.png"
+            alt="Call-It Logo"
+            width={300}
+            height={100}
+            onClick={() => router.push("/")}
+          />
+        </div>
+        <div className="typography" variant="h5" gutterbottom="true">
+          TON Smart Game
+        </div>
 
-          {/* Left Column for Side Sections */}
-          <Box flexBasis="300px">
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              {hasMetamask ? (
-                active ? (
-                  <>
-                  
-                  <div className="typography" variant="h5" gutterbottom="true">
-                      Welcome to Call-It!
-                      </div>
-                      <div className="container">
-                    <div>
- <p style={{ textAlign: 'left' }}>
-                      <h1><b>USD balance is required to:</b></h1>
-                      <h2><p>1) Create new markets</p> 
-                      <p>2) Buy call tickets w/ promo codes</p> 
-                      <p>3) Execute Arbitrage Price Parity for tickets</p></h2> 
-                      </p>
-                      {/* <p>USD balance is required to:</p>
-                      <ul style={{ textAlign: 'left' }}>
-                          <li>create markets</li>
-                          <li>Make calls with promo codes</li>
-                          <li>Execute Arbitrage Price Parity</li>
-                      </ul> */}
-                      
-                      <h2><p><u>Your Wallet Connected</u></p></h2>
-                      <p>
-                      <h3><b>{account}</b></h3>
-                      </p>
-                    </div>
-                    <Button
-                      fullwidth="true"
-                      variant="outlined"
-                      color="info"
-                      onClick={handleGetBalance}
-                    >
-                      balance : ${balance != null ? balance : "Press me"}
-                    </Button>
-                    <div><h4>
-                      To make a USD deposit, transfer native PLS to the CallitVault <b>{ADDR_VAULT}</b>
-                      </h4>
-                    </div>
-                    <h3>
-                    <Typography
-                      sx={{
-                        fontStyle: "normal",
-                        fontWeight: "normal",
-                        lineHeight: "24px",
-                        fontSize: "14px",
-                        letterSpacing: "0.18px",
-                        color: "#FFFFFF",
-                        margin: "0px 0px",
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                      onClick={handleDepositModalOpen}
-                    >
-                      Make deposit for someone else (testing)
-                    </Typography>
-                    </h3>
-                    </div>
-                  </>
-                ) : (
-                 <div className="button-container">
-                  <div
-                    className="button"
-                    fullwidth="true"
-                    variant="contained"
-                    color="error"
-                    onClick={connectWallet}
-                  >
-                    CONNECT METAMASK
-                  </div>
-                  </div>
-                )
-              ) : (
-                <div className="button-container">
-                <h2>Install metamask, please.</h2>
-                </div>
-              )}
-            </Box>
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
-              {active ? (
-                 <div className="button-container">
-                <div
-                  className="button"
-                  fullwidth="true"
-                  variant="contained"
-                  color="error"
-                  onClick={handleCreateModalOpen}
-                >
-                  CREATE NEW MARKET
-                </div>
-                </div>
-              ) : (
-<Box sx={{ textAlign: "center", marginTop: 4 }}>
-<div className="button-container">
-  <button className="button1 disabled">
-    CREATE NEW MARKET
-  </button>
-  </div>
-</Box>
-              )}
-            </Box>
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
-            <div className="button-container">
-              <div className="button1" fullwidth="true" variant="contained" color="warning">
-                CLAIM VOTER REWARDS
-              </div>
-              </div>
-            </Box>
-            <Box sx={{ textAlign: "center", marginTop: 4 }}>
-            <div className="button-container">
-              <div className="button1" fullwidth="true" variant="contained" color="warning" >
-                CLAIM PROMOTOR REWARDS
-              </div>
-              </div>
-            </Box>
-
-            {/* Sidebar Widget: Election Forecast */}
-            {/* <Card sx={{ marginBottom: 2 }}>
-              <CardContent>
-                <Typography variant="h6">2024 Election Forecast</Typography>
-                <Button variant="contained" fullwidth="true" sx={{ marginTop: 2 }}>
-                  View
-                </Button>
-              </CardContent>
-            </Card> */}
-
-            {/* Sidebar Widget: Recent Activity */}
-            {/* <Card sx={{ marginBottom: 2 }}>
-              <CardContent>
-                <Typography variant="h6" gutterbottom="true">
-                  Recent Activity
-                </Typography>
-                {["User1 bet $1000 on Harris", "User2 bet $2000 on Trump"].map(
-                  (activity, index) => (
-                    <Typography
-                      key={index}
-                      variant="body2"
-                      color="text.secondary"
-                    >
-                      {activity}
-                    </Typography>
-                  )
-                )}
-              </CardContent>
-            </Card> */}
-
-            {/* Sidebar Widget: Top Volume */}
-            {/* <Card>
-              <CardContent>
-                <Typography variant="h6" gutterbottom="true">
-                  Top Volume This Week
-                </Typography>
-                {["UserA: $1.2m", "UserB: $800k"].map((volume, index) => (
-                  <Typography
-                    key={index}
-                    variant="body2"
-                    color="text.secondary"
-                  >
-                    {volume}
-                  </Typography>
-                ))}
-              </CardContent>
-            </Card> */}
+        <Box sx={{ textAlign: "center", marginTop: 4 }}>
+          {/* Room Cards */}
+          <Box
+            display="flex"
+            flexDirection="row"
+            flexWrap="wrap"
+            justifyContent="space-around"
+            sx={{ padding: 2 }}
+          >
+            {[1, 2, 3, 4].map((market, index) => (
+              <RoomCard />
+            ))}
           </Box>
-          {/* RIght Column for Market Cards */}
-          <Box sx={{ textAlign: "center", marginTop: 4 }}>
-            <div className="typography" variant="h5" gutterbottom="true">
-              Top Markets
-            </div>
-
-            {/* Market Cards */}
-            <Box
-              display="flex"
-              flexDirection="row"
-              flexWrap="wrap"
-              justifyContent="space-around"
-              sx={{ padding: 2 }}
-            >
-              {marketsList.length > 0
-                ? marketsList.map((market, index) => (
-                    <MarketCard
-                      account={account}
-                      id={market.marketNum}
-                      key={index}
-                      title={market.name}
-                      maker={market.maker}
-                      imgURL={market.imgURL}
-                      category={market.category}
-                      live={market.live}
-                      marketResults={market.marketResults}
-                      rules={market.rules}
-                      winningVoteResult={market.winningVoteResult}
-                      blockNumber={market.blockNumber}
-                      blockTimestamp={market.blockTimestamp}
-                      isMine={market.maker == account}
-                      handleSetInfoModalOpen={handleSetInfoModalOpen}
-                      setTicketForSetInfo={setTicketForSetInfo}
-                    />
-                  ))
-                : null}
-            </Box>
-          </Box>
-
         </Box>
       </Container>
 
       {/* Footer */}
       <Box
-       sx={{
-        background: 'linear-gradient(40deg, #000000 0%, #1a1a1a 33%, #333333 67%, #4d4d4d 100%)',
-        color: "#ffffff",
-        padding: 2,
-        marginTop: 6,
-        fontWeight: 'bold', // This makes the font bold
-      }}
+        sx={{
+          background:
+            "linear-gradient(40deg, #000000 0%, #1a1a1a 33%, #333333 67%, #4d4d4d 100%)",
+          color: "#ffffff",
+          padding: 2,
+          marginTop: 6,
+          fontWeight: "bold", // This makes the font bold
+        }}
       >
         <Container maxWidth="lg">
-          <Typography variant="body1" align="center"  fontWeight="bold">
+          <Typography variant="body1" align="center" fontWeight="bold">
             © 2024 CALL-It. All rights reserved.
           </Typography>
         </Container>
       </Box>
 
       <Container maxWidth="sm">
-  <Box sx={{ my: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Link href="/about" passHref>
-      <Button
-        variant="contained"
-        style={{
-          background: 'linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)',
-          color: 'white', // Ensures the text color is visible
-          position: 'relative',
-          zIndex: 1,
-        }}
-        sx={{
-          mb: 2, // Margin bottom for spacing between buttons
-          width: ['100%', 'auto'], // Full width on small screens, auto width on larger screens
-        }}
-      >
-        About Us
-      </Button>
-    </Link>
-    <Link href="/contact" passHref>
-      <Button
-        variant="outlined"
-        color="secondary"
-        sx={{
-          mb: 2,
-          width: ['100%', 'auto'],
-        }}
-      >
-        Contact Us
-      </Button>
-    </Link>
-    <Link href="/market" passHref>
-      <Button
-        variant="outlined"
-        color="secondary"
-        sx={{
-          mb: 2,
-          width: ['100%', 'auto'],
-        }}
-      >
-        Market Page
-      </Button>
-    </Link>
-  </Box>
-</Container>
-
+        <Box
+          sx={{
+            my: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Link href="/about" passHref>
+            <Button
+              variant="contained"
+              style={{
+                background:
+                  "linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%)",
+                color: "white", // Ensures the text color is visible
+                position: "relative",
+                zIndex: 1,
+              }}
+              sx={{
+                mb: 2, // Margin bottom for spacing between buttons
+                width: ["100%", "auto"], // Full width on small screens, auto width on larger screens
+              }}
+            >
+              About Us
+            </Button>
+          </Link>
+          <Link href="/contact" passHref>
+            <Button
+              variant="outlined"
+              color="secondary"
+              sx={{
+                mb: 2,
+                width: ["100%", "auto"],
+              }}
+            >
+              Contact Us
+            </Button>
+          </Link>
+          <Link href="/market" passHref>
+            <Button
+              variant="outlined"
+              color="secondary"
+              sx={{
+                mb: 2,
+                width: ["100%", "auto"],
+              }}
+            >
+              Market Page
+            </Button>
+          </Link>
+        </Box>
+      </Container>
 
       {/* Modal */}
       <CreateMarketModal
