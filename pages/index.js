@@ -357,7 +357,7 @@ export default function Home() {
               sx={{ padding: 4 }}
             >
               {[1, 2, 3, 4].map((weight, index) => (
-                <RoomCard weight={weight} />
+                <RoomCard weight={weight} key={index} />
               ))}
             </Box>
           </Box>
