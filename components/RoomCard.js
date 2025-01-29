@@ -62,7 +62,13 @@ const RoomCard = ({ weight }) => {
         }}
         passHref
       >
-        <CardContent>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           {/* Top Section: Icon and Title */}
           <Box
             display="flex"
@@ -72,7 +78,7 @@ const RoomCard = ({ weight }) => {
           >
             <Avatar
               alt="Presidential Seal"
-              src="/vote_img.jpg"
+              src="/ton-logo.png"
               sx={{ width: 40, height: 40, marginRight: 2 }}
             />
             <Typography variant="h4" component="div">
@@ -82,21 +88,12 @@ const RoomCard = ({ weight }) => {
 
           {/* Middle Section: Stats */}
           <Box>
-            <Box display="flex" alignItems="center">
+            <Box display="flex" alignItems="right">
               <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
               <Typography variant="body2" color="text.secondary">
                 category
               </Typography>
             </Box>
-            <Box display="flex" alignItems="center">
-              <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
-              <Typography variant="body2" color="text.secondary">
-                live
-              </Typography>
-            </Box>
-            <IconButton aria-label="comments" size="small">
-              <CommentOutlinedIcon />
-            </IconButton>
           </Box>
         </CardContent>
       </Link>

@@ -44,10 +44,10 @@ const RoomPage = () => {
             href="/"
           >
             <Image
-              src="/logo.png"
-              alt="Call-It Logo"
-              width={150}
-              height={50}
+              src="/ton.png"
+              alt="TON-Game Logo"
+              width={70}
+              height={70}
               onClick={() => router.push("/")}
             />
             {`v${currentVersion}`}
@@ -113,8 +113,8 @@ const RoomPage = () => {
                 }}
               >
                 <Avatar
-                  alt="Vote"
-                  src="/vote_img.jpg"
+                  alt="logo"
+                  src="/ton-logo.png"
                   sx={{
                     width: { xs: 50, sm: 80 }, // Smaller width for mobile, larger for desktop
                     height: { xs: 50, sm: 80 },

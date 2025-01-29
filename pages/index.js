@@ -66,7 +66,7 @@ import DepositToVaultModal from "../components/DepositToVaultModal";
 import RoomCard from "../components/RoomCard";
 
 // version display
-export const currentVersion = "0.41";
+export const currentVersion = "0.0.3";
 
 export const injected = new InjectedConnector();
 
@@ -322,12 +322,13 @@ export default function Home() {
                 >
                   <Image
                     src={"/ton.png"} // Switch image based on hover state
-                    alt="Call-It Logo"
+                    alt="TON-Game Logo"
                     width={70}
                     height={70}
                     className={isHovered ? "slide-right" : "slide-left"} // Apply CSS class based on hover state
                   />
                 </div>
+                {`v${currentVersion}`}
               </Typography>
 
               <TonConnectButton />
@@ -356,7 +357,7 @@ export default function Home() {
               justifyContent="space-around"
               sx={{ padding: 4 }}
             >
-              {[1, 2, 3, 4].map((weight, index) => (
+              {[1, 2, 3, 0.5].map((weight, index) => (
                 <RoomCard weight={weight} key={index} />
               ))}
             </Box>
