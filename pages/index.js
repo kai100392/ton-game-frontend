@@ -68,296 +68,11 @@ import RoomCard from "../components/RoomCard";
 // version display
 export const currentVersion = "0.41";
 
-// Custom style for the search bar
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#f1f1f1",
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-    },
-  },
-}));
-
 export const injected = new InjectedConnector();
 
 export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
-  //Wallet Connecting States
-  const [balance, setBalance] = useState(null);
-  const [hasMetamask, setHasMetamask] = useState(null);
-  const {
-    active,
-    activate,
-    chainId,
-    account,
-    library: provider,
-  } = useWeb3React();
-
-  //Markets Management States
-  const [onlyMyMarkets, setOnlyMyMarkets] = useState(false); //Checkbox for mine filter
-  const [marketCategory, setMarketCategory] = useState(""); //Combobox for category filter
-  const [marketsList, setMarketsList] = useState([]); //Main Data for Grid View
-  let marketsArray = [];
-  const [ticketForSetInfo, setTicketForSetInfo] = useState(""); // input as _anyTicket for SM setMarketInfo
-
-  //Modal Control States
-  const [createModalopen, setCreateModalOpen] = useState(false);
-  const [setInfoModalOpen, setSetInfoModalOpen] = useState(false);
-  const [depositModalOpen, setDepositModalOpen] = useState(false);
-
-  //For Pagination
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const maxCntPerPage = 6;
-  const handlePaginationChange = (event, value) => {
-    setPage(value);
-  };
-
-  // Using useEffect to fetch data when the component mounts
-  const [loading, setLoading] = useState(true); // For Spinner Screen - potential
-  useEffect(() => {
-    refreshMarketList();
-    handleGetBalance();
-  }, [account, onlyMyMarkets, marketCategory, page, totalPages]); // Empty dependency array means this effect runs only once when the component mounts
-
-  const refreshMarketList = async () => {
-    console.log("Market List refreshing...");
-    if (account == undefined) {
-      setLoading(false);
-      return;
-    }
-
-    let maker = "";
-    if (onlyMyMarkets) maker = account;
-    else maker = "0x0000000000000000000000000000000000000000";
-
-    const marektCnt = await handleGetMarketCntForMakerOrCategory({
-      _maker: maker,
-      // _maker: account,
-      _category: marketCategory,
-    });
-    console.log("market count: ", marektCnt);
-
-    //page control
-    setTotalPages(Math.ceil(marektCnt / maxCntPerPage));
-    console.log("ceil value is ", Math.ceil(marektCnt / maxCntPerPage));
-    console.log("totalPage is ", totalPages);
-
-    let idxStart = (page - 1) * maxCntPerPage;
-    let retCnt =
-      page < totalPages
-        ? maxCntPerPage
-        : marektCnt % maxCntPerPage == 0
-        ? maxCntPerPage
-        : marektCnt % maxCntPerPage;
-    const params = {
-      _category: marketCategory,
-      _maker: maker,
-      _all: true,
-      _live: true,
-      _idxStart: idxStart,
-      _retCnt: retCnt,
-    };
-    console.log("getMarkets Function's params: ", params);
-    const tempArray = await handleGetMarketsForMakerOrCategory(params);
-    if (tempArray == undefined) return;
-    console.log("marketArray displays :", tempArray.length);
-    for (let i = 0; i < tempArray.length; i++) {
-      marketsArray[i] = {
-        marketNum: tempArray[i]["marketNum"],
-        name: tempArray[i]["name"],
-        imgURL: tempArray[i]["imgURL"],
-        maker: tempArray[i]["maker"],
-        category: tempArray[i]["category"],
-        live: tempArray[i]["live"],
-        rules: tempArray[i]["rules"],
-        winningVoteResult: tempArray[i]["winningVoteResult"],
-        blockNumber: tempArray[i]["blockNumber"],
-        blockTimestamp: tempArray[i]["blockTimestamp"],
-        marketResults: { resultLabels: [], resultOptionTokens: [] },
-      };
-      for (
-        let j = 0;
-        j < tempArray[i]["marketResults"]["resultLabels"].length;
-        j++
-      ) {
-        marketsArray[i].marketResults.resultLabels[j] =
-          tempArray[i]["marketResults"]["resultLabels"][j];
-        marketsArray[i].marketResults.resultOptionTokens[j] =
-          tempArray[i]["marketResults"]["resultOptionTokens"][j];
-      }
-    }
-    setMarketsList(marketsArray);
-    setLoading(false);
-    console.log("Market List Updated");
-  };
-  //Functions to manage markets
-  const handleMarketCheck = () => {
-    if (onlyMyMarkets) setOnlyMyMarkets(false);
-    else setOnlyMyMarkets(true);
-  };
-  const handleCategorySelect = (event) => {
-    setMarketCategory(event.target.value); // Update the age state based on the selected value
-  };
-
-  // Functions to handle modal actions
-  const handleCreateModalOpen = () => setCreateModalOpen(true);
-
-  const handleCreateModalClose = () => setCreateModalOpen(false);
-
-  const handleSetInfoModalOpen = () => setSetInfoModalOpen(true);
-
-  const handleSetInfoModalClose = () => setSetInfoModalOpen(false);
-
-  const handleDepositModalOpen = () => setDepositModalOpen(true);
-
-  const handleDepositModalClose = () => setDepositModalOpen(false);
-
-  // Connect to MetaMask
-  const connectWallet = async () => {
-    try {
-      await activate(injected);
-      setHasMetamask(true);
-      console.log("User's wallet address:", account);
-    } catch (error) {
-      console.error("Error connecting to MetaMask:", error);
-    }
-  };
-
-  // Get balance from vault
-  const handleGetBalance = async () => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
-      const usdBalance = await getUSDBalance(contract, {
-        _acct: account,
-      });
-      setBalance(usdBalance.toNumber() / 10 ** 6);
-    } catch (error) {
-      console.error("Error getting your balance:", error);
-    }
-  };
-
-  // Trigger market creation
-  const handleCreateMarket = async (marketParams) => {
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-
-    try {
-      await makeNewMarket(contract, marketParams);
-      console.log("Market created successfully!");
-    } catch (error) {
-      console.error("Error creating market:", error);
-    }
-    await refreshMarketList();
-    handleGetBalance();
-    handleCreateModalClose();
-  };
-
-  // Trigger set market infomation
-  const handleSetMarketInfo = async (params) => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      await setMarketInfo(contract, params);
-      console.log("Market Info Updated!");
-    } catch (error) {
-      console.error("Error creating market:", error);
-    }
-    await refreshMarketList();
-    handleSetInfoModalClose();
-  };
-
-  // Trigger
-  const handleGetMarketsForMakerOrCategory = async (params) => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      const marketsArray = await getMarketsForMakerOrCategory(contract, params);
-      // await getMarketHashesForMakerOrCategory(contract,params); //TEST
-
-      return marketsArray;
-    } catch (error) {
-      console.error("Error getting markets:", error);
-    }
-  };
-
-  // Trigger
-  const handleGetMarketCntForMakerOrCategory = async (params) => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_FACT, factoryAbi, signer);
-      const count = await getMarketCntForMakerOrCategory(contract, params);
-      console.log("Market Count For Category Called: ", count);
-      return count;
-    } catch (error) {
-      console.error("Error getting markets:", error);
-    }
-  };
-
-  // Trigger
-  const handleDepositToVault = async (params) => {
-    try {
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(ADDR_VAULT, vaultAbi, signer);
-      await depositToVault(contract, params);
-      console.log("You deposited successfully");
-      handleGetBalance();
-    } catch (error) {
-      console.error("Error depositing:", error);
-    }
-    handleDepositModalClose();
-  };
-
-  // Add similar handlers for all other functions like exeAerriceParityForTicket, castVoteForMarketTicket, claim rewards, etc.
-
-  useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
-      setHasMetamask(true);
-    }
-  }, [setHasMetamask]);
-
-  async function execute() {
-    if (active) {
-      const signer = provider.getSigner();
-      console.log("User's wallet address:", account);
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      try {
-        await contract.store(42);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log("Please install MetaMask");
-    }
-  }
 
   return (
     <>
@@ -619,70 +334,61 @@ export default function Home() {
             </Toolbar>
           </div>
         </div>
-      </TonConnectUIProvider>
+        {/* Main Content */}
+        <Container maxWidth="lg" sx={{ marginTop: 10 }}>
+          <div
+            className="typography"
+            variant="h10"
+            component="h5"
+            gutterbottom="true"
+            align="center"
+          ></div>
+          <div className="typography" variant="h5" gutterbottom="true">
+            TON Smart Game
+          </div>
 
-      {/* Main Content */}
-      <Container maxWidth="lg" sx={{ marginTop: 4 }}>
-        <div
-          className="typography"
-          variant="h10"
-          component="h5"
-          gutterbottom="true"
-          align="center"
-        >
-          <Image
-            src="/logo.png"
-            alt="Call-It Logo"
-            width={300}
-            height={100}
-            onClick={() => router.push("/")}
-          />
-        </div>
-        <div className="typography" variant="h5" gutterbottom="true">
-          TON Smart Game
-        </div>
-
-        <Box sx={{ textAlign: "center", marginTop: 4 }}>
-          {/* Room Cards */}
-          <Box
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            justifyContent="space-around"
-            sx={{ padding: 2 }}
-          >
-            {[1, 2, 3, 4].map((weight, index) => (
-              <RoomCard weight={weight} />
-            ))}
+          <Box sx={{ textAlign: "center", marginTop: 4 }}>
+            {/* Room Cards */}
+            <Box
+              display="flex"
+              flexDirection="row"
+              flexWrap="wrap"
+              justifyContent="space-around"
+              sx={{ padding: 4 }}
+            >
+              {[1, 2, 3, 4].map((weight, index) => (
+                <RoomCard weight={weight} />
+              ))}
+            </Box>
           </Box>
-        </Box>
-      </Container>
-
-      {/* Footer */}
-      <Box
-        sx={{
-          background:
-            "linear-gradient(40deg, #000000 0%, #1a1a1a 33%, #333333 67%, #4d4d4d 100%)",
-          color: "#ffffff",
-          padding: 2,
-          marginTop: 6,
-          fontWeight: "bold", // This makes the font bold
-        }}
-      >
-        <Container maxWidth="lg">
-          <Typography variant="body1" align="center" fontWeight="bold">
-            © 2024 CALL-It. All rights reserved.
-          </Typography>
         </Container>
-      </Box>
+
+        {/* Footer */}
+        <Box
+          sx={{
+            background:
+              "linear-gradient(40deg, #000000 0%, #1a1a1a 33%, #333333 67%, #4d4d4d 100%)",
+            color: "#ffffff",
+            padding: 2,
+            marginTop: 6,
+            fontWeight: "bold", // This makes the font bold
+          }}
+        >
+          <Container maxWidth="lg">
+            <Typography variant="body1" align="center" fontWeight="bold">
+              © 2025 TON Smart Games. All rights reserved.
+            </Typography>
+          </Container>
+        </Box>
+      </TonConnectUIProvider>
 
       <Container maxWidth="sm">
         <Box
           sx={{
             my: 4,
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "space-around",
           }}
         >
           <Link href="/about" passHref>
@@ -729,28 +435,6 @@ export default function Home() {
           </Link>
         </Box>
       </Container>
-
-      {/* Modal */}
-      <CreateMarketModal
-        createModalopen={createModalopen}
-        handleCreateModalClose={handleCreateModalClose}
-        handleCreateMarket={handleCreateMarket}
-      />
-
-      <SetMarketInfoModal
-        setInfoModalOpen={setInfoModalOpen}
-        handleSetInfoModalClose={handleSetInfoModalClose}
-        handleSetMarketInfo={handleSetMarketInfo}
-        ticket={ticketForSetInfo}
-      />
-
-      <DepositToVaultModal
-        depositModalOpen={depositModalOpen}
-        handleDepositModalClose={handleDepositModalClose}
-        handleDepositToVault={handleDepositToVault}
-        balance={balance}
-        account={account}
-      />
     </>
   );
 }
