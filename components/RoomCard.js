@@ -16,7 +16,7 @@ import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
-const RoomCard = ({ title }) => {
+const RoomCard = ({ weight }) => {
   const router = useRouter();
 
   return (
@@ -58,7 +58,7 @@ const RoomCard = ({ title }) => {
     >
       <Link
         href={{
-          pathname: `/market/${title}`,
+          pathname: `/room/${weight}`,
         }}
         passHref
       >
@@ -76,7 +76,7 @@ const RoomCard = ({ title }) => {
               sx={{ width: 40, height: 40, marginRight: 2 }}
             />
             <Typography variant="h4" component="div">
-              {`${title} TON ROOM`}
+              {`${weight} TON ROOM`}
             </Typography>
           </Box>
 
