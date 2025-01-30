@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import {
   Card,
   CardContent,
@@ -17,6 +18,10 @@ import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
 const RoomCard = ({ weight }) => {
+  const wallet = useTonWallet();
+
+  const [tonConnectUi] = useTonConnectUI();
+
   const router = useRouter();
 
   return (
@@ -58,7 +63,7 @@ const RoomCard = ({ weight }) => {
     >
       <Link
         href={{
-          pathname: `/room/${weight}`,
+          pathname: wallet ? `/room/${weight}` : `/`,
         }}
         passHref
       >
