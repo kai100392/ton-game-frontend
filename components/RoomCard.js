@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import {
@@ -17,12 +17,37 @@ import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 
+import { SERVER_WALLET_ADDRESS } from "../constants/address";
+
 const RoomCard = ({ weight }) => {
   const wallet = useTonWallet();
 
   const [tonConnectUi] = useTonConnectUI();
 
   const router = useRouter();
+
+  const payRoomTx = () => {
+    if (!wallet) return;
+    const roomTx = {
+      // The transaction is valid for 10 minutes from now, in unix epoch seconds.
+      validUntil: Math.floor(Date.now() / 1000) + 600,
+      messages: [
+        {
+          // The receiver's address.
+          address: SERVER_WALLET_ADDRESS,
+          // Amount to send in nanoTON. For example, 0.005 TON is 5000000 nanoTON.
+          amount: weight * 1000000000,
+        },
+      ],
+    };
+    try {
+      tonConnectUi.sendTransaction(roomTx);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      router.push(`/room/${weight}`);
+    }
+  };
 
   return (
     <Card
@@ -60,48 +85,42 @@ const RoomCard = ({ weight }) => {
         fontSize: { xs: "12px", sm: "14px" }, // Smaller responsive font size
         lineHeight: "1.4", // Adjust line height
       }}
+      onClick={payRoomTx}
     >
-      <Link
-        href={{
-          pathname: wallet ? `/room/${weight}` : `/`,
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
-        passHref
       >
-        <CardContent
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+        {/* Top Section: Icon and Title */}
+        <Box
+          display="flex"
+          alignItems="center"
+          mb={1}
+          justifyContent="space-around"
         >
-          {/* Top Section: Icon and Title */}
-          <Box
-            display="flex"
-            alignItems="center"
-            mb={1}
-            justifyContent="space-around"
-          >
-            <Avatar
-              alt="Presidential Seal"
-              src="/ton-logo.png"
-              sx={{ width: 40, height: 40, marginRight: 2 }}
-            />
-            <Typography variant="h4" component="div">
-              {`${weight} TON ROOM`}
+          <Avatar
+            alt="Presidential Seal"
+            src="/ton-logo.png"
+            sx={{ width: 40, height: 40, marginRight: 2 }}
+          />
+          <Typography variant="h4" component="div">
+            {`${weight} TON ROOM`}
+          </Typography>
+        </Box>
+
+        {/* Middle Section: Stats */}
+        <Box>
+          <Box display="flex" alignItems="right">
+            <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
+            <Typography variant="body2" color="pink">
+              {`Total Participants: ${Math.ceil(7 / weight)}K+`}
             </Typography>
           </Box>
-
-          {/* Middle Section: Stats */}
-          <Box>
-            <Box display="flex" alignItems="right">
-              <PushPinOutlinedIcon sx={{ marginRight: 0.5 }} />
-              <Typography variant="body2" color="text.secondary">
-                category
-              </Typography>
-            </Box>
-          </Box>
-        </CardContent>
-      </Link>
+        </Box>
+      </CardContent>
     </Card>
   );
 };

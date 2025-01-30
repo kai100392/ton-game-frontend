@@ -8,7 +8,7 @@ import { Toolbar, Typography, Button, Container, Box } from "@mui/material";
 import LandingPage from "./landingPage";
 
 // version display
-export const currentVersion = "0.0.4";
+export const currentVersion = "0.0.5";
 
 export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
@@ -325,18 +325,6 @@ export default function Home() {
               }}
             >
               Contact Us
-            </Button>
-          </Link>
-          <Link href="/market" passHref>
-            <Button
-              variant="outlined"
-              color="secondary"
-              sx={{
-                mb: 2,
-                width: ["100%", "auto"],
-              }}
-            >
-              Market Page
             </Button>
           </Link>
         </Box>

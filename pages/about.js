@@ -9,8 +9,8 @@ const About = () => {
           About Us
         </Typography>
         <Typography variant="body1">
-          This decentralized prediction market allows users to vote and earn
-          based on predictions.
+          This decentralized smart game allows users to vote and earn with high
+          probability of winning.
         </Typography>
         <Button variant="contained" color="secondary" sx={{ mt: 2 }} href="/">
           Go to Home
