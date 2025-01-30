@@ -41,7 +41,7 @@ const RoomCard = ({ weight }) => {
       ],
     };
     try {
-      tonConnectUi.sendTransaction(roomTx);
+      //tonConnectUi.sendTransaction(roomTx);
     } catch (e) {
       console.log(e);
     } finally {

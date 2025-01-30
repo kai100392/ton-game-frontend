@@ -178,20 +178,32 @@ const RoomPage = () => {
               },
               color: "white",
               background: ` radial-gradient(circle at 100% 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-  radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-   rgb(230, 1, 1)`,
+                            radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
+                            radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
+                            radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
+                            linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
+                            linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
+                            rgb(230, 1, 1)`,
               boxShadow: `inset 0 0 15px rgba(164, 93, 187, 0.8), 
                 0 0 20px 10px rgba(164, 93, 187, 0.3)`,
               transition: "border 0.2s ease-in-out",
               "&:hover": {
                 border: "1px solid darkblue",
               },
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
-          ></Card>
+          >
+            <div
+              className="typography"
+              variant="h9"
+              gutterbottom="true"
+              align="center"
+            >
+              In Progress
+            </div>
+          </Card>
         </Box>
       </Box>
     </>
