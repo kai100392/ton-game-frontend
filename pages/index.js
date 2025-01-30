@@ -8,7 +8,7 @@ import { Toolbar, Typography, Button, Container, Box } from "@mui/material";
 import LandingPage from "./landingPage";
 
 // version display
-export const currentVersion = "0.0.5";
+export const currentVersion = "0.0.6";
 
 export default function Home() {
   const [isHovered, setIsHovered] = useState(false);

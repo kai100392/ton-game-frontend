@@ -4,6 +4,7 @@ html,
 body {
   font-family: "Poppins", "IBM Plex Sans", monospace;
   width: 100%;
+  min-height: 100%;
   position: relative; /* Use relative positioning for better responsiveness */
   display: flex;
   flex-direction: column;
