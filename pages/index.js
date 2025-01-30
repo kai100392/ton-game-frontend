@@ -1,15 +1,14 @@
-import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import factoryAbi from "./abi/CallitFactory.abi.json";
-import vaultAbi from "./abi/CallitVault.abi.json";
-// import { abi } from "../constants/abi";
 import { useState, useEffect } from "react";
-import { ethers } from "ethers";
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
+import {
+  SendTransactionRequest,
+  useTonConnectUI,
+  useTonWallet,
+} from "@tonconnect/ui-react";
 import Link from "next/link";
 import {
   AppBar,
@@ -29,40 +28,6 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import {
-  makeNewMarket,
-  buyCallTicketWithPromoCode,
-  exeAerriceParityForTicket,
-  closeMarketCallsForTicket,
-  castVoteForMarketTicket,
-  closeMarketForTicket,
-  claimTicketRewards,
-  claimVoterRewards,
-  claimPromotorRewards,
-  setMarketInfo,
-  getUSDBalance,
-  getMarketsForMakerOrCategory,
-  depositToVault,
-  getMarketCntForMakerOrCategory,
-} from "../constants/contractActions";
-import { styled } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-
-import MarketCard from "../components/MarketCard";
-import CreateMarketModal from "../components/CreateMarketModal";
-import SetMarketInfoModal from "../components/SetMarketInfoModal";
-
-import {
-  contractAddress,
-  ADDR_FACT,
-  ADDR_VAULT,
-  ADDR_DELEGATE,
-} from "../constants/address";
-import DepositToVaultModal from "../components/DepositToVaultModal";
 import RoomCard from "../components/RoomCard";
 
 // version display

@@ -1,14 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
 html,
 body {
   font-family: "Poppins", "IBM Plex Sans", monospace;
   width: 100%;
+  height: 100%;
   position: relative; /* Use relative positioning for better responsiveness */
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  background: linear-gradient(40deg, #000000 0%, #030303 33%, #1a1a1a 67%, #262626 100%);
+  gap: 1.5rem;
+  margin: 0;
+  background: linear-gradient(
+    40deg,
+    #000000 0%,
+    #030303 33%,
+    #1a1a1a 67%,
+    #262626 100%
+  );
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; /* Center background image for better appearance */
@@ -51,7 +59,7 @@ body {
     overflow: hidden; /* Prevent overflow of content */
     overflow-y: auto;
   }
-  
+
   @media (max-width: 480px) {
     gap: 1rem; /* Reduce gap for smaller screens */
     padding: 1rem; /* Add padding for smaller screens */
@@ -88,8 +96,6 @@ body {
   }
 }
 
-
-
 .glowBox {
   position: absolute;
   top: 100%;
@@ -101,14 +107,24 @@ body {
   justify-content: center;
 
   /* Background with radial and linear gradients */
-  background: 
-  radial-gradient(circle at 100% 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
-  radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
-  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
-  linear-gradient(#1a1a1a, #0d0d0d) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
-   rgb(230, 1, 1);
+  background: radial-gradient(
+        circle at 100% 100%,
+        #1a1a1a 0,
+        #1a1a1a 5px,
+        transparent 5px
+      )
+      0% 0%/8px 8px no-repeat,
+    radial-gradient(circle at 0 100%, #1a1a1a 0, #1a1a1a 5px, transparent 5px)
+      100% 0%/8px 8px no-repeat,
+    radial-gradient(circle at 100% 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px)
+      0% 100%/8px 8px no-repeat,
+    radial-gradient(circle at 0 0, #0d0d0d 0, #0d0d0d 5px, transparent 5px) 100%
+      100%/8px 8px no-repeat,
+    linear-gradient(#1a1a1a, #0d0d0d) 50% 50% / calc(100% - 6px)
+      calc(100% - 16px) no-repeat,
+    linear-gradient(#1a1a1a, #0d0d0d) 50% 50% / calc(100% - 16px)
+      calc(100% - 6px) no-repeat,
+    rgb(230, 1, 1);
 
   border-radius: 8px;
   padding: 16px 16px 8px 16px; /* Reduced padding */
@@ -116,8 +132,8 @@ body {
   font-size: 14px; /* Smaller font size for glowBox text */
 
   /* Updated Glow Effect - confined to borders */
-  box-shadow: inset 0 0 5px rgba(87, 81, 88, 0.8), /* Inside glow reduced */
-              0 0 10px 0px rgba(164, 93, 187, 0.3); /* Subtle outer glow reduced */
+  box-shadow: inset 0 0 5px rgba(87, 81, 88, 0.8),
+    /* Inside glow reduced */ 0 0 10px 0px rgba(164, 93, 187, 0.3); /* Subtle outer glow reduced */
 
   animation: shine 2s infinite; /* Add shine animatiWon */
 }
@@ -131,7 +147,7 @@ body {
 }
 
 .glowBox::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -144,16 +160,17 @@ body {
   pointer-events: none;
 }
 
-
 /* glowBox adjustments for small screens */
 @media (max-width: 768px) {
-  .glowBox { /* Add the class or selector that you want to apply the styles to */
+  .glowBox {
+    /* Add the class or selector that you want to apply the styles to */
     width: 90%; /* Ensure glowBox adjusts width for mobile screens */
   }
 }
 
 @media (max-width: 480px) {
-  .glowBox { /* Add the class or selector that you want to apply the styles to */
+  .glowBox {
+    /* Add the class or selector that you want to apply the styles to */
     width: 85%; /* Ensure glowBox adjusts width for mobile screens */
   }
 }
@@ -200,7 +217,7 @@ body {
     content: "";
     height: 125px; /* Adjusted hover effect size */
     left: -50px; /* Adjusted hover effect position */
-    opacity: .2;
+    opacity: 0.2;
     position: absolute;
     top: -40px; /* Adjusted hover effect position */
     transform: rotate(35deg);
@@ -215,9 +232,7 @@ body {
       transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
-
 }
-
 
 .button-close {
   box-sizing: border-box;
@@ -231,8 +246,14 @@ body {
   height: 2.5em;
   font-weight: 700;
   font-size: 1.5rem;
-  background: linear-gradient(40deg, #890501 0%, #b90903 35%, #eb2c01 67%, #ff6868 100%);
-  
+  background: linear-gradient(
+    40deg,
+    #890501 0%,
+    #b90903 35%,
+    #eb2c01 67%,
+    #ff6868 100%
+  );
+
   border-radius: 8px;
   color: #fff;
   backdrop-filter: blur(10px);
@@ -262,7 +283,7 @@ body {
     content: "";
     height: 125px; /* Adjusted hover effect size */
     left: -50px; /* Adjusted hover effect position */
-    opacity: .2;
+    opacity: 0.2;
     position: absolute;
     top: -40px; /* Adjusted hover effect position */
     transform: rotate(35deg);
@@ -277,7 +298,6 @@ body {
       transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
-
 }
 
 .button-claim {
@@ -292,7 +312,13 @@ body {
   height: 2.5em;
   font-weight: 700;
   font-size: 1.5rem;
-  background: linear-gradient(40deg, #0c0182 0%, #1f01c8 35%, #3146ca 67%, #007dd1 100%);
+  background: linear-gradient(
+    40deg,
+    #0c0182 0%,
+    #1f01c8 35%,
+    #3146ca 67%,
+    #007dd1 100%
+  );
   border-radius: 8px;
   color: #fff;
   backdrop-filter: blur(10px);
@@ -322,7 +348,7 @@ body {
     content: "";
     height: 125px; /* Adjusted hover effect size */
     left: -50px; /* Adjusted hover effect position */
-    opacity: .2;
+    opacity: 0.2;
     position: absolute;
     top: -40px; /* Adjusted hover effect position */
     transform: rotate(35deg);
@@ -337,11 +363,7 @@ body {
       transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
-
 }
-
-
-
 
 .button-add {
   box-sizing: border-box;
@@ -355,7 +377,7 @@ body {
   min-height: 40px; /* Minimum height */
   font-weight: 700;
   font-size: 20px; /* Smaller font size for button text */
-  background: #32CD32;
+  background: #32cd32;
   border: 2px solid rgb(230, 1, 1);
   border-radius: 8px;
   color: #fff;
@@ -385,7 +407,7 @@ body {
     content: "";
     height: 125px; /* Adjusted hover effect size */
     left: -50px; /* Adjusted hover effect position */
-    opacity: .2;
+    opacity: 0.2;
     position: absolute;
     top: -40px; /* Adjusted hover effect position */
     transform: rotate(35deg);
@@ -418,20 +440,22 @@ body {
 }
 
 @media (max-width: 768px) {
-  .button-submit, .button-add {
-  font-size: 16px; /* Adjust button font size for mobile */
-  padding: 8px 12px; /* Slightly reduce padding */
-  width: 30%; /* Ensure buttons fit on mobile */
-  min-width: unset; /* Remove min-width constraint */
-}
+  .button-submit,
+  .button-add {
+    font-size: 16px; /* Adjust button font size for mobile */
+    padding: 8px 12px; /* Slightly reduce padding */
+    width: 30%; /* Ensure buttons fit on mobile */
+    min-width: unset; /* Remove min-width constraint */
+  }
 }
 @media (max-width: 480px) {
-  .button-submit, .button-add {
-  font-size: 14px; /* Adjust button font size for mobile */
-  padding: 8px 12px; /* Slightly reduce padding */
-  width: 30%; /* Ensure buttons fit on mobile */
-  min-width: unset; /* Remove min-width constraint */
-}
+  .button-submit,
+  .button-add {
+    font-size: 14px; /* Adjust button font size for mobile */
+    padding: 8px 12px; /* Slightly reduce padding */
+    width: 30%; /* Ensure buttons fit on mobile */
+    min-width: unset; /* Remove min-width constraint */
+  }
 }
 
 /* Button Class */
@@ -509,7 +533,6 @@ body {
   }
 }
 
-
 .button1 {
   font-family: "Poppins", "IBM Plex Sans", monospace;
   box-sizing: border-box;
@@ -532,7 +555,6 @@ body {
   overflow: hidden;
   position: relative;
   transition: all 0.3s ease;
-
 
   a {
     text-decoration: none;
@@ -619,27 +641,30 @@ body {
   }
 }
 
-
-
 /* button responsiveness */
 
-  @media (max-width: 768px) {
-    .button, .button1, .button-close, .button-claim {
+@media (max-width: 768px) {
+  .button,
+  .button1,
+  .button-close,
+  .button-claim {
     font-size: 18px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
     width: 90%; /* Ensure buttons fit on mobile */
     min-width: unset; /* Remove min-width constraint */
   }
 }
-  @media (max-width: 480px) {
-    .button, .button1, .button-close, .button-claim {
+@media (max-width: 480px) {
+  .button,
+  .button1,
+  .button-close,
+  .button-claim {
     font-size: 16px; /* Adjust button font size for mobile */
     padding: 8px 12px; /* Slightly reduce padding */
     width: 90%; /* Ensure buttons fit on mobile */
     min-width: unset; /* Remove min-width constraint */
   }
 }
-  
 
 /* Navbar Styles */
 .navbar {
@@ -672,29 +697,32 @@ body {
   }
 }
 
-
 .typography {
   font-size: 40px; /* Default font size */
   font-weight: bold; /* Make the font bold */
-  color: #32CD32; /* Set text color to green */
+  color: #32cd32; /* Set text color to green */
   text-align: center; /* Center text for all devices */
   display: block; /* Ensure it behaves like a block element */
   width: 100%; /* Full width */
   margin: 0 auto; /* Centering */
   padding: 0; /* Remove default padding */
-  
+
   /* Engraved effect */
-  background: linear-gradient(135deg, #32CD32, #7FFF00); /* Gradient background */
+  background: linear-gradient(
+    135deg,
+    #32cd32,
+    #7fff00
+  ); /* Gradient background */
   -webkit-background-clip: text; /* Clip background to text */
   -webkit-text-fill-color: transparent; /* Make text color transparent */
-  
+
   /* Text shadows for the engraved effect and green glow */
-  text-shadow: 
-    1px 1px 0 rgba(73, 255, 1, 0.863), /* Light shadow */
-    -1px -1px 0 rgba(255, 255, 255, 0.3), /* Light highlight */
-    10px 10px 10px rgba(0, 0, 0, 0.6), /* Wider bottom-right shadow (offset increased) */
-    0 0 10px rgba(50, 205, 50, 0.7), /* Green glow */
-    0 0 20px rgba(50, 255, 50, 0.5); /* More intense green glow */
+  text-shadow: 1px 1px 0 rgba(73, 255, 1, 0.863),
+    /* Light shadow */ -1px -1px 0 rgba(255, 255, 255, 0.3),
+    /* Light highlight */ 10px 10px 10px rgba(0, 0, 0, 0.6),
+    /* Wider bottom-right shadow (offset increased) */ 0 0 10px
+      rgba(50, 205, 50, 0.7),
+    /* Green glow */ 0 0 20px rgba(50, 255, 50, 0.5); /* More intense green glow */
 
   letter-spacing: 2px; /* Increase spacing between letters */
   line-height: 1.2; /* Adjust line height for better readability */
@@ -711,18 +739,15 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .typography {
-      font-size: 30px; /* Adjust font size for tablets */
+    font-size: 30px; /* Adjust font size for tablets */
   }
 }
 
 @media (max-width: 480px) {
   .typography {
-      font-size: 25px; /* Adjust font size for mobile phones */
+    font-size: 25px; /* Adjust font size for mobile phones */
   }
 }
-
-
-
 
 /* styles.css */
 .custom-checkbox {
@@ -737,8 +762,6 @@ body {
   border: 1px solid white; /* Adjust border if needed */
 }
 
-
-
 .cardBox {
   font-family: "Poppins", sans-serif;
   width: 300px;
@@ -749,24 +772,35 @@ body {
   gap: 1rem;
   justify-content: center;
 
- /* Background with radial and linear gradients */
- background: radial-gradient(circle at 100% 100%, #373261 0, #373261 5px, transparent 5px) 0% 0%/8px 8px no-repeat,
- radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px) 100% 0%/8px 8px no-repeat,
- radial-gradient(circle at 100% 0, #27244E 0, #27244E 5px, transparent 5px) 0% 100%/8px 8px no-repeat,
- radial-gradient(circle at 0 0, #27244E 0, #27244E 5px, transparent 5px) 100% 100%/8px 8px no-repeat,
- linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 6px) calc(100% - 16px) no-repeat,
- linear-gradient(#373261, #27244E) 50% 50%/calc(100% - 16px) calc(100% - 6px) no-repeat,
- linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%);
+  /* Background with radial and linear gradients */
+  background: radial-gradient(
+        circle at 100% 100%,
+        #373261 0,
+        #373261 5px,
+        transparent 5px
+      )
+      0% 0%/8px 8px no-repeat,
+    radial-gradient(circle at 0 100%, #373261 0, #373261 5px, transparent 5px)
+      100% 0%/8px 8px no-repeat,
+    radial-gradient(circle at 100% 0, #27244e 0, #27244e 5px, transparent 5px)
+      0% 100%/8px 8px no-repeat,
+    radial-gradient(circle at 0 0, #27244e 0, #27244e 5px, transparent 5px) 100%
+      100%/8px 8px no-repeat,
+    linear-gradient(#373261, #27244e) 50% 50% / calc(100% - 6px)
+      calc(100% - 16px) no-repeat,
+    linear-gradient(#373261, #27244e) 50% 50% / calc(100% - 16px)
+      calc(100% - 6px) no-repeat,
+    linear-gradient(40deg, #ff0000 0%, #e200f3 33%, #314bff 67%, #00b6d1 100%);
 
-border-radius: 8px;
-padding: 16px 16px 8px 16px; /* Reduced padding */
-box-sizing: border-box;
-color: white;
-font-size: 14px; /* Smaller font size for glowBox text */
+  border-radius: 8px;
+  padding: 16px 16px 8px 16px; /* Reduced padding */
+  box-sizing: border-box;
+  color: white;
+  font-size: 14px; /* Smaller font size for glowBox text */
 
-/* Updated Glow Effect - confined to borders */
-box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
- 0 0 20px 10px rgba(164, 93, 187, 0.3); /* Subtle outer glow */
+  /* Updated Glow Effect - confined to borders */
+  box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8),
+    /* Inside glow */ 0 0 20px 10px rgba(164, 93, 187, 0.3); /* Subtle outer glow */
 }
 
 .cardBox:hover {
@@ -800,7 +834,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   }
 }
 
-
 /* cardBox adjustments for smaller screens */
 .cardBox {
   @media (max-width: 480px) {
@@ -808,10 +841,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
     padding: 12px 12px 4px 12px; /* Adjust padding */
   }
 }
-
-
-
-
 
 .container {
   display: flex;
@@ -839,9 +868,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   }
 }
 
-
-
-
 /* CSS styles for the grid container */
 .grid-container {
   gap: 10px; /* Space between grid items */
@@ -849,7 +875,8 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 }
 
 /* Mobile styles */
-@media (max-width: 480px) { /* Adjust the breakpoint as needed */
+@media (max-width: 480px) {
+  /* Adjust the breakpoint as needed */
   .grid-container {
     display: grid; /* Enable grid layout */
     grid-template-columns: 1fr; /* One column on mobile */
@@ -857,17 +884,13 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
 }
 
 /* Desktop styles */
-@media (min-width: 768px) { /* Adjust the breakpoint as needed */
+@media (min-width: 768px) {
+  /* Adjust the breakpoint as needed */
   .grid-container {
     display: grid; /* Enable grid layout */
     grid-template-columns: repeat(2, 1fr); /* Two columns on larger devices */
   }
 }
-
-
-
-
-
 
 .button-card {
   box-sizing: border-box;
@@ -910,7 +933,7 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   content: "";
   height: 125px;
   left: -50px;
-  opacity: .2;
+  opacity: 0.2;
   position: absolute;
   top: -40px;
   transform: rotate(35deg);
@@ -959,7 +982,6 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   }
 }
 
-
 .logo-container {
   position: relative; /* Necessary for positioning */
   display: inline-block; /* Keeps the container small */
@@ -997,5 +1019,3 @@ box-shadow: inset 0 0 15px rgba(164, 93, 187, 0.8), /* Inside glow */
   max-height: 50px; /* Set to reveal the full logo */
   opacity: 1; /* Fully visible */
 }
-
-
