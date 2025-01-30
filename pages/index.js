@@ -5,7 +5,7 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
 import Link from "next/link";
 import { Toolbar, Typography, Button, Container, Box } from "@mui/material";
-import { LandingPage } from "./landingPage";
+import LandingPage from "./landingPage";
 
 // version display
 export const currentVersion = "0.0.4";

@@ -38,7 +38,7 @@ import RoomCard from "../components/RoomCard";
 //   ],
 // };
 
-export function LandingPage() {
+export default function LandingPage() {
   //   const [tx, setTx] = useState(defaultTx);
 
   const wallet = useTonWallet();
